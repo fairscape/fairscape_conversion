@@ -1,0 +1,5 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+distributions,,DigitalObject,distribution,data,keep,,download_url,FALSE,,each distribution -> DigitalObject in hasPart. target_type_iri holds the additionalType; id_column holds the url field.
+use_repository,,DigitalObject,softwareRepo,data,keep,,repository_url,FALSE,,software repository link
+external_resources,,DigitalObject,externalResource,data,keep,,external_resources,FALSE,,external related links (urls kept as a list)
+resources,,DigitalObject,dataset,data,keep,,download_url,FALSE,,each resource -> DigitalObject(dataset) in hasPart

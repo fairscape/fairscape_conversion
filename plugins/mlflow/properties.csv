@@ -1,0 +1,63 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+run,name,Computation,name,run_name,,import,,required,scalar,,,,,,,MLflow run '<run name>'
+run,name,Computation,description,run_description,,import,,required,scalar,,,,,,,notes the experiment; parent run and non-FINISHED status when present
+run,user,Computation,runBy,run_user,,import,,recommended,scalar,,,,,,,mlflow.user tag else the crate author
+run,start_time,Computation,dateCreated,date_or_published,,import,,required,scalar,,,,,,,falls back to the crate datePublished
+run,source_key,Computation,command,run_command,,import,,recommended,scalar,,,,,,,best-effort invocation from mlflow.source.name (MLflow does not record argv)
+run,,Computation,usedSoftware,run_used_software,,import,,required,list,,,,,,,source Software (when logged) + engine
+run,dataset_inputs,Computation,usedDataset,run_used_datasets,,import,,required,list,,,,,,,logged dataset inputs (mlflow.log_input)
+run,,Computation,generated,run_generated,,import,,required,list,,,,,,,artifact files + logged models of this run
+run,parent_run_id,Computation,isPartOf,run_parent_ref,,import,,optional,list,,,,,,,nested child run -> parent Computation
+run,params,Computation,parameter,param_strings,,import,,optional,list,,,,,,,logged params as name=value strings
+run,metrics,Computation,additionalProperty,metric_property_values,,import,,optional,list,,,,,,,logged metrics (latest value per key) as schema.org PropertyValue
+run,start_time,Computation,startTime,scalar,,import,,optional,scalar,,,,,,,
+run,end_time,Computation,endTime,scalar,,import,,optional,scalar,,,,,,,
+run,run_id,Computation,mlflowRunId,scalar,,import,,optional,scalar,,,,,,,passthrough extra
+run,container,Computation,containerImage,scalar,,import,,optional,scalar,,,,,,,mlflow.docker.image.name tag when present
+source,name,Software,name,basename,,import,,required,scalar,,,,,,,
+source,,Software,author,settings_author,,import,,required,scalar,,,,,,,
+source,name,Software,description,source_description,,import,,required,scalar,,,,,,,names the source type and git commit when recorded
+source,name,Software,format,source_format,,import,,required,scalar,,,,,,,text/x-python for .py; application/x-ipynb+json for notebooks
+source,git_commit,Software,version,scalar,,import,,optional,scalar,,,,,,,mlflow.source.git.commit tag
+source,name,Software,contentUrl,source_content_url,,import,,optional,scalar,,,,,,,when the source reference is a URL (e.g. an MLflow Project git source)
+source,name,Software,localPath,source_local_path,,import,,optional,scalar,,,,,,,'was here when this ran' for local script paths on the training machine
+engine,,Software,name,csv_constant,,import,,required,scalar,MLflow,,,,,,
+engine,,Software,author,csv_constant,,import,,required,scalar,"MLflow Project, a Series of LF Projects, LLC",,,,,,
+engine,,Software,description,csv_constant,,import,,required,scalar,MLflow open source platform for the machine learning lifecycle (https://mlflow.org/),,,,,,
+engine,,Software,format,csv_constant,,import,,required,scalar,application/x-python,,,,,,
+engine,version,Software,version,scalar,,import,,required,scalar,,,,,,,mlflow_version from a logged model's MLmodel file else the exporting client's version
+engine,,Software,contentUrl,csv_constant,,import,,required,scalar,https://github.com/mlflow/mlflow,,,,,,
+dataset,name,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+dataset,,Dataset,author,settings_author,,import,,required,scalar,,,,,,,
+dataset,name,Dataset,description,dataset_description,,import,,required,scalar,,,,,,,rows/digest/usage-context variants
+dataset,,Dataset,datePublished,settings_date,,import,,required,scalar,,,,,,,
+dataset,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
+dataset,source_type,Dataset,format,dataset_format,,import,,required,scalar,,,,,,,the mlflow dataset source type (pandas/code/delta/...)
+dataset,,Dataset,generatedBy,empty_list,,import,,required,list,,,,,,,logged inputs; [] like other plugins' input files (LakeDB parity)
+dataset,digest,Dataset,digest,scalar,,import,,optional,scalar,,,,,,,mlflow's content-based dataset digest
+dataset,,Dataset,evi:Schema,dataset_schema_ref,,import,,optional,scalar,,,,,,,link to the colspec-derived Schema node
+model,name,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+model,,Dataset,additionalType,csv_constant,,import,,required,scalar,http://www.w3.org/ns/mls#Model,,,,,,W3C ML-Schema Model class (verified: www.w3.org/ns/mls)
+model,,Dataset,author,settings_author,,import,,required,scalar,,,,,,,
+model,name,Dataset,description,model_description,,import,,required,scalar,,,,,,,names flavor and producing run
+model,,Dataset,datePublished,settings_date,,import,,required,scalar,,,,,,,
+model,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
+model,flavor,Dataset,format,model_format,,import,,required,scalar,,,,,,,the MLflow model flavor (sklearn/pytorch/...)
+model,run_id,Dataset,generatedBy,producer_run_ref,,import,,required,list,,,,,,,the run that logged the model
+model,params,Dataset,parameter,param_strings,,import,,optional,list,,,,,,,model-scoped hyperparameters (MLflow 3 LoggedModel.params)
+model,metrics,Dataset,additionalProperty,metric_property_values,,import,,optional,list,,,,,,,model-scoped metrics (MLflow 3 LoggedModel.metrics) as schema.org PropertyValue
+model,model_id,Dataset,mlflowModelId,scalar,,import,,optional,scalar,,,,,,,passthrough extra (MLflow 3 LoggedModel id / 2.x model uuid)
+model,,Dataset,contentUrl,file_content_url,,import,,optional,scalar,,,,,,,crate-relative model directory when artifacts were copied in
+model,,Dataset,localPath,file_local_path,,import,,optional,scalar,,,,,,,model directory in the tracking store otherwise
+model,size,Dataset,contentSize,size_string,,import,,optional,scalar,,,,,,,pydantic requires a string
+file,path,Dataset,name,basename,,import,,required,scalar,,,,,,,
+file,,Dataset,author,settings_author,,import,,required,scalar,,,,,,,
+file,path,Dataset,description,file_description,,import,,required,scalar,,,,,,,Artifact '<name>' logged by MLflow run '<run>'
+file,,Dataset,datePublished,settings_date,,import,,required,scalar,,,,,,,
+file,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
+file,path,Dataset,format,encoding_format,,import,,required,scalar,,,,,,,
+file,run_id,Dataset,generatedBy,producer_run_ref,,import,,required,list,,,,,,,the run that logged the artifact
+file,path,Dataset,evi:Schema,file_schema_ref,,import,,optional,scalar,,,,,,,link to the inferred Schema node (--schemas)
+file,,Dataset,contentUrl,file_content_url,,import,,optional,scalar,,,,,,,crate-relative promise when the artifact was copied into the crate
+file,,Dataset,localPath,file_local_path,,import,,optional,scalar,,,,,,,artifact location in the tracking store otherwise
+file,size,Dataset,contentSize,size_string,,import,,optional,scalar,,,,,,,pydantic requires a string

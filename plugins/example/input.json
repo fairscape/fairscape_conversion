@@ -1,0 +1,16 @@
+{
+  "memos": [
+    {
+      "id": "memo-1",
+      "title": "Quarterly notes",
+      "body": "Summary of second-quarter progress.",
+      "tags": ["planning", "q2"]
+    },
+    {
+      "id": "memo-2",
+      "title": "Reading list",
+      "body": "Papers to read before the retreat.",
+      "tags": []
+    }
+  ]
+}

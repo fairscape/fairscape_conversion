@@ -1,0 +1,4 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+memo,title,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+memo,body,Dataset,description,scalar,,import,,recommended,scalar,,,,,,,
+memo,tags,Dataset,keywords,string_list,,import,,optional,list,,,,,,,

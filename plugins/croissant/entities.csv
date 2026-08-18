@@ -1,0 +1,5 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,precedence,note
+ROCrateMetadataElem,ROOT,CroissantDataset,,root,keep,,,FALSE,,0,the crate root -> Croissant Dataset
+Dataset,COMPONENT,CroissantFileObject,,component,keep,,,FALSE,,0,each data entity -> Croissant FileObject
+Schema,COMPONENT,,,drop,keep,,,FALSE,,0,schemas drive record sets (built), not a node
+Field,,CroissantField,,component,keep,,,FALSE,,0,sub-mapping for record-set fields

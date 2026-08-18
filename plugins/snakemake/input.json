@@ -1,0 +1,130 @@
+{
+  "settings": {
+    "naan": "59853",
+    "name": "Snakemake workflow 'Snakefile'",
+    "description": "FAIRSCAPE EVI RO-Crate describing a run of the Snakemake workflow 'Snakefile'",
+    "author": "oj",
+    "keywords": [
+      "snakemake",
+      "workflow"
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0",
+    "version": "1.0",
+    "date_published": "2026-08-06T09:23:13.829075-04:00"
+  },
+  "run": {
+    "name": "Snakemake workflow 'Snakefile'",
+    "snakefile": "Snakefile",
+    "snakefile_key": "/data/letters-chain/Snakefile",
+    "engine_version": "9.25.1",
+    "starttime": "2026-08-06T08:38:00.039968-04:00",
+    "endtime": "2026-08-06T08:38:00.065969-04:00"
+  },
+  "jobs": [
+    {
+      "rule": "make_list",
+      "wildcards": {},
+      "shellcmd": "printf '%s\\n' a b c d e f g h > results/letters.txt",
+      "params": [],
+      "inputs": [],
+      "outputs": [
+        "results/letters.txt"
+      ],
+      "starttime": "2026-08-06T08:38:00.039968-04:00",
+      "endtime": "2026-08-06T08:38:00.040968-04:00",
+      "container_img_url": null,
+      "conda_env": null
+    },
+    {
+      "rule": "reverse",
+      "wildcards": {},
+      "shellcmd": "tac results/letters.txt > results/reversed.txt",
+      "params": [],
+      "inputs": [
+        "results/letters.txt"
+      ],
+      "outputs": [
+        "results/reversed.txt"
+      ],
+      "starttime": "2026-08-06T08:38:00.045969-04:00",
+      "endtime": "2026-08-06T08:38:00.054969-04:00",
+      "container_img_url": null,
+      "conda_env": null
+    },
+    {
+      "rule": "split_halves",
+      "wildcards": {},
+      "shellcmd": "head -n 4 results/reversed.txt > results/first_half.txt && tail -n 4 results/reversed.txt > results/second_half.txt",
+      "params": [],
+      "inputs": [
+        "results/reversed.txt"
+      ],
+      "outputs": [
+        "results/first_half.txt",
+        "results/second_half.txt"
+      ],
+      "starttime": "2026-08-06T08:38:00.061969-04:00",
+      "endtime": "2026-08-06T08:38:00.065969-04:00",
+      "container_img_url": null,
+      "conda_env": null
+    }
+  ],
+  "rules": {
+    "split_halves": {
+      "source": "head -n 4 {input} > {output.first} && tail -n 4 {input} > {output.second}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": null,
+      "definition_kind": null,
+      "definition_ref": null
+    },
+    "reverse": {
+      "source": "tac {input} > {output}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": null,
+      "definition_kind": null,
+      "definition_ref": null
+    },
+    "make_list": {
+      "source": "printf '%s\\n' a b c d e f g h > {output}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": null,
+      "definition_kind": null,
+      "definition_ref": null
+    }
+  },
+  "files": {
+    "results/letters.txt": {
+      "size": 16,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/letters.txt"
+    },
+    "results/reversed.txt": {
+      "size": 16,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/reversed.txt"
+    },
+    "results/first_half.txt": {
+      "size": 8,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/first_half.txt"
+    },
+    "results/second_half.txt": {
+      "size": 8,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/second_half.txt"
+    }
+  },
+  "configfiles": [],
+  "schemas": {}
+}

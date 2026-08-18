@@ -1,0 +1,19 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+CreateAction,instrument_is_workflow,Computation,prov:Activity|https://w3id.org/EVI#Computation,workflow,mint,,,TRUE,computation-main,parent run; tool Computations link to it via isPartOf
+CreateAction,instrument_is_tool,Computation,prov:Activity|https://w3id.org/EVI#Computation,tool,mint,,,TRUE,computation,one per tool execution
+ComputationalWorkflow,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,TRUE,software,the workflow file
+SoftwareSourceCode,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,TRUE,software,source file not typed ComputationalWorkflow
+SoftwareApplication,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,TRUE,software,tool or engine; a shared instrument is one graph node
+Dataset,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,TRUE,dataset,directory data entity; keeps hasPart refs
+Collection,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,TRUE,dataset,multi-file input
+File,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,TRUE,dataset,@id may be a bare checksum
+Person,,,,agent,,,,FALSE,,kept in the output graph as-is
+Organization,,,,agent,,,,FALSE,,kept in the output graph as-is
+PropertyValue,,,,drop,,,,FALSE,,object_split folds values into Computation.parameters
+FormalParameter,,,,drop,,,,FALSE,,encodingFormat harvested for Dataset.format; inputs flattened to Computation.parameter strings
+HowToStep,,,,drop,,,,FALSE,,orchestration layer
+ControlAction,,,,drop,,,,FALSE,,orchestration layer
+OrganizeAction,,,,drop,,,,FALSE,,agent is runBy fallback; instrument joins usedSoftware
+ParameterConnection,,,,drop,,,,FALSE,,step dataflow re-emerges via shared Dataset ids
+ComputerLanguage,,,,drop,,,,FALSE,,harvested by synth_format_lang
+CreativeWork,,,,drop,,,,FALSE,,profile PID stub nodes

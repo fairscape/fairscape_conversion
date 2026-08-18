@@ -1,0 +1,174 @@
+{
+  "settings": {
+    "naan": "59853",
+    "name": "Cromwell run of WDL workflow 'letters'",
+    "description": "FAIRSCAPE EVI RO-Crate describing a Cromwell run of the WDL workflow 'letters'",
+    "author": "demo",
+    "keywords": [
+      "cromwell",
+      "wdl",
+      "workflow"
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0",
+    "version": "1.0",
+    "date_published": "2026-08-06T00:00:00-04:00"
+  },
+  "run": {
+    "name": "Cromwell run of WDL workflow 'letters'",
+    "workflow_name": "letters",
+    "wdl_ref": "letters.wdl",
+    "wdl_key": "letters:letters.wdl",
+    "language": "WDL 1.0",
+    "engine_version": "92",
+    "workflow_id": "d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b",
+    "command": "cromwell run letters.wdl",
+    "status": "Succeeded",
+    "starttime": "2026-08-05T21:44:30.101Z",
+    "endtime": "2026-08-05T21:45:06.278Z"
+  },
+  "jobs": [
+    {
+      "task": "annotate",
+      "shard": 0,
+      "attempt": 1,
+      "shellcmd": "sed \"s/^/alpha: /\" /cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/inputs/-1940065067/upper.txt > alpha.txt",
+      "parameters": [
+        "sample=alpha"
+      ],
+      "inputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/execution/upper.txt"
+      ],
+      "outputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/execution/alpha.txt"
+      ],
+      "starttime": "2026-08-05T21:44:46.874Z",
+      "endtime": "2026-08-05T21:44:54.979Z",
+      "container": "ubuntu@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f",
+      "status": "Done"
+    },
+    {
+      "task": "annotate",
+      "shard": 1,
+      "attempt": 1,
+      "shellcmd": "sed \"s/^/beta: /\" /cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/inputs/-1940065067/upper.txt > beta.txt",
+      "parameters": [
+        "sample=beta"
+      ],
+      "inputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/execution/upper.txt"
+      ],
+      "outputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/execution/beta.txt"
+      ],
+      "starttime": "2026-08-05T21:44:46.873Z",
+      "endtime": "2026-08-05T21:44:54.978Z",
+      "container": "ubuntu@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f",
+      "status": "Done"
+    },
+    {
+      "task": "combine",
+      "shard": -1,
+      "attempt": 1,
+      "shellcmd": "cat /data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/inputs/2041601165/alpha.txt /data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/inputs/244649806/beta.txt > summary.txt",
+      "parameters": [],
+      "inputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/execution/alpha.txt",
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/execution/beta.txt"
+      ],
+      "outputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/execution/summary.txt"
+      ],
+      "starttime": "2026-08-05T21:44:57.074Z",
+      "endtime": "2026-08-05T21:45:04.977Z",
+      "container": null,
+      "status": "Done"
+    },
+    {
+      "task": "uppercase",
+      "shard": -1,
+      "attempt": 1,
+      "shellcmd": "tr 'a-z' 'A-Z' < /data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/inputs/-1588382431/seed.txt > upper.txt",
+      "parameters": [],
+      "inputs": [
+        "seed.txt"
+      ],
+      "outputs": [
+        "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/execution/upper.txt"
+      ],
+      "starttime": "2026-08-05T21:44:32.597Z",
+      "endtime": "2026-08-05T21:44:45.015Z",
+      "container": null,
+      "status": "Done"
+    }
+  ],
+  "tasks": {
+    "annotate": {
+      "source": "task annotate {\n  input {\n    File infile\n    String sample\n  }\n  command <<<\n    sed \"s/^/~{sample}: /\" ~{infile} > ~{sample}.txt\n  >>>\n  output {\n    File outfile = \"~{sample}.txt\"\n  }\n  runtime {\n    docker: \"ubuntu:22.04\"\n  }\n}",
+      "container": "ubuntu:22.04"
+    },
+    "combine": {
+      "source": "task combine {\n  input {\n    Array[File] infiles\n  }\n  command <<<\n    cat ~{sep=' ' infiles} > summary.txt\n  >>>\n  output {\n    File outfile = \"summary.txt\"\n  }\n}",
+      "container": null
+    },
+    "uppercase": {
+      "source": "task uppercase {\n  input {\n    File infile\n  }\n  command <<<\n    tr 'a-z' 'A-Z' < ~{infile} > upper.txt\n  >>>\n  output {\n    File outfile = \"upper.txt\"\n  }\n}",
+      "container": null
+    }
+  },
+  "files": {
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/execution/alpha.txt": {
+      "size": 42,
+      "is_config": false,
+      "ark_source": "letters:letters.wdl#run/call-annotate/shard-0/execution/alpha.txt",
+      "locator": "contentUrl",
+      "locator_value": "cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/execution/alpha.txt"
+    },
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/execution/upper.txt": {
+      "size": 28,
+      "is_config": false,
+      "ark_source": "letters:letters.wdl#run/call-uppercase/execution/upper.txt",
+      "locator": "contentUrl",
+      "locator_value": "cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/execution/upper.txt"
+    },
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/execution/beta.txt": {
+      "size": 40,
+      "is_config": false,
+      "ark_source": "letters:letters.wdl#run/call-annotate/shard-1/execution/beta.txt",
+      "locator": "contentUrl",
+      "locator_value": "cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/execution/beta.txt"
+    },
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/execution/summary.txt": {
+      "size": 82,
+      "is_config": false,
+      "ark_source": "letters:letters.wdl#run/call-combine/execution/summary.txt",
+      "locator": "contentUrl",
+      "locator_value": "cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/execution/summary.txt"
+    },
+    "seed.txt": {
+      "size": 28,
+      "is_config": false,
+      "ark_source": "/data/letters-scatter/seed.txt",
+      "locator": "contentUrl",
+      "locator_value": "seed.txt"
+    },
+    "letters.wdl": {
+      "size": 1110,
+      "is_config": true,
+      "ark_source": "letters:letters.wdl#workflow",
+      "locator": "contentUrl",
+      "locator_value": "letters.wdl"
+    },
+    "inputs.json": {
+      "size": 33,
+      "is_config": true,
+      "ark_source": "letters:letters.wdl#inputs",
+      "locator": "contentUrl",
+      "locator_value": "inputs.json"
+    }
+  },
+  "run_outputs": [
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/execution/alpha.txt",
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/execution/beta.txt",
+    "/data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/execution/summary.txt"
+  ]
+}

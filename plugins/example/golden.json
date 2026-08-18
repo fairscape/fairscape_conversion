@@ -1,0 +1,20 @@
+{
+  "@graph": [
+    {
+      "name": "Quarterly notes",
+      "description": "Summary of second-quarter progress.",
+      "keywords": [
+        "planning",
+        "q2"
+      ],
+      "@type": "https://schema.org/Dataset",
+      "@id": "memo-1"
+    },
+    {
+      "name": "Reading list",
+      "description": "Papers to read before the retreat.",
+      "@type": "https://schema.org/Dataset",
+      "@id": "memo-2"
+    }
+  ]
+}

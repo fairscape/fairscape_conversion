@@ -1,0 +1,5 @@
+source_type,token,strategy,sources,template,when,note
+file,eff_local_id,first_nonempty,local_id|filename,,,
+file,eff_filename,first_nonempty,filename|local_id,,,
+collection,eff_name,first_nonempty,name|abbreviation|local_id,,,
+collection,desc_clause,template,, {description},description,

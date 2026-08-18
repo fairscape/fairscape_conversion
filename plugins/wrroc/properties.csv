@@ -1,0 +1,36 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+CreateAction,name,Computation,name,scalar,scalar,both,TRUE,required,scalar,,,,,,,
+CreateAction,description,Computation,description,desc_min10,scalar,both,TRUE,synthesized,scalar,,,,,,,synthesized from name + tool description when absent
+CreateAction,instrument,Computation,usedSoftware,ref_list,ref_list_first,both,TRUE,recommended,scalar,,,,,,,export uses usedSoftware[0] as the single instrument
+CreateAction,instrument,Computation,parameter,formal_params,drop_export,import,FALSE,optional,list,,,,,,,instrument's input FormalParameters flattened to descriptor strings
+CreateAction,object,Computation,usedDataset,object_split,ref_list,both,TRUE,recommended,scalar,,,,,,,files/dirs -> usedDataset; scalar PropertyValues -> parameters extra
+CreateAction,result,Computation,generated,ref_list,ref_list,both,TRUE,optional,scalar,,,,,,,inverse pass fills Dataset.generatedBy
+CreateAction,agent,Computation,runBy,agent_ref,agent_export,both,TRUE,required,scalar,,,,,,,precedence: action agent -> OrganizeAction agent -> root author -> Unknown
+CreateAction,endTime,Computation,dateCreated,scalar,scalar,both,TRUE,required,scalar,,,,,,,the only timestamp EVI models
+CreateAction,startTime,Computation,startTime,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,extra key re-emitted on export
+CreateAction,actionStatus,Computation,actionStatus,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,EVI cannot model failed runs
+CreateAction,error,Computation,error,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,
+CreateAction,environment,Computation,environment,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,
+CreateAction,containerImage,Computation,containerImage,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,EVI Container model exists but is not wired to Computation
+CreateAction,resourceUsage,Computation,resourceUsage,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,Provenance profile only
+CreateAction,,Computation,isPartOf,parent_link,drop_export,import,FALSE,synthesized,scalar,,,,,,,tool Computations point at the workflow-level Computation
+ComputationalWorkflow,name,Software,name,scalar,scalar,both,TRUE,required,scalar,,,,,,,
+ComputationalWorkflow,description,Software,description,desc_min10,scalar,both,TRUE,synthesized,scalar,,,,,,,
+ComputationalWorkflow,version,Software,version,scalar,scalar,both,FALSE,optional,scalar,,,,,,,
+ComputationalWorkflow,programmingLanguage,Software,format,synth_format_lang,drop_export,import,TRUE,synthesized,scalar,,,,,,,resolved via the ComputerLanguage node else extension else text/plain
+SoftwareApplication,name,Software,name,scalar,scalar,both,TRUE,required,scalar,,,,,,,
+SoftwareApplication,description,Software,description,desc_min10,scalar,both,TRUE,synthesized,scalar,,,,,,,
+SoftwareApplication,version,Software,version,scalar,scalar,both,FALSE,optional,scalar,,,,,,,
+SoftwareApplication,,Software,format,synth_format,drop_export,import,FALSE,synthesized,scalar,,,,,,,from file extension else text/plain
+SoftwareApplication,,Software,author,synth_author,drop_export,import,FALSE,synthesized,scalar,,,,,,,Software.author is required; agent precedence
+File,alternateName,Dataset,name,synth_name,name_export,both,TRUE,required,scalar,,,,,,,alternateName else name else basename of @id
+File,,Dataset,description,desc_min10,drop_export,import,FALSE,synthesized,scalar,,,,,,,
+File,encodingFormat,Dataset,format,synth_format_file,scalar,both,TRUE,synthesized,scalar,,,,,,,own encodingFormat else FormalParameter.encodingFormat else text/plain
+File,sha1,Dataset,hash,scalar,scalar,both,TRUE,optional,scalar,,,,,,,sha1 lands in the generic hash field
+File,sha1,Dataset,sha1,passthrough,,import,FALSE,passthrough,scalar,,,,,,,original sha1 key kept as extra
+File,contentUrl,Dataset,contentUrl,scalar,scalar,both,TRUE,optional,scalar,,,,,,,
+File,hasPart,Dataset,hasPart,ref_list,ref_list,both,TRUE,optional,scalar,,,,,,,directory Dataset children mapped through the guid map
+File,exampleOfWork,,,drop,,import,FALSE,nohome,scalar,,,,,,,FormalParameter links dropped (encodingFormat harvested first)
+File,,Dataset,datePublished,synth_datepub,drop_export,import,FALSE,synthesized,scalar,,,,,,,workflow-level action endTime else root datePublished
+File,,Dataset,keywords,synth_keywords,drop_export,import,FALSE,synthesized,scalar,,,,,,,root keywords else wrroc + workflow-run
+File,,Dataset,author,synth_author,drop_export,import,FALSE,synthesized,scalar,,,,,,,Dataset.author is required; agent precedence

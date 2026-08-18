@@ -1,0 +1,8 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+run,,Computation,prov:Activity|https://w3id.org/EVI#Computation,workflow,mint,,,FALSE,computation,the whole Snakemake run; job Computations link via isPartOf
+job,,Computation,prov:Activity|https://w3id.org/EVI#Computation,tool,mint,,,FALSE,computation,one per executed job (persistence-metadata record)
+workflow,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,the Snakefile
+engine,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,Snakemake itself
+rule,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,one per rule; ARK hashes snakefile#rule
+file,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per unique file; ARK hashes the normalized path
+schema,,Schema,,data,keep,,,FALSE,schema,pre-built EVI Schema node (fairscape-cli infer_schema); passes through verbatim

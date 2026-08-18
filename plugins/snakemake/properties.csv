@@ -1,0 +1,56 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+run,snakefile,Computation,name,run_name,,import,,required,scalar,,,,,,,Snakemake workflow run of '<basename>'
+run,snakefile,Computation,description,run_description,,import,,required,scalar,,,,,,,
+run,,Computation,runBy,settings_author,,import,,recommended,scalar,,,,,,,
+run,starttime,Computation,dateCreated,date_or_published,,import,,required,scalar,,,,,,,falls back to the crate datePublished
+run,,Computation,command,csv_constant,,import,,recommended,scalar,snakemake,,,,,,original CLI line is not recorded post-hoc
+run,,Computation,usedSoftware,run_used_software,,import,,required,list,,,,,,,workflow + engine Software
+run,,Computation,usedDataset,run_used_datasets,,import,,required,list,,,,,,,root inputs: files no job produced
+run,,Computation,generated,run_generated,,import,,required,list,,,,,,,terminal outputs: outputs no job consumed
+run,engine_version,Computation,snakemakeVersion,scalar,,import,,optional,scalar,,,,,,,passthrough extra
+run,starttime,Computation,startTime,scalar,,import,,optional,scalar,,,,,,,
+run,endtime,Computation,endTime,scalar,,import,,optional,scalar,,,,,,,
+job,rule,Computation,name,job_name,,import,,required,scalar,,,,,,,rule name + wildcards
+job,rule,Computation,description,job_description,,import,,required,scalar,,,,,,,
+job,,Computation,runBy,settings_author,,import,,recommended,scalar,,,,,,,
+job,starttime,Computation,dateCreated,date_or_published,,import,,required,scalar,,,,,,,
+job,rule,Computation,usedSoftware,rule_ref,,import,,required,list,,,,,,,the rule's Software entity
+job,inputs,Computation,usedDataset,dataset_refs,,import,,required,list,,,,,,,
+job,outputs,Computation,generated,dataset_refs,,import,,required,list,,,,,,,
+job,,Computation,isPartOf,run_ref,,import,,required,list,,,,,,,
+job,shellcmd,Computation,command,scalar,,import,,recommended,scalar,,,,,,,resolved shell command; script/notebook/wrapper fallback set by the extractor
+job,params,Computation,parameter,param_strings,,import,,optional,list,,,,,,,
+job,starttime,Computation,startTime,scalar,,import,,optional,scalar,,,,,,,
+job,endtime,Computation,endTime,scalar,,import,,optional,scalar,,,,,,,
+job,container_img_url,Computation,containerImage,scalar,,import,,optional,scalar,,,,,,,
+workflow,snakefile,Software,name,basename,,import,,required,scalar,,,,,,,
+workflow,,Software,author,settings_author,,import,,required,scalar,,,,,,,
+workflow,snakefile,Software,description,workflow_description,,import,,required,scalar,,,,,,,
+workflow,,Software,format,csv_constant,,import,,required,scalar,snakemake,,,,,,
+workflow,snakefile,Software,contentUrl,scalar,,import,,required,scalar,,,,,,,as referenced from the crate directory
+engine,,Software,name,csv_constant,,import,,required,scalar,Snakemake,,,,,,
+engine,,Software,author,csv_constant,,import,,required,scalar,Johannes Köster,,,,,,
+engine,,Software,description,csv_constant,,import,,required,scalar,Snakemake workflow management system (https://snakemake.github.io/),,,,,,
+engine,,Software,format,csv_constant,,import,,required,scalar,application/x-python,,,,,,
+engine,engine_version,Software,version,scalar,,import,,required,scalar,,,,,,,
+engine,,Software,contentUrl,csv_constant,,import,,required,scalar,https://github.com/snakemake/snakemake,,,,,,
+rule,name,Software,name,scalar,,import,,required,scalar,,,,,,,
+rule,,Software,author,settings_author,,import,,required,scalar,,,,,,,
+rule,source,Software,description,rule_description,,import,,required,scalar,,,,,,,the rule source as written; >=10-char floor
+rule,,Software,format,rule_format,,import,,required,scalar,,,,,,,script/notebook/wrapper language else 'snakemake'
+rule,,Software,contentUrl,rule_content_url,,import,,required,scalar,,,,,,,defining file (script/notebook/wrapper) else the Snakefile
+rule,,Software,isPartOf,workflow_ref,,import,,required,list,,,,,,,
+rule,container_img_url,Software,containerImage,scalar,,import,,optional,scalar,,,,,,,
+rule,conda_env,Software,condaEnvironment,scalar,,import,,optional,scalar,,,,,,,
+file,path,Dataset,name,basename,,import,,required,scalar,,,,,,,
+file,,Dataset,author,settings_author,,import,,required,scalar,,,,,,,
+file,path,Dataset,description,file_description,,import,,required,scalar,,,,,,,input/output/config/dir-member variants
+file,,Dataset,datePublished,settings_date,,import,,required,scalar,,,,,,,
+file,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
+file,path,Dataset,format,encoding_format,,import,,required,scalar,,,,,,,
+file,path,Dataset,generatedBy,file_generated_by,,import,,required,list,,,,,,,producing Computation; [] for inputs (LakeDB parity)
+file,path,Dataset,isPartOf,file_is_part_of,,import,,optional,list,,,,,,,expanded-dir parent or (configfiles) the workflow Software
+file,path,Dataset,evi:Schema,file_schema_ref,,import,,optional,scalar,,,,,,,link to the inferred Schema node
+file,path,Dataset,contentUrl,file_content_url,,import,,optional,scalar,,,,,,,crate-relative promise; only when the file is inside the crate
+file,path,Dataset,localPath,file_local_path,,import,,optional,scalar,,,,,,,'was here when this ran' for work files and deleted temp() outputs
+file,size,Dataset,contentSize,size_string,,import,,optional,scalar,,,,,,,pydantic requires a string

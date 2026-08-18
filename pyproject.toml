@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fairscape-conversion"
+version = "0.1.0"
+description = "One mapping format and one engine for every fairscape RO-Crate converter (wrroc, d4d, c2m2, croissant, snakemake, cromwell, mlflow)"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [
+    { name = "Justin Niestroy", email = "jniestroy@gmail.com" },
+]
+keywords = ["fairscape", "ro-crate", "provenance", "evi", "converter", "metadata"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "fairscape-models>=1.1.5",
+    "pyyaml",
+]
+
+# The package content lives at the repo root (core/, plugins/, __init__.py),
+# so map the import name onto ".". tests/ and archive/ are deliberately not
+# packaged.
+[tool.setuptools]
+packages = [
+    "fairscape_conversion",
+    "fairscape_conversion.core",
+    "fairscape_conversion.plugins",
+    "fairscape_conversion.plugins.example",
+    "fairscape_conversion.plugins.wrroc",
+    "fairscape_conversion.plugins.d4d",
+    "fairscape_conversion.plugins.c2m2",
+    "fairscape_conversion.plugins.croissant",
+    "fairscape_conversion.plugins.snakemake",
+    "fairscape_conversion.plugins.cromwell",
+    "fairscape_conversion.plugins.mlflow",
+]
+
+[tool.setuptools.package-dir]
+fairscape_conversion = "."
+
+[tool.setuptools.package-data]
+"*" = ["*.csv", "*.json", "*.md", "*.yaml", "input-datapackage/*"]

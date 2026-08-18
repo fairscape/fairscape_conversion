@@ -1,0 +1,611 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "sc": "https://schema.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "Mini_Project",
+  "description": "RO-Crate packaging of the CFDE C2M2 Frictionless datapackage for the input-datapackage dataset. It preserves the C2M2 relational tables (TSV), the datapackage schema, and the SQLite relational index verbatim, and overlays schema.org/EVI provenance plus file-level links back to the source data. The relational contract (primary/foreign keys) travels as cfde:* extension fields so the C2M2 relational model can be reconstituted.",
+  "dct:conformsTo": "http://mlcommons.org/croissant/RAI/1.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "CFDE",
+    "C2M2",
+    "input-datapackage",
+    "metadata",
+    "RO-Crate",
+    "Frictionless",
+    "provenance"
+  ],
+  "version": "1.0",
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "name": "CFDE / input-datapackage DCC"
+    }
+  ],
+  "publisher": {
+    "@type": "sc:Organization",
+    "name": "NIH Common Fund Data Ecosystem"
+  },
+  "distribution": [
+    {
+      "@id": "#file-input-datapackage-c2m2-table-id_namespace",
+      "@type": "cr:FileObject",
+      "name": "C2M2_id_namespace_table_(input-datapackage)",
+      "description": "Top-level identifier namespaces.",
+      "contentUrl": "file:///id_namespace.tsv",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-input-datapackage-c2m2-table-project",
+      "@type": "cr:FileObject",
+      "name": "C2M2_project_table_(input-datapackage)",
+      "description": "Projects within a namespace.",
+      "contentUrl": "file:///project.tsv",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-input-datapackage-c2m2-table-file_format",
+      "@type": "cr:FileObject",
+      "name": "C2M2_file_format_table_(input-datapackage)",
+      "description": "EDAM CV file-format terms.",
+      "contentUrl": "file:///file_format.tsv",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-input-datapackage-c2m2-table-file",
+      "@type": "cr:FileObject",
+      "name": "C2M2_file_table_(input-datapackage)",
+      "description": "The C2M2 file table \u2014 a stable digital-asset inventory.",
+      "contentUrl": "file:///file.tsv",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-input-datapackage-c2m2-table-biosample",
+      "@type": "cr:FileObject",
+      "name": "C2M2_biosample_table_(input-datapackage)",
+      "description": "The C2M2 biosample table.",
+      "contentUrl": "file:///biosample.tsv",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-input-datapackage-c2m2-table-file_describes_biosample",
+      "@type": "cr:FileObject",
+      "name": "C2M2_file_describes_biosample_table_(input-datapackage)",
+      "description": "Association table: a file describes a biosample.",
+      "contentUrl": "file:///file_describes_biosample.tsv",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-sample-tsv",
+      "@type": "cr:FileObject",
+      "name": "sample.tsv",
+      "description": "Source data file 'sample.tsv', an individual record exploded from the C2M2 file table (id_namespace=mini, local_id=sample.tsv). Its contentUrl links back to the source data. This is the source-data bridge from C2M2 metadata to actual data.",
+      "contentUrl": "https://example.org/files/sample.tsv?download",
+      "encodingFormat": "text/plain",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "@id": "#file-data-bin",
+      "@type": "cr:FileObject",
+      "name": "data.bin",
+      "description": "Source data file 'data.bin', an individual record exploded from the C2M2 file table (id_namespace=mini, local_id=data.bin). Its contentUrl links back to the source data. This is the source-data bridge from C2M2 metadata to actual data.",
+      "contentUrl": "ark:99999/data-bin",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#file-input-datapackage-c2m2-datapackage-json",
+      "@type": "cr:FileObject",
+      "name": "C2M2_datapackage.json",
+      "description": "The Frictionless Data Package descriptor (JSON Table Schema) defining all 7 C2M2 table fields, primary keys, and foreign-key relationships for this instance \u2014 the authoritative relational contract, preserved verbatim so the full model survives even for tables omitted from @graph.",
+      "contentUrl": "file:///C2M2_datapackage.json",
+      "encodingFormat": "text/plain"
+    }
+  ],
+  "recordSet": [
+    {
+      "@id": "#recordset-input-datapackage-c2m2-schema-id_namespace",
+      "@type": "cr:RecordSet",
+      "name": "C2M2_id_namespace_table_schema",
+      "description": "Column schema for the C2M2 'id_namespace' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
+      "key": [
+        "#recordset-input-datapackage-c2m2-schema-id_namespace/id"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-id_namespace/id",
+          "@type": "cr:Field",
+          "name": "id",
+          "description": "Namespace id.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-id_namespace"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-id_namespace/name",
+          "@type": "cr:Field",
+          "name": "name",
+          "description": "Namespace name.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-id_namespace"
+            },
+            "extract": {
+              "column": "name"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@id": "#recordset-input-datapackage-c2m2-schema-project",
+      "@type": "cr:RecordSet",
+      "name": "C2M2_project_table_schema",
+      "description": "Column schema for the C2M2 'project' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
+      "key": [
+        "#recordset-input-datapackage-c2m2-schema-project/id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-project/local_id"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-project/id_namespace",
+          "@type": "cr:Field",
+          "name": "id_namespace",
+          "description": "Namespace of this project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-project"
+            },
+            "extract": {
+              "column": "id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-project/local_id",
+          "@type": "cr:Field",
+          "name": "local_id",
+          "description": "Local id of this project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-project"
+            },
+            "extract": {
+              "column": "local_id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-project/name",
+          "@type": "cr:Field",
+          "name": "name",
+          "description": "Project name.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-project"
+            },
+            "extract": {
+              "column": "name"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@id": "#recordset-input-datapackage-c2m2-schema-file_format",
+      "@type": "cr:RecordSet",
+      "name": "C2M2_file_format_table_schema",
+      "description": "Column schema for the C2M2 'file_format' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
+      "key": [
+        "#recordset-input-datapackage-c2m2-schema-file_format/id"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file_format/id",
+          "@type": "cr:Field",
+          "name": "id",
+          "description": "An EDAM CV term id identifying the digital format.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file_format"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file_format/name",
+          "@type": "cr:Field",
+          "name": "name",
+          "description": "Term name.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file_format"
+            },
+            "extract": {
+              "column": "name"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@id": "#recordset-input-datapackage-c2m2-schema-file",
+      "@type": "cr:RecordSet",
+      "name": "C2M2_file_table_schema",
+      "description": "Column schema for the C2M2 'file' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
+      "key": [
+        "#recordset-input-datapackage-c2m2-schema-file/id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-file/local_id",
+        "#recordset-input-datapackage-c2m2-schema-file/project_id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-file/project_local_id",
+        "#recordset-input-datapackage-c2m2-schema-file/filename"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/id_namespace",
+          "@type": "cr:Field",
+          "name": "id_namespace",
+          "description": "Namespace containing this file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/local_id",
+          "@type": "cr:Field",
+          "name": "local_id",
+          "description": "Local id of this file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "local_id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/project_id_namespace",
+          "@type": "cr:Field",
+          "name": "project_id_namespace",
+          "description": "Namespace of the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "project_id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/project_local_id",
+          "@type": "cr:Field",
+          "name": "project_local_id",
+          "description": "Local id of the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "project_local_id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/persistent_id",
+          "@type": "cr:Field",
+          "name": "persistent_id",
+          "description": "A persistent, resolvable identifier (minid / DRS / DOI).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "persistent_id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/size_in_bytes",
+          "@type": "cr:Field",
+          "name": "size_in_bytes",
+          "description": "The size of this file in bytes.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "size_in_bytes"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/sha256",
+          "@type": "cr:Field",
+          "name": "sha256",
+          "description": "SHA-256 checksum for this file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "sha256"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/filename",
+          "@type": "cr:Field",
+          "name": "filename",
+          "description": "A filename with no path.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "filename"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/file_format",
+          "@type": "cr:Field",
+          "name": "file_format",
+          "description": "An EDAM CV term id identifying the digital format of this file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "file_format"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/mime_type",
+          "@type": "cr:Field",
+          "name": "mime_type",
+          "description": "A MIME type describing this file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "mime_type"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file/access_url",
+          "@type": "cr:Field",
+          "name": "access_url",
+          "description": "A publicly accessible download URL.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file"
+            },
+            "extract": {
+              "column": "access_url"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@id": "#recordset-input-datapackage-c2m2-schema-biosample",
+      "@type": "cr:RecordSet",
+      "name": "C2M2_biosample_table_schema",
+      "description": "Column schema for the C2M2 'biosample' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
+      "key": [
+        "#recordset-input-datapackage-c2m2-schema-biosample/id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-biosample/local_id",
+        "#recordset-input-datapackage-c2m2-schema-biosample/project_id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-biosample/project_local_id"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-biosample/id_namespace",
+          "@type": "cr:Field",
+          "name": "id_namespace",
+          "description": "Namespace containing this biosample.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-biosample"
+            },
+            "extract": {
+              "column": "id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-biosample/local_id",
+          "@type": "cr:Field",
+          "name": "local_id",
+          "description": "Local id of this biosample.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-biosample"
+            },
+            "extract": {
+              "column": "local_id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-biosample/project_id_namespace",
+          "@type": "cr:Field",
+          "name": "project_id_namespace",
+          "description": "Namespace of the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-biosample"
+            },
+            "extract": {
+              "column": "project_id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-biosample/project_local_id",
+          "@type": "cr:Field",
+          "name": "project_local_id",
+          "description": "Local id of the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-biosample"
+            },
+            "extract": {
+              "column": "project_local_id"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@id": "#recordset-input-datapackage-c2m2-schema-file_describes_biosample",
+      "@type": "cr:RecordSet",
+      "name": "C2M2_file_describes_biosample_table_schema",
+      "description": "Column schema for the C2M2 'file_describes_biosample' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
+      "key": [
+        "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/file_id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/file_local_id",
+        "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/biosample_id_namespace",
+        "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/biosample_local_id"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/file_id_namespace",
+          "@type": "cr:Field",
+          "name": "file_id_namespace",
+          "description": "Namespace of the file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file_describes_biosample"
+            },
+            "extract": {
+              "column": "file_id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/file_local_id",
+          "@type": "cr:Field",
+          "name": "file_local_id",
+          "description": "Local id of the file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file_describes_biosample"
+            },
+            "extract": {
+              "column": "file_local_id"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/biosample_id_namespace",
+          "@type": "cr:Field",
+          "name": "biosample_id_namespace",
+          "description": "Namespace of the biosample.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file_describes_biosample"
+            },
+            "extract": {
+              "column": "biosample_id_namespace"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-input-datapackage-c2m2-schema-file_describes_biosample/biosample_local_id",
+          "@type": "cr:Field",
+          "name": "biosample_local_id",
+          "description": "Local id of the biosample.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-input-datapackage-c2m2-table-file_describes_biosample"
+            },
+            "extract": {
+              "column": "biosample_local_id"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

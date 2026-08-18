@@ -1,0 +1,389 @@
+{
+    "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#",
+        "rai": "http://mlcommons.org/croissant/RAI/",
+        "prov": "http://www.w3.org/ns/prov#",
+        "mls": "http://www.w3.org/ns/mls#",
+        "usedSoftware": {
+            "@id": "https://w3id.org/EVI#usedSoftware",
+            "@type": "@id"
+        },
+        "usedDataset": {
+            "@id": "https://w3id.org/EVI#usedDataset",
+            "@type": "@id"
+        },
+        "generatedBy": {
+            "@id": "https://w3id.org/EVI#generatedBy",
+            "@type": "@id"
+        },
+        "generated": {
+            "@id": "https://w3id.org/EVI#generated",
+            "@type": "@id"
+        },
+        "annotates": {
+            "@id": "https://w3id.org/EVI#annotates",
+            "@type": "@id"
+        },
+        "hasDistribution": {
+            "@id": "https://w3id.org/EVI#hasDistribution",
+            "@type": "@id"
+        },
+        "localPath": "https://w3id.org/ro/terms#localPath"
+    },
+    "@graph": [
+        {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "conformsTo": {
+                "@id": "https://w3id.org/ro/crate/1.2"
+            },
+            "about": {
+                "@id": "ark:59853/rocrate-mlflow-experiment-iris-classifier-a92e05c"
+            }
+        },
+        {
+            "@id": "ark:59853/rocrate-mlflow-experiment-iris-classifier-a92e05c",
+            "@type": [
+                "Dataset",
+                "https://w3id.org/EVI#ROCrate"
+            ],
+            "conformsTo": {
+                "@id": "https://w3id.org/fairscape/profile/0.1"
+            },
+            "name": "MLflow experiment 'iris-classifier'",
+            "description": "FAIRSCAPE EVI RO-Crate describing MLflow experiment 'iris-classifier', exported from the MLflow tracking store by mlflow-fairscape",
+            "keywords": [
+                "mlflow",
+                "machine learning",
+                "experiment tracking"
+            ],
+            "version": "1.0",
+            "author": "jniestroy",
+            "license": "https://spdx.org/licenses/CC-BY-4.0",
+            "datePublished": "2026-08-13T00:00:00-04:00",
+            "hasPart": [
+                {
+                    "@id": "ark:59853/computation-rf-train-788c3e0"
+                },
+                {
+                    "@id": "ark:59853/computation-rf-depth-2-31412e3"
+                },
+                {
+                    "@id": "ark:59853/software-make-fixture-py-49e7a79"
+                },
+                {
+                    "@id": "ark:59853/software-mlflow-eb75505"
+                },
+                {
+                    "@id": "ark:59853/dataset-iris-d7253d9"
+                },
+                {
+                    "@id": "ark:59853/dataset-model-db0c467"
+                },
+                {
+                    "@id": "ark:59853/dataset-confusion-matrix-csv-bd2503f"
+                },
+                {
+                    "@id": "ark:59853/dataset-notes-txt-126776c"
+                },
+                {
+                    "@id": "ark:59853/schema-iris-4aeb741"
+                }
+            ]
+        },
+        {
+            "@id": "ark:59853/computation-rf-train-788c3e0",
+            "@type": [
+                "prov:Activity",
+                "https://w3id.org/EVI#Computation"
+            ],
+            "name": "MLflow run 'rf-train'",
+            "description": "MLflow run 'rf-train' of experiment 'iris-classifier', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+            "runBy": "oj",
+            "dateCreated": "2026-08-13T07:11:37.222000-04:00",
+            "command": "python make_fixture.py",
+            "usedSoftware": [
+                {
+                    "@id": "ark:59853/software-make-fixture-py-49e7a79"
+                },
+                {
+                    "@id": "ark:59853/software-mlflow-eb75505"
+                }
+            ],
+            "usedDataset": [
+                {
+                    "@id": "ark:59853/dataset-iris-d7253d9"
+                }
+            ],
+            "generated": [
+                {
+                    "@id": "ark:59853/dataset-confusion-matrix-csv-bd2503f"
+                },
+                {
+                    "@id": "ark:59853/dataset-notes-txt-126776c"
+                },
+                {
+                    "@id": "ark:59853/dataset-model-db0c467"
+                }
+            ],
+            "parameter": [
+                "max_depth=4",
+                "n_estimators=50",
+                "random_state=42"
+            ],
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "accuracy",
+                    "value": 1.0
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "f1_macro",
+                    "value": 1.0
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "train_loss",
+                    "value": 0.25
+                }
+            ],
+            "startTime": "2026-08-13T07:11:37.222000-04:00",
+            "endTime": "2026-08-13T07:11:42.263000-04:00",
+            "mlflowRunId": "681fa34b3749418b995ef32200636b71"
+        },
+        {
+            "@id": "ark:59853/computation-rf-depth-2-31412e3",
+            "@type": [
+                "prov:Activity",
+                "https://w3id.org/EVI#Computation"
+            ],
+            "name": "MLflow run 'rf-depth-2'",
+            "description": "MLflow run 'rf-depth-2' of experiment 'iris-classifier', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape (nested child of run 'rf-train')",
+            "runBy": "oj",
+            "dateCreated": "2026-08-13T07:11:42.218000-04:00",
+            "command": "python make_fixture.py",
+            "usedSoftware": [
+                {
+                    "@id": "ark:59853/software-make-fixture-py-49e7a79"
+                },
+                {
+                    "@id": "ark:59853/software-mlflow-eb75505"
+                }
+            ],
+            "usedDataset": [],
+            "generated": [],
+            "isPartOf": [
+                {
+                    "@id": "ark:59853/computation-rf-train-788c3e0"
+                }
+            ],
+            "parameter": [
+                "max_depth=2"
+            ],
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "accuracy",
+                    "value": 1.0
+                }
+            ],
+            "startTime": "2026-08-13T07:11:42.218000-04:00",
+            "endTime": "2026-08-13T07:11:42.262000-04:00",
+            "mlflowRunId": "1cedcd0d52f64c2aa651a5aa76787743"
+        },
+        {
+            "@id": "ark:59853/software-make-fixture-py-49e7a79",
+            "@type": [
+                "prov:Entity",
+                "https://w3id.org/EVI#Software"
+            ],
+            "name": "make_fixture.py",
+            "author": "jniestroy",
+            "description": "The script 'make_fixture.py' logged by MLflow as the source of run(s) in experiment 'iris-classifier'",
+            "format": "text/x-python",
+            "localPath": "make_fixture.py"
+        },
+        {
+            "@id": "ark:59853/software-mlflow-eb75505",
+            "@type": [
+                "prov:Entity",
+                "https://w3id.org/EVI#Software"
+            ],
+            "name": "MLflow",
+            "author": "MLflow Project, a Series of LF Projects, LLC",
+            "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)",
+            "format": "application/x-python",
+            "version": "3.15.1",
+            "contentUrl": "https://github.com/mlflow/mlflow"
+        },
+        {
+            "@id": "ark:59853/dataset-iris-d7253d9",
+            "@type": [
+                "prov:Entity",
+                "https://w3id.org/EVI#Dataset"
+            ],
+            "name": "iris",
+            "author": "jniestroy",
+            "description": "Dataset 'iris' logged as an MLflow run input (150 rows, digest 8f9eb48c), used as training data",
+            "datePublished": "2026-08-13T00:00:00-04:00",
+            "keywords": [
+                "mlflow",
+                "machine learning",
+                "experiment tracking"
+            ],
+            "format": "code",
+            "generatedBy": [],
+            "digest": "8f9eb48c",
+            "evi:Schema": {
+                "@id": "ark:59853/schema-iris-4aeb741"
+            }
+        },
+        {
+            "@id": "ark:59853/dataset-model-db0c467",
+            "@type": [
+                "prov:Entity",
+                "https://w3id.org/EVI#Dataset"
+            ],
+            "name": "model",
+            "additionalType": "http://www.w3.org/ns/mls#Model",
+            "author": "jniestroy",
+            "description": "MLflow model 'model' (sklearn flavor), logged by run 'rf-train' with MLflow 3.15.1",
+            "datePublished": "2026-08-13T00:00:00-04:00",
+            "keywords": [
+                "mlflow",
+                "machine learning",
+                "experiment tracking"
+            ],
+            "format": "sklearn",
+            "generatedBy": [
+                {
+                    "@id": "ark:59853/computation-rf-train-788c3e0"
+                }
+            ],
+            "parameter": [
+                "max_depth=4",
+                "n_estimators=50",
+                "random_state=42"
+            ],
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "accuracy",
+                    "value": 1.0
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "f1_macro",
+                    "value": 1.0
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "train_loss",
+                    "value": 0.9
+                }
+            ],
+            "mlflowModelId": "m-aeca7b9019374d8c90f48fae3a1643bb",
+            "contentUrl": "rf-train-681fa34b/model/",
+            "contentSize": "912159"
+        },
+        {
+            "@id": "ark:59853/dataset-confusion-matrix-csv-bd2503f",
+            "@type": [
+                "prov:Entity",
+                "https://w3id.org/EVI#Dataset"
+            ],
+            "name": "confusion_matrix.csv",
+            "author": "jniestroy",
+            "description": "Artifact 'confusion_matrix.csv' logged by MLflow run 'rf-train'",
+            "datePublished": "2026-08-13T00:00:00-04:00",
+            "keywords": [
+                "mlflow",
+                "machine learning",
+                "experiment tracking"
+            ],
+            "format": "text/csv",
+            "generatedBy": [
+                {
+                    "@id": "ark:59853/computation-rf-train-788c3e0"
+                }
+            ],
+            "contentUrl": "rf-train-681fa34b/confusion_matrix.csv",
+            "contentSize": "40"
+        },
+        {
+            "@id": "ark:59853/dataset-notes-txt-126776c",
+            "@type": [
+                "prov:Entity",
+                "https://w3id.org/EVI#Dataset"
+            ],
+            "name": "notes.txt",
+            "author": "jniestroy",
+            "description": "Artifact 'notes.txt' logged by MLflow run 'rf-train'",
+            "datePublished": "2026-08-13T00:00:00-04:00",
+            "keywords": [
+                "mlflow",
+                "machine learning",
+                "experiment tracking"
+            ],
+            "format": "text/plain",
+            "generatedBy": [
+                {
+                    "@id": "ark:59853/computation-rf-train-788c3e0"
+                }
+            ],
+            "contentUrl": "rf-train-681fa34b/notes.txt",
+            "contentSize": "23"
+        },
+        {
+            "@id": "ark:59853/schema-iris-4aeb741",
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "evi": "https://w3id.org/EVI#"
+            },
+            "@type": "evi:Schema",
+            "name": "Schema for MLflow dataset 'iris'",
+            "description": "Schema derived from the column spec MLflow logged for dataset 'iris' (digest 8f9eb48c)",
+            "conformsTo": {
+                "@id": "https://json-schema.org/draft/2020-12/schema"
+            },
+            "properties": {
+                "sepal length (cm)": {
+                    "description": "Column 'sepal length (cm)' of MLflow dataset 'iris' (double)",
+                    "index": 0,
+                    "type": "number"
+                },
+                "sepal width (cm)": {
+                    "description": "Column 'sepal width (cm)' of MLflow dataset 'iris' (double)",
+                    "index": 1,
+                    "type": "number"
+                },
+                "petal length (cm)": {
+                    "description": "Column 'petal length (cm)' of MLflow dataset 'iris' (double)",
+                    "index": 2,
+                    "type": "number"
+                },
+                "petal width (cm)": {
+                    "description": "Column 'petal width (cm)' of MLflow dataset 'iris' (double)",
+                    "index": 3,
+                    "type": "number"
+                },
+                "target": {
+                    "description": "Column 'target' of MLflow dataset 'iris' (long)",
+                    "index": 4,
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+                "sepal length (cm)",
+                "sepal width (cm)",
+                "petal length (cm)",
+                "petal width (cm)",
+                "target"
+            ]
+        }
+    ]
+}

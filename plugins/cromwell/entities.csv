@@ -1,0 +1,8 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+run,,Computation,prov:Activity|https://w3id.org/EVI#Computation,workflow,mint,,,FALSE,computation,the whole Cromwell run; call Computations link via isPartOf
+job,,Computation,prov:Activity|https://w3id.org/EVI#Computation,tool,mint,,,FALSE,computation,one per executed call (last attempt per scatter shard)
+workflow,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,the submitted WDL source
+engine,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,Cromwell itself
+task,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,one per WDL task; ARK hashes wdl_key#task
+file,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per unique file; ARK hashes the run-independent ark_source (run-UUID-stripped path)
+schema,,Schema,,data,keep,,,FALSE,schema,pre-built EVI Schema node (fairscape-cli infer_schema); passes through verbatim

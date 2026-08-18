@@ -1,0 +1,56 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+run,workflow_name,Computation,name,run_name,,import,,required,scalar,,,,,,,Cromwell workflow run of '<name>'
+run,workflow_name,Computation,description,run_description,,import,,required,scalar,,,,,,,notes non-Succeeded workflow status
+run,,Computation,runBy,settings_author,,import,,recommended,scalar,,,,,,,
+run,starttime,Computation,dateCreated,date_or_published,,import,,required,scalar,,,,,,,falls back to the crate datePublished
+run,command,Computation,command,scalar,,import,,recommended,scalar,,,,,,,cromwell run <workflowUrl>
+run,,Computation,usedSoftware,run_used_software,,import,,required,list,,,,,,,workflow + engine Software
+run,,Computation,usedDataset,run_used_datasets,,import,,required,list,,,,,,,root inputs: files no call produced
+run,,Computation,generated,run_generated,,import,,required,list,,,,,,,the workflow-level outputs Cromwell declared
+run,engine_version,Computation,cromwellVersion,scalar,,import,,optional,scalar,,,,,,,passthrough extra
+run,workflow_id,Computation,cromwellWorkflowId,scalar,,import,,optional,scalar,,,,,,,the run UUID
+run,starttime,Computation,startTime,scalar,,import,,optional,scalar,,,,,,,
+run,endtime,Computation,endTime,scalar,,import,,optional,scalar,,,,,,,
+job,task,Computation,name,job_name,,import,,required,scalar,,,,,,,task name + shard/attempt qualifiers
+job,task,Computation,description,job_description,,import,,required,scalar,,,,,,,notes shard and non-Done execution status
+job,,Computation,runBy,settings_author,,import,,recommended,scalar,,,,,,,
+job,starttime,Computation,dateCreated,date_or_published,,import,,required,scalar,,,,,,,
+job,task,Computation,usedSoftware,task_ref,,import,,required,list,,,,,,,the task's Software entity
+job,inputs,Computation,usedDataset,dataset_refs,,import,,required,list,,,,,,,pre-localization source paths == producer output paths
+job,outputs,Computation,generated,dataset_refs,,import,,required,list,,,,,,,
+job,,Computation,isPartOf,run_ref,,import,,required,list,,,,,,,
+job,shellcmd,Computation,command,scalar,,import,,recommended,scalar,,,,,,,cromwell's instantiated commandLine
+job,parameters,Computation,parameter,param_strings,,import,,optional,list,,,,,,,non-file call inputs as name=value
+job,starttime,Computation,startTime,scalar,,import,,optional,scalar,,,,,,,
+job,endtime,Computation,endTime,scalar,,import,,optional,scalar,,,,,,,
+job,container,Computation,containerImage,scalar,,import,,optional,scalar,,,,,,,dockerImageUsed (digest-pinned) else declared runtime docker
+workflow,wdl_ref,Software,name,basename,,import,,required,scalar,,,,,,,
+workflow,,Software,author,settings_author,,import,,required,scalar,,,,,,,
+workflow,wdl_ref,Software,description,workflow_description,,import,,required,scalar,,,,,,,names the actual workflow language (e.g. WDL 1.0)
+workflow,,Software,format,csv_constant,,import,,required,scalar,wdl,,,,,,
+workflow,wdl_ref,Software,contentUrl,scalar,,import,,required,scalar,,,,,,,as referenced from the crate directory
+engine,,Software,name,csv_constant,,import,,required,scalar,Cromwell,,,,,,
+engine,,Software,author,csv_constant,,import,,required,scalar,Broad Institute,,,,,,
+engine,,Software,description,csv_constant,,import,,required,scalar,Cromwell workflow execution engine (https://cromwell.readthedocs.io/),,,,,,
+engine,,Software,format,csv_constant,,import,,required,scalar,application/java-archive,,,,,,
+engine,engine_version,Software,version,scalar,,import,,required,scalar,,,,,,,from workflowProcessingEvents
+engine,,Software,contentUrl,csv_constant,,import,,required,scalar,https://github.com/broadinstitute/cromwell,,,,,,
+task,name,Software,name,scalar,,import,,required,scalar,,,,,,,
+task,,Software,author,settings_author,,import,,required,scalar,,,,,,,
+task,source,Software,description,task_description,,import,,required,scalar,,,,,,,the task {...} block from the WDL source; >=10-char floor
+task,,Software,format,csv_constant,,import,,required,scalar,wdl,,,,,,
+task,,Software,contentUrl,wdl_ref_url,,import,,required,scalar,,,,,,,the WDL file defines every task
+task,,Software,isPartOf,workflow_ref,,import,,required,list,,,,,,,
+task,container,Software,containerImage,scalar,,import,,optional,scalar,,,,,,,declared runtime docker
+file,path,Dataset,name,file_name,,import,,required,scalar,,,,,,,
+file,,Dataset,author,settings_author,,import,,required,scalar,,,,,,,
+file,path,Dataset,description,file_description,,import,,required,scalar,,,,,,,input/output/submitted variants
+file,,Dataset,datePublished,settings_date,,import,,required,scalar,,,,,,,
+file,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
+file,path,Dataset,format,encoding_format,,import,,required,scalar,,,,,,,
+file,path,Dataset,generatedBy,file_generated_by,,import,,required,list,,,,,,,producing Computation; [] for inputs (LakeDB parity)
+file,path,Dataset,isPartOf,file_is_part_of,,import,,optional,list,,,,,,,submitted WDL/inputs files hang off the workflow Software
+file,path,Dataset,evi:Schema,file_schema_ref,,import,,optional,scalar,,,,,,,link to the inferred Schema node
+file,path,Dataset,contentUrl,file_content_url,,import,,optional,scalar,,,,,,,crate-relative promise (or remote URI) when resolvable from the crate
+file,path,Dataset,localPath,file_local_path,,import,,optional,scalar,,,,,,,'was here when this ran' for paths outside the crate
+file,size,Dataset,contentSize,size_string,,import,,optional,scalar,,,,,,,pydantic requires a string

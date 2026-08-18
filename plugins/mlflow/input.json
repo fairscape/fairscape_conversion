@@ -1,0 +1,230 @@
+{
+  "settings": {
+    "naan": "59853",
+    "name": "MLflow experiment 'iris-classifier'",
+    "description": "FAIRSCAPE EVI RO-Crate describing MLflow experiment 'iris-classifier', exported from the MLflow tracking store by mlflow-fairscape",
+    "author": "jniestroy",
+    "keywords": [
+      "mlflow",
+      "machine learning",
+      "experiment tracking"
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0",
+    "version": "1.0",
+    "date_published": "2026-08-13T00:00:00-04:00"
+  },
+  "experiment": {
+    "name": "iris-classifier",
+    "experiment_id": "532023913993003406",
+    "ark_source": "mlflow:iris-classifier#1cedcd0d52f64c2aa651a5aa76787743,681fa34b3749418b995ef32200636b71"
+  },
+  "engine": {
+    "version": "3.15.1"
+  },
+  "runs": [
+    {
+      "run_id": "681fa34b3749418b995ef32200636b71",
+      "name": "rf-train",
+      "ark_source": "mlflow:iris-classifier#681fa34b3749418b995ef32200636b71",
+      "parent_run_id": null,
+      "status": "FINISHED",
+      "user": "oj",
+      "source_key": "make_fixture.py@local",
+      "start_time": "2026-08-13T07:11:37.222000-04:00",
+      "end_time": "2026-08-13T07:11:42.263000-04:00",
+      "params": {
+        "max_depth": "4",
+        "random_state": "42",
+        "n_estimators": "50"
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "train_loss": 0.25
+      },
+      "tags": {
+        "team": "clarklab"
+      },
+      "container": null,
+      "dataset_inputs": [
+        {
+          "key": "iris@8f9eb48c",
+          "context": "training"
+        }
+      ],
+      "artifacts": [
+        "681fa34b3749418b995ef32200636b71:confusion_matrix.csv",
+        "681fa34b3749418b995ef32200636b71:notes.txt"
+      ],
+      "models": [
+        "m-aeca7b9019374d8c90f48fae3a1643bb"
+      ]
+    },
+    {
+      "run_id": "1cedcd0d52f64c2aa651a5aa76787743",
+      "name": "rf-depth-2",
+      "ark_source": "mlflow:iris-classifier#1cedcd0d52f64c2aa651a5aa76787743",
+      "parent_run_id": "681fa34b3749418b995ef32200636b71",
+      "status": "FINISHED",
+      "user": "oj",
+      "source_key": "make_fixture.py@local",
+      "start_time": "2026-08-13T07:11:42.218000-04:00",
+      "end_time": "2026-08-13T07:11:42.262000-04:00",
+      "params": {
+        "max_depth": "2"
+      },
+      "metrics": {
+        "accuracy": 1.0
+      },
+      "tags": {},
+      "container": null,
+      "dataset_inputs": [],
+      "artifacts": [],
+      "models": []
+    }
+  ],
+  "sources": {
+    "make_fixture.py@local": {
+      "key": "make_fixture.py@local",
+      "name": "make_fixture.py",
+      "source_type": "LOCAL",
+      "git_commit": null,
+      "ark_source": "make_fixture.py@local"
+    }
+  },
+  "datasets": {
+    "iris@8f9eb48c": {
+      "key": "iris@8f9eb48c",
+      "name": "iris",
+      "digest": "8f9eb48c",
+      "source_type": "code",
+      "columns": [
+        {
+          "name": "sepal length (cm)",
+          "type": "double",
+          "required": true
+        },
+        {
+          "name": "sepal width (cm)",
+          "type": "double",
+          "required": true
+        },
+        {
+          "name": "petal length (cm)",
+          "type": "double",
+          "required": true
+        },
+        {
+          "name": "petal width (cm)",
+          "type": "double",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "long",
+          "required": true
+        }
+      ],
+      "num_rows": 150,
+      "num_elements": 750,
+      "contexts": [
+        "training"
+      ],
+      "ark_source": "mlflow-dataset:iris@8f9eb48c"
+    }
+  },
+  "models": {
+    "m-aeca7b9019374d8c90f48fae3a1643bb": {
+      "model_id": "m-aeca7b9019374d8c90f48fae3a1643bb",
+      "name": "model",
+      "run_id": "681fa34b3749418b995ef32200636b71",
+      "flavor": "sklearn",
+      "mlflow_version": "3.15.1",
+      "size": 912159,
+      "params": {
+        "max_depth": "4",
+        "random_state": "42",
+        "n_estimators": "50"
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "train_loss": 0.9
+      },
+      "ark_source": "mlflow:iris-classifier#m-aeca7b9019374d8c90f48fae3a1643bb",
+      "locator": "contentUrl",
+      "locator_value": "rf-train-681fa34b/model/"
+    }
+  },
+  "files": {
+    "681fa34b3749418b995ef32200636b71:confusion_matrix.csv": {
+      "key": "681fa34b3749418b995ef32200636b71:confusion_matrix.csv",
+      "path": "confusion_matrix.csv",
+      "run_id": "681fa34b3749418b995ef32200636b71",
+      "size": 40,
+      "ark_source": "mlflow:iris-classifier#681fa34b3749418b995ef32200636b71/confusion_matrix.csv",
+      "locator": "contentUrl",
+      "locator_value": "rf-train-681fa34b/confusion_matrix.csv"
+    },
+    "681fa34b3749418b995ef32200636b71:notes.txt": {
+      "key": "681fa34b3749418b995ef32200636b71:notes.txt",
+      "path": "notes.txt",
+      "run_id": "681fa34b3749418b995ef32200636b71",
+      "size": 23,
+      "ark_source": "mlflow:iris-classifier#681fa34b3749418b995ef32200636b71/notes.txt",
+      "locator": "contentUrl",
+      "locator_value": "rf-train-681fa34b/notes.txt"
+    }
+  },
+  "schemas": {
+    "dataset:iris@8f9eb48c": {
+      "@id": "ark:59853/schema-iris-4aeb741",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for MLflow dataset 'iris'",
+      "description": "Schema derived from the column spec MLflow logged for dataset 'iris' (digest 8f9eb48c)",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "sepal length (cm)": {
+          "description": "Column 'sepal length (cm)' of MLflow dataset 'iris' (double)",
+          "index": 0,
+          "type": "number"
+        },
+        "sepal width (cm)": {
+          "description": "Column 'sepal width (cm)' of MLflow dataset 'iris' (double)",
+          "index": 1,
+          "type": "number"
+        },
+        "petal length (cm)": {
+          "description": "Column 'petal length (cm)' of MLflow dataset 'iris' (double)",
+          "index": 2,
+          "type": "number"
+        },
+        "petal width (cm)": {
+          "description": "Column 'petal width (cm)' of MLflow dataset 'iris' (double)",
+          "index": 3,
+          "type": "number"
+        },
+        "target": {
+          "description": "Column 'target' of MLflow dataset 'iris' (long)",
+          "index": 4,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+        "target"
+      ]
+    }
+  }
+}

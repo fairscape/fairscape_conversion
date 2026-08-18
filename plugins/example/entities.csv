@@ -1,0 +1,2 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+memo,,Dataset,https://schema.org/Dataset,data,keep,,,FALSE,,one Dataset per memo; @id reused from the memo's id
