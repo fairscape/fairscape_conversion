@@ -64,6 +64,11 @@ fairscape_conversion/
   archive/               inert snapshot of the pre-PluginBase implementation
   tests/                 golden-file + example tests (hermetic), parity tests
                          (need the original converters checked out alongside)
+  examples/              one runnable example per conversion, on the plugin
+                         fixtures (run_all.py runs them all); examples/mlflow/
+                         is the live walk-through — a notebook that trains a
+                         model, converts its tracking store, and ships the
+                         crate it produced
 ```
 
 Exports are bespoke `export()` overrides that compose the same kernel pieces

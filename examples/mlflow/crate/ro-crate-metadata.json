@@ -1,0 +1,457 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "mls": "http://www.w3.org/ns/mls#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-iris-classifier-mlflow-experiment-2ac4a59"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-iris-classifier-mlflow-experiment-2ac4a59",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Iris classifier \u2014 MLflow experiment",
+      "description": "Random forest trained on the iris dataset, tracked in MLflow and converted to an EVI RO-Crate.",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "provenance"
+      ],
+      "version": "1.0",
+      "author": "Example Researcher",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-01T15:42:24.146461-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-rf-baseline-3fd9e47"
+        },
+        {
+          "@id": "ark:59853/computation-feature-importance-c9a5fa7"
+        },
+        {
+          "@id": "ark:59853/software-ipykernel-launcher-py-461b0f9"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-907d9b5"
+        },
+        {
+          "@id": "ark:59853/dataset-iris-a44c0fa"
+        },
+        {
+          "@id": "ark:59853/dataset-model-c7bf999"
+        },
+        {
+          "@id": "ark:59853/dataset-feature-importance-csv-3fce305"
+        },
+        {
+          "@id": "ark:59853/dataset-confusion-matrix-csv-8fa7303"
+        },
+        {
+          "@id": "ark:59853/schema-iris-e04fad4"
+        },
+        {
+          "@id": "ark:59853/schema-feature-importance-csv-9337f10"
+        },
+        {
+          "@id": "ark:59853/schema-confusion-matrix-csv-96bec34"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-rf-baseline-3fd9e47",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'rf-baseline'",
+      "description": "MLflow run 'rf-baseline' of experiment 'iris-classifier', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "runBy": "justin",
+      "dateCreated": "2026-09-01T15:42:20.472000-04:00",
+      "command": "python /opt/anaconda3/lib/python3.11/site-packages/ipykernel_launcher.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-ipykernel-launcher-py-461b0f9"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-907d9b5"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-iris-a44c0fa"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-confusion-matrix-csv-8fa7303"
+        },
+        {
+          "@id": "ark:59853/dataset-model-c7bf999"
+        }
+      ],
+      "parameter": [
+        "max_depth=4",
+        "n_estimators=200",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "accuracy",
+          "value": 0.9473684210526315
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "f1_macro",
+          "value": 0.9458874458874459
+        }
+      ],
+      "startTime": "2026-09-01T15:42:20.472000-04:00",
+      "endTime": "2026-09-01T15:42:24.073000-04:00",
+      "mlflowRunId": "2dcf075cdb4746c1bb2820b376c7d7df"
+    },
+    {
+      "@id": "ark:59853/computation-feature-importance-c9a5fa7",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'feature-importance'",
+      "description": "MLflow run 'feature-importance' of experiment 'iris-classifier', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape (nested child of run 'rf-baseline')",
+      "runBy": "justin",
+      "dateCreated": "2026-09-01T15:42:24.058000-04:00",
+      "command": "python /opt/anaconda3/lib/python3.11/site-packages/ipykernel_launcher.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-ipykernel-launcher-py-461b0f9"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-907d9b5"
+        }
+      ],
+      "usedDataset": [],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-feature-importance-csv-3fce305"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-rf-baseline-3fd9e47"
+        }
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "top_importance",
+          "value": 0.46823099144305624
+        }
+      ],
+      "startTime": "2026-09-01T15:42:24.058000-04:00",
+      "endTime": "2026-09-01T15:42:24.073000-04:00",
+      "mlflowRunId": "0742299e95d04ff5bbc300f5a7928a9a"
+    },
+    {
+      "@id": "ark:59853/software-ipykernel-launcher-py-461b0f9",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "ipykernel_launcher.py",
+      "author": "Example Researcher",
+      "description": "The script 'ipykernel_launcher.py' logged by MLflow as the source of run(s) in experiment 'iris-classifier'",
+      "format": "text/x-python",
+      "localPath": "/opt/anaconda3/lib/python3.11/site-packages/ipykernel_launcher.py"
+    },
+    {
+      "@id": "ark:59853/software-mlflow-907d9b5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "MLflow",
+      "author": "MLflow Project, a Series of LF Projects, LLC",
+      "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)",
+      "format": "application/x-python",
+      "version": "2.22.0",
+      "contentUrl": "https://github.com/mlflow/mlflow"
+    },
+    {
+      "@id": "ark:59853/dataset-iris-a44c0fa",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "iris",
+      "author": "Example Researcher",
+      "description": "Dataset 'iris' logged as an MLflow run input (150 rows, digest d9ca403e), used as training data",
+      "datePublished": "2026-09-01T15:42:24.146461-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "provenance"
+      ],
+      "format": "code",
+      "generatedBy": [],
+      "digest": "d9ca403e",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-iris-e04fad4"
+      }
+    },
+    {
+      "@id": "ark:59853/dataset-model-c7bf999",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "model",
+      "additionalType": "http://www.w3.org/ns/mls#Model",
+      "author": "Example Researcher",
+      "description": "MLflow model 'model' (sklearn flavor), logged by run 'rf-baseline' with MLflow 2.22.0",
+      "datePublished": "2026-09-01T15:42:24.146461-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "provenance"
+      ],
+      "format": "sklearn",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-rf-baseline-3fd9e47"
+        }
+      ],
+      "mlflowModelId": "cce96f10b1334967bb3fbb0ff0e02698",
+      "contentUrl": "rf-baseline-2dcf075c/model/",
+      "contentSize": "284491"
+    },
+    {
+      "@id": "ark:59853/dataset-feature-importance-csv-3fce305",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "feature_importance.csv",
+      "author": "Example Researcher",
+      "description": "Artifact 'feature_importance.csv' logged by MLflow run 'feature-importance'",
+      "datePublished": "2026-09-01T15:42:24.146461-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "provenance"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-feature-importance-c9a5fa7"
+        }
+      ],
+      "evi:Schema": {
+        "@id": "ark:59853/schema-feature-importance-csv-9337f10"
+      },
+      "contentUrl": "feature-importance-0742299e/feature_importance.csv",
+      "contentSize": "170"
+    },
+    {
+      "@id": "ark:59853/dataset-confusion-matrix-csv-8fa7303",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "confusion_matrix.csv",
+      "author": "Example Researcher",
+      "description": "Artifact 'confusion_matrix.csv' logged by MLflow run 'rf-baseline'",
+      "datePublished": "2026-09-01T15:42:24.146461-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "provenance"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-rf-baseline-3fd9e47"
+        }
+      ],
+      "evi:Schema": {
+        "@id": "ark:59853/schema-confusion-matrix-csv-96bec34"
+      },
+      "contentUrl": "rf-baseline-2dcf075c/confusion_matrix.csv",
+      "contentSize": "27"
+    },
+    {
+      "@id": "ark:59853/schema-iris-e04fad4",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for MLflow dataset 'iris'",
+      "description": "Schema derived from the column spec MLflow logged for dataset 'iris' (digest d9ca403e)",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "sepal length (cm)": {
+          "description": "Column 'sepal length (cm)' of MLflow dataset 'iris' (double)",
+          "index": 0,
+          "type": "number"
+        },
+        "sepal width (cm)": {
+          "description": "Column 'sepal width (cm)' of MLflow dataset 'iris' (double)",
+          "index": 1,
+          "type": "number"
+        },
+        "petal length (cm)": {
+          "description": "Column 'petal length (cm)' of MLflow dataset 'iris' (double)",
+          "index": 2,
+          "type": "number"
+        },
+        "petal width (cm)": {
+          "description": "Column 'petal width (cm)' of MLflow dataset 'iris' (double)",
+          "index": 3,
+          "type": "number"
+        },
+        "species": {
+          "description": "Column 'species' of MLflow dataset 'iris' (long)",
+          "index": 4,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+        "species"
+      ]
+    },
+    {
+      "@id": "ark:59853/schema-feature-importance-csv-9337f10",
+      "@type": "EVI:Schema",
+      "name": "Schema for feature_importance.csv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "feature": {
+          "description": "Column feature",
+          "index": 0,
+          "type": "string"
+        },
+        "importance": {
+          "description": "Column importance",
+          "index": 1,
+          "type": "number"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "feature",
+        "importance"
+      ],
+      "separator": ",",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.1.3",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the csv artifact 'feature_importance.csv' by mlflow-fairscape"
+    },
+    {
+      "@id": "ark:59853/schema-confusion-matrix-csv-96bec34",
+      "@type": "EVI:Schema",
+      "name": "Schema for confusion_matrix.csv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "0": {
+          "description": "Column 0",
+          "index": 0,
+          "type": "integer"
+        },
+        "1": {
+          "description": "Column 1",
+          "index": 1,
+          "type": "integer"
+        },
+        "2": {
+          "description": "Column 2",
+          "index": 2,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "0",
+        "1",
+        "2"
+      ],
+      "separator": ",",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.1.3",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the csv artifact 'confusion_matrix.csv' by mlflow-fairscape"
+    }
+  ]
+}

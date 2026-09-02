@@ -35,12 +35,24 @@ Pick the row that matches what you have.
 
 ## Try it — no data needed
 
-Every format ships a real example input and its expected output inside its
-plugin folder, so you can run any conversion right now:
+Every conversion above has a runnable example in [`examples/`](examples),
+on real input that ships with the package. They need nothing installed:
 
 ```bash
-fairscape import d4d plugins/d4d/input.yaml -o /tmp/crate
+python examples/run_all.py            # all nine, with a pass/fail table
+python examples/import_d4d.py         # or just the one you care about
 ```
+
+Each prints what went in, what came out, the provenance edges it created, and
+whether the result still matches the plugin's reviewed golden file.
+
+**[`examples/mlflow/mlflow_to_rocrate.ipynb`](examples/mlflow/mlflow_to_rocrate.ipynb)**
+is the end-to-end walk-through: it trains a scikit-learn model with MLflow
+tracking, converts the store it just created, then reads the crate back and
+validates it. It is checked in with its outputs, and so is
+[the crate it produced](examples/mlflow/crate).
+
+The inputs and expected outputs the examples run on live inside each plugin:
 
 | format | example input | expected output |
 |---|---|---|

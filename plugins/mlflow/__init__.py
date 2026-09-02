@@ -29,15 +29,6 @@ records, and this plugin owns the conversion:
                            ark_source}},
       "schemas":    {"dataset:<key>"|"file:<key>": <EVI Schema node>}
     }
-
-The emitted crate mirrors plugins/snakemake and plugins/cromwell: descriptor
--> root ["Dataset", EVI#ROCrate] -> run Computations (nested runs isPartOf
-their parent) -> Software (source script + MLflow engine) -> Datasets (logged
-dataset inputs, logged models, artifact files) -> Schema nodes (from the
-logged dataset colspecs, plus fairscape-cli inference when asked). ARKs are
-deterministic (core.arks): exporting the same tracking store twice yields
-identical identifiers (see the ARK-source note in extract.py for why
-run-scoped sources deliberately include the MLflow run_id, unlike Cromwell).
 """
 
 from __future__ import annotations
