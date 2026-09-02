@@ -40,10 +40,11 @@ packages = [
     "fairscape_conversion.plugins.snakemake",
     "fairscape_conversion.plugins.cromwell",
     "fairscape_conversion.plugins.mlflow",
+    "fairscape_conversion.plugins.cpm",
 ]
 
 [tool.setuptools.package-dir]
 fairscape_conversion = "."
 
 [tool.setuptools.package-data]
-"*" = ["*.csv", "*.json", "*.md", "*.yaml", "input-datapackage/*"]
+"*" = ["*.csv", "*.json", "*.md", "*.yaml", "input-datapackage/*", "input-crate/*"]

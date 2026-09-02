@@ -1,0 +1,7 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+mainActivity,,Computation,prov:Activity|https://w3id.org/EVI#Computation,main,mint,,,TRUE,cpm-computation,the bundle's cpm:mainActivity
+activity,,Computation,prov:Activity|https://w3id.org/EVI#Computation,step,mint,,,TRUE,cpm-computation,domain activity inside a bundle; isPartOf its mainActivity
+transferActivity,,Activity,prov:Activity,transfer,mint,,,TRUE,cpm-transfer,cpm:receiptActivity — cross-org data transfer kept as a plain prov:Activity (deliberate: not dropped and not a Computation)
+entity,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,TRUE,cpm-dataset,every PROV entity: connectors and externalInputs included; shared connector ids stitch bundles (same qid -> same ARK)
+agent,,Organization,Organization,agent,mint,,,TRUE,cpm-agent,cpm:senderAgent / cpm:receiverAgent — organization-level actors
+cpmfile,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,bundlefile,mint,,,TRUE,cpm-bundle,the CPMProvenanceFile / CPMMetaProvenanceFile itself registered as a Dataset; bundle members point at it via subjectOf

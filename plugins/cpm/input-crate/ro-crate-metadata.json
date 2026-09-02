@@ -1,0 +1,841 @@
+{
+    "@context": [
+        "https://w3id.org/ro/crate/1.1/context",
+        {
+            "CPMMetaProvenanceFile": "https://w3id.org/ro/terms/cpm#CPMMetaProvenanceFile",
+            "CPMProvenanceFile": "https://w3id.org/ro/terms/cpm#CPMProvenanceFile"
+        }
+    ],
+    "@graph": [
+        {
+            "@id": "./",
+            "@type": "Dataset",
+            "conformsTo": [
+                {
+                    "@id": "https://w3id.org/cpm/ro-crate/0.1"
+                },
+                {
+                    "@id": "https://w3id.org/ro/wfrun/process/0.1"
+                }
+            ],
+            "datePublished": "2023-02-24T12:16:13+00:00",
+            "hasPart": [
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_test.py"
+                },
+                {
+                    "@id": "prov_test_config.json"
+                },
+                {
+                    "@id": "cam16_mrxs.h5"
+                },
+                {
+                    "@id": "prov_test.log"
+                },
+                {
+                    "@id": "predictions.h5"
+                },
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_test.py"
+                },
+                {
+                    "@id": "prov_test.provn"
+                },
+                {
+                    "@id": "prov_test.png"
+                },
+                {
+                    "@id": "prov_test.provn.log"
+                },
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_train.py"
+                },
+                {
+                    "@id": "prov_train_config.json"
+                },
+                {
+                    "@id": "prov_train.log"
+                },
+                {
+                    "@id": "model/weights/auc_01.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/auc_01.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "model/weights/auc_02.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/auc_02.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "model/weights/best_loss.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/best_loss.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "model/weights/auc_03.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/auc_03.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_train.py"
+                },
+                {
+                    "@id": "prov_train.provn"
+                },
+                {
+                    "@id": "prov_train.png"
+                },
+                {
+                    "@id": "prov_train.provn.log"
+                },
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/data/tiler/xml_annot_patcher.py"
+                },
+                {
+                    "@id": "wsi/test/test_001.xml"
+                },
+                {
+                    "@id": "wsi/test/test_001.tif"
+                },
+                {
+                    "@id": "wsi/test/"
+                },
+                {
+                    "@id": "wsi/train/tumor_001.xml"
+                },
+                {
+                    "@id": "wsi/train/tumor_001.tif"
+                },
+                {
+                    "@id": "wsi/train/normal_001.tif"
+                },
+                {
+                    "@id": "wsi/train/"
+                },
+                {
+                    "@id": "prov_converter_config.json"
+                },
+                {
+                    "@id": "prov_preprocess.log"
+                },
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/data/tiler/xml_annot_patcher.py"
+                },
+                {
+                    "@id": "prov_preprocess.provn"
+                },
+                {
+                    "@id": "prov_preprocess.png"
+                },
+                {
+                    "@id": "prov_preprocess.provn.log"
+                },
+                {
+                    "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/meta/meta_prov.py"
+                },
+                {
+                    "@id": "meta_provenance.provn"
+                },
+                {
+                    "@id": "meta_provenance.png"
+                },
+                {
+                    "@id": "meta_provenance.provn.log"
+                }
+            ],
+            "mentions": [
+                {
+                    "@id": "#test_script:ROCRATE-PUB-1438b57a750ce887d4433d9e"
+                },
+                {
+                    "@id": "#test_script:ee7fb5ad-a726-495d-9ccf-aa1761278af5:CPM-provgen"
+                },
+                {
+                    "@id": "#train_script:ROCRATE-PUB-1438b57a750ce887d4433d9e"
+                },
+                {
+                    "@id": "#train_script:c0c48ea4-bd08-4aef-895b-fdd50bc13319:CPM-provgen"
+                },
+                {
+                    "@id": "#convert_script:9bdc1af0-53cf-4c3f-8c88-42f004b1f824"
+                },
+                {
+                    "@id": "#test_001"
+                },
+                {
+                    "@id": "#tumor_001"
+                },
+                {
+                    "@id": "#normal_001"
+                },
+                {
+                    "@id": "#convert_script:a7d373bb-b200-48d4-8bc2-e6318a8a2e7a:CPM-provgen"
+                },
+                {
+                    "@id": "#meta_provn_script:c339f9c9-7718-4c6e-af36-4361e7f77eb4:CPM-provgen"
+                }
+            ]
+        },
+        {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "about": {
+                "@id": "./"
+            },
+            "conformsTo": {
+                "@id": "https://w3id.org/ro/crate/1.1"
+            }
+        },
+        {
+            "@id": "https://w3id.org/cpm/ro-crate/0.1",
+            "@type": "CreativeWork",
+            "name": "Common Provenance Model RO-Crate profile",
+            "version": "0.1"
+        },
+        {
+            "@id": "https://w3id.org/ro/wfrun/process/0.1",
+            "@type": "CreativeWork",
+            "name": "Process Run Crate",
+            "version": "0.1"
+        },
+        {
+            "@id": "#test_script:ROCRATE-PUB-1438b57a750ce887d4433d9e",
+            "@type": "CreateAction",
+            "endTime": "24-Feb-2023 13:14:58",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_test.py"
+            },
+            "name": "VGG16 Predict",
+            "object": [
+                {
+                    "@id": "prov_test_config.json"
+                },
+                {
+                    "@id": "cam16_mrxs.h5"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "predictions.h5"
+                },
+                {
+                    "@id": "prov_test.log"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_test.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "name": "VGG16 Python Test Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_test.py"
+        },
+        {
+            "@id": "prov_test_config.json",
+            "@type": "File",
+            "encodingFormat": "text/json",
+            "name": "input configuration file"
+        },
+        {
+            "@id": "cam16_mrxs.h5",
+            "@type": "File",
+            "encodingFormat": "application/x-hdf5",
+            "name": "output dataset"
+        },
+        {
+            "@id": "prov_test.log",
+            "@type": "File",
+            "encodingFormat": "application/json",
+            "name": "output provenance log"
+        },
+        {
+            "@id": "predictions.h5",
+            "@type": "File",
+            "encodingFormat": "application/x-hdf5",
+            "name": "output dataset with predictions and metrics"
+        },
+        {
+            "@id": "#test_script:ee7fb5ad-a726-495d-9ccf-aa1761278af5:CPM-provgen",
+            "@type": "CreateAction",
+            "description": "CPM compliant provenance generation for testing.",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_test.py"
+            },
+            "name": "CPM Compliant Test Provenanace Generation Execution",
+            "object": [
+                {
+                    "@id": "prov_test.log"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "prov_test.provn"
+                },
+                {
+                    "@id": "prov_test.provn.log"
+                },
+                {
+                    "@id": "prov_test.png"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_test.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "description": "A python script that translates the computation log files into CPM compliant provenance file.",
+            "name": "Test Provenanace Generation Python Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_test.py"
+        },
+        {
+            "@id": "prov_test.provn",
+            "@type": [
+                "File",
+                "CPMProvenanceFile"
+            ],
+            "about": [
+                {
+                    "@id": "#test_script:ee7fb5ad-a726-495d-9ccf-aa1761278af5:CPM-provgen"
+                }
+            ],
+            "description": "CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": [
+                "text/provenance-notation",
+                {
+                    "@id": "http://www.w3.org/TR/2013/REC-prov-n-20130430/"
+                }
+            ],
+            "name": "Test Provenanace CPM File"
+        },
+        {
+            "@id": "prov_test.png",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "prov_test.provn"
+                }
+            ],
+            "description": "PNG visualization of a CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": "image/png",
+            "name": "PNG visualization of Provenanace CPM File"
+        },
+        {
+            "@id": "prov_test.provn.log",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "#test_script:ee7fb5ad-a726-495d-9ccf-aa1761278af5:CPM-provgen"
+                }
+            ],
+            "description": "Log file for provenance generation.",
+            "encodingFormat": "text/json",
+            "name": "Test provgen log file"
+        },
+        {
+            "@id": "#train_script:ROCRATE-PUB-1438b57a750ce887d4433d9e",
+            "@type": "CreateAction",
+            "endTime": "24-Feb-2023 13:13:33",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_train.py"
+            },
+            "name": "VGG16 Training",
+            "object": [
+                {
+                    "@id": "prov_train_config.json"
+                },
+                {
+                    "@id": "cam16_mrxs.h5"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "prov_train.log"
+                },
+                {
+                    "@id": "model/weights/auc_01.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/auc_01.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "model/weights/auc_02.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/auc_02.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "model/weights/best_loss.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/best_loss.ckpt.data-00000-of-00001"
+                },
+                {
+                    "@id": "model/weights/auc_03.ckpt.index"
+                },
+                {
+                    "@id": "model/weights/auc_03.ckpt.data-00000-of-00001"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_train.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "name": "VGG16 Python Training Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/training/experiments/slide_train.py"
+        },
+        {
+            "@id": "prov_train_config.json",
+            "@type": "File",
+            "encodingFormat": "text/json",
+            "name": "input configuration file"
+        },
+        {
+            "@id": "prov_train.log",
+            "@type": "File",
+            "encodingFormat": "application/json",
+            "name": "output provenance log"
+        },
+        {
+            "@id": "model/weights/auc_01.ckpt.index",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/auc_01.ckpt.data-00000-of-00001",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/auc_02.ckpt.index",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/auc_02.ckpt.data-00000-of-00001",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/best_loss.ckpt.index",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/best_loss.ckpt.data-00000-of-00001",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/auc_03.ckpt.index",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "model/weights/auc_03.ckpt.data-00000-of-00001",
+            "@type": "File",
+            "name": "saved training weights"
+        },
+        {
+            "@id": "#train_script:c0c48ea4-bd08-4aef-895b-fdd50bc13319:CPM-provgen",
+            "@type": "CreateAction",
+            "description": "CPM compliant provenance generation for training.",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_train.py"
+            },
+            "name": "CPM Compliant Training Provenanace Generation Execution",
+            "object": [
+                {
+                    "@id": "prov_train.log"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "prov_train.provn"
+                },
+                {
+                    "@id": "prov_train.png"
+                },
+                {
+                    "@id": "prov_train.provn.log"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_train.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "description": "A python script that translates the computation log files into CPM compliant provenance file.",
+            "name": "Training Provenanace Generation Python Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/experiments/slide_train.py"
+        },
+        {
+            "@id": "prov_train.provn",
+            "@type": [
+                "File",
+                "CPMProvenanceFile"
+            ],
+            "about": [
+                {
+                    "@id": "#train_script:c0c48ea4-bd08-4aef-895b-fdd50bc13319:CPM-provgen"
+                }
+            ],
+            "description": "CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": [
+                "text/provenance-notation",
+                {
+                    "@id": "http://www.w3.org/TR/2013/REC-prov-n-20130430/"
+                }
+            ],
+            "name": "Training Provenanace CPM File"
+        },
+        {
+            "@id": "prov_train.png",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "prov_train.provn"
+                }
+            ],
+            "description": "PNG visualization of a CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": "image/png",
+            "name": "PNG visualization of Provenanace CPM File"
+        },
+        {
+            "@id": "prov_train.provn.log",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "#train_script:c0c48ea4-bd08-4aef-895b-fdd50bc13319:CPM-provgen"
+                }
+            ],
+            "description": "Log file for provenance generation.",
+            "encodingFormat": "text/json",
+            "name": "Train provgen log file"
+        },
+        {
+            "@id": "#convert_script:9bdc1af0-53cf-4c3f-8c88-42f004b1f824",
+            "@type": "CreateAction",
+            "endTime": "24-Feb-2023 13:11:14",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/data/tiler/xml_annot_patcher.py"
+            },
+            "name": "WSI Tiler",
+            "object": [
+                {
+                    "@id": "wsi/test/"
+                },
+                {
+                    "@id": "wsi/train/"
+                },
+                {
+                    "@id": "prov_converter_config.json"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "cam16_mrxs.h5"
+                },
+                {
+                    "@id": "prov_preprocess.log"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/data/tiler/xml_annot_patcher.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "name": "WSI Tiler Python Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/data/tiler/xml_annot_patcher.py"
+        },
+        {
+            "@id": "#test_001",
+            "@type": "Collection",
+            "hasPart": [
+                {
+                    "@id": "wsi/test/test_001.xml"
+                },
+                {
+                    "@id": "wsi/test/test_001.tif"
+                }
+            ],
+            "mainEntity": {
+                "@id": "wsi/test/test_001.tif"
+            }
+        },
+        {
+            "@id": "wsi/test/test_001.xml",
+            "@type": "File"
+        },
+        {
+            "@id": "wsi/test/test_001.tif",
+            "@type": "File"
+        },
+        {
+            "@id": "wsi/test/",
+            "@type": "Dataset",
+            "hasPart": [
+                {
+                    "@id": "#test_001"
+                }
+            ]
+        },
+        {
+            "@id": "#tumor_001",
+            "@type": "Collection",
+            "hasPart": [
+                {
+                    "@id": "wsi/train/tumor_001.xml"
+                },
+                {
+                    "@id": "wsi/train/tumor_001.tif"
+                }
+            ],
+            "mainEntity": {
+                "@id": "wsi/train/tumor_001.tif"
+            }
+        },
+        {
+            "@id": "wsi/train/tumor_001.xml",
+            "@type": "File"
+        },
+        {
+            "@id": "wsi/train/tumor_001.tif",
+            "@type": "File"
+        },
+        {
+            "@id": "#normal_001",
+            "@type": "Collection",
+            "hasPart": [
+                {
+                    "@id": "wsi/train/normal_001.tif"
+                }
+            ],
+            "mainEntity": {
+                "@id": "wsi/train/normal_001.tif"
+            }
+        },
+        {
+            "@id": "wsi/train/normal_001.tif",
+            "@type": "File"
+        },
+        {
+            "@id": "wsi/train/",
+            "@type": "Dataset",
+            "hasPart": [
+                {
+                    "@id": "#tumor_001"
+                },
+                {
+                    "@id": "#normal_001"
+                }
+            ]
+        },
+        {
+            "@id": "prov_converter_config.json",
+            "@type": "File",
+            "encodingFormat": "text/json",
+            "name": "input configuration file"
+        },
+        {
+            "@id": "prov_preprocess.log",
+            "@type": "File",
+            "encodingFormat": "application/json",
+            "name": "output provenance log"
+        },
+        {
+            "@id": "#convert_script:a7d373bb-b200-48d4-8bc2-e6318a8a2e7a:CPM-provgen",
+            "@type": "CreateAction",
+            "description": "CPM compliant provenance generation for WSI tiling.",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/data/tiler/xml_annot_patcher.py"
+            },
+            "name": "CPM Compliant Tiler Provenanace Generation Execution",
+            "object": [
+                {
+                    "@id": "prov_preprocess.log"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "prov_preprocess.provn"
+                },
+                {
+                    "@id": "prov_preprocess.png"
+                },
+                {
+                    "@id": "prov_preprocess.provn.log"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/data/tiler/xml_annot_patcher.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "description": "A python script that translates the computation log files into CPM compliant provenance file.",
+            "name": "WSI Tiler Provenanace Generation Python Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/data/tiler/xml_annot_patcher.py"
+        },
+        {
+            "@id": "prov_preprocess.provn",
+            "@type": [
+                "File",
+                "CPMProvenanceFile"
+            ],
+            "about": [
+                {
+                    "@id": "#convert_script:a7d373bb-b200-48d4-8bc2-e6318a8a2e7a:CPM-provgen"
+                }
+            ],
+            "description": "CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": [
+                "text/provenance-notation",
+                {
+                    "@id": "http://www.w3.org/TR/2013/REC-prov-n-20130430/"
+                }
+            ],
+            "name": "WSI Tiler Provenanace CPM File"
+        },
+        {
+            "@id": "prov_preprocess.png",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "prov_preprocess.provn"
+                }
+            ],
+            "description": "PNG visualization of a CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": "image/png",
+            "name": "PNG visualization of Provenanace CPM File"
+        },
+        {
+            "@id": "prov_preprocess.provn.log",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "#convert_script:a7d373bb-b200-48d4-8bc2-e6318a8a2e7a:CPM-provgen"
+                }
+            ],
+            "description": "Log file for provenance generation.",
+            "encodingFormat": "text/json",
+            "name": "Preprocess provgen log file"
+        },
+        {
+            "@id": "#meta_provn_script:c339f9c9-7718-4c6e-af36-4361e7f77eb4:CPM-provgen",
+            "@type": "CreateAction",
+            "description": "CPM compliant meta provenance generation for.",
+            "instrument": {
+                "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/meta/meta_prov.py"
+            },
+            "name": "CPM Compliant Meta Provenanace Generation Execution",
+            "object": [
+                {
+                    "@id": "prov_train.provn.log"
+                },
+                {
+                    "@id": "prov_test.provn.log"
+                },
+                {
+                    "@id": "prov_preprocess.provn.log"
+                }
+            ],
+            "result": [
+                {
+                    "@id": "meta_provenance.provn"
+                },
+                {
+                    "@id": "meta_provenance.png"
+                },
+                {
+                    "@id": "meta_provenance.provn.log"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/meta/meta_prov.py",
+            "@type": [
+                "File",
+                "SoftwareSourceCode"
+            ],
+            "description": "A python script that translates the computation log files into CPM compliant provenance file.",
+            "name": "Meta Provenanace Generation Python Script",
+            "url": "https://github.com/RationAI/crc_ml-provenance/blob/12ab3f8f5f441e385eeab5d66f5ba1516f2cb870/rationai/provenance/meta/meta_prov.py"
+        },
+        {
+            "@id": "meta_provenance.provn",
+            "@type": [
+                "File",
+                "CPMMetaProvenanceFile"
+            ],
+            "about": [
+                {
+                    "@id": "#meta_provn_script:c339f9c9-7718-4c6e-af36-4361e7f77eb4:CPM-provgen"
+                }
+            ],
+            "description": "CPM compliant provenance file generated based on the computation log file.",
+            "encodingFormat": [
+                "text/provenance-notation",
+                {
+                    "@id": "http://www.w3.org/TR/2013/REC-prov-n-20130430/"
+                }
+            ],
+            "name": "WSI Tiler Provenanace CPM File"
+        },
+        {
+            "@id": "meta_provenance.png",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "#meta_provn_script:c339f9c9-7718-4c6e-af36-4361e7f77eb4:CPM-provgen"
+                }
+            ],
+            "description": "PNG visualization of a CPM compliant provenance.",
+            "encodingFormat": "image/png",
+            "name": "Meta provenance PNG graph"
+        },
+        {
+            "@id": "meta_provenance.provn.log",
+            "@type": [
+                "File"
+            ],
+            "about": [
+                {
+                    "@id": "#meta_provn_script:c339f9c9-7718-4c6e-af36-4361e7f77eb4:CPM-provgen"
+                }
+            ],
+            "description": "Log file for provenance generation.",
+            "encodingFormat": "text/json",
+            "name": "Preprocess provgen log file"
+        }
+    ]
+}

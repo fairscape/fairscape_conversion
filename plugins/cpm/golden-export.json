@@ -1,0 +1,739 @@
+{
+  "prefix": {
+    "ns_preprocessing": "preproc_uri",
+    "ns_pathology": "pathology_uri",
+    "cpm": "cpm_uri",
+    "dct": "dct_uri",
+    "ns_eval": "eval_uri",
+    "ns_training": "test_uri",
+    "prov_1": "prov_uri",
+    "metabundle": "metabundle_uri",
+    "default": "http://example.org/0/"
+  },
+  "bundle": {
+    "ns_eval:bundle_eval": {
+      "entity": {
+        "ns_training:trainedModelConnector": {
+          "prov:label": "trainedModelConnector",
+          "prov:type": "cpm:receiverConnector",
+          "cpm:senderBundleId": "ns_training:bundle_training",
+          "cpm:senderServiceUri": "#URI#",
+          "cpm:receiverBundleId": "ns_eval:bundle_eval",
+          "cpm:receiverServiceUri": "#URI#"
+        },
+        "ns_preprocessing:datasetTestConnector": {
+          "prov:label": "datasetTestConnector",
+          "prov:type": "cpm:receiverConnector",
+          "cpm:senderBundleId": "ns_preprocessing:bundle_preproc",
+          "cpm:senderServiceUri": "#URI#",
+          "cpm:receiverBundleId": "ns_eval:bundle_eval",
+          "cpm:receiverServiceUri": "#URI#"
+        },
+        "ns_eval:trainedNet": {
+          "prov:label": "trainedNet",
+          "prov:type": "cpm:externalInput"
+        },
+        "ns_eval:testDataset": {
+          "prov:label": "testDataset",
+          "prov:type": "cpm:externalInput"
+        },
+        "ns_eval:trainedNetFromCkpt": {
+          "prov:label": "trainedNetFromCkpt"
+        },
+        "ns_eval:cfgTest": {
+          "prov:label": "cfgTest"
+        },
+        "ns_eval:testHDF5Dataset": {
+          "prov:label": "testHDF5Dataset",
+          "table_0_sha256": "c9015456f94b60a69b608715d80fdcea91d1e8f832742b5762bc11fe979c1d4b"
+        },
+        "ns_eval:evalHDF5Dataset": {
+          "prov:label": "evalHDF5Dataset"
+        },
+        "ns_eval:testPredictions": {
+          "prov:label": "testPredictions",
+          "table_0_sha256": "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_Binary Accuracy": "0.877365",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_Precision": "1",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_Recall": "0",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_TP": "0",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_TN": "1345",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_FP": "0",
+          "a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_FN": "188"
+        }
+      },
+      "agent": {
+        "ns_eval:senderAgent": {
+          "prov:label": "senderAgent",
+          "prov:type": "cpm:senderAgent"
+        }
+      },
+      "activity": {
+        "ns_eval:receipt1": {
+          "prov:label": "receipt1",
+          "prov:type": "cpm:receiptActivity"
+        },
+        "ns_eval:receipt2": {
+          "prov:label": "receipt2",
+          "prov:type": "cpm:receiptActivity"
+        },
+        "ns_eval:mainActivityTesting": {
+          "prov:label": "mainActivityTesting",
+          "prov:type": "cpm:mainActivity",
+          "dct:hasPart": "ns_eval:test"
+        },
+        "ns_eval:test": {
+          "prov:label": "test",
+          "experiment_ID": "ROCRATE-PUB-1438b57a750ce887d4433d9e",
+          "git_commit_hash": "12ab3f8f5f441e385eeab5d66f5ba1516f2cb870"
+        }
+      },
+      "wasGeneratedBy": {
+        "_:wa1": {
+          "prov:entity": "ns_training:trainedModelConnector",
+          "prov:activity": "ns_training:training"
+        },
+        "_:wa2": {
+          "prov:entity": "ns_preprocessing:datasetTestConnector",
+          "prov:activity": "ns_preprocessing:preprocessing"
+        },
+        "_:wa3": {
+          "prov:entity": "ns_eval:trainedNet",
+          "prov:activity": "ns_eval:receipt1"
+        },
+        "_:wa4": {
+          "prov:entity": "ns_eval:testDataset",
+          "prov:activity": "ns_eval:receipt2"
+        },
+        "_:wa5": {
+          "prov:entity": "ns_eval:testPredictions",
+          "prov:activity": "ns_eval:test"
+        }
+      },
+      "wasAttributedTo": {
+        "_:wa1": {
+          "prov:entity": "ns_training:trainedModelConnector",
+          "prov:agent": "ns_eval:senderAgent"
+        },
+        "_:wa2": {
+          "prov:entity": "ns_training:trainedModelConnector",
+          "prov:agent": "ns_preprocessing:receiverAgent"
+        },
+        "_:wa3": {
+          "prov:entity": "ns_preprocessing:datasetTestConnector",
+          "prov:agent": "ns_eval:senderAgent"
+        },
+        "_:wa4": {
+          "prov:entity": "ns_preprocessing:datasetTestConnector",
+          "prov:agent": "ns_preprocessing:receiverAgent"
+        }
+      },
+      "wasInvalidatedBy": {
+        "_:wa1": {
+          "prov:entity": "ns_training:trainedModelConnector",
+          "prov:activity": "ns_eval:receipt1"
+        },
+        "_:wa2": {
+          "prov:entity": "ns_preprocessing:datasetTestConnector",
+          "prov:activity": "ns_eval:receipt2"
+        }
+      },
+      "wasDerivedFrom": {
+        "_:wa1": {
+          "prov:generatedEntity": "ns_preprocessing:datasetTestConnector",
+          "prov:usedEntity": "ns_preprocessing:WSI data"
+        },
+        "_:wa2": {
+          "prov:generatedEntity": "ns_eval:trainedNet",
+          "prov:usedEntity": "ns_training:trainedModelConnector"
+        },
+        "_:wa3": {
+          "prov:generatedEntity": "ns_eval:testDataset",
+          "prov:usedEntity": "ns_preprocessing:datasetTestConnector"
+        },
+        "_:wa4": {
+          "prov:generatedEntity": "ns_eval:evalHDF5Dataset",
+          "prov:usedEntity": "ns_eval:testPredictions"
+        },
+        "_:wa5": {
+          "prov:generatedEntity": "ns_eval:testPredictions",
+          "prov:usedEntity": "ns_eval:testHDF5Dataset"
+        }
+      },
+      "used": {
+        "_:us1": {
+          "prov:activity": "ns_eval:receipt1",
+          "prov:entity": "ns_training:trainedModelConnector"
+        },
+        "_:us2": {
+          "prov:activity": "ns_eval:receipt2",
+          "prov:entity": "ns_preprocessing:datasetTestConnector"
+        },
+        "_:us3": {
+          "prov:activity": "ns_eval:mainActivityTesting",
+          "prov:entity": "ns_eval:testDataset"
+        },
+        "_:us4": {
+          "prov:activity": "ns_eval:mainActivityTesting",
+          "prov:entity": "ns_eval:trainedNet"
+        },
+        "_:us5": {
+          "prov:activity": "ns_eval:test",
+          "prov:entity": "ns_eval:testHDF5Dataset"
+        },
+        "_:us6": {
+          "prov:activity": "ns_eval:test",
+          "prov:entity": "ns_eval:cfgTest"
+        },
+        "_:us7": {
+          "prov:activity": "ns_eval:test",
+          "prov:entity": "ns_eval:trainedNetFromCkpt"
+        }
+      },
+      "specializationOf": {
+        "_:sp1": {
+          "prov:specificEntity": "ns_eval:trainedNetFromCkpt",
+          "prov:generalEntity": "ns_eval:trainedNet"
+        },
+        "_:sp2": {
+          "prov:specificEntity": "ns_eval:testHDF5Dataset",
+          "prov:generalEntity": "ns_eval:testDataset"
+        }
+      }
+    },
+    "ns_training:bundle_training": {
+      "entity": {
+        "ns_preprocessing:datasetTrainConnector": {
+          "prov:label": "datasetTrainConnector",
+          "prov:type": "cpm:receiverConnector",
+          "cpm:senderBundleId": "ns_preprocessing:bundle_preproc",
+          "cpm:senderServiceUri": "#URI#",
+          "cpm:receiverBundleId": "ns_training:bundle_training",
+          "cpm:receiverServiceUri": "#URI#"
+        },
+        "ns_training:dataset": {
+          "prov:label": "dataset"
+        },
+        "ns_training:trainData": {
+          "prov:label": "trainData",
+          "groups": "train"
+        },
+        "ns_training:trainSlides": {
+          "prov:label": "trainSlides",
+          "table_0_sha256": "220ca9f61efc6657582ebc2e65745935211f451e707e86ad9212203cfc091a1a",
+          "table_1_sha256": "fa877089f84055392be6bddc97b818df8cb346bf8bc5eb90d4489591ecb36f05"
+        },
+        "ns_training:modelInit": {
+          "prov:label": "modelInit",
+          "model": "rationai.training.models.keras_models.PretrainedNet"
+        },
+        "ns_training:checkpointInit": {
+          "prov:label": "checkpointInit"
+        },
+        "ns_training:trainTilesSubset0": {
+          "prov:label": "trainTilesSubset0",
+          "sampled_epoch_sha256": "11539cb59ac14bf92b79c5965657b946d9db93d0c35fec83c063d88a10cfb486"
+        },
+        "ns_training:modelIter1": {
+          "prov:label": "modelIter1"
+        },
+        "ns_training:trainTilesSubset1": {
+          "prov:label": "trainTilesSubset1",
+          "sampled_epoch_sha256": "9c938ef2e7860029bf485550eeeebf311a2f73c86584037ebef06cc8ea83cf3b"
+        },
+        "ns_training:modelIter2": {
+          "prov:label": "modelIter2"
+        },
+        "ns_training:trainTilesSubset2": {
+          "prov:label": "trainTilesSubset2",
+          "sampled_epoch_sha256": "8768d58cd8aeec59b6ada8999ac9c0567121be5d035beecd33ca0f96a54d4607"
+        },
+        "ns_training:modelIter3": {
+          "prov:label": "modelIter3"
+        }
+      },
+      "agent": {
+        "ns_preprocessing:receiverAgent": {
+          "prov:label": "receiverAgent",
+          "prov:type": "cpm:receiverAgent"
+        },
+        "ns_training:senderAgent": {
+          "prov:label": "senderAgent",
+          "prov:type": "cpm:senderAgent"
+        }
+      },
+      "activity": {
+        "ns_training:receipt": {
+          "prov:label": "receipt",
+          "prov:type": "cpm:receiptActivity"
+        },
+        "ns_training:training": {
+          "prov:label": "training",
+          "prov:type": "cpm:mainActivity",
+          "git_commit_hash": "12ab3f8f5f441e385eeab5d66f5ba1516f2cb870",
+          "dct:hasPart": [
+            "ns_training:trainGenerator",
+            "ns_training:trainIter0",
+            "ns_training:trainIter1",
+            "ns_training:trainIter2"
+          ]
+        },
+        "ns_training:trainGenerator": {
+          "prov:label": "trainGenerator",
+          "data_source": "train",
+          "sampler": "rationai.datagens.samplers.RandomTreeSampler",
+          "augmenter": "rationai.datagens.augmenters.ImageAugmenter",
+          "extractor": "rationai.datagens.extractors.OpenslideExtractor",
+          "generator": "rationai.datagens.generators.BaseGeneratorKeras"
+        },
+        "ns_training:trainIter0": {
+          "prov:label": "trainIter0",
+          "loss": "0.801632",
+          "binary_accuracy": "0.64",
+          "precision": "0.6",
+          "recall": "0.545455",
+          "auc": "0.662338"
+        },
+        "ns_training:trainIter1": {
+          "prov:label": "trainIter1",
+          "loss": "0.549169",
+          "binary_accuracy": "0.72",
+          "precision": "0.666667",
+          "recall": "0.727273",
+          "auc": "0.789773"
+        },
+        "ns_training:trainIter2": {
+          "prov:label": "trainIter2",
+          "loss": "0.455578",
+          "binary_accuracy": "0.74",
+          "precision": "0.705882",
+          "recall": "0.6",
+          "auc": "0.8725"
+        }
+      },
+      "wasGeneratedBy": {
+        "_:wa1": {
+          "prov:entity": "ns_preprocessing:datasetTrainConnector",
+          "prov:activity": "ns_preprocessing:preprocessing"
+        },
+        "_:wa2": {
+          "prov:entity": "ns_training:dataset",
+          "prov:activity": "ns_training:receipt"
+        },
+        "_:wa3": {
+          "prov:entity": "ns_training:trainTilesSubset0",
+          "prov:activity": "ns_training:trainGenerator"
+        },
+        "_:wa4": {
+          "prov:entity": "ns_training:trainTilesSubset1",
+          "prov:activity": "ns_training:trainGenerator"
+        },
+        "_:wa5": {
+          "prov:entity": "ns_training:trainTilesSubset2",
+          "prov:activity": "ns_training:trainGenerator"
+        },
+        "_:wa6": {
+          "prov:entity": "ns_training:checkpointInit",
+          "prov:activity": "ns_training:modelInit"
+        },
+        "_:wa7": {
+          "prov:entity": "ns_training:modelIter1",
+          "prov:activity": "ns_training:trainIter0"
+        },
+        "_:wa8": {
+          "prov:entity": "ns_training:modelIter2",
+          "prov:activity": "ns_training:trainIter1"
+        },
+        "_:wa9": {
+          "prov:entity": "ns_training:modelIter3",
+          "prov:activity": "ns_training:trainIter2"
+        }
+      },
+      "wasDerivedFrom": {
+        "_:wa1": {
+          "prov:generatedEntity": "ns_preprocessing:datasetTrainConnector",
+          "prov:usedEntity": "ns_preprocessing:WSI data"
+        },
+        "_:wa2": {
+          "prov:generatedEntity": "ns_training:trainSlides",
+          "prov:usedEntity": "ns_training:trainData"
+        },
+        "_:wa3": {
+          "prov:generatedEntity": "ns_training:trainTilesSubset0",
+          "prov:usedEntity": "ns_training:trainSlides"
+        },
+        "_:wa4": {
+          "prov:generatedEntity": "ns_training:modelIter1",
+          "prov:usedEntity": "ns_training:modelInit"
+        },
+        "_:wa5": {
+          "prov:generatedEntity": "ns_training:trainTilesSubset1",
+          "prov:usedEntity": "ns_training:trainSlides"
+        },
+        "_:wa6": {
+          "prov:generatedEntity": "ns_training:modelIter2",
+          "prov:usedEntity": "ns_training:modelIter1"
+        },
+        "_:wa7": {
+          "prov:generatedEntity": "ns_training:trainTilesSubset2",
+          "prov:usedEntity": "ns_training:trainSlides"
+        },
+        "_:wa8": {
+          "prov:generatedEntity": "ns_training:modelIter3",
+          "prov:usedEntity": "ns_training:modelIter2"
+        }
+      },
+      "wasAttributedTo": {
+        "_:wa1": {
+          "prov:entity": "ns_preprocessing:datasetTrainConnector",
+          "prov:agent": "ns_training:senderAgent"
+        },
+        "_:wa2": {
+          "prov:entity": "ns_preprocessing:datasetTrainConnector",
+          "prov:agent": "ns_preprocessing:receiverAgent"
+        }
+      },
+      "used": {
+        "_:us1": {
+          "prov:activity": "ns_training:receipt",
+          "prov:entity": "ns_preprocessing:datasetTrainConnector"
+        },
+        "_:us2": {
+          "prov:activity": "ns_training:training",
+          "prov:entity": "ns_training:dataset"
+        },
+        "_:us3": {
+          "prov:activity": "ns_training:trainGenerator",
+          "prov:entity": "ns_training:trainSlides"
+        },
+        "_:us4": {
+          "prov:activity": "ns_training:trainIter0",
+          "prov:entity": "ns_training:trainTilesSubset0"
+        },
+        "_:us5": {
+          "prov:activity": "ns_training:trainIter0",
+          "prov:entity": "ns_training:modelInit"
+        },
+        "_:us6": {
+          "prov:activity": "ns_training:trainIter1",
+          "prov:entity": "ns_training:trainTilesSubset1"
+        },
+        "_:us7": {
+          "prov:activity": "ns_training:trainIter1",
+          "prov:entity": "ns_training:modelIter1"
+        },
+        "_:us8": {
+          "prov:activity": "ns_training:trainIter2",
+          "prov:entity": "ns_training:trainTilesSubset2"
+        },
+        "_:us9": {
+          "prov:activity": "ns_training:trainIter2",
+          "prov:entity": "ns_training:modelIter2"
+        }
+      },
+      "specializationOf": {
+        "_:sp1": {
+          "prov:specificEntity": "ns_training:trainData",
+          "prov:generalEntity": "ns_training:dataset"
+        },
+        "_:sp2": {
+          "prov:specificEntity": "ns_training:checkpointInit",
+          "prov:generalEntity": "ns_training:trainedModelConnector"
+        }
+      }
+    },
+    "ns_preprocessing:bundle_preproc": {
+      "entity": {
+        "ns_pathology:WSIDataConnector": {
+          "prov:label": "WSIDataConnector",
+          "prov:type": "cpm:receiverConnector",
+          "cpm:senderBundleId": "ns_pathology:bundle_pathology",
+          "cpm:senderServiceUri": "#URI#"
+        },
+        "ns_preprocessing:WSI data": {
+          "prov:label": "WSI data",
+          "cpm:primaryId": ""
+        },
+        "ns_preprocessing:hdf5_dataset": {
+          "prov:label": "hdf5_dataset"
+        },
+        "ns_preprocessing:params": {
+          "prov:label": "params"
+        },
+        "ns_preprocessing:testGroup": {
+          "prov:label": "testGroup",
+          "table_0_sha256": "c9015456f94b60a69b608715d80fdcea91d1e8f832742b5762bc11fe979c1d4b"
+        },
+        "ns_preprocessing:Data test": {
+          "prov:label": "Data test",
+          "cpm:primaryId": "",
+          "imagesDirSHA256": "4e14a3b852922c0c8cb7e29c8b2d02e5102498c0e6870218ebb499e88a2492f7",
+          "imagesDirPath": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/test",
+          "annotationsDirHash": "4e14a3b852922c0c8cb7e29c8b2d02e5102498c0e6870218ebb499e88a2492f7",
+          "annotationsDirPath": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/test"
+        },
+        "ns_preprocessing:Config test": {
+          "prov:label": "Config test",
+          "output_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs",
+          "tile_size": 512,
+          "center_size": 256,
+          "step_size": 128,
+          "sample_level": 3,
+          "bg_level": 5,
+          "force": "0",
+          "include_keywords": "_0, Tumor",
+          "exclude_keywords": "_1",
+          "min_tissue": "0.5",
+          "max_tissue": "1",
+          "disk_size": 10,
+          "negative_mode": "0",
+          "strict_mode": "0",
+          "max_workers": 1,
+          "pattern": "*.tif",
+          "slide_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/test",
+          "label_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/test"
+        },
+        "ns_preprocessing:roiTables test": {
+          "prov:label": "roiTables test"
+        },
+        "ns_preprocessing:trainGroup": {
+          "prov:label": "trainGroup",
+          "table_0_sha256": "220ca9f61efc6657582ebc2e65745935211f451e707e86ad9212203cfc091a1a",
+          "table_1_sha256": "fa877089f84055392be6bddc97b818df8cb346bf8bc5eb90d4489591ecb36f05"
+        },
+        "ns_preprocessing:Data train_pos": {
+          "prov:label": "Data train_pos",
+          "cpm:primaryId": "",
+          "imagesDirSHA256": "41b2153a7890d17e9a1b8f7713ffd524c18262aba506a21feb2b400a797c2eb7",
+          "imagesDirPath": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos",
+          "annotationsDirHash": "41b2153a7890d17e9a1b8f7713ffd524c18262aba506a21feb2b400a797c2eb7",
+          "annotationsDirPath": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos"
+        },
+        "ns_preprocessing:Config train_pos": {
+          "prov:label": "Config train_pos",
+          "output_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs",
+          "tile_size": 512,
+          "center_size": 256,
+          "step_size": 128,
+          "sample_level": 3,
+          "bg_level": 5,
+          "force": "0",
+          "include_keywords": "_0, Tumor",
+          "exclude_keywords": "_1",
+          "min_tissue": "0.5",
+          "max_tissue": "1",
+          "disk_size": 10,
+          "negative_mode": "0",
+          "strict_mode": "0",
+          "max_workers": 1,
+          "pattern": "*.tif",
+          "slide_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos",
+          "label_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos"
+        },
+        "ns_preprocessing:roiTables train_pos": {
+          "prov:label": "roiTables train_pos"
+        },
+        "ns_preprocessing:Data train_neg": {
+          "prov:label": "Data train_neg",
+          "cpm:primaryId": "",
+          "imagesDirSHA256": "8b205c6efb9d95a7314ebcbfccffe33cb484c0d3edd4254917103d00adfe9cd5",
+          "imagesDirPath": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_neg",
+          "annotationsDirHash": "None",
+          "annotationsDirPath": "None"
+        },
+        "ns_preprocessing:Config train_neg": {
+          "prov:label": "Config train_neg",
+          "output_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs",
+          "tile_size": 512,
+          "center_size": 256,
+          "step_size": 128,
+          "sample_level": 3,
+          "bg_level": 5,
+          "force": "0",
+          "include_keywords": "_0, Tumor",
+          "exclude_keywords": "_1",
+          "min_tissue": "0.5",
+          "max_tissue": "1",
+          "disk_size": 10,
+          "negative_mode": "1",
+          "strict_mode": "0",
+          "max_workers": 1,
+          "pattern": "*.tif",
+          "slide_dir": "/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_neg"
+        },
+        "ns_preprocessing:roiTables train_neg": {
+          "prov:label": "roiTables train_neg"
+        }
+      },
+      "agent": {
+        "ns_preprocessing:senderAgent": {
+          "prov:label": "senderAgent",
+          "prov:type": "cpm:senderAgent"
+        }
+      },
+      "activity": {
+        "ns_preprocessing:receipt": {
+          "prov:label": "receipt",
+          "prov:type": "cpm:receiptActivity"
+        },
+        "ns_preprocessing:preprocessing": {
+          "prov:label": "preprocessing",
+          "prov:type": "cpm:mainActivity",
+          "dct:hasPart": "ns_preprocessing:tilesGeneration"
+        },
+        "ns_preprocessing:tilesGeneration": {
+          "prov:label": "tiles generation",
+          "git_commit_hash": "12ab3f8f5f441e385eeab5d66f5ba1516f2cb870"
+        }
+      },
+      "wasAttributedTo": {
+        "_:wa1": {
+          "prov:entity": "ns_pathology:WSIDataConnector",
+          "prov:agent": "ns_preprocessing:senderAgent"
+        }
+      },
+      "wasInvalidatedBy": {
+        "_:wa1": {
+          "prov:entity": "ns_pathology:WSIDataConnector",
+          "prov:activity": "ns_preprocessing:receipt"
+        }
+      },
+      "used": {
+        "_:us1": {
+          "prov:activity": "ns_preprocessing:receipt",
+          "prov:entity": "ns_pathology:WSIDataConnector"
+        },
+        "_:us2": {
+          "prov:activity": "ns_preprocessing:preprocessing",
+          "prov:entity": "ns_preprocessing:WSI data"
+        },
+        "_:us3": {
+          "prov:activity": "ns_preprocessing:tilesGeneration",
+          "prov:entity": "ns_preprocessing:Data test"
+        },
+        "_:us4": {
+          "prov:activity": "ns_preprocessing:tilesGeneration",
+          "prov:entity": "ns_preprocessing:Config test"
+        },
+        "_:us5": {
+          "prov:activity": "ns_preprocessing:tilesGeneration",
+          "prov:entity": "ns_preprocessing:Data train_pos"
+        },
+        "_:us6": {
+          "prov:activity": "ns_preprocessing:tilesGeneration",
+          "prov:entity": "ns_preprocessing:Config train_pos"
+        },
+        "_:us7": {
+          "prov:activity": "ns_preprocessing:tilesGeneration",
+          "prov:entity": "ns_preprocessing:Data train_neg"
+        },
+        "_:us8": {
+          "prov:activity": "ns_preprocessing:tilesGeneration",
+          "prov:entity": "ns_preprocessing:Config train_neg"
+        }
+      },
+      "wasGeneratedBy": {
+        "_:wa1": {
+          "prov:entity": "ns_preprocessing:WSI data",
+          "prov:activity": "ns_preprocessing:receipt"
+        },
+        "_:wa2": {
+          "prov:entity": "ns_preprocessing:roiTables test",
+          "prov:activity": "ns_preprocessing:tilesGeneration"
+        },
+        "_:wa3": {
+          "prov:entity": "ns_preprocessing:roiTables train_pos",
+          "prov:activity": "ns_preprocessing:tilesGeneration"
+        },
+        "_:wa4": {
+          "prov:entity": "ns_preprocessing:roiTables train_neg",
+          "prov:activity": "ns_preprocessing:tilesGeneration"
+        }
+      },
+      "wasDerivedFrom": {
+        "_:wa1": {
+          "prov:generatedEntity": "ns_preprocessing:WSI data",
+          "prov:usedEntity": "ns_pathology:WSIDataConnector"
+        },
+        "_:wa2": {
+          "prov:generatedEntity": "ns_preprocessing:hdf5_dataset",
+          "prov:usedEntity": "ns_preprocessing:testGroup"
+        },
+        "_:wa3": {
+          "prov:generatedEntity": "ns_preprocessing:hdf5_dataset",
+          "prov:usedEntity": "ns_preprocessing:trainGroup"
+        },
+        "_:wa4": {
+          "prov:generatedEntity": "ns_preprocessing:testGroup",
+          "prov:usedEntity": "ns_preprocessing:roiTables test"
+        },
+        "_:wa5": {
+          "prov:generatedEntity": "ns_preprocessing:Config test",
+          "prov:usedEntity": "ns_preprocessing:params"
+        },
+        "_:wa6": {
+          "prov:generatedEntity": "ns_preprocessing:roiTables test",
+          "prov:usedEntity": "ns_preprocessing:Data test"
+        },
+        "_:wa7": {
+          "prov:generatedEntity": "ns_preprocessing:roiTables test",
+          "prov:usedEntity": "ns_preprocessing:Config test"
+        },
+        "_:wa8": {
+          "prov:generatedEntity": "ns_preprocessing:trainGroup",
+          "prov:usedEntity": "ns_preprocessing:roiTables train_pos"
+        },
+        "_:wa9": {
+          "prov:generatedEntity": "ns_preprocessing:trainGroup",
+          "prov:usedEntity": "ns_preprocessing:roiTables train_neg"
+        },
+        "_:wa10": {
+          "prov:generatedEntity": "ns_preprocessing:Config train_pos",
+          "prov:usedEntity": "ns_preprocessing:params"
+        },
+        "_:wa11": {
+          "prov:generatedEntity": "ns_preprocessing:roiTables train_pos",
+          "prov:usedEntity": "ns_preprocessing:Data train_pos"
+        },
+        "_:wa12": {
+          "prov:generatedEntity": "ns_preprocessing:roiTables train_pos",
+          "prov:usedEntity": "ns_preprocessing:Config train_pos"
+        },
+        "_:wa13": {
+          "prov:generatedEntity": "ns_preprocessing:Config train_neg",
+          "prov:usedEntity": "ns_preprocessing:params"
+        },
+        "_:wa14": {
+          "prov:generatedEntity": "ns_preprocessing:roiTables train_neg",
+          "prov:usedEntity": "ns_preprocessing:Data train_neg"
+        },
+        "_:wa15": {
+          "prov:generatedEntity": "ns_preprocessing:roiTables train_neg",
+          "prov:usedEntity": "ns_preprocessing:Config train_neg"
+        }
+      },
+      "specializationOf": {
+        "_:sp1": {
+          "prov:specificEntity": "ns_preprocessing:hdf5_dataset",
+          "prov:generalEntity": "ns_preprocessing:datasetTrainConnector"
+        },
+        "_:sp2": {
+          "prov:specificEntity": "ns_preprocessing:hdf5_dataset",
+          "prov:generalEntity": "ns_preprocessing:datasetTestConnector"
+        },
+        "_:sp3": {
+          "prov:specificEntity": "ns_preprocessing:Data test",
+          "prov:generalEntity": "ns_preprocessing:WSI data"
+        },
+        "_:sp4": {
+          "prov:specificEntity": "ns_preprocessing:Data train_pos",
+          "prov:generalEntity": "ns_preprocessing:WSI data"
+        },
+        "_:sp5": {
+          "prov:specificEntity": "ns_preprocessing:Data train_neg",
+          "prov:generalEntity": "ns_preprocessing:WSI data"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+document
+  default <http://example.org/0/>
+  prefix ns_preprocessing <preproc_uri>
+  prefix ns_pathology <pathology_uri>
+  prefix cpm <cpm_uri>
+  prefix dct <dct_uri>
+  prefix ns_eval <eval_uri>
+  prefix ns_training <test_uri>
+  prefix prov_1 <prov_uri>
+  prefix metabundle <metabundle_uri>
+  
+  bundle ns_training:bundle_training
+    prefix ns_training <test_uri>
+    prefix ns_preprocessing <preproc_uri>
+    
+    entity(ns_preprocessing:datasetTrainConnector, [prov:type="cpm:receiverConnector", cpm:senderBundleId="ns_preprocessing:bundle_preproc", cpm:senderServiceUri="#URI#"])
+    entity(ns_training:trainedModelConnector, [prov:type="cpm:senderConnector", cpm:receiverBundleId="ns_eval:bundle_eval", cpm:receiverServiceUri="#URI#"])
+    agent(ns_preprocessing:receiverAgent, [prov:type="cpm:receiverAgent"])
+    agent(ns_training:senderAgent, [prov:type="cpm:senderAgent"])
+    activity(ns_training:receipt, -, -, [prov:type="cpm:receiptActivity"])
+    activity(ns_training:training, -, -, [prov:type="cpm:mainActivity", git_commit_hash="12ab3f8f5f441e385eeab5d66f5ba1516f2cb870", dct:hasPart0="ns_training:trainGenerator", dct:hasPart1="ns_training:trainIter0", dct:hasPart2="ns_training:trainIter1", dct:hasPart3="ns_training:trainIter2"])
+    entity(ns_training:dataset)
+    used(ns_training:receipt, ns_preprocessing:datasetTrainConnector, -)
+    wasGeneratedBy(ns_training:dataset, ns_training:receipt, -)
+    used(ns_training:training, ns_training:dataset, -)
+    wasGeneratedBy(ns_training:trainedModelConnector, ns_training:training, -)
+    wasAttributedTo(ns_preprocessing:datasetTrainConnector, ns_training:senderAgent)
+    wasAttributedTo(ns_training:trainedModelConnector, ns_preprocessing:receiverAgent)
+    entity(ns_training:trainData, [file="/home/meta/matejg/Data/camelyon16/cam16_mrxs/cam16_mrxs.h5", groups="train", sha256="7880958ae4c8e9df18929b06debd6c09ada3e0895e6ebbdcfe9b0f5a30516fa9"])
+    specializationOf(ns_training:trainData, ns_training:dataset)
+    entity(ns_training:trainSlides, [table_0_sha256="220ca9f61efc6657582ebc2e65745935211f451e707e86ad9212203cfc091a1a", table_1_sha256="fa877089f84055392be6bddc97b818df8cb346bf8bc5eb90d4489591ecb36f05"])
+    activity(ns_training:trainGenerator, -, -, [data_source="train", sampler="rationai.datagens.samplers.RandomTreeSampler", augmenter="rationai.datagens.augmenters.ImageAugmenter", extractor="rationai.datagens.extractors.OpenslideExtractor", generator="rationai.datagens.generators.BaseGeneratorKeras"])
+    used(ns_training:trainGenerator, ns_training:trainSlides, -)
+    wasDerivedFrom(ns_training:trainSlides, ns_training:trainData, -, -, -)
+    entity(ns_training:modelInit, [model="rationai.training.models.keras_models.PretrainedNet"])
+    entity(ns_training:checkpointInit, [filepath="/home/meta/matejg/Data/camelyon16/cam16_experiments/ROCRATE-PUB-1438b57a750ce887d4433d9e/init.ckpt"])
+    wasGeneratedBy(ns_training:checkpointInit, ns_training:modelInit, -)
+    specializationOf(ns_training:checkpointInit, ns_training:trainedModelConnector)
+    entity(ns_training:trainTilesSubset0, [sampled_epoch_sha256="11539cb59ac14bf92b79c5965657b946d9db93d0c35fec83c063d88a10cfb486"])
+    wasGeneratedBy(ns_training:trainTilesSubset0, ns_training:trainGenerator, -)
+    wasDerivedFrom(ns_training:trainTilesSubset0, ns_training:trainSlides, -, -, -)
+    activity(ns_training:trainIter0, -, -, [loss="0.801632" %% xsd:float, binary_accuracy="0.64" %% xsd:float, precision="0.6" %% xsd:float, recall="0.545455" %% xsd:float, auc="0.662338" %% xsd:float])
+    entity(ns_training:modelIter1)
+    used(ns_training:trainIter0, ns_training:trainTilesSubset0, -)
+    used(ns_training:trainIter0, ns_training:modelInit, -)
+    wasGeneratedBy(ns_training:modelIter1, ns_training:trainIter0, -)
+    wasDerivedFrom(ns_training:modelIter1, ns_training:modelInit, -, -, -)
+    entity(ns_training:trainTilesSubset1, [sampled_epoch_sha256="9c938ef2e7860029bf485550eeeebf311a2f73c86584037ebef06cc8ea83cf3b"])
+    wasGeneratedBy(ns_training:trainTilesSubset1, ns_training:trainGenerator, -)
+    wasDerivedFrom(ns_training:trainTilesSubset1, ns_training:trainSlides, -, -, -)
+    activity(ns_training:trainIter1, -, -, [loss="0.549169" %% xsd:float, binary_accuracy="0.72" %% xsd:float, precision="0.666667" %% xsd:float, recall="0.727273" %% xsd:float, auc="0.789773" %% xsd:float])
+    entity(ns_training:modelIter2)
+    used(ns_training:trainIter1, ns_training:trainTilesSubset1, -)
+    used(ns_training:trainIter1, ns_training:modelIter1, -)
+    wasGeneratedBy(ns_training:modelIter2, ns_training:trainIter1, -)
+    wasDerivedFrom(ns_training:modelIter2, ns_training:modelIter1, -, -, -)
+    entity(ns_training:trainTilesSubset2, [sampled_epoch_sha256="8768d58cd8aeec59b6ada8999ac9c0567121be5d035beecd33ca0f96a54d4607"])
+    wasGeneratedBy(ns_training:trainTilesSubset2, ns_training:trainGenerator, -)
+    wasDerivedFrom(ns_training:trainTilesSubset2, ns_training:trainSlides, -, -, -)
+    activity(ns_training:trainIter2, -, -, [loss="0.455578" %% xsd:float, binary_accuracy="0.74" %% xsd:float, precision="0.705882" %% xsd:float, recall="0.6" %% xsd:float, auc="0.8725" %% xsd:float])
+    entity(ns_training:modelIter3)
+    used(ns_training:trainIter2, ns_training:trainTilesSubset2, -)
+    used(ns_training:trainIter2, ns_training:modelIter2, -)
+    wasGeneratedBy(ns_training:modelIter3, ns_training:trainIter2, -)
+    wasDerivedFrom(ns_training:modelIter3, ns_training:modelIter2, -, -, -)
+  endBundle
+endDocument

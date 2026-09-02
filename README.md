@@ -24,6 +24,7 @@ Pick the row that matches what you have.
 | A finished Cromwell/WDL run | the file from `cromwell run -m metadata.json` | `fairscape import cromwell metadata.json -o ./crate` |
 | A finished Snakemake run | the records JSON from `snakemake --reporter fairscape` | `fairscape import snakemake records.json -o ./crate` |
 | Finished MLflow runs | the tracking store (an `mlruns` dir or tracking URI) and `pip install mlflow` | `fairscape import mlflow ./mlruns --experiment NAME -o ./crate` |
+| A CPM RO-Crate (distributed provenance bundles) | the crate directory: `ro-crate-metadata.json` + its `CPMProvenanceFile` PROV-N/PROV-JSON files | `fairscape import cpm ./crate-dir -o ./evi-crate` |
 
 ## Export — from an RO-Crate
 
@@ -32,6 +33,7 @@ Pick the row that matches what you have.
 | A D4D datasheet | `fairscape export d4d ro-crate-metadata.json` |
 | A Workflow Run RO-Crate | `fairscape export wrroc ro-crate-metadata.json` |
 | An MLCommons Croissant document | `fairscape export croissant ro-crate-metadata.json` |
+| A CPM provenance document (PROV-JSON, or PROV-N with `--provn`) | `fairscape export cpm ro-crate-metadata.json` |
 
 ## Try it — no data needed
 
@@ -63,6 +65,7 @@ The inputs and expected outputs the examples run on live inside each plugin:
 | snakemake | `plugins/snakemake/input.json` (3-rule chain records) | `plugins/snakemake/golden.json` |
 | mlflow | `plugins/mlflow/input.json` (iris experiment records) | `plugins/mlflow/golden.json` |
 | croissant | `plugins/croissant/input.json` (export this crate) | `plugins/croissant/golden.json` |
+| cpm | `plugins/cpm/input-crate/` (the CPM reference crate's provenance files, [zenodo 7676924](https://zenodo.org/records/7676924)) | `plugins/cpm/golden.json` (+ `golden-export.json`) |
 
 ## From Python
 
@@ -74,8 +77,10 @@ crate = d4d.convert("import", yaml.safe_load(open("datasheet.yaml")))
 ```
 
 Same shape for every format: `wrroc`, `c2m2`, `cromwell`, `snakemake`,
-`mlflow` (`convert("import", ...)`), and `d4d`/`wrroc`/`croissant`
-(`convert("export", crate)`).
+`mlflow`, `cpm` (`convert("import", ...)`), and `d4d`/`wrroc`/`croissant`/`cpm`
+(`convert("export", crate)`). `cpm` takes the crate *directory* rather than a
+parsed document, because it reads the PROV bundle files registered in the
+metadata alongside it.
 
 ## More
 

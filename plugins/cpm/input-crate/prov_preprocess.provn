@@ -1,0 +1,79 @@
+document
+  default <http://example.org/0/>
+  prefix ns_preprocessing <preproc_uri>
+  prefix ns_pathology <pathology_uri>
+  prefix cpm <cpm_uri>
+  prefix dct <dct_uri>
+  prefix ns_eval <eval_uri>
+  prefix ns_training <test_uri>
+  prefix prov_1 <prov_uri>
+  prefix metabundle <metabundle_uri>
+  
+  bundle ns_preprocessing:bundle_preproc
+    prefix ns_preprocessing <preproc_uri>
+    prefix ns_pathology <pathology_uri>
+    
+    entity(ns_pathology:WSIDataConnector, [prov:type="cpm:receiverConnector", cpm:senderBundleId="ns_pathology:bundle_pathology", cpm:senderServiceUri="#URI#"])
+    entity(ns_preprocessing:datasetTrainConnector, [prov:type="cpm:senderConnector", cpm:receiverBundleId="ns_training:bundle_training", cpm:receiverServiceUri="#URI#"])
+    entity(ns_preprocessing:datasetTestConnector, [prov:type="cpm:senderConnector", cpm:receiverBundleId="ns_eval:bundle_eval", cpm:receiverServiceUri="#URI#"])
+    agent(ns_preprocessing:receiverAgent, [prov:type="cpm:receiverAgent"])
+    agent(ns_preprocessing:senderAgent, [prov:type="cpm:senderAgent"])
+    activity(ns_preprocessing:receipt, -, -, [prov:type="cpm:receiptActivity"])
+    activity(ns_preprocessing:preprocessing, -, -, [prov:type="cpm:mainActivity", dct:hasPart="ns_preprocessing:tilesGeneration"])
+    entity(ns_preprocessing:WSI data, [cpm:primaryId=""])
+    wasGeneratedBy(ns_preprocessing:WSI data, ns_preprocessing:receipt, -)
+    wasAttributedTo(ns_pathology:WSIDataConnector, ns_preprocessing:senderAgent)
+    wasAttributedTo(ns_preprocessing:datasetTrainConnector, ns_preprocessing:receiverAgent)
+    wasAttributedTo(ns_preprocessing:datasetTestConnector, ns_preprocessing:receiverAgent)
+    wasDerivedFrom(ns_preprocessing:WSI data, ns_pathology:WSIDataConnector, -, -, -)
+    used(ns_preprocessing:receipt, ns_pathology:WSIDataConnector, -)
+    wasInvalidatedBy(ns_pathology:WSIDataConnector, ns_preprocessing:receipt, -)
+    used(ns_preprocessing:preprocessing, ns_preprocessing:WSI data, -)
+    wasDerivedFrom(ns_preprocessing:datasetTrainConnector, ns_preprocessing:WSI data, -, -, -)
+    wasGeneratedBy(ns_preprocessing:datasetTrainConnector, ns_preprocessing:preprocessing, -)
+    wasDerivedFrom(ns_preprocessing:datasetTestConnector, ns_preprocessing:WSI data, -, -, -)
+    wasGeneratedBy(ns_preprocessing:datasetTestConnector, ns_preprocessing:preprocessing, -)
+    activity(ns_preprocessing:tilesGeneration, -, -, [prov:label="tiles generation", git_commit_hash="12ab3f8f5f441e385eeab5d66f5ba1516f2cb870"])
+    entity(ns_preprocessing:hdf5_dataset, [filepath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/cam16_mrxs.h5", hash="7880958ae4c8e9df18929b06debd6c09ada3e0895e6ebbdcfe9b0f5a30516fa9"])
+    entity(ns_preprocessing:params, [filepath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/prov_converter_config.json", sha256="3d6f6702f0d7f49378decd8971725c20a730c38888b4345029d54eafa720d3ab"])
+    entity(ns_preprocessing:testGroup, [table_0_sha256="c9015456f94b60a69b608715d80fdcea91d1e8f832742b5762bc11fe979c1d4b"])
+    entity(ns_preprocessing:Data test, [cpm:primaryId="", imagesDirSHA256="4e14a3b852922c0c8cb7e29c8b2d02e5102498c0e6870218ebb499e88a2492f7", imagesDirPath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/test", annotationsDirHash="4e14a3b852922c0c8cb7e29c8b2d02e5102498c0e6870218ebb499e88a2492f7", annotationsDirPath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/test", prov:type="prov:collection"])
+    entity(ns_preprocessing:Config test, [output_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs", tile_size=512, center_size=256, step_size=128, sample_level=3, bg_level=5, force="0" %% xsd:boolean, include_keywords="_0, Tumor", exclude_keywords="_1", min_tissue="0.5" %% xsd:float, max_tissue="1" %% xsd:float, disk_size=10, negative_mode="0" %% xsd:boolean, strict_mode="0" %% xsd:boolean, max_workers=1, pattern="*.tif", slide_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs/test", label_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs/test"])
+    entity(ns_preprocessing:roiTables test)
+    wasDerivedFrom(ns_preprocessing:Config test, ns_preprocessing:params, -, -, -)
+    wasGeneratedBy(ns_preprocessing:roiTables test, ns_preprocessing:tilesGeneration, -)
+    wasDerivedFrom(ns_preprocessing:roiTables test, ns_preprocessing:Data test, -, -, -)
+    wasDerivedFrom(ns_preprocessing:roiTables test, ns_preprocessing:Config test, -, -, -)
+    used(ns_preprocessing:tilesGeneration, ns_preprocessing:Data test, -)
+    used(ns_preprocessing:tilesGeneration, ns_preprocessing:Config test, -)
+    wasDerivedFrom(ns_preprocessing:testGroup, ns_preprocessing:roiTables test, -, -, -)
+    specializationOf(ns_preprocessing:Data test, ns_preprocessing:WSI data)
+    wasDerivedFrom(ns_preprocessing:hdf5_dataset, ns_preprocessing:testGroup, -, -, -)
+    entity(ns_preprocessing:trainGroup, [table_0_sha256="220ca9f61efc6657582ebc2e65745935211f451e707e86ad9212203cfc091a1a", table_1_sha256="fa877089f84055392be6bddc97b818df8cb346bf8bc5eb90d4489591ecb36f05"])
+    entity(ns_preprocessing:Data train_pos, [cpm:primaryId="", imagesDirSHA256="41b2153a7890d17e9a1b8f7713ffd524c18262aba506a21feb2b400a797c2eb7", imagesDirPath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos", annotationsDirHash="41b2153a7890d17e9a1b8f7713ffd524c18262aba506a21feb2b400a797c2eb7", annotationsDirPath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos", prov:type="prov:collection"])
+    entity(ns_preprocessing:Config train_pos, [output_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs", tile_size=512, center_size=256, step_size=128, sample_level=3, bg_level=5, force="0" %% xsd:boolean, include_keywords="_0, Tumor", exclude_keywords="_1", min_tissue="0.5" %% xsd:float, max_tissue="1" %% xsd:float, disk_size=10, negative_mode="0" %% xsd:boolean, strict_mode="0" %% xsd:boolean, max_workers=1, pattern="*.tif", slide_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos", label_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_pos"])
+    entity(ns_preprocessing:roiTables train_pos)
+    wasDerivedFrom(ns_preprocessing:Config train_pos, ns_preprocessing:params, -, -, -)
+    wasGeneratedBy(ns_preprocessing:roiTables train_pos, ns_preprocessing:tilesGeneration, -)
+    wasDerivedFrom(ns_preprocessing:roiTables train_pos, ns_preprocessing:Data train_pos, -, -, -)
+    wasDerivedFrom(ns_preprocessing:roiTables train_pos, ns_preprocessing:Config train_pos, -, -, -)
+    used(ns_preprocessing:tilesGeneration, ns_preprocessing:Data train_pos, -)
+    used(ns_preprocessing:tilesGeneration, ns_preprocessing:Config train_pos, -)
+    wasDerivedFrom(ns_preprocessing:trainGroup, ns_preprocessing:roiTables train_pos, -, -, -)
+    specializationOf(ns_preprocessing:Data train_pos, ns_preprocessing:WSI data)
+    entity(ns_preprocessing:Data train_neg, [cpm:primaryId="", imagesDirSHA256="8b205c6efb9d95a7314ebcbfccffe33cb484c0d3edd4254917103d00adfe9cd5", imagesDirPath="/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_neg", annotationsDirHash="None", annotationsDirPath="None", prov:type="prov:collection"])
+    entity(ns_preprocessing:Config train_neg, [output_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs", tile_size=512, center_size=256, step_size=128, sample_level=3, bg_level=5, force="0" %% xsd:boolean, include_keywords="_0, Tumor", exclude_keywords="_1", min_tissue="0.5" %% xsd:float, max_tissue="1" %% xsd:float, disk_size=10, negative_mode="1" %% xsd:boolean, strict_mode="0" %% xsd:boolean, max_workers=1, pattern="*.tif", slide_dir="/home/meta/matejg/Data/camelyon16/cam16_mrxs/train_neg"])
+    entity(ns_preprocessing:roiTables train_neg)
+    wasDerivedFrom(ns_preprocessing:Config train_neg, ns_preprocessing:params, -, -, -)
+    wasGeneratedBy(ns_preprocessing:roiTables train_neg, ns_preprocessing:tilesGeneration, -)
+    wasDerivedFrom(ns_preprocessing:roiTables train_neg, ns_preprocessing:Data train_neg, -, -, -)
+    wasDerivedFrom(ns_preprocessing:roiTables train_neg, ns_preprocessing:Config train_neg, -, -, -)
+    used(ns_preprocessing:tilesGeneration, ns_preprocessing:Data train_neg, -)
+    used(ns_preprocessing:tilesGeneration, ns_preprocessing:Config train_neg, -)
+    wasDerivedFrom(ns_preprocessing:trainGroup, ns_preprocessing:roiTables train_neg, -, -, -)
+    specializationOf(ns_preprocessing:Data train_neg, ns_preprocessing:WSI data)
+    wasDerivedFrom(ns_preprocessing:hdf5_dataset, ns_preprocessing:trainGroup, -, -, -)
+    specializationOf(ns_preprocessing:hdf5_dataset, ns_preprocessing:datasetTrainConnector)
+    specializationOf(ns_preprocessing:hdf5_dataset, ns_preprocessing:datasetTestConnector)
+  endBundle
+endDocument

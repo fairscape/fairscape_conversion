@@ -1,0 +1,53 @@
+document
+  default <http://example.org/0/>
+  prefix ns_preprocessing <preproc_uri>
+  prefix ns_pathology <pathology_uri>
+  prefix cpm <cpm_uri>
+  prefix dct <dct_uri>
+  prefix ns_eval <eval_uri>
+  prefix ns_training <test_uri>
+  prefix prov_1 <prov_uri>
+  prefix metabundle <metabundle_uri>
+  
+  bundle ns_eval:bundle_eval
+    prefix ns_eval <eval_uri>
+    prefix ns_training <test_uri>
+    prefix ns_preprocessing <preproc_uri>
+    
+    entity(ns_training:trainedModelConnector, [prov:type="cpm:receiverConnector", cpm:senderBundleId="ns_training:bundle_training", cpm:senderServiceUri="#URI#"])
+    entity(ns_preprocessing:datasetTestConnector, [prov:type="cpm:receiverConnector", cpm:senderBundleId="ns_preprocessing:bundle_preproc", cpm:senderServiceUri="#URI#"])
+    agent(ns_eval:senderAgent, [prov:type="cpm:senderAgent"])
+    agent(ns_eval:senderAgent, [prov:type="cpm:senderAgent"])
+    entity(ns_eval:trainedNet, [prov:type="cpm:externalInput"])
+    entity(ns_eval:testDataset, [prov:type="cpm:externalInput"])
+    activity(ns_eval:receipt1, -, -, [prov:type="cpm:receiptActivity"])
+    activity(ns_eval:receipt2, -, -, [prov:type="cpm:receiptActivity"])
+    activity(ns_eval:mainActivityTesting, -, -, [prov:type="cpm:mainActivity", dct:hasPart="ns_eval:test"])
+    wasDerivedFrom(ns_eval:trainedNet, ns_training:trainedModelConnector, -, -, -)
+    wasInvalidatedBy(ns_training:trainedModelConnector, ns_eval:receipt1, -)
+    wasGeneratedBy(ns_eval:trainedNet, ns_eval:receipt1, -)
+    used(ns_eval:receipt1, ns_training:trainedModelConnector, -)
+    wasDerivedFrom(ns_eval:testDataset, ns_preprocessing:datasetTestConnector, -, -, -)
+    wasGeneratedBy(ns_eval:testDataset, ns_eval:receipt2, -)
+    used(ns_eval:receipt2, ns_preprocessing:datasetTestConnector, -)
+    wasInvalidatedBy(ns_preprocessing:datasetTestConnector, ns_eval:receipt2, -)
+    used(ns_eval:mainActivityTesting, ns_eval:testDataset, -)
+    used(ns_eval:mainActivityTesting, ns_eval:trainedNet, -)
+    wasAttributedTo(ns_training:trainedModelConnector, ns_eval:senderAgent)
+    wasAttributedTo(ns_preprocessing:datasetTestConnector, ns_eval:senderAgent)
+    entity(ns_eval:trainedNetFromCkpt, [checkpoint_file="/home/meta/matejg/Data/camelyon16/cam16_experiments/ROCRATE-PUB-1438b57a750ce887d4433d9e/best_loss.ckpt"])
+    entity(ns_eval:cfgTest, [filepath="/home/meta/matejg/Data/camelyon16/cam16_experiments/ROCRATE-PUB-1438b57a750ce887d4433d9e/prov_test_config.json", sha256="384b04f850ee6f9fe70c33fef63565b5ab2fa6c84b0d531f3ee912d7a1c0ba51"])
+    entity(ns_eval:testHDF5Dataset, [table_0_sha256="c9015456f94b60a69b608715d80fdcea91d1e8f832742b5762bc11fe979c1d4b"])
+    entity(ns_eval:evalHDF5Dataset, [filepath="/home/meta/matejg/Data/camelyon16/cam16_experiments/ROCRATE-PUB-1438b57a750ce887d4433d9e/predictions.h5", sha256="58b6ec9279718e91c0981484fad680628010b16fda6165da9d0310bbf6628444"])
+    activity(ns_eval:test, -, -, [experiment_ID="ROCRATE-PUB-1438b57a750ce887d4433d9e", git_commit_hash="12ab3f8f5f441e385eeab5d66f5ba1516f2cb870"])
+    entity(ns_eval:testPredictions, [table_0_sha256="a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7", a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_Binary Accuracy="0.877365" %% xsd:float, a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_Precision="1" %% xsd:float, a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_Recall="0" %% xsd:float, a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_TP="0" %% xsd:float, a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_TN="1345" %% xsd:float, a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_FP="0" %% xsd:float, a0b6208ac013d08eb912710c3b6e26294e3558b19595dd2876236d6d4a1ce4f7_FN="188" %% xsd:float])
+    specializationOf(ns_eval:trainedNetFromCkpt, ns_eval:trainedNet)
+    specializationOf(ns_eval:testHDF5Dataset, ns_eval:testDataset)
+    wasDerivedFrom(ns_eval:testPredictions, ns_eval:testHDF5Dataset, -, -, -)
+    used(ns_eval:test, ns_eval:testHDF5Dataset, -)
+    used(ns_eval:test, ns_eval:cfgTest, -)
+    used(ns_eval:test, ns_eval:trainedNetFromCkpt, -)
+    wasGeneratedBy(ns_eval:testPredictions, ns_eval:test, -)
+    wasDerivedFrom(ns_eval:evalHDF5Dataset, ns_eval:testPredictions, -, -, -)
+  endBundle
+endDocument

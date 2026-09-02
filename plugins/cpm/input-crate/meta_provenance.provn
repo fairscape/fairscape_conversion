@@ -1,0 +1,27 @@
+document
+  default <http://example.org/0/>
+  prefix ns_preprocessing <preproc_uri>
+  prefix ns_pathology <pathology_uri>
+  prefix cpm <cpm_uri>
+  prefix dct <dct_uri>
+  prefix ns_eval <eval_uri>
+  prefix ns_training <test_uri>
+  prefix prov_1 <prov_uri>
+  prefix metabundle <metabundle_uri>
+  
+  bundle metabundle:meta-provenance
+    prefix ns_training <test_uri>
+    prefix ns_eval <eval_uri>
+    prefix ns_preprocessing <preproc_uri>
+    
+    entity(ns_training:bundle_train, [prov:type="prov:bundle"])
+    entity(ns_training:bundle_train_gen, [prov:type="prov:bundle"])
+    specializationOf(ns_training:bundle_train, ns_training:bundle_train_gen)
+    entity(ns_eval:bundle_test, [prov:type="prov:bundle"])
+    entity(ns_eval:bundle_test_gen, [prov:type="prov:bundle"])
+    specializationOf(ns_eval:bundle_test, ns_eval:bundle_test_gen)
+    entity(ns_preprocessing:bundle_preprocess, [prov:type="prov:bundle"])
+    entity(ns_preprocessing:bundle_preprocess_gen, [prov:type="prov:bundle"])
+    specializationOf(ns_preprocessing:bundle_preprocess, ns_preprocessing:bundle_preprocess_gen)
+  endBundle
+endDocument

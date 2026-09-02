@@ -1,0 +1,36 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+mainActivity,label,Computation,name,pretty_label,,import,TRUE,required,scalar,,,,,,,prov:label else spaced local name
+mainActivity,,Computation,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
+mainActivity,,Computation,runBy,synth_runby,,import,FALSE,required,scalar,,,,,,,bundle senderAgent else crate author else Unknown
+mainActivity,,Computation,dateCreated,synth_date,,import,FALSE,required,scalar,,,,,,,bundles carry no timestamps; crate root datePublished
+mainActivity,cpm_type,Computation,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,cpm:mainActivity — round-trip marker for export
+mainActivity,attrs,Computation,parameter,attrs_parameter,,import,FALSE,optional,list,,,,,,,domain attrs (metrics/git hashes) as key=value strings
+activity,label,Computation,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
+activity,,Computation,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
+activity,,Computation,runBy,synth_runby,,import,FALSE,required,scalar,,,,,,,
+activity,,Computation,dateCreated,synth_date,,import,FALSE,required,scalar,,,,,,,
+activity,attrs,Computation,parameter,attrs_parameter,,import,FALSE,optional,list,,,,,,,
+transferActivity,label,Activity,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
+transferActivity,,Activity,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
+transferActivity,cpm_type,Activity,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,cpm:receiptActivity — round-trip marker
+entity,label,Dataset,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
+entity,,Dataset,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
+entity,,Dataset,author,synth_author,,import,FALSE,required,scalar,,,,,,,
+entity,,Dataset,datePublished,synth_date,,import,FALSE,required,scalar,,,,,,,
+entity,,Dataset,keywords,synth_keywords,,import,FALSE,required,list,,,,,,,
+entity,,Dataset,format,synth_format,,import,FALSE,required,scalar,,,,,,,from file-path attr extension else octet-stream
+entity,sha256,Dataset,sha256,scalar_or_list,,import,TRUE,optional,scalar,,,,,,,
+entity,hash,Dataset,hash,scalar_or_list,,import,TRUE,optional,scalar,,,,,,,
+entity,,Dataset,contentUrl,synth_content_url,,import,FALSE,optional,scalar,,,,,,,filepath/file/checkpoint_file attr as file:// URL
+entity,cpm_type,Dataset,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,cpm:senderConnector / cpm:receiverConnector / cpm:externalInput
+entity,attrs,Dataset,additionalProperty,attrs_property_values,,import,FALSE,optional,list,,,,,,,every unconsumed bundle attribute as a PropertyValue
+agent,label,Organization,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
+agent,cpm_type,Organization,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,cpm:senderAgent / cpm:receiverAgent
+cpmfile,name,Dataset,name,scalar,,import,TRUE,required,scalar,,,,,,,crate node name else file id
+cpmfile,description,Dataset,description,file_desc,,import,TRUE,required,scalar,,,,,,,
+cpmfile,,Dataset,author,synth_author,,import,FALSE,required,scalar,,,,,,,
+cpmfile,,Dataset,datePublished,file_date,,import,FALSE,required,scalar,,,,,,,node dateModified else root datePublished
+cpmfile,,Dataset,keywords,synth_keywords,,import,FALSE,required,list,,,,,,,
+cpmfile,encodingFormat,Dataset,format,file_format,,import,TRUE,required,scalar,,,,,,,first plain string of encodingFormat
+cpmfile,,Dataset,additionalType,file_kind,,import,FALSE,optional,scalar,,,,,,,CPMProvenanceFile / CPMMetaProvenanceFile (profile terms); export skips these nodes
+cpmfile,bundle_id,Dataset,cpmBundleId,scalar,,import,FALSE,optional,scalar,,,,,,,original bundle identifier — export regroups statements by it
