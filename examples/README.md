@@ -41,11 +41,11 @@ having one hub format in the middle — every importer feeds every exporter.
 
 **[`mlflow/mlflow_to_rocrate.ipynb`](mlflow/mlflow_to_rocrate.ipynb)** is the
 end-to-end one: it trains a scikit-learn model with MLflow tracking, converts
-the store it just created, and reads the crate back — provenance edges, the
-run in full, the schema MLflow's column spec gave for free,
-`fairscape_models` validation, and a determinism check on the ARKs. It is
-checked in with its outputs, and the crate it produced is in
-[`mlflow/crate/`](mlflow/crate). See [`mlflow/README.md`](mlflow/README.md).
+the store it just created, validates the crate, and renders its datasheet and
+provenance graph inline. It ends with [`mlflow/pipeline/`](mlflow/pipeline), a
+three-step prepare → train → evaluate pipeline whose evaluate run `usedMLModel`
+the trained model. Both notebook and crates are checked in with their outputs.
+See [`mlflow/README.md`](mlflow/README.md).
 
 Everything else on this page runs on fixtures and finishes instantly; that
 notebook is the one that starts from nothing and needs `mlflow`,

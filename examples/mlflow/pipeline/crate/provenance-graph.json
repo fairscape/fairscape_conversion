@@ -1,0 +1,184 @@
+{
+  "@type": "evi:EvidenceGraph",
+  "@id": "ark:59853/evidence-graph-dataset-predictions-csv-c7a6b13",
+  "owner": "ark:59853/dataset-predictions-csv-c7a6b13",
+  "description": "Evidence graph for predictions.csv",
+  "name": "Evidence Graph - predictions.csv",
+  "outputs": [
+    {
+      "@id": "ark:59853/dataset-predictions-csv-c7a6b13"
+    }
+  ],
+  "@graph": {
+    "ark:59853/dataset-iris-a44c0fa": {
+      "@id": "ark:59853/dataset-iris-a44c0fa",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "iris",
+      "description": "Dataset 'iris' logged as an MLflow run input (150 rows, digest d9ca403e), used as source data"
+    },
+    "ark:59853/software-prepare-py-8975583": {
+      "@id": "ark:59853/software-prepare-py-8975583",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "prepare.py",
+      "description": "The script 'prepare.py' logged by MLflow as the source of run(s) in experiment 'iris-pipeline' (git commit 938ac5e548a38a52df289c8a93a4791e05bd9a80)"
+    },
+    "ark:59853/software-mlflow-2ea5ff6": {
+      "@id": "ark:59853/software-mlflow-2ea5ff6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "MLflow",
+      "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)"
+    },
+    "ark:59853/computation-prepare-data-a011a7d": {
+      "@id": "ark:59853/computation-prepare-data-a011a7d",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'prepare-data'",
+      "description": "MLflow run 'prepare-data' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-iris-a44c0fa"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-prepare-py-8975583"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ]
+    },
+    "ark:59853/dataset-test-csv-81ea422": {
+      "@id": "ark:59853/dataset-test-csv-81ea422",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "test.csv",
+      "description": "Artifact 'test.csv' logged by MLflow run 'prepare-data'",
+      "generatedBy": {
+        "@id": "ark:59853/computation-prepare-data-a011a7d"
+      }
+    },
+    "ark:59853/software-evaluate-py-e01b107": {
+      "@id": "ark:59853/software-evaluate-py-e01b107",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "evaluate.py",
+      "description": "The script 'evaluate.py' logged by MLflow as the source of run(s) in experiment 'iris-pipeline' (git commit 938ac5e548a38a52df289c8a93a4791e05bd9a80)"
+    },
+    "ark:59853/dataset-train-csv-cfdb848": {
+      "@id": "ark:59853/dataset-train-csv-cfdb848",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "train.csv",
+      "description": "Artifact 'train.csv' logged by MLflow run 'prepare-data'",
+      "generatedBy": {
+        "@id": "ark:59853/computation-prepare-data-a011a7d"
+      }
+    },
+    "ark:59853/software-train-py-328f4c6": {
+      "@id": "ark:59853/software-train-py-328f4c6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "train.py",
+      "description": "The script 'train.py' logged by MLflow as the source of run(s) in experiment 'iris-pipeline' (git commit 938ac5e548a38a52df289c8a93a4791e05bd9a80)"
+    },
+    "ark:59853/computation-rf-200-trees-ef81b10": {
+      "@id": "ark:59853/computation-rf-200-trees-ef81b10",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'rf-200-trees'",
+      "description": "MLflow run 'rf-200-trees' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape (nested child of run 'train')",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-train-py-328f4c6"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ]
+    },
+    "ark:59853/dataset-iris-rf-b967e0c": {
+      "@id": "ark:59853/dataset-iris-rf-b967e0c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#MLModel"
+      ],
+      "name": "iris-rf",
+      "description": "MLflow model 'iris-rf' (sklearn flavor), logged by run 'rf-200-trees' with MLflow 3.16.0",
+      "generatedBy": {
+        "@id": "ark:59853/computation-rf-200-trees-ef81b10"
+      }
+    },
+    "ark:59853/computation-evaluate-2dcbe2a": {
+      "@id": "ark:59853/computation-evaluate-2dcbe2a",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'evaluate'",
+      "description": "MLflow run 'evaluate' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-test-csv-81ea422"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-evaluate-py-e01b107"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedMLModel": [
+        {
+          "@id": "ark:59853/dataset-iris-rf-b967e0c"
+        }
+      ]
+    },
+    "ark:59853/dataset-predictions-csv-c7a6b13": {
+      "@id": "ark:59853/dataset-predictions-csv-c7a6b13",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "predictions.csv",
+      "description": "Artifact 'predictions.csv' logged by MLflow run 'evaluate'",
+      "generatedBy": {
+        "@id": "ark:59853/computation-evaluate-2dcbe2a"
+      }
+    }
+  },
+  "condensation_stats": {
+    "condensed": false,
+    "originalEntityCount": 12,
+    "condensedEntityCount": 12,
+    "datasetGroupCount": 0
+  }
+}

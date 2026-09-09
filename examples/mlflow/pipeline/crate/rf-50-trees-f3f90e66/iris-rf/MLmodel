@@ -1,4 +1,4 @@
-artifact_path: model
+artifact_path: /home/oj/fairscape/fairscape_conversion/examples/mlflow/pipeline/mlruns/1/models/m-dd419601d8b140f989a3b7dd4207dee3/artifacts
 flavors:
   python_function:
     env:
@@ -7,18 +7,20 @@ flavors:
     loader_module: mlflow.sklearn
     model_path: model.pkl
     predict_fn: predict
-    python_version: 3.11.7
+    python_version: 3.11.16
   sklearn:
     code: null
     pickled_model: model.pkl
-    serialization_format: cloudpickle
-    sklearn_version: 1.8.0
+    serialization_format: pickle
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
 is_signature_from_type_hint: false
-mlflow_version: 2.22.0
-model_size_bytes: 282806
-model_uuid: cce96f10b1334967bb3fbb0ff0e02698
+mlflow_version: 3.16.0
+model_id: m-dd419601d8b140f989a3b7dd4207dee3
+model_size_bytes: 44997
+model_uuid: m-dd419601d8b140f989a3b7dd4207dee3
 prompts: null
-run_id: 2dcf075cdb4746c1bb2820b376c7d7df
+run_id: f3f90e66adec44458a26eb4f4e8e1a86
 saved_input_example_info:
   artifact_path: input_example.json
   pandas_orient: split
@@ -32,4 +34,4 @@ signature:
   outputs: '[{"type": "long", "required": true}]'
   params: null
 type_hint_from_example: false
-utc_time_created: '2026-09-01 19:42:20.607648'
+utc_time_created: '2026-09-09 10:52:43.620328'

@@ -3,6 +3,6 @@ run,,Computation,prov:Activity|https://w3id.org/EVI#Computation,workflow,mint,,,
 source,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,the logged source script/notebook/project entry point (mlflow.source.name); ARK hashes name@git-commit
 engine,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,MLflow itself
 dataset,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per logged dataset input (mlflow.log_input); ARK hashes name@digest (content-based and run-independent)
-model,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per logged MLflow model (the whole model directory as a single Dataset; mls:Model stated via additionalType so fairscape_models still classifies it as a Dataset)
+model,,MLModel,prov:Entity|https://w3id.org/EVI#MLModel,data,mint,,,FALSE,dataset,one per logged MLflow model (the whole model directory as a single EVI MLModel; additionalType also names the W3C ML-Schema mls:Model class)
 file,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per run artifact file
 schema,,Schema,,data,keep,,,FALSE,schema,pre-built EVI Schema node (dataset colspec or fairscape-cli infer_schema); passes through verbatim

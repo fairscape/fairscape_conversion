@@ -1,0 +1,81 @@
+{
+  "@type": "evi:EvidenceGraph",
+  "@id": "ark:59853/evidence-graph-dataset-model-4bcee6d",
+  "owner": "ark:59853/dataset-model-4bcee6d",
+  "description": "Evidence graph for model",
+  "name": "Evidence Graph - model",
+  "outputs": [
+    {
+      "@id": "ark:59853/dataset-model-4bcee6d"
+    }
+  ],
+  "@graph": {
+    "ark:59853/dataset-iris-a44c0fa": {
+      "@id": "ark:59853/dataset-iris-a44c0fa",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "iris",
+      "description": "Dataset 'iris' logged as an MLflow run input (150 rows, digest d9ca403e)"
+    },
+    "ark:59853/software-ipykernel-launcher-py-6974dfd": {
+      "@id": "ark:59853/software-ipykernel-launcher-py-6974dfd",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "ipykernel_launcher.py",
+      "description": "The notebook 'ipykernel_launcher.py' logged by MLflow as the source of run(s) in experiment 'iris-classifier'"
+    },
+    "ark:59853/software-mlflow-2ea5ff6": {
+      "@id": "ark:59853/software-mlflow-2ea5ff6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "MLflow",
+      "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)"
+    },
+    "ark:59853/computation-rf-baseline-e2ac35f": {
+      "@id": "ark:59853/computation-rf-baseline-e2ac35f",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'rf-baseline'",
+      "description": "MLflow run 'rf-baseline' of experiment 'iris-classifier', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-iris-a44c0fa"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-ipykernel-launcher-py-6974dfd"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ]
+    },
+    "ark:59853/dataset-model-4bcee6d": {
+      "@id": "ark:59853/dataset-model-4bcee6d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#MLModel"
+      ],
+      "name": "model",
+      "description": "MLflow model 'model' (sklearn flavor), logged by run 'rf-baseline' with MLflow 3.16.0",
+      "generatedBy": {
+        "@id": "ark:59853/computation-rf-baseline-e2ac35f"
+      }
+    }
+  },
+  "condensation_stats": {
+    "condensed": false,
+    "originalEntityCount": 5,
+    "condensedEntityCount": 5,
+    "datasetGroupCount": 0
+  }
+}

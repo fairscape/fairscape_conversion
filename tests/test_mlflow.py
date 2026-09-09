@@ -72,3 +72,51 @@ def test_mlflow_export_unsupported():
 
     with pytest.raises(NotImplementedError):
         convert("export", _load("golden.json"))
+
+
+def test_mlflow_model_inputs_become_usedMLModel():
+    """MLflow 3 lets a run declare a model as an *input* (an evaluation run
+    scoring a trained model); that is EVI's usedMLModel."""
+    from fairscape_conversion.plugins.mlflow import convert
+
+    records = _load("input.json")
+    model_id = next(iter(records["models"]))
+    consumer = next(r for r in records["runs"]
+                    if model_id not in r.get("models", []))
+    consumer["model_inputs"] = [model_id, "m-not-in-this-experiment"]
+
+    crate = convert("import", records)
+    nodes = {n["@id"]: n for n in crate["@graph"]}
+    computation = next(n for n in crate["@graph"]
+                       if n.get("mlflowRunId") == consumer["run_id"])
+    used = [ref["@id"] for ref in computation["usedMLModel"]]
+    assert len(used) == 1
+    assert "MLModel" in str(nodes[used[0]]["@type"])
+    assert "usedMLModel" in crate["@context"]
+
+    untouched = [n for n in crate["@graph"]
+                 if "Computation" in str(n.get("@type"))
+                 and n.get("mlflowRunId") != consumer["run_id"]]
+    assert all("usedMLModel" not in n for n in untouched)
+
+
+def test_mlflow_dataset_input_aliased_to_artifact():
+    """A dataset input that extract.py matched to another run's artifact
+    (``file_key``) reuses that artifact's Dataset node, so the chain
+    producer-run -> file -> consumer-run stays connected."""
+    from fairscape_conversion.plugins.mlflow import convert
+
+    records = _load("input.json")
+    file_key = next(iter(records["files"]))
+    consumer = next(r for r in records["runs"] if r["dataset_inputs"])
+    consumer["dataset_inputs"][0]["file_key"] = file_key
+
+    crate = convert("import", records)
+    computation = next(n for n in crate["@graph"]
+                       if n.get("mlflowRunId") == consumer["run_id"])
+    used = {ref["@id"] for ref in computation["usedDataset"]}
+    file_node = next(n for n in crate["@graph"]
+                     if n.get("name") == records["files"][file_key]["path"]
+                     .split("/")[-1])
+    assert used == {file_node["@id"]}
+    assert file_node["generatedBy"], "the artifact keeps its producer run"

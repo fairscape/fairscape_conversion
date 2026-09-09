@@ -89,8 +89,24 @@ def run_used_software(value, rule, ctx):
 
 
 def run_used_datasets(value, rule, ctx):
+    """Logged dataset inputs; one aliased to another run's artifact
+    (``file_key``, see extract._alias_dataset_inputs) points at that
+    artifact's Dataset node."""
     g = ctx.extras["guid_map"]
-    return refs([g[f"dataset:{d['key']}"] for d in (value or [])])
+    arks = []
+    for d in (value or []):
+        ark = (g[f"file:{d['file_key']}"] if d.get("file_key")
+               else g[f"dataset:{d['key']}"])
+        if ark not in arks:
+            arks.append(ark)
+    return refs(arks)
+
+
+def run_used_models(value, rule, ctx):
+    """Models logged as run inputs (MLflow 3 ``mlflow.log_input(model=...)``)."""
+    g = ctx.extras["guid_map"]
+    arks = [g[f"model:{m}"] for m in (value or []) if f"model:{m}" in g]
+    return refs(arks) if arks else None
 
 
 def run_generated(value, rule, ctx):
@@ -251,6 +267,14 @@ def model_format(value, rule, ctx):
     return value or "mlflow-model"
 
 
+def model_trained_on(value, rule, ctx):
+    """The producing run's dataset inputs, i.e. what the model was trained on."""
+    run = ctx.extras["runs_by_id"].get(value) if value else None
+    if not run or not run.get("dataset_inputs"):
+        return None
+    return run_used_datasets(run["dataset_inputs"], rule, ctx)
+
+
 # ---- file Datasets ------------------------------------------------------------
 
 def file_description(value, rule, ctx):
@@ -290,6 +314,7 @@ IMPORT_PARSERS = {
     "run_command": run_command,
     "run_used_software": run_used_software,
     "run_used_datasets": run_used_datasets,
+    "run_used_models": run_used_models,
     "run_generated": run_generated,
     "run_parent_ref": run_parent_ref,
     "param_strings": param_strings,
@@ -312,6 +337,7 @@ IMPORT_PARSERS = {
     "dataset_schema_ref": dataset_schema_ref,
     "model_description": model_description,
     "model_format": model_format,
+    "model_trained_on": model_trained_on,
     "file_description": file_description,
     "encoding_format": encoding_format,
     "file_schema_ref": file_schema_ref,

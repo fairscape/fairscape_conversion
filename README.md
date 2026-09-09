@@ -50,9 +50,10 @@ whether the result still matches the plugin's reviewed golden file.
 
 **[`examples/mlflow/mlflow_to_rocrate.ipynb`](examples/mlflow/mlflow_to_rocrate.ipynb)**
 is the end-to-end walk-through: it trains a scikit-learn model with MLflow
-tracking, converts the store it just created, then reads the crate back and
-validates it. It is checked in with its outputs, and so is
-[the crate it produced](examples/mlflow/crate).
+tracking, converts the store it just created, validates the crate, and renders
+its datasheet and provenance graph inline. A three-step pipeline with
+`usedMLModel` lives next to it in [`examples/mlflow/pipeline/`](examples/mlflow/pipeline).
+Both are checked in with their outputs.
 
 The inputs and expected outputs the examples run on live inside each plugin:
 

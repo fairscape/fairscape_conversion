@@ -1,3 +1,7 @@
 out/
 mlflow/mlruns/
 mlflow/work/
+mlflow/mlflow.db
+mlflow/pipeline/data/
+mlflow/pipeline/mlflow.db
+mlflow/pipeline/mlruns/

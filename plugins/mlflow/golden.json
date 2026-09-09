@@ -13,6 +13,10 @@
             "@id": "https://w3id.org/EVI#usedDataset",
             "@type": "@id"
         },
+        "usedMLModel": {
+            "@id": "https://w3id.org/EVI#usedMLModel",
+            "@type": "@id"
+        },
         "generatedBy": {
             "@id": "https://w3id.org/EVI#generatedBy",
             "@type": "@id"
@@ -244,7 +248,7 @@
             "@id": "ark:59853/dataset-model-db0c467",
             "@type": [
                 "prov:Entity",
-                "https://w3id.org/EVI#Dataset"
+                "https://w3id.org/EVI#MLModel"
             ],
             "name": "model",
             "additionalType": "http://www.w3.org/ns/mls#Model",
@@ -260,6 +264,11 @@
             "generatedBy": [
                 {
                     "@id": "ark:59853/computation-rf-train-788c3e0"
+                }
+            ],
+            "trainedOn": [
+                {
+                    "@id": "ark:59853/dataset-iris-d7253d9"
                 }
             ],
             "parameter": [

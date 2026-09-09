@@ -172,6 +172,25 @@ def _logged_models(client, experiment_id, runs):
     return models
 
 
+def _model_inputs(client, run, known_models):
+    """Model ids a run declared as inputs (MLflow 3 ``log_input(model=...)``).
+    ``search_runs`` leaves ``inputs.model_inputs`` empty on the SQL store
+    (verified against MLflow 3.16) while ``get_run`` fills it, so re-fetch
+    the run when the search result shows none. Pre-3 stores have no such
+    attribute and yield []."""
+    def ids_of(r):
+        inputs = getattr(r, "inputs", None)
+        return [m.model_id
+                for m in (getattr(inputs, "model_inputs", None) or [])]
+    ids = ids_of(run)
+    if not ids:
+        try:
+            ids = ids_of(client.get_run(run.info.run_id))
+        except Exception:
+            ids = []
+    return [m for m in ids if m in known_models]
+
+
 def _model_meta_from_dir(model_dir):
     """Read flavor + mlflow_version from a model directory's MLmodel file."""
     mlmodel = os.path.join(model_dir, "MLmodel")
@@ -198,6 +217,45 @@ def _dir_size(path):
             except OSError:
                 pass
     return total or None
+
+
+def _alias_dataset_inputs(runs, datasets, files):
+    """Best-effort cross-run linking. A logged dataset input whose local
+    source file is an artifact that *another* run logged (same basename,
+    and the same size when the local file is still around) is that
+    artifact: point the consuming run's usedDataset at the artifact's
+    Dataset node instead of minting a second, producer-less node. This is
+    what turns a chain of runs (prepare -> train -> evaluate) into one
+    connected provenance graph. Ambiguous basenames are left alone."""
+    by_basename = {}
+    for key, info in files.items():
+        by_basename.setdefault(os.path.basename(info["path"]), []).append(key)
+
+    aliased = {}
+    for key, ds in datasets.items():
+        uri = ds.get("source_uri")
+        if ds.get("source_type") != "local" or not uri:
+            continue
+        path = uri[len("file://"):] if uri.startswith("file://") else uri
+        candidates = by_basename.get(os.path.basename(path), [])
+        if os.path.isfile(path):
+            size = os.path.getsize(path)
+            candidates = [k for k in candidates
+                          if files[k]["size"] in (None, size)]
+        if len(candidates) == 1:
+            aliased[key] = candidates[0]
+
+    for run in runs:
+        for di in run["dataset_inputs"]:
+            file_key = aliased.get(di["key"])
+            if file_key and files[file_key]["run_id"] != run["run_id"]:
+                di["file_key"] = file_key
+
+    still_direct = {di["key"] for run in runs for di in run["dataset_inputs"]
+                    if not di.get("file_key")}
+    for key in list(aliased):
+        if key not in still_direct:
+            del datasets[key]
 
 
 def colspec_schema_node(dataset, naan):
@@ -369,7 +427,7 @@ def extract(tracking_uri, experiment=None, run_id=None, crate_dir=None,
             context = next((t.value for t in (di.tags or [])
                             if t.key == "mlflow.data.context"), None)
             if key not in datasets:
-                columns, num_rows, num_elements = [], None, None
+                columns, num_rows, num_elements, source_uri = [], None, None, None
                 try:
                     spec = json.loads(ds.schema) if ds.schema else {}
                     for col in spec.get("mlflow_colspec", []):
@@ -384,11 +442,17 @@ def extract(tracking_uri, experiment=None, run_id=None, crate_dir=None,
                     num_elements = profile.get("num_elements")
                 except ValueError:
                     pass
+                try:
+                    source_uri = (json.loads(ds.source) if ds.source
+                                  else {}).get("uri")
+                except (ValueError, AttributeError):
+                    pass
                 datasets[key] = {
                     "key": key,
                     "name": ds.name,
                     "digest": ds.digest,
                     "source_type": ds.source_type,
+                    "source_uri": source_uri,
                     "columns": columns,
                     "num_rows": num_rows,
                     "num_elements": num_elements,
@@ -398,6 +462,9 @@ def extract(tracking_uri, experiment=None, run_id=None, crate_dir=None,
             if context and context not in datasets[key]["contexts"]:
                 datasets[key]["contexts"].append(context)
             dataset_inputs.append({"key": key, "context": context})
+
+        # ---- models used as inputs (MLflow 3: mlflow.log_input(model=...)) ----
+        model_inputs = _model_inputs(client, r, raw_models)
 
         # ---- run artifacts ----
         local_root = _local_artifact_root(r.info.artifact_uri)
@@ -503,11 +570,13 @@ def extract(tracking_uri, experiment=None, run_id=None, crate_dir=None,
                      if not k.startswith("mlflow.")},
             "container": tags.get("mlflow.docker.image.name"),
             "dataset_inputs": dataset_inputs,
+            "model_inputs": model_inputs,
             "artifacts": artifact_keys,
             "models": sorted(models_by_run.get(rid, [])),
         })
 
     engine_version = engine_version or mlflow.__version__
+    _alias_dataset_inputs(runs, datasets, files)
 
     author = author or getpass.getuser()
     keyword_list = [k.strip() for k in (keywords or "").split(",") if k.strip()]

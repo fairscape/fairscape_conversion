@@ -1,0 +1,1102 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "mls": "http://www.w3.org/ns/mls#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "usedMLModel": {
+      "@id": "https://w3id.org/EVI#usedMLModel",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-iris-pipeline-prepare-train-evaluate-a1e4f5a"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-iris-pipeline-prepare-train-evaluate-a1e4f5a",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Iris pipeline \u2014 prepare, train, evaluate",
+      "description": "A three-step MLflow pipeline (data split, random-forest grid, held-out evaluation) converted to an EVI RO-Crate.",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "version": "1.0",
+      "author": "Example Researcher",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-prepare-data-a011a7d"
+        },
+        {
+          "@id": "ark:59853/computation-train-6e163b1"
+        },
+        {
+          "@id": "ark:59853/computation-rf-50-trees-a54edb2"
+        },
+        {
+          "@id": "ark:59853/computation-rf-200-trees-ef81b10"
+        },
+        {
+          "@id": "ark:59853/computation-rf-400-trees-9f5214e"
+        },
+        {
+          "@id": "ark:59853/computation-evaluate-2dcbe2a"
+        },
+        {
+          "@id": "ark:59853/software-evaluate-py-e01b107"
+        },
+        {
+          "@id": "ark:59853/software-prepare-py-8975583"
+        },
+        {
+          "@id": "ark:59853/software-train-py-328f4c6"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        },
+        {
+          "@id": "ark:59853/dataset-iris-a44c0fa"
+        },
+        {
+          "@id": "ark:59853/dataset-iris-rf-b967e0c"
+        },
+        {
+          "@id": "ark:59853/dataset-iris-rf-e3e5506"
+        },
+        {
+          "@id": "ark:59853/dataset-iris-rf-82f6f7f"
+        },
+        {
+          "@id": "ark:59853/dataset-test-csv-81ea422"
+        },
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        },
+        {
+          "@id": "ark:59853/dataset-classification-report-json-3f93bf5"
+        },
+        {
+          "@id": "ark:59853/dataset-confusion-matrix-csv-30d0b39"
+        },
+        {
+          "@id": "ark:59853/dataset-confusion-matrix-png-f60b22c"
+        },
+        {
+          "@id": "ark:59853/dataset-predictions-csv-c7a6b13"
+        },
+        {
+          "@id": "ark:59853/schema-iris-e04fad4"
+        },
+        {
+          "@id": "ark:59853/schema-test-csv-a176a8d"
+        },
+        {
+          "@id": "ark:59853/schema-train-csv-6b51af8"
+        },
+        {
+          "@id": "ark:59853/schema-confusion-matrix-csv-9c69d48"
+        },
+        {
+          "@id": "ark:59853/schema-predictions-csv-d8fe6ee"
+        }
+      ],
+      "localEvidenceGraph": {
+        "@id": "/home/oj/fairscape/fairscape_conversion/examples/mlflow/pipeline/crate/provenance-graph.html"
+      }
+    },
+    {
+      "@id": "ark:59853/computation-prepare-data-a011a7d",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'prepare-data'",
+      "description": "MLflow run 'prepare-data' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2026-09-09T06:52:40.387000-04:00",
+      "command": "python prepare.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-prepare-py-8975583"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-iris-a44c0fa"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-test-csv-81ea422"
+        },
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "parameter": [
+        "random_state=0",
+        "stratify=species",
+        "test_size=0.25"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "test_rows",
+          "value": 38.0
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "train_rows",
+          "value": 112.0
+        }
+      ],
+      "startTime": "2026-09-09T06:52:40.387000-04:00",
+      "endTime": "2026-09-09T06:52:40.481000-04:00",
+      "mlflowRunId": "98c8bb67e6fb405193ea815429607cd6"
+    },
+    {
+      "@id": "ark:59853/computation-train-6e163b1",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'train'",
+      "description": "MLflow run 'train' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2026-09-09T06:52:43.420000-04:00",
+      "command": "python train.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-train-py-328f4c6"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "generated": [],
+      "parameter": [
+        "best_max_depth=4",
+        "best_n_estimators=200",
+        "selection_metric=oob_accuracy"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "best_oob_accuracy",
+          "value": 0.9464285714285714
+        }
+      ],
+      "startTime": "2026-09-09T06:52:43.420000-04:00",
+      "endTime": "2026-09-09T06:52:51.432000-04:00",
+      "mlflowRunId": "1bf212a88e014e2d8cd9b79ba0a26a7e"
+    },
+    {
+      "@id": "ark:59853/computation-rf-50-trees-a54edb2",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'rf-50-trees'",
+      "description": "MLflow run 'rf-50-trees' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape (nested child of run 'train')",
+      "runBy": "oj",
+      "dateCreated": "2026-09-09T06:52:43.465000-04:00",
+      "command": "python train.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-train-py-328f4c6"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-iris-rf-82f6f7f"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-train-6e163b1"
+        }
+      ],
+      "parameter": [
+        "max_depth=2",
+        "n_estimators=50",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "oob_accuracy",
+          "value": 0.9375
+        }
+      ],
+      "startTime": "2026-09-09T06:52:43.465000-04:00",
+      "endTime": "2026-09-09T06:52:46.195000-04:00",
+      "mlflowRunId": "f3f90e66adec44458a26eb4f4e8e1a86"
+    },
+    {
+      "@id": "ark:59853/computation-rf-200-trees-ef81b10",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'rf-200-trees'",
+      "description": "MLflow run 'rf-200-trees' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape (nested child of run 'train')",
+      "runBy": "oj",
+      "dateCreated": "2026-09-09T06:52:46.204000-04:00",
+      "command": "python train.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-train-py-328f4c6"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-iris-rf-b967e0c"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-train-6e163b1"
+        }
+      ],
+      "parameter": [
+        "max_depth=4",
+        "n_estimators=200",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "oob_accuracy",
+          "value": 0.9464285714285714
+        }
+      ],
+      "startTime": "2026-09-09T06:52:46.204000-04:00",
+      "endTime": "2026-09-09T06:52:48.664000-04:00",
+      "mlflowRunId": "7b083d0775c44e299298cd56605a8166"
+    },
+    {
+      "@id": "ark:59853/computation-rf-400-trees-9f5214e",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'rf-400-trees'",
+      "description": "MLflow run 'rf-400-trees' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape (nested child of run 'train')",
+      "runBy": "oj",
+      "dateCreated": "2026-09-09T06:52:48.671000-04:00",
+      "command": "python train.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-train-py-328f4c6"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-iris-rf-e3e5506"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-train-6e163b1"
+        }
+      ],
+      "parameter": [
+        "max_depth=None",
+        "n_estimators=400",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "oob_accuracy",
+          "value": 0.9375
+        }
+      ],
+      "startTime": "2026-09-09T06:52:48.671000-04:00",
+      "endTime": "2026-09-09T06:52:51.400000-04:00",
+      "mlflowRunId": "dfe50f7da47b4d9e8f5877b5afff38d3"
+    },
+    {
+      "@id": "ark:59853/computation-evaluate-2dcbe2a",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'evaluate'",
+      "description": "MLflow run 'evaluate' of experiment 'iris-pipeline', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2026-09-09T06:52:54.488000-04:00",
+      "command": "python evaluate.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-evaluate-py-e01b107"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-test-csv-81ea422"
+        }
+      ],
+      "usedMLModel": [
+        {
+          "@id": "ark:59853/dataset-iris-rf-b967e0c"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-classification-report-json-3f93bf5"
+        },
+        {
+          "@id": "ark:59853/dataset-confusion-matrix-csv-30d0b39"
+        },
+        {
+          "@id": "ark:59853/dataset-confusion-matrix-png-f60b22c"
+        },
+        {
+          "@id": "ark:59853/dataset-predictions-csv-c7a6b13"
+        }
+      ],
+      "parameter": [
+        "model_id=m-28f8e7d21a92491bac291b203fa318ad",
+        "threshold=argmax"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "accuracy",
+          "value": 0.9473684210526315
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "f1_macro",
+          "value": 0.9458874458874459
+        }
+      ],
+      "startTime": "2026-09-09T06:52:54.488000-04:00",
+      "endTime": "2026-09-09T06:52:54.742000-04:00",
+      "mlflowRunId": "c15a7f145d4e4f99bc7aae18ee3e417c"
+    },
+    {
+      "@id": "ark:59853/software-evaluate-py-e01b107",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "evaluate.py",
+      "author": "Example Researcher",
+      "description": "The script 'evaluate.py' logged by MLflow as the source of run(s) in experiment 'iris-pipeline' (git commit 938ac5e548a38a52df289c8a93a4791e05bd9a80)",
+      "format": "text/x-python",
+      "version": "938ac5e548a38a52df289c8a93a4791e05bd9a80",
+      "localPath": "evaluate.py"
+    },
+    {
+      "@id": "ark:59853/software-prepare-py-8975583",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "prepare.py",
+      "author": "Example Researcher",
+      "description": "The script 'prepare.py' logged by MLflow as the source of run(s) in experiment 'iris-pipeline' (git commit 938ac5e548a38a52df289c8a93a4791e05bd9a80)",
+      "format": "text/x-python",
+      "version": "938ac5e548a38a52df289c8a93a4791e05bd9a80",
+      "localPath": "prepare.py"
+    },
+    {
+      "@id": "ark:59853/software-train-py-328f4c6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "train.py",
+      "author": "Example Researcher",
+      "description": "The script 'train.py' logged by MLflow as the source of run(s) in experiment 'iris-pipeline' (git commit 938ac5e548a38a52df289c8a93a4791e05bd9a80)",
+      "format": "text/x-python",
+      "version": "938ac5e548a38a52df289c8a93a4791e05bd9a80",
+      "localPath": "train.py"
+    },
+    {
+      "@id": "ark:59853/software-mlflow-2ea5ff6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "MLflow",
+      "author": "MLflow Project, a Series of LF Projects, LLC",
+      "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)",
+      "format": "application/x-python",
+      "version": "3.16.0",
+      "contentUrl": "https://github.com/mlflow/mlflow"
+    },
+    {
+      "@id": "ark:59853/dataset-iris-a44c0fa",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "iris",
+      "author": "Example Researcher",
+      "description": "Dataset 'iris' logged as an MLflow run input (150 rows, digest d9ca403e), used as source data",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "code",
+      "generatedBy": [],
+      "digest": "d9ca403e",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-iris-e04fad4"
+      }
+    },
+    {
+      "@id": "ark:59853/dataset-iris-rf-b967e0c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#MLModel"
+      ],
+      "name": "iris-rf",
+      "additionalType": "http://www.w3.org/ns/mls#Model",
+      "author": "Example Researcher",
+      "description": "MLflow model 'iris-rf' (sklearn flavor), logged by run 'rf-200-trees' with MLflow 3.16.0",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "sklearn",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-rf-200-trees-ef81b10"
+        }
+      ],
+      "trainedOn": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "parameter": [
+        "max_depth=4",
+        "n_estimators=200",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "oob_accuracy",
+          "value": 0.9464285714285714
+        }
+      ],
+      "mlflowModelId": "m-28f8e7d21a92491bac291b203fa318ad",
+      "contentUrl": "rf-200-trees-7b083d07/iris-rf/",
+      "contentSize": "287436"
+    },
+    {
+      "@id": "ark:59853/dataset-iris-rf-e3e5506",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#MLModel"
+      ],
+      "name": "iris-rf",
+      "additionalType": "http://www.w3.org/ns/mls#Model",
+      "author": "Example Researcher",
+      "description": "MLflow model 'iris-rf' (sklearn flavor), logged by run 'rf-400-trees' with MLflow 3.16.0",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "sklearn",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-rf-400-trees-9f5214e"
+        }
+      ],
+      "trainedOn": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "parameter": [
+        "max_depth=None",
+        "n_estimators=400",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "oob_accuracy",
+          "value": 0.9375
+        }
+      ],
+      "mlflowModelId": "m-d9746991d30e4d3bb0a2ba1beebd3b95",
+      "contentUrl": "rf-400-trees-dfe50f7d/iris-rf/",
+      "contentSize": "657296"
+    },
+    {
+      "@id": "ark:59853/dataset-iris-rf-82f6f7f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#MLModel"
+      ],
+      "name": "iris-rf",
+      "additionalType": "http://www.w3.org/ns/mls#Model",
+      "author": "Example Researcher",
+      "description": "MLflow model 'iris-rf' (sklearn flavor), logged by run 'rf-50-trees' with MLflow 3.16.0",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "sklearn",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-rf-50-trees-a54edb2"
+        }
+      ],
+      "trainedOn": [
+        {
+          "@id": "ark:59853/dataset-train-csv-cfdb848"
+        }
+      ],
+      "parameter": [
+        "max_depth=2",
+        "n_estimators=50",
+        "random_state=0"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "oob_accuracy",
+          "value": 0.9375
+        }
+      ],
+      "mlflowModelId": "m-dd419601d8b140f989a3b7dd4207dee3",
+      "contentUrl": "rf-50-trees-f3f90e66/iris-rf/",
+      "contentSize": "46837"
+    },
+    {
+      "@id": "ark:59853/dataset-test-csv-81ea422",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "test.csv",
+      "author": "Example Researcher",
+      "description": "Artifact 'test.csv' logged by MLflow run 'prepare-data'",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-prepare-data-a011a7d"
+        }
+      ],
+      "evi:Schema": {
+        "@id": "ark:59853/schema-test-csv-a176a8d"
+      },
+      "contentUrl": "prepare-data-98c8bb67/data/test.csv",
+      "contentSize": "762"
+    },
+    {
+      "@id": "ark:59853/dataset-train-csv-cfdb848",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "train.csv",
+      "author": "Example Researcher",
+      "description": "Artifact 'train.csv' logged by MLflow run 'prepare-data'",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-prepare-data-a011a7d"
+        }
+      ],
+      "evi:Schema": {
+        "@id": "ark:59853/schema-train-csv-6b51af8"
+      },
+      "contentUrl": "prepare-data-98c8bb67/data/train.csv",
+      "contentSize": "2094"
+    },
+    {
+      "@id": "ark:59853/dataset-classification-report-json-3f93bf5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "classification_report.json",
+      "author": "Example Researcher",
+      "description": "Artifact 'classification_report.json' logged by MLflow run 'evaluate'",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "application/json",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-evaluate-2dcbe2a"
+        }
+      ],
+      "contentUrl": "evaluate-c15a7f14/evaluation/classification_report.json",
+      "contentSize": "685"
+    },
+    {
+      "@id": "ark:59853/dataset-confusion-matrix-csv-30d0b39",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "confusion_matrix.csv",
+      "author": "Example Researcher",
+      "description": "Artifact 'confusion_matrix.csv' logged by MLflow run 'evaluate'",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-evaluate-2dcbe2a"
+        }
+      ],
+      "evi:Schema": {
+        "@id": "ark:59853/schema-confusion-matrix-csv-9c69d48"
+      },
+      "contentUrl": "evaluate-c15a7f14/evaluation/confusion_matrix.csv",
+      "contentSize": "27"
+    },
+    {
+      "@id": "ark:59853/dataset-confusion-matrix-png-f60b22c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "confusion_matrix.png",
+      "author": "Example Researcher",
+      "description": "Artifact 'confusion_matrix.png' logged by MLflow run 'evaluate'",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-evaluate-2dcbe2a"
+        }
+      ],
+      "contentUrl": "evaluate-c15a7f14/evaluation/confusion_matrix.png",
+      "contentSize": "25260"
+    },
+    {
+      "@id": "ark:59853/dataset-predictions-csv-c7a6b13",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "predictions.csv",
+      "author": "Example Researcher",
+      "description": "Artifact 'predictions.csv' logged by MLflow run 'evaluate'",
+      "datePublished": "2026-09-09T06:52:57.050068-04:00",
+      "keywords": [
+        "mlflow",
+        "iris",
+        "random forest",
+        "pipeline",
+        "provenance"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-evaluate-2dcbe2a"
+        }
+      ],
+      "evi:Schema": {
+        "@id": "ark:59853/schema-predictions-csv-d8fe6ee"
+      },
+      "contentUrl": "evaluate-c15a7f14/evaluation/predictions.csv",
+      "contentSize": "848"
+    },
+    {
+      "@id": "ark:59853/schema-iris-e04fad4",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for MLflow dataset 'iris'",
+      "description": "Schema derived from the column spec MLflow logged for dataset 'iris' (digest d9ca403e)",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "sepal length (cm)": {
+          "description": "Column 'sepal length (cm)' of MLflow dataset 'iris' (double)",
+          "index": 0,
+          "type": "number"
+        },
+        "sepal width (cm)": {
+          "description": "Column 'sepal width (cm)' of MLflow dataset 'iris' (double)",
+          "index": 1,
+          "type": "number"
+        },
+        "petal length (cm)": {
+          "description": "Column 'petal length (cm)' of MLflow dataset 'iris' (double)",
+          "index": 2,
+          "type": "number"
+        },
+        "petal width (cm)": {
+          "description": "Column 'petal width (cm)' of MLflow dataset 'iris' (double)",
+          "index": 3,
+          "type": "number"
+        },
+        "species": {
+          "description": "Column 'species' of MLflow dataset 'iris' (long)",
+          "index": 4,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+        "species"
+      ]
+    },
+    {
+      "@id": "ark:59853/schema-test-csv-a176a8d",
+      "@type": "EVI:Schema",
+      "name": "Schema for test.csv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "sepal length (cm)": {
+          "description": "Column sepal length (cm)",
+          "index": 0,
+          "type": "number"
+        },
+        "sepal width (cm)": {
+          "description": "Column sepal width (cm)",
+          "index": 1,
+          "type": "number"
+        },
+        "petal length (cm)": {
+          "description": "Column petal length (cm)",
+          "index": 2,
+          "type": "number"
+        },
+        "petal width (cm)": {
+          "description": "Column petal width (cm)",
+          "index": 3,
+          "type": "number"
+        },
+        "species": {
+          "description": "Column species",
+          "index": 4,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+        "species"
+      ],
+      "separator": ",",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.2.2",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the csv artifact 'data/test.csv' by mlflow-fairscape"
+    },
+    {
+      "@id": "ark:59853/schema-train-csv-6b51af8",
+      "@type": "EVI:Schema",
+      "name": "Schema for train.csv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "sepal length (cm)": {
+          "description": "Column sepal length (cm)",
+          "index": 0,
+          "type": "number"
+        },
+        "sepal width (cm)": {
+          "description": "Column sepal width (cm)",
+          "index": 1,
+          "type": "number"
+        },
+        "petal length (cm)": {
+          "description": "Column petal length (cm)",
+          "index": 2,
+          "type": "number"
+        },
+        "petal width (cm)": {
+          "description": "Column petal width (cm)",
+          "index": 3,
+          "type": "number"
+        },
+        "species": {
+          "description": "Column species",
+          "index": 4,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+        "species"
+      ],
+      "separator": ",",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.2.2",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the csv artifact 'data/train.csv' by mlflow-fairscape"
+    },
+    {
+      "@id": "ark:59853/schema-confusion-matrix-csv-9c69d48",
+      "@type": "EVI:Schema",
+      "name": "Schema for confusion_matrix.csv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "0": {
+          "description": "Column 0",
+          "index": 0,
+          "type": "integer"
+        },
+        "1": {
+          "description": "Column 1",
+          "index": 1,
+          "type": "integer"
+        },
+        "2": {
+          "description": "Column 2",
+          "index": 2,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "0",
+        "1",
+        "2"
+      ],
+      "separator": ",",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.2.2",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the csv artifact 'evaluation/confusion_matrix.csv' by mlflow-fairscape"
+    },
+    {
+      "@id": "ark:59853/schema-predictions-csv-d8fe6ee",
+      "@type": "EVI:Schema",
+      "name": "Schema for predictions.csv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "sepal length (cm)": {
+          "description": "Column sepal length (cm)",
+          "index": 0,
+          "type": "number"
+        },
+        "sepal width (cm)": {
+          "description": "Column sepal width (cm)",
+          "index": 1,
+          "type": "number"
+        },
+        "petal length (cm)": {
+          "description": "Column petal length (cm)",
+          "index": 2,
+          "type": "number"
+        },
+        "petal width (cm)": {
+          "description": "Column petal width (cm)",
+          "index": 3,
+          "type": "number"
+        },
+        "species": {
+          "description": "Column species",
+          "index": 4,
+          "type": "integer"
+        },
+        "predicted": {
+          "description": "Column predicted",
+          "index": 5,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+        "species",
+        "predicted"
+      ],
+      "separator": ",",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.2.2",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the csv artifact 'evaluation/predictions.csv' by mlflow-fairscape"
+    }
+  ]
+}

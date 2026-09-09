@@ -19,10 +19,10 @@ records, and this plugin owns the conversion:
       "engine":     {version},
       "runs":       [{run_id, name, parent_run_id, status, user, source_key,
                       start_time, end_time, params, metrics, tags, container,
-                      dataset_inputs, artifacts, models}, ...],
+                      dataset_inputs, model_inputs, artifacts, models}, ...],
       "sources":    {key: {name, source_type, git_commit, ark_source}},
-      "datasets":   {key: {name, digest, source_type, columns, num_rows,
-                           contexts, ark_source}},
+      "datasets":   {key: {name, digest, source_type, source_uri, columns,
+                           num_rows, contexts, ark_source}},
       "models":     {model_id: {name, run_id, flavor, mlflow_version, size,
                                 locator, locator_value, ark_source}},
       "files":      {key: {path, run_id, size, locator, locator_value,
@@ -50,6 +50,7 @@ DEFAULT_CONTEXT = {
     "mls": "http://www.w3.org/ns/mls#",
     "usedSoftware": {"@id": EVI + "usedSoftware", "@type": "@id"},
     "usedDataset": {"@id": EVI + "usedDataset", "@type": "@id"},
+    "usedMLModel": {"@id": EVI + "usedMLModel", "@type": "@id"},
     "generatedBy": {"@id": EVI + "generatedBy", "@type": "@id"},
     "generated": {"@id": EVI + "generated", "@type": "@id"},
     "annotates": {"@id": EVI + "annotates", "@type": "@id"},
@@ -65,7 +66,8 @@ class MlflowPlugin(PluginBase):
     def pre(self, ctx: Context) -> None:
         """Index the records, mint every ARK, and queue records in crate
         emission order (runs, sources, engine, datasets, models, files,
-        schemas)."""
+        schemas). Models are EVI MLModel nodes; their ARKs keep the
+        ``dataset-`` prefix they have always had."""
         src = ctx.source
         settings = src["settings"]
         experiment = src["experiment"]
