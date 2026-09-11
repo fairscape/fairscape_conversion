@@ -1,0 +1,118 @@
+"""Read alignment and variant calling on three sequenced samples.
+
+The canonical Snakemake tutorial pipeline, run for real: bwa-mem aligns each
+sample's reads to the reference, samtools sorts and indexes them, bcftools
+calls variants jointly across all three, and two rules summarise the calls —
+one plot, one table.
+
+Run it with the FAIRSCAPE reporter and the finished DAG comes back out as an
+EVI RO-Crate:
+
+    snakemake --cores 4 --use-conda --reporter fairscape
+
+See run.sh for the full invocation this example's checked-in crate came from.
+"""
+
+configfile: "config.yaml"
+
+SAMPLES = config["samples"]
+GENOME = config["genome"]
+
+
+rule all:
+    input:
+        "results/plots/quals.svg",
+        "results/calls/variant_summary.tsv",
+
+
+rule bwa_map:
+    """Align one sample's reads to the reference genome."""
+    input:
+        genome=GENOME,
+        index=multiext(GENOME, ".amb", ".ann", ".bwt", ".pac", ".sa"),
+        reads="data/samples/{sample}.fastq",
+    output:
+        temp("results/mapped/{sample}.bam"),
+    params:
+        read_group=r"@RG\tID:{sample}\tSM:{sample}\tPL:ILLUMINA",
+    log:
+        "logs/bwa_map/{sample}.log",
+    threads: 2
+    conda:
+        "envs/mapping.yaml"
+    shell:
+        "bwa mem -t {threads} -R '{params.read_group}' {input.genome} {input.reads} "
+        "2> {log} | samtools view -Sb - > {output}"
+
+
+rule samtools_sort:
+    """Sort an alignment by coordinate so it can be indexed and piled up."""
+    input:
+        "results/mapped/{sample}.bam",
+    output:
+        "results/sorted/{sample}.bam",
+    log:
+        "logs/samtools_sort/{sample}.log",
+    conda:
+        "envs/mapping.yaml"
+    shell:
+        "samtools sort -T results/sorted/{wildcards.sample} -O bam {input} "
+        "> {output} 2> {log}"
+
+
+rule samtools_index:
+    """Index a sorted alignment."""
+    input:
+        "results/sorted/{sample}.bam",
+    output:
+        "results/sorted/{sample}.bam.bai",
+    conda:
+        "envs/mapping.yaml"
+    shell:
+        "samtools index {input}"
+
+
+rule bcftools_call:
+    """Call variants jointly across every sample."""
+    input:
+        genome=GENOME,
+        bam=expand("results/sorted/{sample}.bam", sample=SAMPLES),
+        bai=expand("results/sorted/{sample}.bam.bai", sample=SAMPLES),
+    output:
+        "results/calls/all.vcf",
+    params:
+        mpileup=config["bcftools"]["mpileup"],
+        call=config["bcftools"]["call"],
+    log:
+        "logs/bcftools_call/all.log",
+    conda:
+        "envs/calling.yaml"
+    shell:
+        "(bcftools mpileup {params.mpileup} -f {input.genome} {input.bam} | "
+        "bcftools call {params.call} -o {output}) 2> {log}"
+
+
+rule variant_summary:
+    """Flatten the VCF into one tab-separated row per called variant."""
+    input:
+        "results/calls/all.vcf",
+    output:
+        "results/calls/variant_summary.tsv",
+    conda:
+        "envs/calling.yaml"
+    shell:
+        "(printf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n'; "
+        "bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' {input}) "
+        "> {output}"
+
+
+rule plot_quals:
+    """Plot the distribution of variant quality scores."""
+    input:
+        "results/calls/all.vcf",
+    output:
+        "results/plots/quals.svg",
+    conda:
+        "envs/plotting.yaml"
+    script:
+        "scripts/plot_quals.py"

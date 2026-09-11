@@ -1,0 +1,14 @@
+# Samples to align and call together. Each needs data/samples/<name>.fastq.
+samples:
+  - A
+  - B
+  - C
+
+# Reference the reads are aligned to (bwa index files sit next to it).
+genome: data/genome.fa
+
+bcftools:
+  # -d caps per-file depth; the tutorial data is deep for its size.
+  mpileup: "-d 250 -a AD,DP"
+  # -m multiallelic caller, -v variant sites only.
+  call: "-mv -Ov"

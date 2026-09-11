@@ -1,0 +1,559 @@
+{
+  "@type": "evi:EvidenceGraph",
+  "@id": "ark:59853/evidence-graph-dataset-variant-summary-tsv-71310c4",
+  "owner": "ark:59853/dataset-variant-summary-tsv-71310c4",
+  "description": "Evidence graph for variant_summary.tsv",
+  "name": "Evidence Graph - variant_summary.tsv",
+  "outputs": [
+    {
+      "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+    }
+  ],
+  "@graph": {
+    "ark:59853/dataset-genome-fa-f891ca0": {
+      "@id": "ark:59853/dataset-genome-fa-f891ca0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa",
+      "description": "Input file 'data/genome.fa' used by the Snakemake workflow run"
+    },
+    "ark:59853/dataset-genome-fa-amb-c2df282": {
+      "@id": "ark:59853/dataset-genome-fa-amb-c2df282",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.amb",
+      "description": "Input file 'data/genome.fa.amb' used by the Snakemake workflow run"
+    },
+    "ark:59853/dataset-genome-fa-ann-936b248": {
+      "@id": "ark:59853/dataset-genome-fa-ann-936b248",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.ann",
+      "description": "Input file 'data/genome.fa.ann' used by the Snakemake workflow run"
+    },
+    "ark:59853/dataset-genome-fa-bwt-0a9c7e3": {
+      "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.bwt",
+      "description": "Input file 'data/genome.fa.bwt' used by the Snakemake workflow run"
+    },
+    "ark:59853/dataset-genome-fa-pac-28b255e": {
+      "@id": "ark:59853/dataset-genome-fa-pac-28b255e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.pac",
+      "description": "Input file 'data/genome.fa.pac' used by the Snakemake workflow run"
+    },
+    "ark:59853/dataset-genome-fa-sa-90bdcc1": {
+      "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.sa",
+      "description": "Input file 'data/genome.fa.sa' used by the Snakemake workflow run"
+    },
+    "ark:59853/dataset-a-fastq-d4611b6": {
+      "@id": "ark:59853/dataset-a-fastq-d4611b6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.fastq",
+      "description": "Input file 'data/samples/A.fastq' used by the Snakemake workflow run"
+    },
+    "ark:59853/software-bwa-map-0bcb380": {
+      "@id": "ark:59853/software-bwa-map-0bcb380",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "bwa_map",
+      "description": "bwa mem -t {threads} -R '{params.read_group}' {input.genome} {input.reads} 2> {log} | samtools view -Sb - > {output}"
+    },
+    "ark:59853/computation-bwa-map-sample-a-9183688": {
+      "@id": "ark:59853/computation-bwa-map-sample-a-9183688",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "bwa_map (sample=A)",
+      "description": "Snakemake job for rule 'bwa_map' with wildcards {'sample': 'A'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+        },
+        {
+          "@id": "ark:59853/dataset-a-fastq-d4611b6"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bwa-map-0bcb380"
+        }
+      ]
+    },
+    "ark:59853/dataset-a-bam-016e31c": {
+      "@id": "ark:59853/dataset-a-bam-016e31c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.bam",
+      "description": "File 'results/mapped/A.bam' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bwa-map-sample-a-9183688"
+      }
+    },
+    "ark:59853/software-samtools-sort-65f7fb4": {
+      "@id": "ark:59853/software-samtools-sort-65f7fb4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "samtools_sort",
+      "description": "samtools sort -T results/sorted/{wildcards.sample} -O bam {input} > {output} 2> {log}"
+    },
+    "ark:59853/computation-samtools-sort-sample-a-3bd01fd": {
+      "@id": "ark:59853/computation-samtools-sort-sample-a-3bd01fd",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "samtools_sort (sample=A)",
+      "description": "Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'A'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-a-bam-016e31c"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtools-sort-65f7fb4"
+        }
+      ]
+    },
+    "ark:59853/dataset-a-bam-c0907f3": {
+      "@id": "ark:59853/dataset-a-bam-c0907f3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.bam",
+      "description": "File 'results/sorted/A.bam' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtools-sort-sample-a-3bd01fd"
+      }
+    },
+    "ark:59853/software-samtools-index-b6cd086": {
+      "@id": "ark:59853/software-samtools-index-b6cd086",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "samtools_index",
+      "description": "samtools index {input}"
+    },
+    "ark:59853/computation-samtools-index-sample-a-13242d2": {
+      "@id": "ark:59853/computation-samtools-index-sample-a-13242d2",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "samtools_index (sample=A)",
+      "description": "Snakemake job for rule 'samtools_index' with wildcards {'sample': 'A'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-a-bam-c0907f3"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtools-index-b6cd086"
+        }
+      ]
+    },
+    "ark:59853/dataset-a-bam-bai-9ebeb4d": {
+      "@id": "ark:59853/dataset-a-bam-bai-9ebeb4d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.bam.bai",
+      "description": "File 'results/sorted/A.bam.bai' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtools-index-sample-a-13242d2"
+      }
+    },
+    "ark:59853/dataset-b-fastq-7ed58c5": {
+      "@id": "ark:59853/dataset-b-fastq-7ed58c5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.fastq",
+      "description": "Input file 'data/samples/B.fastq' used by the Snakemake workflow run"
+    },
+    "ark:59853/computation-bwa-map-sample-b-5025f30": {
+      "@id": "ark:59853/computation-bwa-map-sample-b-5025f30",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "bwa_map (sample=B)",
+      "description": "Snakemake job for rule 'bwa_map' with wildcards {'sample': 'B'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+        },
+        {
+          "@id": "ark:59853/dataset-b-fastq-7ed58c5"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bwa-map-0bcb380"
+        }
+      ]
+    },
+    "ark:59853/dataset-b-bam-6b7c70e": {
+      "@id": "ark:59853/dataset-b-bam-6b7c70e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.bam",
+      "description": "File 'results/mapped/B.bam' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bwa-map-sample-b-5025f30"
+      }
+    },
+    "ark:59853/computation-samtools-sort-sample-b-74d837f": {
+      "@id": "ark:59853/computation-samtools-sort-sample-b-74d837f",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "samtools_sort (sample=B)",
+      "description": "Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'B'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-b-bam-6b7c70e"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtools-sort-65f7fb4"
+        }
+      ]
+    },
+    "ark:59853/dataset-b-bam-cbee9ae": {
+      "@id": "ark:59853/dataset-b-bam-cbee9ae",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.bam",
+      "description": "File 'results/sorted/B.bam' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtools-sort-sample-b-74d837f"
+      }
+    },
+    "ark:59853/computation-samtools-index-sample-b-f89dac4": {
+      "@id": "ark:59853/computation-samtools-index-sample-b-f89dac4",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "samtools_index (sample=B)",
+      "description": "Snakemake job for rule 'samtools_index' with wildcards {'sample': 'B'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-b-bam-cbee9ae"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtools-index-b6cd086"
+        }
+      ]
+    },
+    "ark:59853/dataset-b-bam-bai-6a20e1e": {
+      "@id": "ark:59853/dataset-b-bam-bai-6a20e1e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.bam.bai",
+      "description": "File 'results/sorted/B.bam.bai' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtools-index-sample-b-f89dac4"
+      }
+    },
+    "ark:59853/dataset-c-fastq-bef0063": {
+      "@id": "ark:59853/dataset-c-fastq-bef0063",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.fastq",
+      "description": "Input file 'data/samples/C.fastq' used by the Snakemake workflow run"
+    },
+    "ark:59853/computation-bwa-map-sample-c-c80046e": {
+      "@id": "ark:59853/computation-bwa-map-sample-c-c80046e",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "bwa_map (sample=C)",
+      "description": "Snakemake job for rule 'bwa_map' with wildcards {'sample': 'C'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+        },
+        {
+          "@id": "ark:59853/dataset-c-fastq-bef0063"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bwa-map-0bcb380"
+        }
+      ]
+    },
+    "ark:59853/dataset-c-bam-3e0f2ac": {
+      "@id": "ark:59853/dataset-c-bam-3e0f2ac",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.bam",
+      "description": "File 'results/mapped/C.bam' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bwa-map-sample-c-c80046e"
+      }
+    },
+    "ark:59853/computation-samtools-sort-sample-c-1828156": {
+      "@id": "ark:59853/computation-samtools-sort-sample-c-1828156",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "samtools_sort (sample=C)",
+      "description": "Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'C'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-c-bam-3e0f2ac"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtools-sort-65f7fb4"
+        }
+      ]
+    },
+    "ark:59853/dataset-c-bam-7ccb833": {
+      "@id": "ark:59853/dataset-c-bam-7ccb833",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.bam",
+      "description": "File 'results/sorted/C.bam' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtools-sort-sample-c-1828156"
+      }
+    },
+    "ark:59853/computation-samtools-index-sample-c-d37cbd8": {
+      "@id": "ark:59853/computation-samtools-index-sample-c-d37cbd8",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "samtools_index (sample=C)",
+      "description": "Snakemake job for rule 'samtools_index' with wildcards {'sample': 'C'}",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-c-bam-7ccb833"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtools-index-b6cd086"
+        }
+      ]
+    },
+    "ark:59853/dataset-c-bam-bai-39648ed": {
+      "@id": "ark:59853/dataset-c-bam-bai-39648ed",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.bam.bai",
+      "description": "File 'results/sorted/C.bam.bai' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtools-index-sample-c-d37cbd8"
+      }
+    },
+    "ark:59853/software-bcftools-call-7c9ed78": {
+      "@id": "ark:59853/software-bcftools-call-7c9ed78",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "bcftools_call",
+      "description": "(bcftools mpileup {params.mpileup} -f {input.genome} {input.bam} | bcftools call {params.call} -o {output}) 2> {log}"
+    },
+    "ark:59853/computation-bcftools-call-c76dde6": {
+      "@id": "ark:59853/computation-bcftools-call-c76dde6",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "bcftools_call",
+      "description": "Snakemake job for rule 'bcftools_call'",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+        },
+        {
+          "@id": "ark:59853/dataset-a-bam-c0907f3"
+        },
+        {
+          "@id": "ark:59853/dataset-a-bam-bai-9ebeb4d"
+        },
+        {
+          "@id": "ark:59853/dataset-b-bam-cbee9ae"
+        },
+        {
+          "@id": "ark:59853/dataset-b-bam-bai-6a20e1e"
+        },
+        {
+          "@id": "ark:59853/dataset-c-bam-7ccb833"
+        },
+        {
+          "@id": "ark:59853/dataset-c-bam-bai-39648ed"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bcftools-call-7c9ed78"
+        }
+      ]
+    },
+    "ark:59853/dataset-all-vcf-637cf3e": {
+      "@id": "ark:59853/dataset-all-vcf-637cf3e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "all.vcf",
+      "description": "File 'results/calls/all.vcf' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bcftools-call-c76dde6"
+      }
+    },
+    "ark:59853/software-variant-summary-aea5e1b": {
+      "@id": "ark:59853/software-variant-summary-aea5e1b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "variant_summary",
+      "description": "(printf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n'; bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' {input}) > {output}"
+    },
+    "ark:59853/computation-variant-summary-d29c059": {
+      "@id": "ark:59853/computation-variant-summary-d29c059",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "variant_summary",
+      "description": "Snakemake job for rule 'variant_summary'",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-all-vcf-637cf3e"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-variant-summary-aea5e1b"
+        }
+      ]
+    },
+    "ark:59853/dataset-variant-summary-tsv-71310c4": {
+      "@id": "ark:59853/dataset-variant-summary-tsv-71310c4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "variant_summary.tsv",
+      "description": "File 'results/calls/variant_summary.tsv' produced by the Snakemake workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-variant-summary-d29c059"
+      }
+    }
+  },
+  "condensation_stats": {
+    "condensed": false,
+    "originalEntityCount": 36,
+    "condensedEntityCount": 36,
+    "datasetGroupCount": 0
+  }
+}

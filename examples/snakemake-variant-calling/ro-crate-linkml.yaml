@@ -1,0 +1,18 @@
+conforms_to: D4D Schema
+created_by: Example Researcher
+creators:
+- description: Example Researcher
+description: Reads from three samples aligned to the reference with bwa-mem, sorted
+  and indexed with samtools, and jointly called with bcftools; a Snakemake run captured
+  as an EVI RO-Crate.
+id: ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-68f3c95
+keywords:
+- snakemake
+- variant calling
+- bwa
+- bcftools
+- genomics
+license: https://spdx.org/licenses/CC-BY-4.0
+name: Variant calling on three sequenced samples
+title: Variant calling on three sequenced samples
+version: '1.0'

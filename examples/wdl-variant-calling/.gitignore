@@ -1,0 +1,11 @@
+# Fetched by run.sh (18 MB of reads and a bwa index).
+data/
+# Cromwell's execution root: every call's script, logs, localized inputs and
+# outputs. Regenerate with ./run.sh; the crate, the run metadata and the final
+# outputs in results/ are checked in.
+cromwell-executions/
+cromwell-workflow-logs/
+logs/
+results/*.bam
+# Downloaded on demand by run.sh.
+cromwell-*.jar

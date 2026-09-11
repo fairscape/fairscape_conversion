@@ -1,0 +1,596 @@
+{
+  "settings": {
+    "naan": "59853",
+    "name": "Variant calling on three sequenced samples",
+    "description": "Reads from three samples aligned to the reference with bwa-mem, sorted and indexed with samtools, and jointly called with bcftools; a Snakemake run captured as an EVI RO-Crate.",
+    "author": "Example Researcher",
+    "keywords": [
+      "snakemake",
+      "variant calling",
+      "bwa",
+      "bcftools",
+      "genomics"
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0",
+    "version": "1.0",
+    "date_published": "2026-09-11T13:35:02.543766-04:00"
+  },
+  "run": {
+    "name": "Variant calling on three sequenced samples",
+    "snakefile": "Snakefile",
+    "snakefile_key": "/home/oj/fairscape/fairscape_conversion/examples/snakemake-variant-calling/Snakefile",
+    "engine_version": "9.26.1",
+    "starttime": "2026-09-11T13:13:18.895022-04:00",
+    "endtime": "2026-09-11T13:13:25.031213-04:00"
+  },
+  "jobs": [
+    {
+      "rule": "bcftools_call",
+      "wildcards": {},
+      "shellcmd": "(bcftools mpileup -d 250 -a AD,DP -f data/genome.fa results/sorted/A.bam results/sorted/B.bam results/sorted/C.bam | bcftools call -mv -Ov -o results/calls/all.vcf) 2> logs/bcftools_call/all.log",
+      "params": [
+        "'-d 250 -a AD,DP'",
+        "'-mv -Ov'"
+      ],
+      "inputs": [
+        "data/genome.fa",
+        "results/sorted/A.bam",
+        "results/sorted/A.bam.bai",
+        "results/sorted/B.bam",
+        "results/sorted/B.bam.bai",
+        "results/sorted/C.bam",
+        "results/sorted/C.bam.bai"
+      ],
+      "outputs": [
+        "results/calls/all.vcf"
+      ],
+      "starttime": "2026-09-11T13:13:22.547135-04:00",
+      "endtime": "2026-09-11T13:13:23.335160-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYmNmdG9vbHMgPTEuMjQK"
+    },
+    {
+      "rule": "bwa_map",
+      "wildcards": {
+        "sample": "A"
+      },
+      "shellcmd": "bwa mem -t 2 -R '@RG\\tID:A\\tSM:A\\tPL:ILLUMINA' data/genome.fa data/samples/A.fastq 2> logs/bwa_map/A.log | samtools view -Sb - > results/mapped/A.bam",
+      "params": [
+        "'@RG\\\\tID:A\\\\tSM:A\\\\tPL:ILLUMINA'"
+      ],
+      "inputs": [
+        "data/genome.fa",
+        "data/genome.fa.amb",
+        "data/genome.fa.ann",
+        "data/genome.fa.bwt",
+        "data/genome.fa.pac",
+        "data/genome.fa.sa",
+        "data/samples/A.fastq"
+      ],
+      "outputs": [
+        "results/mapped/A.bam"
+      ],
+      "starttime": "2026-09-11T13:13:18.895022-04:00",
+      "endtime": "2026-09-11T13:13:19.887053-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "bwa_map",
+      "wildcards": {
+        "sample": "B"
+      },
+      "shellcmd": "bwa mem -t 2 -R '@RG\\tID:B\\tSM:B\\tPL:ILLUMINA' data/genome.fa data/samples/B.fastq 2> logs/bwa_map/B.log | samtools view -Sb - > results/mapped/B.bam",
+      "params": [
+        "'@RG\\\\tID:B\\\\tSM:B\\\\tPL:ILLUMINA'"
+      ],
+      "inputs": [
+        "data/genome.fa",
+        "data/genome.fa.amb",
+        "data/genome.fa.ann",
+        "data/genome.fa.bwt",
+        "data/genome.fa.pac",
+        "data/genome.fa.sa",
+        "data/samples/B.fastq"
+      ],
+      "outputs": [
+        "results/mapped/B.bam"
+      ],
+      "starttime": "2026-09-11T13:13:18.895022-04:00",
+      "endtime": "2026-09-11T13:13:20.075058-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "bwa_map",
+      "wildcards": {
+        "sample": "C"
+      },
+      "shellcmd": "bwa mem -t 2 -R '@RG\\tID:C\\tSM:C\\tPL:ILLUMINA' data/genome.fa data/samples/C.fastq 2> logs/bwa_map/C.log | samtools view -Sb - > results/mapped/C.bam",
+      "params": [
+        "'@RG\\\\tID:C\\\\tSM:C\\\\tPL:ILLUMINA'"
+      ],
+      "inputs": [
+        "data/genome.fa",
+        "data/genome.fa.amb",
+        "data/genome.fa.ann",
+        "data/genome.fa.bwt",
+        "data/genome.fa.pac",
+        "data/genome.fa.sa",
+        "data/samples/C.fastq"
+      ],
+      "outputs": [
+        "results/mapped/C.bam"
+      ],
+      "starttime": "2026-09-11T13:13:20.075058-04:00",
+      "endtime": "2026-09-11T13:13:21.139091-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "plot_quals",
+      "wildcards": {},
+      "shellcmd": "script: scripts/plot_quals.py",
+      "params": [],
+      "inputs": [
+        "results/calls/all.vcf"
+      ],
+      "outputs": [
+        "results/plots/quals.svg"
+      ],
+      "starttime": "2026-09-11T13:13:23.355160-04:00",
+      "endtime": "2026-09-11T13:13:25.031213-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gcHl0aG9uID0zLjExCiAgLSBweXNhbSA9MC4yNC4xCiAgLSBtYXRwbG90bGliID0zLjEwCg=="
+    },
+    {
+      "rule": "samtools_index",
+      "wildcards": {
+        "sample": "A"
+      },
+      "shellcmd": "samtools index results/sorted/A.bam",
+      "params": [],
+      "inputs": [
+        "results/sorted/A.bam"
+      ],
+      "outputs": [
+        "results/sorted/A.bam.bai"
+      ],
+      "starttime": "2026-09-11T13:13:20.895084-04:00",
+      "endtime": "2026-09-11T13:13:21.583105-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "samtools_index",
+      "wildcards": {
+        "sample": "B"
+      },
+      "shellcmd": "samtools index results/sorted/B.bam",
+      "params": [],
+      "inputs": [
+        "results/sorted/B.bam"
+      ],
+      "outputs": [
+        "results/sorted/B.bam.bai"
+      ],
+      "starttime": "2026-09-11T13:13:20.931085-04:00",
+      "endtime": "2026-09-11T13:13:21.635107-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "samtools_index",
+      "wildcards": {
+        "sample": "C"
+      },
+      "shellcmd": "samtools index results/sorted/C.bam",
+      "params": [],
+      "inputs": [
+        "results/sorted/C.bam"
+      ],
+      "outputs": [
+        "results/sorted/C.bam.bai"
+      ],
+      "starttime": "2026-09-11T13:13:21.911116-04:00",
+      "endtime": "2026-09-11T13:13:22.527135-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "samtools_sort",
+      "wildcards": {
+        "sample": "A"
+      },
+      "shellcmd": "samtools sort -T results/sorted/A -O bam results/mapped/A.bam > results/sorted/A.bam 2> logs/samtools_sort/A.log",
+      "params": [],
+      "inputs": [
+        "results/mapped/A.bam"
+      ],
+      "outputs": [
+        "results/sorted/A.bam"
+      ],
+      "starttime": "2026-09-11T13:13:20.095059-04:00",
+      "endtime": "2026-09-11T13:13:20.875083-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "samtools_sort",
+      "wildcards": {
+        "sample": "B"
+      },
+      "shellcmd": "samtools sort -T results/sorted/B -O bam results/mapped/B.bam > results/sorted/B.bam 2> logs/samtools_sort/B.log",
+      "params": [],
+      "inputs": [
+        "results/mapped/B.bam"
+      ],
+      "outputs": [
+        "results/sorted/B.bam"
+      ],
+      "starttime": "2026-09-11T13:13:20.099059-04:00",
+      "endtime": "2026-09-11T13:13:20.895084-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "samtools_sort",
+      "wildcards": {
+        "sample": "C"
+      },
+      "shellcmd": "samtools sort -T results/sorted/C -O bam results/mapped/C.bam > results/sorted/C.bam 2> logs/samtools_sort/C.log",
+      "params": [],
+      "inputs": [
+        "results/mapped/C.bam"
+      ],
+      "outputs": [
+        "results/sorted/C.bam"
+      ],
+      "starttime": "2026-09-11T13:13:21.155092-04:00",
+      "endtime": "2026-09-11T13:13:21.887115-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYndhID0wLjcuMTkKICAtIHNhbXRvb2xzID0xLjI0Cg=="
+    },
+    {
+      "rule": "variant_summary",
+      "wildcards": {},
+      "shellcmd": "(printf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n'; bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' results/calls/all.vcf) > results/calls/variant_summary.tsv",
+      "params": [],
+      "inputs": [
+        "results/calls/all.vcf"
+      ],
+      "outputs": [
+        "results/calls/variant_summary.tsv"
+      ],
+      "starttime": "2026-09-11T13:13:23.355160-04:00",
+      "endtime": "2026-09-11T13:13:23.999181-04:00",
+      "container_img_url": null,
+      "conda_env": "Y2hhbm5lbHM6CiAgLSBjb25kYS1mb3JnZQogIC0gYmlvY29uZGEKZGVwZW5kZW5jaWVzOgogIC0gYmNmdG9vbHMgPTEuMjQK"
+    }
+  ],
+  "rules": {
+    "plot_quals": {
+      "source": "\"\"\"Plot the quality-score distribution of the called variants.\n\nSnakemake runs this with a ``snakemake`` object in scope carrying the rule's\ninput and output paths \u2014 which is also why the crate records this file as the\nrule's Software rather than a shell command.\n\"\"\"\n\nimport matplotlib\n\nmatplotlib.use(\"Agg\")\n\nimport matplotlib.pyplot as plt\nfrom pysam import VariantFile\n\nquals = [record.qual for record in VariantFile(snakemake.input[0])]\n\nfigure, axes = plt.subplots(figsize=(6, 4))\naxes.hist(quals, bins=30, color=\"#3b6ea5\", edgecolor=\"white\")\naxes.set_xlabel(\"variant quality (Phred)\")\naxes.set_ylabel(\"variants\")\naxes.set_title(f\"{len(quals)} variants called across all samples\")\nfigure.tight_layout()\nfigure.savefig(snakemake.output[0])\n",
+      "language": "python",
+      "container_img_url": null,
+      "conda_env": {
+        "channels": [
+          "conda-forge",
+          "bioconda"
+        ],
+        "dependencies": [
+          "python =3.11",
+          "pysam =0.24.1",
+          "matplotlib =3.10"
+        ]
+      },
+      "definition_kind": "script",
+      "definition_ref": "scripts/plot_quals.py"
+    },
+    "bcftools_call": {
+      "source": "(bcftools mpileup {params.mpileup} -f {input.genome} {input.bam} | bcftools call {params.call} -o {output}) 2> {log}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": {
+        "channels": [
+          "conda-forge",
+          "bioconda"
+        ],
+        "dependencies": [
+          "bcftools =1.24"
+        ]
+      },
+      "definition_kind": null,
+      "definition_ref": null
+    },
+    "samtools_sort": {
+      "source": "samtools sort -T results/sorted/{wildcards.sample} -O bam {input} > {output} 2> {log}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": {
+        "channels": [
+          "conda-forge",
+          "bioconda"
+        ],
+        "dependencies": [
+          "bwa =0.7.19",
+          "samtools =1.24"
+        ]
+      },
+      "definition_kind": null,
+      "definition_ref": null
+    },
+    "bwa_map": {
+      "source": "bwa mem -t {threads} -R '{params.read_group}' {input.genome} {input.reads} 2> {log} | samtools view -Sb - > {output}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": {
+        "channels": [
+          "conda-forge",
+          "bioconda"
+        ],
+        "dependencies": [
+          "bwa =0.7.19",
+          "samtools =1.24"
+        ]
+      },
+      "definition_kind": null,
+      "definition_ref": null
+    },
+    "samtools_index": {
+      "source": "samtools index {input}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": {
+        "channels": [
+          "conda-forge",
+          "bioconda"
+        ],
+        "dependencies": [
+          "bwa =0.7.19",
+          "samtools =1.24"
+        ]
+      },
+      "definition_kind": null,
+      "definition_ref": null
+    },
+    "variant_summary": {
+      "source": "(printf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n'; bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' {input}) > {output}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": {
+        "channels": [
+          "conda-forge",
+          "bioconda"
+        ],
+        "dependencies": [
+          "bcftools =1.24"
+        ]
+      },
+      "definition_kind": null,
+      "definition_ref": null
+    }
+  },
+  "files": {
+    "data/genome.fa": {
+      "size": 234112,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/genome.fa"
+    },
+    "results/sorted/A.bam": {
+      "size": 2186140,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/sorted/A.bam"
+    },
+    "results/sorted/A.bam.bai": {
+      "size": 344,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/sorted/A.bam.bai"
+    },
+    "results/sorted/B.bam": {
+      "size": 2189285,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/sorted/B.bam"
+    },
+    "results/sorted/B.bam.bai": {
+      "size": 344,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/sorted/B.bam.bai"
+    },
+    "results/sorted/C.bam": {
+      "size": 2189379,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/sorted/C.bam"
+    },
+    "results/sorted/C.bam.bai": {
+      "size": 344,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/sorted/C.bam.bai"
+    },
+    "results/calls/all.vcf": {
+      "size": 111627,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/calls/all.vcf"
+    },
+    "data/genome.fa.amb": {
+      "size": 2598,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/genome.fa.amb"
+    },
+    "data/genome.fa.ann": {
+      "size": 83,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/genome.fa.ann"
+    },
+    "data/genome.fa.bwt": {
+      "size": 230320,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/genome.fa.bwt"
+    },
+    "data/genome.fa.pac": {
+      "size": 57556,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/genome.fa.pac"
+    },
+    "data/genome.fa.sa": {
+      "size": 115160,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/genome.fa.sa"
+    },
+    "data/samples/A.fastq": {
+      "size": 5752788,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/samples/A.fastq"
+    },
+    "results/mapped/A.bam": {
+      "size": null,
+      "parent": null,
+      "is_dir": false,
+      "locator": "localPath",
+      "locator_value": "results/mapped/A.bam"
+    },
+    "data/samples/B.fastq": {
+      "size": 5775000,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/samples/B.fastq"
+    },
+    "results/mapped/B.bam": {
+      "size": null,
+      "parent": null,
+      "is_dir": false,
+      "locator": "localPath",
+      "locator_value": "results/mapped/B.bam"
+    },
+    "data/samples/C.fastq": {
+      "size": 5775000,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "data/samples/C.fastq"
+    },
+    "results/mapped/C.bam": {
+      "size": null,
+      "parent": null,
+      "is_dir": false,
+      "locator": "localPath",
+      "locator_value": "results/mapped/C.bam"
+    },
+    "results/plots/quals.svg": {
+      "size": 32379,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/plots/quals.svg"
+    },
+    "results/calls/variant_summary.tsv": {
+      "size": 14609,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/calls/variant_summary.tsv"
+    },
+    "config.yaml": {
+      "size": 375,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "config.yaml"
+    }
+  },
+  "configfiles": [
+    "config.yaml"
+  ],
+  "schemas": {
+    "results/calls/variant_summary.tsv": {
+      "@id": "ark:59853/schema-variant-summary-tsv-ec080af",
+      "@type": "EVI:Schema",
+      "name": "Schema for variant_summary.tsv",
+      "isPartOf": [],
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "chrom": {
+          "description": "Column chrom",
+          "index": 0,
+          "type": "string"
+        },
+        "pos": {
+          "description": "Column pos",
+          "index": 1,
+          "type": "integer"
+        },
+        "ref": {
+          "description": "Column ref",
+          "index": 2,
+          "type": "string"
+        },
+        "alt": {
+          "description": "Column alt",
+          "index": 3,
+          "type": "string"
+        },
+        "quality": {
+          "description": "Column quality",
+          "index": 4,
+          "type": "number"
+        },
+        "depth": {
+          "description": "Column depth",
+          "index": 5,
+          "type": "integer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "chrom",
+        "pos",
+        "ref",
+        "alt",
+        "quality",
+        "depth"
+      ],
+      "separator": "\t",
+      "header": true,
+      "examples": [],
+      "fairscapeVersion": "1.2.2",
+      "EVI:schemaType": "tabular",
+      "description": "Schema inferred from the tsv file 'results/calls/variant_summary.tsv' by snakemake-report-plugin-fairscape"
+    }
+  }
+}

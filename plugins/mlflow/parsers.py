@@ -8,10 +8,9 @@ stashed in ``ctx.extras``.
 
 from __future__ import annotations
 
-import mimetypes
 import os
 
-from ...core.parsers import scalar
+from ...core.parsers import encoding_format_of, scalar
 
 REMOTE_SCHEMES = ("http://", "https://", "git://", "ssh://", "gs://", "s3://",
                   "wasbs://", "dbfs://", "ftp://")
@@ -19,12 +18,7 @@ REMOTE_SCHEMES = ("http://", "https://", "git://", "ssh://", "gs://", "s3://",
 
 # ---- plain helpers (shared with the plugin's pre/assemble) -----------------
 
-def encoding_format_of(path):
-    guessed, _ = mimetypes.guess_type(str(path))
-    if guessed:
-        return guessed
-    ext = os.path.splitext(str(path))[1].lstrip(".")
-    return ext or "unknown"
+
 
 
 def ref(ark):

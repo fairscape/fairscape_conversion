@@ -150,6 +150,32 @@ def show_provenance(crate, limit=25):
         print("  (none — this format carries no computation edges)")
 
 
+def check_same_entities(result, crate_path, ignore_types=()):
+    """Compare a conversion against a crate checked in beside its workflow.
+
+    The examples that run on a real pipeline cannot use a golden file: the
+    checked-in crate went through fairscape-cli afterwards, which adds the
+    inverse EVI links (``generatedBy`` gets a ``generated`` on the other end,
+    and so on) and so is a superset of what ``convert`` returns. What must
+    still hold is that both describe exactly the same entities — same ARKs,
+    same names — so that is what this checks.
+    """
+    want = {n["@id"]: n.get("name")
+            for n in json.loads(Path(crate_path).read_text())["@graph"]
+            if not any(t in str(n.get("@type")) for t in ignore_types)}
+    got = {n["@id"]: n.get("name") for n in result["@graph"]}
+    missing, extra = set(want) - set(got), set(got) - set(want)
+    ok = not missing and not extra
+    rel = Path(crate_path).parent.name + "/" + Path(crate_path).name
+    print(f"\n{'MATCHES' if ok else 'DIFFERS FROM'} the entities in {rel} "
+          f"({len(got)} node(s))")
+    for guid in sorted(missing):
+        print(f"  only in the crate: {guid} ({want[guid]})")
+    for guid in sorted(extra):
+        print(f"  only in this conversion: {guid} ({got[guid]})")
+    return ok
+
+
 def check_golden(result, plugin_name):
     """Compare against the plugin's reviewed golden.json — the examples that
     are deterministic say so out loud, so a drift shows up when you run one."""

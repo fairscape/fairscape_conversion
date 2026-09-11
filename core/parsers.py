@@ -16,7 +16,51 @@ shared name.
 
 from __future__ import annotations
 
+import mimetypes
+import os
+
 _EMPTY = (None, "", [], {})
+
+# Extensions Python's mimetypes table gets wrong or does not know. It is a
+# desktop-file table: '.vcf' there is a vCard address book, not the Variant
+# Call Format a genomics pipeline writes, and the formats below are absent
+# altogether. Guessing wrong is worse than not guessing, because a data loader
+# reads encodingFormat to decide how to parse the file.
+MIME_OVERRIDES = {
+    "bam": "application/x-bam",
+    "bai": "application/octet-stream",
+    "bed": "text/x-bed",
+    "cram": "application/x-cram",
+    "crai": "application/octet-stream",
+    "fa": "text/x-fasta",
+    "fasta": "text/x-fasta",
+    "fna": "text/x-fasta",
+    "fastq": "text/x-fastq",
+    "fq": "text/x-fastq",
+    "gff": "text/x-gff3",
+    "gff3": "text/x-gff3",
+    "gtf": "text/x-gtf",
+    "h5": "application/x-hdf5",
+    "hdf5": "application/x-hdf5",
+    "parquet": "application/vnd.apache.parquet",
+    "sam": "text/x-sam",
+    "vcf": "text/x-vcf",
+    "yaml": "application/yaml",
+    "yml": "application/yaml",
+}
+
+
+def encoding_format_of(path):
+    """A MIME type for a file path — the value that lands in Dataset.format.
+
+    Overrides first (see MIME_OVERRIDES), then the standard table, then the
+    bare extension so the crate still says something.
+    """
+    ext = os.path.splitext(str(path))[1].lstrip(".").lower()
+    if ext in MIME_OVERRIDES:
+        return MIME_OVERRIDES[ext]
+    guessed, _ = mimetypes.guess_type(str(path))
+    return guessed or ext or "unknown"
 
 
 def drop(value, rule, ctx):

@@ -1,0 +1,1101 @@
+{
+  "workflowName": "VariantCalling",
+  "workflowProcessingEvents": [{
+    "cromwellId": "cromid-2900dc0",
+    "description": "PickedUp",
+    "timestamp": "2026-09-11T17:14:15.900Z",
+    "cromwellVersion": "92"
+  }, {
+    "cromwellId": "cromid-2900dc0",
+    "description": "Finished",
+    "timestamp": "2026-09-11T17:15:14.630Z",
+    "cromwellVersion": "92"
+  }],
+  "actualWorkflowLanguageVersion": "1.0",
+  "submittedFiles": {
+    "workflow": "version 1.0\n\n## Read alignment and joint variant calling, scattered over samples.\n##\n## The same analysis as ../snakemake-variant-calling, written the way WDL\n## pipelines are: one task per tool, a scatter over the samples, and a gather\n## that calls variants across all of them at once. Run it with\n##\n##     java -jar cromwell.jar run variant-calling.wdl -i inputs.json -m metadata.json\n##\n## and the metadata.json Cromwell writes is what fairscape_conversion's\n## cromwell plugin converts into an RO-Crate. See run.sh.\n\nworkflow VariantCalling {\n    input {\n        File reference\n        File reference_amb\n        File reference_ann\n        File reference_bwt\n        File reference_pac\n        File reference_sa\n        Array[String] sample_names\n        Array[File] sample_reads\n        String mpileup_options = \"-d 250 -a AD,DP\"\n        String call_options = \"-mv -Ov\"\n    }\n\n    scatter (sample in zip(sample_names, sample_reads)) {\n        call BwaMem {\n            input:\n                sample = sample.left,\n                reads = sample.right,\n                reference = reference,\n                reference_amb = reference_amb,\n                reference_ann = reference_ann,\n                reference_bwt = reference_bwt,\n                reference_pac = reference_pac,\n                reference_sa = reference_sa\n        }\n\n        call SamtoolsSort {\n            input:\n                sample = sample.left,\n                bam = BwaMem.bam\n        }\n\n        call SamtoolsIndex {\n            input:\n                sample = sample.left,\n                bam = SamtoolsSort.sorted_bam\n        }\n    }\n\n    call BcftoolsCall {\n        input:\n            reference = reference,\n            bams = SamtoolsSort.sorted_bam,\n            bais = SamtoolsIndex.index,\n            mpileup_options = mpileup_options,\n            call_options = call_options\n    }\n\n    call VariantSummary {\n        input:\n            vcf = BcftoolsCall.vcf\n    }\n\n    call PlotQuals {\n        input:\n            vcf = BcftoolsCall.vcf\n    }\n\n    output {\n        File variants = BcftoolsCall.vcf\n        File variant_summary = VariantSummary.summary\n        File quality_plot = PlotQuals.plot\n        Array[File] alignments = SamtoolsSort.sorted_bam\n    }\n\n    meta {\n        description: \"Align reads from several samples with bwa-mem and call variants jointly with bcftools.\"\n    }\n}\n\n\ntask BwaMem {\n    input {\n        String sample\n        File reads\n        File reference\n        File reference_amb\n        File reference_ann\n        File reference_bwt\n        File reference_pac\n        File reference_sa\n        Int threads = 2\n    }\n\n    command <<<\n        set -euo pipefail\n        # bwa wants the index files beside the fasta under their original\n        # names; Cromwell localizes each input into its own directory, so\n        # rebuild that layout with symlinks.\n        mkdir -p reference\n        ln -s ~{reference}     reference/genome.fa\n        ln -s ~{reference_amb} reference/genome.fa.amb\n        ln -s ~{reference_ann} reference/genome.fa.ann\n        ln -s ~{reference_bwt} reference/genome.fa.bwt\n        ln -s ~{reference_pac} reference/genome.fa.pac\n        ln -s ~{reference_sa}  reference/genome.fa.sa\n\n        bwa mem -t ~{threads} \\\n            -R \"@RG\\tID:~{sample}\\tSM:~{sample}\\tPL:ILLUMINA\" \\\n            reference/genome.fa ~{reads} \\\n            | samtools view -Sb - > ~{sample}.bam\n    >>>\n\n    output {\n        File bam = \"~{sample}.bam\"\n    }\n\n    runtime {\n        cpu: threads\n    }\n}\n\n\ntask SamtoolsSort {\n    input {\n        String sample\n        File bam\n    }\n\n    command <<<\n        set -euo pipefail\n        samtools sort -T ~{sample} -O bam ~{bam} > ~{sample}.sorted.bam\n    >>>\n\n    output {\n        File sorted_bam = \"~{sample}.sorted.bam\"\n    }\n}\n\n\ntask SamtoolsIndex {\n    input {\n        String sample\n        File bam\n    }\n\n    command <<<\n        set -euo pipefail\n        # the index has to sit beside the bam it indexes\n        ln -s ~{bam} ~{sample}.sorted.bam\n        samtools index ~{sample}.sorted.bam\n    >>>\n\n    output {\n        File index = \"~{sample}.sorted.bam.bai\"\n    }\n}\n\n\ntask BcftoolsCall {\n    input {\n        File reference\n        Array[File] bams\n        Array[File] bais\n        String mpileup_options\n        String call_options\n    }\n\n    command <<<\n        set -euo pipefail\n        # pile the alignments and their indexes back into one directory\n        mkdir -p alignments\n        for bam in ~{sep=' ' bams}; do ln -s \"$bam\" alignments/; done\n        for bai in ~{sep=' ' bais}; do ln -s \"$bai\" alignments/; done\n\n        bcftools mpileup ~{mpileup_options} -f ~{reference} alignments/*.bam \\\n            | bcftools call ~{call_options} -o all.vcf\n    >>>\n\n    output {\n        File vcf = \"all.vcf\"\n    }\n}\n\n\ntask VariantSummary {\n    input {\n        File vcf\n    }\n\n    command <<<\n        set -euo pipefail\n        printf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n' > variant_summary.tsv\n        bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' ~{vcf} \\\n            >> variant_summary.tsv\n    >>>\n\n    output {\n        File summary = \"variant_summary.tsv\"\n    }\n}\n\n\ntask PlotQuals {\n    input {\n        File vcf\n    }\n\n    command <<<\n        set -euo pipefail\n        python3 <<'PYTHON'\n        import matplotlib\n        matplotlib.use(\"Agg\")\n        import matplotlib.pyplot as plt\n        from pysam import VariantFile\n\n        quals = [record.qual for record in VariantFile(\"~{vcf}\")]\n\n        figure, axes = plt.subplots(figsize=(6, 4))\n        axes.hist(quals, bins=30, color=\"#3b6ea5\", edgecolor=\"white\")\n        axes.set_xlabel(\"variant quality (Phred)\")\n        axes.set_ylabel(\"variants\")\n        axes.set_title(f\"{len(quals)} variants called across all samples\")\n        figure.tight_layout()\n        figure.savefig(\"quals.svg\")\n        PYTHON\n    >>>\n\n    output {\n        File plot = \"quals.svg\"\n    }\n}\n",
+    "root": "",
+    "options": "{\n  \"final_workflow_log_dir\": \"logs\",\n  \"final_workflow_outputs_dir\": \"results\",\n  \"use_relative_output_paths\": true\n}",
+    "inputs": "{\n  \"VariantCalling.reference\": \"data/genome.fa\",\n  \"VariantCalling.reference_amb\": \"data/genome.fa.amb\",\n  \"VariantCalling.reference_ann\": \"data/genome.fa.ann\",\n  \"VariantCalling.reference_bwt\": \"data/genome.fa.bwt\",\n  \"VariantCalling.reference_pac\": \"data/genome.fa.pac\",\n  \"VariantCalling.reference_sa\": \"data/genome.fa.sa\",\n  \"VariantCalling.sample_names\": [\"A\", \"B\", \"C\"],\n  \"VariantCalling.sample_reads\": [\n    \"data/samples/A.fastq\",\n    \"data/samples/B.fastq\",\n    \"data/samples/C.fastq\"\n  ]\n}\n",
+    "workflowUrl": "variant-calling.wdl",
+    "labels": "{}"
+  },
+  "calls": {
+    "VariantCalling.BwaMem": [{
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# bwa wants the index files beside the fasta under their original\n# names; Cromwell localizes each input into its own directory, so\n# rebuild that layout with symlinks.\nmkdir -p reference\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa     reference/genome.fa\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.amb reference/genome.fa.amb\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.ann reference/genome.fa.ann\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.pac reference/genome.fa.pac\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa\n\nbwa mem -t 2 \\\n    -R \"@RG\\tID:A\\tSM:A\\tPL:ILLUMINA\" \\\n    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/23660975/A.fastq \\\n    | samtools view -Sb - > A.bam",
+      "shardIndex": 0,
+      "outputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/execution/A.bam"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "2",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File bam": "CF6F8B700B4814785B694DC1F82DFD41"
+          },
+          "input count": "45C48CCE2E2D7FBDEA1AFC51C7C6AD26",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "E55E29A098C04F17BC49752077A2EED0",
+          "input": {
+            "String sample": "82EDCE195C3FC73701183F8DBCCB4F74",
+            "File reference_ann": "b10b510dd81fb50fe29d1dab7243b004",
+            "File reads": "78d7e2e5288d59dd026aa924639b0055",
+            "File reference_amb": "027042e52ae480946124039fc0f415a7",
+            "File reference_pac": "53bcbcf8bd363419ec446e7f3ce46879",
+            "File reference": "160f590deb248b6636003f3b5cc59654",
+            "Int threads": "C81E728D9D4C2F636F067F89CC14862C",
+            "File reference_bwt": "09610475c5d664670205ef0b95815cbf",
+            "File reference_sa": "1b5974b9416e0b8d8b246d6d405e964f"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "reference_amb": "data/genome.fa.amb",
+        "reference_bwt": "data/genome.fa.bwt",
+        "sample": "A",
+        "threads": 2,
+        "reference_ann": "data/genome.fa.ann",
+        "reference": "data/genome.fa",
+        "reference_sa": "data/genome.fa.sa",
+        "reference_pac": "data/genome.fa.pac",
+        "reads": "data/samples/A.fastq"
+      },
+      "returnCode": 0,
+      "jobId": "228841",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:33.835Z",
+      "start": "2026-09-11T17:14:20.541Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:25.900Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:25.929Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.861Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:25.900Z"
+      }, {
+        "startTime": "2026-09-11T17:14:20.553Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:25.857Z"
+      }, {
+        "startTime": "2026-09-11T17:14:20.546Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:20.553Z"
+      }, {
+        "startTime": "2026-09-11T17:14:33.834Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:33.835Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.929Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:30.836Z"
+      }, {
+        "startTime": "2026-09-11T17:14:30.836Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:33.834Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.857Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:25.861Z"
+      }]
+    }, {
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# bwa wants the index files beside the fasta under their original\n# names; Cromwell localizes each input into its own directory, so\n# rebuild that layout with symlinks.\nmkdir -p reference\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa     reference/genome.fa\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.amb reference/genome.fa.amb\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.ann reference/genome.fa.ann\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.pac reference/genome.fa.pac\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa\n\nbwa mem -t 2 \\\n    -R \"@RG\\tID:B\\tSM:B\\tPL:ILLUMINA\" \\\n    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/23660975/B.fastq \\\n    | samtools view -Sb - > B.bam",
+      "shardIndex": 1,
+      "outputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/execution/B.bam"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "2",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File bam": "CF6F8B700B4814785B694DC1F82DFD41"
+          },
+          "input count": "45C48CCE2E2D7FBDEA1AFC51C7C6AD26",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "E55E29A098C04F17BC49752077A2EED0",
+          "input": {
+            "String sample": "A72ECF67CDEAFCE3BDB4C8BF6C12E7BF",
+            "File reference_ann": "b10b510dd81fb50fe29d1dab7243b004",
+            "File reads": "6d74d4d5f1d5d20829c7237f346d8f66",
+            "File reference_amb": "027042e52ae480946124039fc0f415a7",
+            "File reference_pac": "53bcbcf8bd363419ec446e7f3ce46879",
+            "File reference": "160f590deb248b6636003f3b5cc59654",
+            "Int threads": "C81E728D9D4C2F636F067F89CC14862C",
+            "File reference_bwt": "09610475c5d664670205ef0b95815cbf",
+            "File reference_sa": "1b5974b9416e0b8d8b246d6d405e964f"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "reference_amb": "data/genome.fa.amb",
+        "reference_bwt": "data/genome.fa.bwt",
+        "sample": "B",
+        "threads": 2,
+        "reference_ann": "data/genome.fa.ann",
+        "reference": "data/genome.fa",
+        "reference_sa": "data/genome.fa.sa",
+        "reference_pac": "data/genome.fa.pac",
+        "reads": "data/samples/B.fastq"
+      },
+      "returnCode": 0,
+      "jobId": "228842",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:33.834Z",
+      "start": "2026-09-11T17:14:20.540Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:30.836Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:33.834Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.860Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:25.900Z"
+      }, {
+        "startTime": "2026-09-11T17:14:20.553Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:25.857Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.931Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:30.836Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.900Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:25.931Z"
+      }, {
+        "startTime": "2026-09-11T17:14:20.546Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:20.553Z"
+      }, {
+        "startTime": "2026-09-11T17:14:33.834Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:33.835Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.857Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:25.860Z"
+      }]
+    }, {
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# bwa wants the index files beside the fasta under their original\n# names; Cromwell localizes each input into its own directory, so\n# rebuild that layout with symlinks.\nmkdir -p reference\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa     reference/genome.fa\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.amb reference/genome.fa.amb\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.ann reference/genome.fa.ann\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.pac reference/genome.fa.pac\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa\n\nbwa mem -t 2 \\\n    -R \"@RG\\tID:C\\tSM:C\\tPL:ILLUMINA\" \\\n    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/23660975/C.fastq \\\n    | samtools view -Sb - > C.bam",
+      "shardIndex": 2,
+      "outputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/execution/C.bam"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "2",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File bam": "CF6F8B700B4814785B694DC1F82DFD41"
+          },
+          "input count": "45C48CCE2E2D7FBDEA1AFC51C7C6AD26",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "E55E29A098C04F17BC49752077A2EED0",
+          "input": {
+            "String sample": "4D036FD58CEB15B0074E51A919EEDB3D",
+            "File reference_ann": "b10b510dd81fb50fe29d1dab7243b004",
+            "File reads": "6d74d4d5f1d5d20829c7237f346d8f66",
+            "File reference_amb": "027042e52ae480946124039fc0f415a7",
+            "File reference_pac": "53bcbcf8bd363419ec446e7f3ce46879",
+            "File reference": "160f590deb248b6636003f3b5cc59654",
+            "Int threads": "C81E728D9D4C2F636F067F89CC14862C",
+            "File reference_bwt": "09610475c5d664670205ef0b95815cbf",
+            "File reference_sa": "1b5974b9416e0b8d8b246d6d405e964f"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "reference_amb": "data/genome.fa.amb",
+        "reference_bwt": "data/genome.fa.bwt",
+        "sample": "C",
+        "threads": 2,
+        "reference_ann": "data/genome.fa.ann",
+        "reference": "data/genome.fa",
+        "reference_sa": "data/genome.fa.sa",
+        "reference_pac": "data/genome.fa.pac",
+        "reads": "data/samples/C.fastq"
+      },
+      "returnCode": 0,
+      "jobId": "228843",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:33.836Z",
+      "start": "2026-09-11T17:14:20.541Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:33.834Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:33.835Z"
+      }, {
+        "startTime": "2026-09-11T17:14:20.546Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:20.553Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.900Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:25.930Z"
+      }, {
+        "startTime": "2026-09-11T17:14:30.836Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:33.834Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.857Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:25.861Z"
+      }, {
+        "startTime": "2026-09-11T17:14:20.553Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:25.857Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.930Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:30.836Z"
+      }, {
+        "startTime": "2026-09-11T17:14:25.861Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:25.900Z"
+      }]
+    }],
+    "VariantCalling.VariantSummary": [{
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\nprintf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n' > variant_summary.tsv\nbcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/inputs/1301869358/all.vcf \\\n    >> variant_summary.tsv",
+      "shardIndex": -1,
+      "outputs": {
+        "summary": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/variant_summary.tsv"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File summary": "3072EC0676EFCF9AE6355F742A1D106E"
+          },
+          "input count": "C4CA4238A0B923820DCC509A6F75849B",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "B200B762B9452215FFE80CF70BB5D3D9",
+          "input": {
+            "File vcf": "388851ded408fc27c51441c193fbac80"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "vcf": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/all.vcf"
+      },
+      "returnCode": 0,
+      "jobId": "229583",
+      "backend": "Local",
+      "end": "2026-09-11T17:15:12.805Z",
+      "start": "2026-09-11T17:15:05.420Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:15:05.855Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:15:10.804Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.853Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:15:05.855Z"
+      }, {
+        "startTime": "2026-09-11T17:15:10.804Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:15:12.805Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.850Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:15:05.853Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.421Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:15:05.421Z"
+      }, {
+        "startTime": "2026-09-11T17:15:12.805Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:15:12.805Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.421Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:15:05.849Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.849Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:15:05.850Z"
+      }]
+    }],
+    "VariantCalling.BcftoolsCall": [{
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# pile the alignments and their indexes back into one directory\nmkdir -p alignments\nfor bam in /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/230049286/A.sorted.bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-1566902073/B.sorted.bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/931113864/C.sorted.bam; do ln -s \"$bam\" alignments/; done\nfor bai in /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-1581987200/A.sorted.bam.bai /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/916028737/B.sorted.bam.bai /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-880922622/C.sorted.bam.bai; do ln -s \"$bai\" alignments/; done\n\nbcftools mpileup -d 250 -a AD,DP -f /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/1495863733/genome.fa alignments/*.bam \\\n    | bcftools call -mv -Ov -o all.vcf",
+      "shardIndex": -1,
+      "outputs": {
+        "vcf": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/all.vcf"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File vcf": "8F7F3632E09E080089AC708DB2269974"
+          },
+          "input count": "45C48CCE2E2D7FBDEA1AFC51C7C6AD26",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "2D6C787B20B49964292B1535DDAC06D7",
+          "input": {
+            "String mpileup_options": "CFC8C64C4E45840E770C85338600D0B8",
+            "String call_options": "3774368056B4E5B0EA7602836F94C68C",
+            "File bams": ["60fe9f94d2d3174a47244279a25214b7", "6755a9e5336208deee576e1dae66bf71", "addb4019457b9b3b375221c670a2db80"],
+            "File bais": ["4dae8e461275a6b434e81338e4ae85e8", "6fa3218940959af09f470edd0839b490", "319b2c892423c6b459f3a4a2d244119b"],
+            "File reference": "160f590deb248b6636003f3b5cc59654"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "reference": "data/genome.fa",
+        "mpileup_options": "-d 250 -a AD,DP",
+        "call_options": "-mv -Ov",
+        "bais": ["/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/execution/A.sorted.bam.bai", "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/execution/B.sorted.bam.bai", "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/execution/C.sorted.bam.bai"],
+        "bams": ["/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/A.sorted.bam", "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/B.sorted.bam", "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/C.sorted.bam"]
+      },
+      "returnCode": 0,
+      "jobId": "229451",
+      "backend": "Local",
+      "end": "2026-09-11T17:15:03.805Z",
+      "start": "2026-09-11T17:14:54.200Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:55.868Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:15:00.803Z"
+      }, {
+        "startTime": "2026-09-11T17:15:03.804Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:15:03.805Z"
+      }, {
+        "startTime": "2026-09-11T17:14:55.859Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:55.860Z"
+      }, {
+        "startTime": "2026-09-11T17:14:54.201Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:55.859Z"
+      }, {
+        "startTime": "2026-09-11T17:14:55.864Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:55.868Z"
+      }, {
+        "startTime": "2026-09-11T17:15:00.803Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:15:03.804Z"
+      }, {
+        "startTime": "2026-09-11T17:14:54.200Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:54.201Z"
+      }, {
+        "startTime": "2026-09-11T17:14:55.860Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:55.864Z"
+      }]
+    }],
+    "VariantCalling.SamtoolsIndex": [{
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# the index has to sit beside the bam it indexes\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/inputs/230049286/A.sorted.bam A.sorted.bam\nsamtools index A.sorted.bam",
+      "shardIndex": 0,
+      "outputs": {
+        "index": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/execution/A.sorted.bam.bai"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File index": "666F5EBD647751482EA3198EE6778EF4"
+          },
+          "input count": "C81E728D9D4C2F636F067F89CC14862C",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "8B6BA0D61A4295277425BBB0D6B961B9",
+          "input": {
+            "String sample": "82EDCE195C3FC73701183F8DBCCB4F74",
+            "File bam": "60fe9f94d2d3174a47244279a25214b7"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/A.sorted.bam",
+        "sample": "A"
+      },
+      "returnCode": 0,
+      "jobId": "229314",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:51.807Z",
+      "start": "2026-09-11T17:14:44.001Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:44.001Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:44.002Z"
+      }, {
+        "startTime": "2026-09-11T17:14:44.002Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:45.849Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.855Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:45.860Z"
+      }, {
+        "startTime": "2026-09-11T17:14:51.807Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:51.807Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.860Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:50.806Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.849Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:45.850Z"
+      }, {
+        "startTime": "2026-09-11T17:14:50.806Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:51.807Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.850Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:45.855Z"
+      }]
+    }, {
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# the index has to sit beside the bam it indexes\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/inputs/-1566902073/B.sorted.bam B.sorted.bam\nsamtools index B.sorted.bam",
+      "shardIndex": 1,
+      "outputs": {
+        "index": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/execution/B.sorted.bam.bai"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File index": "666F5EBD647751482EA3198EE6778EF4"
+          },
+          "input count": "C81E728D9D4C2F636F067F89CC14862C",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "8B6BA0D61A4295277425BBB0D6B961B9",
+          "input": {
+            "String sample": "A72ECF67CDEAFCE3BDB4C8BF6C12E7BF",
+            "File bam": "6755a9e5336208deee576e1dae66bf71"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/B.sorted.bam",
+        "sample": "B"
+      },
+      "returnCode": 0,
+      "jobId": "229316",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:51.808Z",
+      "start": "2026-09-11T17:14:44.001Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:45.849Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:45.850Z"
+      }, {
+        "startTime": "2026-09-11T17:14:51.807Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:51.807Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.861Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:50.806Z"
+      }, {
+        "startTime": "2026-09-11T17:14:44.001Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:44.001Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.850Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:45.854Z"
+      }, {
+        "startTime": "2026-09-11T17:14:50.806Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:51.807Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.854Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:45.861Z"
+      }, {
+        "startTime": "2026-09-11T17:14:44.001Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:45.849Z"
+      }]
+    }, {
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\n# the index has to sit beside the bam it indexes\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/inputs/931113864/C.sorted.bam C.sorted.bam\nsamtools index C.sorted.bam",
+      "shardIndex": 2,
+      "outputs": {
+        "index": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/execution/C.sorted.bam.bai"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File index": "666F5EBD647751482EA3198EE6778EF4"
+          },
+          "input count": "C81E728D9D4C2F636F067F89CC14862C",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "8B6BA0D61A4295277425BBB0D6B961B9",
+          "input": {
+            "String sample": "4D036FD58CEB15B0074E51A919EEDB3D",
+            "File bam": "addb4019457b9b3b375221c670a2db80"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/C.sorted.bam",
+        "sample": "C"
+      },
+      "returnCode": 0,
+      "jobId": "229322",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:51.808Z",
+      "start": "2026-09-11T17:14:44.001Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:44.001Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:44.002Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.849Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:45.850Z"
+      }, {
+        "startTime": "2026-09-11T17:14:50.806Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:51.807Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.850Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:45.857Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.861Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:50.806Z"
+      }, {
+        "startTime": "2026-09-11T17:14:51.807Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:51.807Z"
+      }, {
+        "startTime": "2026-09-11T17:14:45.857Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:45.861Z"
+      }, {
+        "startTime": "2026-09-11T17:14:44.002Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:45.849Z"
+      }]
+    }],
+    "VariantCalling.SamtoolsSort": [{
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\nsamtools sort -T A -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/inputs/217367413/A.bam > A.sorted.bam",
+      "shardIndex": 0,
+      "outputs": {
+        "sorted_bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/A.sorted.bam"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File sorted_bam": "CF5B542384BF4959DF747A08B7785280"
+          },
+          "input count": "C81E728D9D4C2F636F067F89CC14862C",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "763348250747D794F161C693B45E08D1",
+          "input": {
+            "String sample": "82EDCE195C3FC73701183F8DBCCB4F74",
+            "File bam": "36a42107aa1281a4d34ba5bb26864455"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/execution/A.bam",
+        "sample": "A"
+      },
+      "returnCode": 0,
+      "jobId": "229153",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:42.808Z",
+      "start": "2026-09-11T17:14:35.841Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:35.880Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:40.806Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.841Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:35.860Z"
+      }, {
+        "startTime": "2026-09-11T17:14:40.806Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:42.808Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.862Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:35.868Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.868Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:35.880Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.860Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:35.862Z"
+      }, {
+        "startTime": "2026-09-11T17:14:42.808Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:42.808Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.841Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:35.841Z"
+      }]
+    }, {
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\nsamtools sort -T B -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/inputs/-1579583946/B.bam > B.sorted.bam",
+      "shardIndex": 1,
+      "outputs": {
+        "sorted_bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/B.sorted.bam"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File sorted_bam": "CF5B542384BF4959DF747A08B7785280"
+          },
+          "input count": "C81E728D9D4C2F636F067F89CC14862C",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "763348250747D794F161C693B45E08D1",
+          "input": {
+            "String sample": "A72ECF67CDEAFCE3BDB4C8BF6C12E7BF",
+            "File bam": "3f81c67ccf0ac486d5e82738b3386e83"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/execution/B.bam",
+        "sample": "B"
+      },
+      "returnCode": 0,
+      "jobId": "229157",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:42.808Z",
+      "start": "2026-09-11T17:14:35.840Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:42.808Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:42.808Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.860Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:35.862Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.840Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:35.841Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.841Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:35.860Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.869Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:35.872Z"
+      }, {
+        "startTime": "2026-09-11T17:14:40.806Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:42.808Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.872Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:40.806Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.862Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:35.869Z"
+      }]
+    }, {
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\nsamtools sort -T C -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/inputs/918431991/C.bam > C.sorted.bam",
+      "shardIndex": 2,
+      "outputs": {
+        "sorted_bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/C.sorted.bam"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File sorted_bam": "CF5B542384BF4959DF747A08B7785280"
+          },
+          "input count": "C81E728D9D4C2F636F067F89CC14862C",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "763348250747D794F161C693B45E08D1",
+          "input": {
+            "String sample": "4D036FD58CEB15B0074E51A919EEDB3D",
+            "File bam": "770c5e759cd81e65a65ad7576fb628c6"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "bam": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/execution/C.bam",
+        "sample": "C"
+      },
+      "returnCode": 0,
+      "jobId": "229155",
+      "backend": "Local",
+      "end": "2026-09-11T17:14:42.809Z",
+      "start": "2026-09-11T17:14:35.841Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:14:35.871Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:14:35.874Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.841Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:14:35.841Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.862Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:14:35.871Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.841Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:14:35.859Z"
+      }, {
+        "startTime": "2026-09-11T17:14:42.808Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:14:42.808Z"
+      }, {
+        "startTime": "2026-09-11T17:14:40.806Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:14:42.808Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.874Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:14:40.806Z"
+      }, {
+        "startTime": "2026-09-11T17:14:35.859Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:14:35.862Z"
+      }]
+    }],
+    "VariantCalling.PlotQuals": [{
+      "executionStatus": "Done",
+      "stdout": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/execution/stdout",
+      "backendStatus": "Done",
+      "commandLine": "set -euo pipefail\npython3 <<'PYTHON'\nimport matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nfrom pysam import VariantFile\n\nquals = [record.qual for record in VariantFile(\"/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/inputs/1301869358/all.vcf\")]\n\nfigure, axes = plt.subplots(figsize=(6, 4))\naxes.hist(quals, bins=30, color=\"#3b6ea5\", edgecolor=\"white\")\naxes.set_xlabel(\"variant quality (Phred)\")\naxes.set_ylabel(\"variants\")\naxes.set_title(f\"{len(quals)} variants called across all samples\")\nfigure.tight_layout()\nfigure.savefig(\"quals.svg\")\nPYTHON",
+      "shardIndex": -1,
+      "outputs": {
+        "plot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/execution/quals.svg"
+      },
+      "runtimeAttributes": {
+        "maxRetries": "0",
+        "failOnStderr": "false",
+        "cpu": "1",
+        "continueOnReturnCode": "0"
+      },
+      "callCaching": {
+        "allowResultReuse": true,
+        "hashes": {
+          "output count": "C4CA4238A0B923820DCC509A6F75849B",
+          "runtime attribute": {
+            "failOnStderr": "68934A3E9455FA72420237EB05902327",
+            "continueOnReturnCode": "CFCD208495D565EF66E7DFF9F98764DA"
+          },
+          "output expression": {
+            "File plot": "B7062A40DE24B7A03878CC3BA9802FB8"
+          },
+          "input count": "C4CA4238A0B923820DCC509A6F75849B",
+          "backend name": "509820290D57F333403F490DDE7316F4",
+          "command template": "5E8A06BA4198D5393E24DAE4ED91F9AD",
+          "input": {
+            "File vcf": "388851ded408fc27c51441c193fbac80"
+          }
+        },
+        "effectiveCallCachingMode": "ReadAndWriteCache",
+        "hit": false,
+        "result": "Cache Miss"
+      },
+      "inputs": {
+        "vcf": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/all.vcf"
+      },
+      "returnCode": 0,
+      "jobId": "229584",
+      "backend": "Local",
+      "end": "2026-09-11T17:15:12.806Z",
+      "start": "2026-09-11T17:15:05.421Z",
+      "stderr": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/execution/stderr",
+      "callRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals",
+      "attempt": 1,
+      "executionEvents": [{
+        "startTime": "2026-09-11T17:15:05.854Z",
+        "description": "CallCacheReading",
+        "endTime": "2026-09-11T17:15:05.856Z"
+      }, {
+        "startTime": "2026-09-11T17:15:10.804Z",
+        "description": "UpdatingCallCache",
+        "endTime": "2026-09-11T17:15:12.805Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.421Z",
+        "description": "Pending",
+        "endTime": "2026-09-11T17:15:05.421Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.850Z",
+        "description": "PreparingJob",
+        "endTime": "2026-09-11T17:15:05.854Z"
+      }, {
+        "startTime": "2026-09-11T17:15:12.805Z",
+        "description": "UpdatingJobStore",
+        "endTime": "2026-09-11T17:15:12.805Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.421Z",
+        "description": "RequestingExecutionToken",
+        "endTime": "2026-09-11T17:15:05.849Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.849Z",
+        "description": "WaitingForValueStore",
+        "endTime": "2026-09-11T17:15:05.850Z"
+      }, {
+        "startTime": "2026-09-11T17:15:05.856Z",
+        "description": "RunningJob",
+        "endTime": "2026-09-11T17:15:10.804Z"
+      }]
+    }]
+  },
+  "outputs": {
+    "VariantCalling.alignments": ["/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/A.sorted.bam", "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/B.sorted.bam", "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/C.sorted.bam"],
+    "VariantCalling.variants": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/all.vcf",
+    "VariantCalling.variant_summary": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/variant_summary.tsv",
+    "VariantCalling.quality_plot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/execution/quals.svg"
+  },
+  "workflowRoot": "/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533",
+  "actualWorkflowLanguage": "WDL",
+  "status": "Succeeded",
+  "workflowLog": "logs/workflow.c7066cd6-5dd5-434d-b0f5-fca0662f2533.log",
+  "end": "2026-09-11T17:15:14.630Z",
+  "start": "2026-09-11T17:14:15.925Z",
+  "id": "c7066cd6-5dd5-434d-b0f5-fca0662f2533",
+  "inputs": {
+    "mpileup_options": "-d 250 -a AD,DP",
+    "call_options": "-mv -Ov",
+    "reference_amb": "data/genome.fa.amb",
+    "reference_bwt": "data/genome.fa.bwt",
+    "sample_reads": ["data/samples/A.fastq", "data/samples/B.fastq", "data/samples/C.fastq"],
+    "reference": "data/genome.fa",
+    "reference_sa": "data/genome.fa.sa",
+    "reference_pac": "data/genome.fa.pac",
+    "sample_names": ["A", "B", "C"],
+    "VariantCalling.BwaMem.threads": 2,
+    "reference_ann": "data/genome.fa.ann"
+  },
+  "labels": {
+    "cromwell-workflow-id": "cromwell-c7066cd6-5dd5-434d-b0f5-fca0662f2533"
+  },
+  "submission": "2026-09-11T17:14:15.875Z"
+}

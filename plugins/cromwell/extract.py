@@ -194,10 +194,29 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
     roots = [workflow_root] + [a["callRoot"] for _, a in jobs_raw if a.get("callRoot")]
     roots = [os.path.normpath(r) for r in roots if r]
 
+    def resolve(path, rel_to=None):
+        """Absolute path for a metadata path string.
+
+        Cromwell records workflow and call inputs exactly as they were
+        submitted, so a relative path is relative to the directory Cromwell
+        ran in — which is the crate directory in the usual layout, and not
+        necessarily where the metadata file was written (``cromwell run -m
+        run/metadata.json`` puts it a level down). Resolve against the
+        metadata file's directory first, then the crate directory; a path
+        that exists under either is the same file.
+        """
+        if os.path.isabs(path):
+            return os.path.normpath(path)
+        for base in (rel_to or base_dir, crate_dir):
+            candidate = os.path.normpath(os.path.join(base, path))
+            if os.path.exists(candidate):
+                return candidate
+        return os.path.normpath(os.path.join(rel_to or base_dir, path))
+
     def is_file(s):
         if s.startswith(REMOTE_SCHEMES):
             return True
-        norm = os.path.normpath(s if os.path.isabs(s) else os.path.join(base_dir, s))
+        norm = resolve(s)
         if any(norm == r or norm.startswith(r + os.sep) for r in roots):
             return True
         return os.path.exists(norm)
@@ -210,8 +229,7 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
     def ark_source(path):
         if path.startswith(REMOTE_SCHEMES):
             return path
-        norm = os.path.normpath(path if os.path.isabs(path)
-                                else os.path.join(base_dir, path))
+        norm = resolve(path)
         if workflow_root and (norm.startswith(os.path.normpath(workflow_root) + os.sep)):
             rel = os.path.relpath(norm, workflow_root)
             # subworkflow call dirs embed their own run UUID; blank any so
@@ -229,8 +247,7 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
         if path.startswith(REMOTE_SCHEMES):
             info["locator"], info["locator_value"] = "contentUrl", path
         else:
-            abs_p = os.path.normpath(path if os.path.isabs(path)
-                                     else os.path.join(rel_to or base_dir, path))
+            abs_p = resolve(path, rel_to)
             if os.path.isfile(abs_p):
                 info["size"] = os.path.getsize(abs_p)
             try:
@@ -301,7 +318,11 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
                  rel_to=crate_dir)
 
     author = author or getpass.getuser()
-    keyword_list = [k.strip() for k in (keywords or "").split(",") if k.strip()]
+    # keywords come either as a comma-separated string (CLI, GUI form) or as a
+    # list (Python callers) — accept both
+    if isinstance(keywords, str):
+        keywords = keywords.split(",")
+    keyword_list = [str(k).strip() for k in (keywords or []) if str(k).strip()]
     settings = {
         "naan": naan,
         "name": name or f"Cromwell run of WDL workflow '{workflow_name}'",

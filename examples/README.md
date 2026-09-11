@@ -7,7 +7,7 @@ conversion is deterministic — whether it matches the plugin's reviewed
 `fairscape_conversion` to this checkout.
 
 ```bash
-python examples/run_all.py            # all nine, with a pass/fail table
+python examples/run_all.py            # all twelve, with a pass/fail table
 python examples/import_mlflow.py      # or just the one you care about
 ```
 
@@ -37,6 +37,26 @@ notebook, whose crate is checked in.
 so the two chain: **datapackage → crate → Croissant**. That is the point of
 having one hub format in the middle — every importer feeds every exporter.
 
+## Real runs, end to end
+
+The examples above run on fixtures so they finish instantly. These three run
+on two pipelines that were actually executed — the same variant-calling
+analysis written twice, once in Snakemake and once in WDL, on real sequencing
+reads. Both workflow directories are checked in with their crates, their
+datasheets and their outputs, so you can open them without running anything.
+
+| Example | What it converts | The run it came from |
+|---|---|---|
+| [`import_snakemake_variants.py`](import_snakemake_variants.py) | 12 jobs over 6 rules, bwa → samtools → bcftools | [`snakemake-variant-calling/`](snakemake-variant-calling) |
+| [`import_cromwell_variants.py`](import_cromwell_variants.py) | 12 Cromwell calls, 3 of them scatter shards | [`wdl-variant-calling/`](wdl-variant-calling) |
+| [`export_croissant_variants.py`](export_croissant_variants.py) | that crate's variant table as Croissant, then read back with MLCommons' own `mlcroissant` — 654 rows | ← the Snakemake crate |
+
+Together they are the whole chain on one analysis: **pipeline → run records →
+EVI crate → Croissant → rows back out**. Each workflow folder has a `run.sh`
+that reproduces it from nothing (it fetches ~18 MB of reads; the WDL one also
+fetches the Cromwell jar), and a README explaining what the crate says about
+the run.
+
 ## The full walk-through
 
 **[`mlflow/mlflow_to_rocrate.ipynb`](mlflow/mlflow_to_rocrate.ipynb)** is the
@@ -47,15 +67,18 @@ three-step prepare → train → evaluate pipeline whose evaluate run `usedMLMod
 the trained model. Both notebook and crates are checked in with their outputs.
 See [`mlflow/README.md`](mlflow/README.md).
 
-Everything else on this page runs on fixtures and finishes instantly; that
-notebook is the one that starts from nothing and needs `mlflow`,
-`scikit-learn` and `pandas` installed.
+Every script on this page finishes instantly — the real-run examples convert
+records that are checked in, not pipelines they re-execute. The two things
+that start from nothing are that notebook (needs `mlflow`, `scikit-learn` and
+`pandas`) and the two `run.sh` scripts in the variant-calling folders (need
+Snakemake, or a JVM, plus the bioinformatics tools).
 
 ## Reading them
 
 Each script is short and its docstring is the explanation — start with the
 docstring, then the ~15 lines under it. Shared plumbing (path setup, the
-node/edge printers, the golden check) lives in [`_example.py`](_example.py) so
+node/edge printers, the golden and entity checks) lives in
+[`_example.py`](_example.py) so
 the scripts stay about their format.
 
 Every conversion is also available as a one-liner, in Python:

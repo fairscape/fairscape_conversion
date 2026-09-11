@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run every example in this folder and report which ones worked.
 
-    python examples/run_all.py              # the nine scripted examples
+    python examples/run_all.py              # the twelve scripted examples
     python examples/run_all.py --notebook   # also execute the MLflow notebook
 
 Each script runs in its own process (one of them chdirs, and a couple write
@@ -28,6 +28,9 @@ EXAMPLES = [
     ("export_d4d.py", "crate -> D4D datasheet"),
     ("export_wrroc.py", "crate -> Workflow Run RO-Crate"),
     ("export_croissant.py", "crate -> MLCommons Croissant"),
+    ("import_snakemake_variants.py", "real Snakemake run -> crate"),
+    ("import_cromwell_variants.py", "real Cromwell run -> crate"),
+    ("export_croissant_variants.py", "real run's crate -> Croissant"),
 ]
 
 NOTEBOOK = HERE / "mlflow" / "mlflow_to_rocrate.ipynb"

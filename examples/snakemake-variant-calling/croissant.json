@@ -1,0 +1,345 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "sc": "https://schema.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "Variant_calling_on_three_sequenced_samples",
+  "description": "Reads from three samples aligned to the reference with bwa-mem, sorted and indexed with samtools, and jointly called with bcftools; a Snakemake run captured as an EVI RO-Crate.",
+  "dct:conformsTo": [
+    "http://mlcommons.org/croissant/1.0",
+    "http://mlcommons.org/croissant/RAI/1.0"
+  ],
+  "license": "https://spdx.org/licenses/CC-BY-4.0",
+  "keywords": [
+    "snakemake",
+    "variant calling",
+    "bwa",
+    "bcftools",
+    "genomics"
+  ],
+  "version": "1.0",
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "name": "Example Researcher"
+    }
+  ],
+  "distribution": [
+    {
+      "@id": "#file-dataset-config-yaml-b5106b5",
+      "@type": "cr:FileObject",
+      "name": "config.yaml",
+      "description": "Snakemake configuration file 'config.yaml' for this run",
+      "contentUrl": "config.yaml",
+      "encodingFormat": "application/yaml",
+      "sha256": "5f621294b4d5f486dd88c88ed9ae49c740ea80cf5c558012679a034826a154c1"
+    },
+    {
+      "@id": "#file-dataset-genome-fa-f891ca0",
+      "@type": "cr:FileObject",
+      "name": "genome.fa",
+      "description": "Input file 'data/genome.fa' used by the Snakemake workflow run",
+      "contentUrl": "data/genome.fa",
+      "encodingFormat": "text/x-fasta",
+      "sha256": "25f7d0cbb04c9e7d357fad6e4977d5792c56108a27b5cef4e557e21e87d9c6c9"
+    },
+    {
+      "@id": "#file-dataset-genome-fa-amb-c2df282",
+      "@type": "cr:FileObject",
+      "name": "genome.fa.amb",
+      "description": "Input file 'data/genome.fa.amb' used by the Snakemake workflow run",
+      "contentUrl": "data/genome.fa.amb",
+      "encodingFormat": "text/plain",
+      "sha256": "8b17e892a8209aa157a29d7292c483ae4d948c90b61b65d312d4549fa4a6f8d6"
+    },
+    {
+      "@id": "#file-dataset-genome-fa-ann-936b248",
+      "@type": "cr:FileObject",
+      "name": "genome.fa.ann",
+      "description": "Input file 'data/genome.fa.ann' used by the Snakemake workflow run",
+      "contentUrl": "data/genome.fa.ann",
+      "encodingFormat": "text/plain",
+      "sha256": "b53b87954a56b91ca6e3a3d9b7cb41333a9f67453a6c315f1fb7d9200f6f816d"
+    },
+    {
+      "@id": "#file-dataset-genome-fa-bwt-0a9c7e3",
+      "@type": "cr:FileObject",
+      "name": "genome.fa.bwt",
+      "description": "Input file 'data/genome.fa.bwt' used by the Snakemake workflow run",
+      "contentUrl": "data/genome.fa.bwt",
+      "encodingFormat": "text/plain",
+      "sha256": "bcabd580ea3ff1e995e35386bfeecf7c29d441701ebbf7b5b997c88902ed729d"
+    },
+    {
+      "@id": "#file-dataset-genome-fa-pac-28b255e",
+      "@type": "cr:FileObject",
+      "name": "genome.fa.pac",
+      "description": "Input file 'data/genome.fa.pac' used by the Snakemake workflow run",
+      "contentUrl": "data/genome.fa.pac",
+      "encodingFormat": "application/x-ns-proxy-autoconfig",
+      "sha256": "32c47102de073b3e8921099c85534f9690d32fd076e00d00cdfeceed55c8f24a"
+    },
+    {
+      "@id": "#file-dataset-genome-fa-sa-90bdcc1",
+      "@type": "cr:FileObject",
+      "name": "genome.fa.sa",
+      "description": "Input file 'data/genome.fa.sa' used by the Snakemake workflow run",
+      "contentUrl": "data/genome.fa.sa",
+      "encodingFormat": "text/plain",
+      "sha256": "afbe896df0e4c43ccce70747e1eaa4fd04aa52ed639c56f1d3e9eacae05191bb"
+    },
+    {
+      "@id": "#file-dataset-a-fastq-d4611b6",
+      "@type": "cr:FileObject",
+      "name": "A.fastq",
+      "description": "Input file 'data/samples/A.fastq' used by the Snakemake workflow run",
+      "contentUrl": "data/samples/A.fastq",
+      "encodingFormat": "text/x-fastq",
+      "sha256": "e108a9695584af2eccb97a0411b4fa04644c9b58de47e4aa8f3702f72d4aa3e9"
+    },
+    {
+      "@id": "#file-dataset-b-fastq-7ed58c5",
+      "@type": "cr:FileObject",
+      "name": "B.fastq",
+      "description": "Input file 'data/samples/B.fastq' used by the Snakemake workflow run",
+      "contentUrl": "data/samples/B.fastq",
+      "encodingFormat": "text/x-fastq",
+      "sha256": "71026772dbe12b1d6d4aa05b5f98342b2713a426b454438dc60dd95009702e1b"
+    },
+    {
+      "@id": "#file-dataset-c-fastq-bef0063",
+      "@type": "cr:FileObject",
+      "name": "C.fastq",
+      "description": "Input file 'data/samples/C.fastq' used by the Snakemake workflow run",
+      "contentUrl": "data/samples/C.fastq",
+      "encodingFormat": "text/x-fastq",
+      "sha256": "71026772dbe12b1d6d4aa05b5f98342b2713a426b454438dc60dd95009702e1b"
+    },
+    {
+      "@id": "#file-dataset-all-vcf-637cf3e",
+      "@type": "cr:FileObject",
+      "name": "all.vcf",
+      "description": "File 'results/calls/all.vcf' produced by the Snakemake workflow run",
+      "contentUrl": "results/calls/all.vcf",
+      "encodingFormat": "text/x-vcf",
+      "sha256": "510b63b2745e996f80ff18a53c4bf36fe1810290fbf356537c8d53ee01608e6d"
+    },
+    {
+      "@id": "#file-dataset-variant-summary-tsv-71310c4",
+      "@type": "cr:FileObject",
+      "name": "variant_summary.tsv",
+      "description": "File 'results/calls/variant_summary.tsv' produced by the Snakemake workflow run",
+      "contentUrl": "results/calls/variant_summary.tsv",
+      "encodingFormat": "text/tab-separated-values",
+      "sha256": "c383aa7e02e1efc5e6cb1d894e42559f2489c8f200367d39116656350c8fe3d4"
+    },
+    {
+      "@id": "#file-dataset-quals-svg-81b3cdb",
+      "@type": "cr:FileObject",
+      "name": "quals.svg",
+      "description": "File 'results/plots/quals.svg' produced by the Snakemake workflow run",
+      "contentUrl": "results/plots/quals.svg",
+      "encodingFormat": "image/svg+xml",
+      "sha256": "ce42d26a202879e76941f25aadc325c2542749f6d30991030248a8ffd7d3c017"
+    },
+    {
+      "@id": "#file-dataset-a-bam-c0907f3",
+      "@type": "cr:FileObject",
+      "name": "A.bam",
+      "description": "File 'results/sorted/A.bam' produced by the Snakemake workflow run",
+      "contentUrl": "results/sorted/A.bam",
+      "encodingFormat": "application/x-bam",
+      "sha256": "f44bf81ca94faf9bcf176c6287311e47f96f12c18d0700fb1af541e68b4ece83"
+    },
+    {
+      "@id": "#file-dataset-a-bam-bai-9ebeb4d",
+      "@type": "cr:FileObject",
+      "name": "A.bam.bai",
+      "description": "File 'results/sorted/A.bam.bai' produced by the Snakemake workflow run",
+      "contentUrl": "results/sorted/A.bam.bai",
+      "encodingFormat": "application/octet-stream",
+      "sha256": "be23acfdff9593ac5a443c2197355a6ba501d7f11c13da05c3e0e350c41ded3a"
+    },
+    {
+      "@id": "#file-dataset-b-bam-cbee9ae",
+      "@type": "cr:FileObject",
+      "name": "B.bam",
+      "description": "File 'results/sorted/B.bam' produced by the Snakemake workflow run",
+      "contentUrl": "results/sorted/B.bam",
+      "encodingFormat": "application/x-bam",
+      "sha256": "e3674b4b243280c2cadb82299d64242bdb2557323927d82c2f48f14e68f9e82e"
+    },
+    {
+      "@id": "#file-dataset-b-bam-bai-6a20e1e",
+      "@type": "cr:FileObject",
+      "name": "B.bam.bai",
+      "description": "File 'results/sorted/B.bam.bai' produced by the Snakemake workflow run",
+      "contentUrl": "results/sorted/B.bam.bai",
+      "encodingFormat": "application/octet-stream",
+      "sha256": "74721be3f3333cc45593f701cf15d63060e18a6011a5b2d92b96ccc0be39c002"
+    },
+    {
+      "@id": "#file-dataset-c-bam-7ccb833",
+      "@type": "cr:FileObject",
+      "name": "C.bam",
+      "description": "File 'results/sorted/C.bam' produced by the Snakemake workflow run",
+      "contentUrl": "results/sorted/C.bam",
+      "encodingFormat": "application/x-bam",
+      "sha256": "8b27dd7f18994663f44495699718899c043589f0f1b1fe9c9054953047304bda"
+    },
+    {
+      "@id": "#file-dataset-c-bam-bai-39648ed",
+      "@type": "cr:FileObject",
+      "name": "C.bam.bai",
+      "description": "File 'results/sorted/C.bam.bai' produced by the Snakemake workflow run",
+      "contentUrl": "results/sorted/C.bam.bai",
+      "encodingFormat": "application/octet-stream",
+      "sha256": "74721be3f3333cc45593f701cf15d63060e18a6011a5b2d92b96ccc0be39c002"
+    }
+  ],
+  "recordSet": [
+    {
+      "@id": "#recordset-schema-variant-summary-tsv-ec080af",
+      "@type": "cr:RecordSet",
+      "name": "Schema_for_variant_summary.tsv",
+      "description": "Schema inferred from the tsv file 'results/calls/variant_summary.tsv' by snakemake-report-plugin-fairscape",
+      "key": [
+        "#recordset-schema-variant-summary-tsv-ec080af/chrom",
+        "#recordset-schema-variant-summary-tsv-ec080af/pos",
+        "#recordset-schema-variant-summary-tsv-ec080af/ref",
+        "#recordset-schema-variant-summary-tsv-ec080af/alt",
+        "#recordset-schema-variant-summary-tsv-ec080af/quality",
+        "#recordset-schema-variant-summary-tsv-ec080af/depth"
+      ],
+      "field": [
+        {
+          "@id": "#recordset-schema-variant-summary-tsv-ec080af/chrom",
+          "@type": "cr:Field",
+          "name": "chrom",
+          "description": "Column chrom",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-dataset-variant-summary-tsv-71310c4"
+            },
+            "extract": {
+              "column": "chrom"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-schema-variant-summary-tsv-ec080af/pos",
+          "@type": "cr:Field",
+          "name": "pos",
+          "description": "Column pos",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "#file-dataset-variant-summary-tsv-71310c4"
+            },
+            "extract": {
+              "column": "pos"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-schema-variant-summary-tsv-ec080af/ref",
+          "@type": "cr:Field",
+          "name": "ref",
+          "description": "Column ref",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-dataset-variant-summary-tsv-71310c4"
+            },
+            "extract": {
+              "column": "ref"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-schema-variant-summary-tsv-ec080af/alt",
+          "@type": "cr:Field",
+          "name": "alt",
+          "description": "Column alt",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "#file-dataset-variant-summary-tsv-71310c4"
+            },
+            "extract": {
+              "column": "alt"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-schema-variant-summary-tsv-ec080af/quality",
+          "@type": "cr:Field",
+          "name": "quality",
+          "description": "Column quality",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "#file-dataset-variant-summary-tsv-71310c4"
+            },
+            "extract": {
+              "column": "quality"
+            }
+          }
+        },
+        {
+          "@id": "#recordset-schema-variant-summary-tsv-ec080af/depth",
+          "@type": "cr:Field",
+          "name": "depth",
+          "description": "Column depth",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "#file-dataset-variant-summary-tsv-71310c4"
+            },
+            "extract": {
+              "column": "depth"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

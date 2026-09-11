@@ -1,0 +1,2642 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variant calling on three sequenced samples (WDL) - RO-Crate Preview</title>
+    <style>
+      :root {
+        --color-primary: #1f3a52;
+        --color-primary-dark: #16293a;
+        --color-accent: #2d7dd2;
+        --color-bg: #f4f6f9;
+        --color-surface: #ffffff;
+        --color-surface-alt: #f8fafc;
+        --color-border: #e3e8ee;
+        --color-text: #24323f;
+        --color-text-muted: #5d6b7a;
+        --radius: 10px;
+        --radius-sm: 6px;
+        --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.06),
+          0 1px 3px rgba(16, 24, 40, 0.1);
+        --font-sans: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+      body {
+        font-family: var(--font-sans);
+        margin: 0;
+        padding: 0;
+        color: var(--color-text);
+        line-height: 1.55;
+        background-color: var(--color-bg);
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px 24px;
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-card);
+      }
+      header {
+        margin-bottom: 18px;
+        padding: 26px 24px 22px;
+        border-radius: var(--radius);
+        background: linear-gradient(
+          135deg,
+          var(--color-primary-dark) 0%,
+          var(--color-primary) 55%,
+          #2a5078 100%
+        );
+        color: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin: 0 0 10px 0;
+        color: #fff;
+      }
+      h2 {
+        font-size: 19px;
+        color: var(--color-primary);
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        border-left: 4px solid var(--color-accent);
+        letter-spacing: -0.01em;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .badge-row .badge {
+        display: inline-block;
+        padding: 3px 12px;
+        border-radius: 999px;
+        background-color: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        color: #fff;
+        font-size: 12.5px;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .badge-row a.badge:hover {
+        background-color: rgba(255, 255, 255, 0.26);
+      }
+      .summary-section {
+        background-color: var(--color-surface);
+        padding: 16px 18px;
+        border-radius: var(--radius);
+        margin-bottom: 24px;
+        border: 1px solid var(--color-border);
+        box-shadow: var(--shadow-card);
+        page-break-inside: avoid;
+      }
+      .summary-row {
+        display: flex;
+        margin-bottom: 0;
+        border-bottom: 1px solid var(--color-border);
+        padding: 7px 0;
+      }
+      .summary-row:last-child {
+        border-bottom: none;
+      }
+      .summary-label {
+        width: 220px;
+        flex-shrink: 0;
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--color-text-muted);
+        padding-top: 2px;
+      }
+      .summary-value {
+        flex: 1;
+      }
+      .tabs {
+        display: flex;
+        border-bottom: 2px solid var(--color-border);
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+      .tab {
+        padding: 10px 14px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+        transition: color 0.15s ease;
+      }
+      .tab:hover {
+        color: var(--color-primary);
+      }
+      .tab.active {
+        border-bottom: 3px solid var(--color-accent);
+        color: var(--color-primary);
+      }
+      .tab .badge {
+        display: inline-block;
+        background-color: var(--color-surface-alt);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        padding: 1px 8px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        margin-left: 5px;
+      }
+      .tab.active .badge {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #fff;
+      }
+      .tab-content {
+        margin-bottom: 30px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-card);
+        table-layout: fixed;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--color-border);
+        word-wrap: break-word;
+      }
+      th {
+        background-color: var(--color-surface-alt);
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--color-text-muted);
+        border-bottom: 2px solid var(--color-border);
+      }
+      tr:nth-child(even) {
+        background-color: var(--color-surface-alt);
+      }
+      tr:hover {
+        background-color: #eef5fc;
+      }
+      td:nth-child(2) {
+        max-width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      td:nth-child(2)[title] {
+        cursor: help;
+      }
+      .publications-list {
+        margin: 5px 0 0 15px;
+        padding: 0;
+        list-style: disc;
+      }
+      .publications-list li {
+        margin-bottom: 6px;
+      }
+      .schema-details {
+        margin: 0;
+        padding: 15px;
+        background-color: var(--color-surface-alt);
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .schema-details-container {
+        padding: 0;
+      }
+      .toggle-schema,
+      .toggle-computation {
+        cursor: pointer;
+        color: var(--color-accent);
+        text-decoration: underline;
+        white-space: nowrap;
+      }
+      .computation-meta {
+        margin-bottom: 10px;
+      }
+      .computation-meta div {
+        margin-bottom: 4px;
+      }
+      .io-heading {
+        font-weight: 600;
+        margin: 12px 0 6px;
+      }
+      .io-crate {
+        color: var(--color-text-muted);
+        font-size: 0.85em;
+      }
+      .mono-id {
+        font-family: monospace;
+        font-size: 0.85em;
+        word-break: break-all;
+      }
+      .computation-command {
+        display: block;
+        padding: 8px 12px;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        font-family: monospace;
+        font-size: 0.85em;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .properties-table {
+        margin: 0;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+      }
+      .properties-table th,
+      .properties-table td {
+        padding: 8px 12px;
+        background-color: var(--color-surface);
+      }
+      .properties-table th {
+        background-color: var(--color-surface-alt);
+      }
+      .schema-properties-row {
+        background-color: var(--color-surface-alt) !important;
+      }
+      tr.schema-row:hover
+        + tr.schema-properties-row:not([style*="display: none"]) {
+        background-color: #eef5fc !important;
+      }
+      a {
+        color: var(--color-accent);
+      }
+      @media print {
+        body {
+          font-size: 11pt;
+          background-color: white;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        .container {
+          max-width: 100%;
+          padding: 10px;
+          box-shadow: none;
+        }
+        table {
+          border: 1px solid var(--color-border);
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+        }
+        th,
+        td {
+          border: 1px solid var(--color-border);
+        }
+        .tab-content {
+          display: block !important;
+          page-break-before: always;
+        }
+        .tab-content:first-of-type {
+          page-break-before: avoid;
+        }
+        .tabs {
+          display: none;
+        }
+        .summary-section {
+          box-shadow: none;
+        }
+        h1 {
+          font-size: 18pt;
+        }
+      }
+      @media (max-width: 768px) {
+        .summary-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .summary-label {
+          width: 100%;
+          margin-bottom: 3px;
+        }
+        .summary-value {
+          width: 100%;
+        }
+        td:nth-child(2) {
+          white-space: normal;
+        }
+        .tabs {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Variant calling on three sequenced samples (WDL)</h1>
+        <div class="badge-row">
+          <span class="badge">Version 1.0</span>
+          <a class="badge" href="https://spdx.org/licenses/CC-BY-4.0" target="_blank" rel="noopener" title="https://spdx.org/licenses/CC-BY-4.0">License ↗</a>
+          <span class="badge">Released 2026-09-11T13:32:14.635655-04:00</span>
+        </div>
+      </header>
+
+      <div class="summary-section">
+        <h2>RO-Crate Summary</h2>
+        <div class="summary-row">
+          <div class="summary-label">ROCrate ID</div>
+          <div class="summary-value" id="accession">
+ ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-eaa82aa           </div>
+        </div>
+         <div class="summary-row">
+          <div class="summary-label">Release Date</div>
+          <div class="summary-value" id="release-date">2026-09-11T13:32:14.635655-04:00</div>
+        </div>
+           <div class="summary-row">
+          <div class="summary-label">Description</div>
+          <div class="summary-value" id="description">Reads from three samples aligned with bwa-mem in a scatter, sorted and indexed with samtools, then jointly called with bcftools; a Cromwell run captured as an EVI RO-Crate.</div>
+        </div>
+         <div class="summary-row">
+          <div class="summary-label">Authors</div>
+          <div class="summary-value" id="authors">Example Researcher</div>
+        </div>
+            <div class="summary-row">
+          <div class="summary-label">License</div>
+          <div class="summary-value" id="license">
+            <a href="https://spdx.org/licenses/CC-BY-4.0" target="_blank"
+              >https://spdx.org/licenses/CC-BY-4.0</a
+            >
+          </div>
+        </div>
+          <div class="summary-row">
+          <div class="summary-label">Keywords</div>
+          <div class="summary-value" id="keywords">
+cromwell, wdl, variant calling, bwa, bcftools, genomics          </div>
+        </div>
+         </div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="datasets">
+          Datasets <span class="badge">23</span>
+        </div>
+         <div
+          class="tab "
+          data-tab="software"
+        >
+          Software <span class="badge">8</span>
+        </div>
+         <div
+          class="tab "
+          data-tab="computations"
+        >
+          Computations <span class="badge">13</span>
+        </div>
+            <div
+          class="tab "
+          data-tab="schemas"
+        >
+          Schemas <span class="badge">1</span>
+        </div>
+       </div>
+
+          <div
+        id="datasets-content"
+        class="tab-content"
+        style="display: block;"
+      >
+        <table id="datasets-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Release Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>all.vcf</td>
+              <td
+title="File 'all.vcf' produced by the Cromwell workflow run"
+              >
+                File 'all.vcf' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/all.vcf'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>A.bam</td>
+              <td
+title="File 'A.bam' produced by the Cromwell workflow run"
+              >
+                File 'A.bam' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/execution/A.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>B.bam</td>
+              <td
+title="File 'B.bam' produced by the Cromwell workflow run"
+              >
+                File 'B.bam' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/execution/B.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>C.bam</td>
+              <td
+title="File 'C.bam' produced by the Cromwell workflow run"
+              >
+                File 'C.bam' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/execution/C.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>quals.svg</td>
+              <td
+title="File 'quals.svg' produced by the Cromwell workflow run"
+              >
+                File 'quals.svg' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/execution/quals.svg'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>A.sorted.bam.bai</td>
+              <td
+title="File 'A.sorted.bam.bai' produced by the Cromwell workflow run"
+              >
+                File 'A.sorted.bam.bai' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/execution/A.sorted.bam.bai'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>B.sorted.bam.bai</td>
+              <td
+title="File 'B.sorted.bam.bai' produced by the Cromwell workflow run"
+              >
+                File 'B.sorted.bam.bai' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/execution/B.sorted.bam.bai'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>C.sorted.bam.bai</td>
+              <td
+title="File 'C.sorted.bam.bai' produced by the Cromwell workflow run"
+              >
+                File 'C.sorted.bam.bai' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/execution/C.sorted.bam.bai'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>A.sorted.bam</td>
+              <td
+title="File 'A.sorted.bam' produced by the Cromwell workflow run"
+              >
+                File 'A.sorted.bam' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/A.sorted.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>B.sorted.bam</td>
+              <td
+title="File 'B.sorted.bam' produced by the Cromwell workflow run"
+              >
+                File 'B.sorted.bam' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/B.sorted.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>C.sorted.bam</td>
+              <td
+title="File 'C.sorted.bam' produced by the Cromwell workflow run"
+              >
+                File 'C.sorted.bam' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/C.sorted.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>variant_summary.tsv</td>
+              <td
+title="File 'variant_summary.tsv' produced by the Cromwell workflow run"
+              >
+                File 'variant_summary.tsv' produced by the Cromwell workflow run
+              </td>
+              <td><a href='cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/variant_summary.tsv'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa</td>
+              <td
+title="Input file 'genome.fa' used by the Cromwell workflow run"
+              >
+                Input file 'genome.fa' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/genome.fa'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.amb</td>
+              <td
+title="Input file 'genome.fa.amb' used by the Cromwell workflow run"
+              >
+                Input file 'genome.fa.amb' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/genome.fa.amb'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.ann</td>
+              <td
+title="Input file 'genome.fa.ann' used by the Cromwell workflow run"
+              >
+                Input file 'genome.fa.ann' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/genome.fa.ann'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.bwt</td>
+              <td
+title="Input file 'genome.fa.bwt' used by the Cromwell workflow run"
+              >
+                Input file 'genome.fa.bwt' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/genome.fa.bwt'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.pac</td>
+              <td
+title="Input file 'genome.fa.pac' used by the Cromwell workflow run"
+              >
+                Input file 'genome.fa.pac' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/genome.fa.pac'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.sa</td>
+              <td
+title="Input file 'genome.fa.sa' used by the Cromwell workflow run"
+              >
+                Input file 'genome.fa.sa' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/genome.fa.sa'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>A.fastq</td>
+              <td
+title="Input file 'A.fastq' used by the Cromwell workflow run"
+              >
+                Input file 'A.fastq' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/samples/A.fastq'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>B.fastq</td>
+              <td
+title="Input file 'B.fastq' used by the Cromwell workflow run"
+              >
+                Input file 'B.fastq' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/samples/B.fastq'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>C.fastq</td>
+              <td
+title="Input file 'C.fastq' used by the Cromwell workflow run"
+              >
+                Input file 'C.fastq' used by the Cromwell workflow run
+              </td>
+              <td><a href='data/samples/C.fastq'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>inputs.json</td>
+              <td
+title="File 'inputs.json' submitted to Cromwell for this run"
+              >
+                File 'inputs.json' submitted to Cromwell for this run
+              </td>
+              <td><a href='inputs.json'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+            <tr>
+              <td>variant-calling.wdl</td>
+              <td
+title="File 'variant-calling.wdl' submitted to Cromwell for this run"
+              >
+                File 'variant-calling.wdl' submitted to Cromwell for this run
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>2026-09-11T13:32:14.635655-04:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       <div
+        id="software-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <table id="software-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Release Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>variant-calling.wdl</td>
+              <td
+title="WDL 1.0 workflow definition 'variant-calling.wdl' for this run"
+              >
+                WDL 1.0 workflow definition 'variant-calling.wdl' for this run
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>Cromwell</td>
+              <td
+title="Cromwell workflow execution engine (https://cromwell.readthedocs.io/)"
+              >
+                Cromwell workflow execution engine (https://cromwell.readthedocs.io/)
+              </td>
+              <td><a href='https://github.com/broadinstitute/cromwell'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>BcftoolsCall</td>
+              <td
+title="task BcftoolsCall {
+    input {
+        File reference
+        Array[File] bams
+        Array[File] bais
+        String mpileup_options
+        String call_options
+    }
+
+    command <<<
+        set -euo pipefail
+        # pile the alignments and their indexes back into one directory
+        mkdir -p alignments
+        for bam in ~{sep=' ' bams}; do ln -s "$bam" alignments/; done
+        for bai in ~{sep=' ' bais}; do ln -s "$bai" alignments/; done
+
+        bcftools mpileup ~{mpileup_options} -f ~{reference} alignments/*.bam \
+            | bcftools call ~{call_options} -o all.vcf
+    >>>
+
+    output {
+        File vcf = "all.vcf"
+    }
+}"
+              >
+                task BcftoolsCall {
+    input {
+        File reference
+        Array[File] bams
+        Array[File] ...
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>BwaMem</td>
+              <td
+title="task BwaMem {
+    input {
+        String sample
+        File reads
+        File reference
+        File reference_amb
+        File reference_ann
+        File reference_bwt
+        File reference_pac
+        File reference_sa
+        Int threads = 2
+    }
+
+    command <<<
+        set -euo pipefail
+        # bwa wants the index files beside the fasta under their original
+        # names; Cromwell localizes each input into its own directory, so
+        # rebuild that layout with symlinks.
+        mkdir -p reference
+        ln -s ~{reference}     reference/genome.fa
+        ln -s ~{reference_amb} reference/genome.fa.amb
+        ln -s ~{reference_ann} reference/genome.fa.ann
+        ln -s ~{reference_bwt} reference/genome.fa.bwt
+        ln -s ~{reference_pac} reference/genome.fa.pac
+        ln -s ~{reference_sa}  reference/genome.fa.sa
+
+        bwa mem -t ~{threads} \
+            -R "@RG\tID:~{sample}\tSM:~{sample}\tPL:ILLUMINA" \
+            reference/genome.fa ~{reads} \
+            | samtools view -Sb - > ~{sample}.bam
+    >>>
+
+    output {
+        File bam = "~{sample}.bam"
+    }
+
+    runtime {
+        cpu: threads
+    }
+}"
+              >
+                task BwaMem {
+    input {
+        String sample
+        File reads
+        File reference
+        Fi...
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>PlotQuals</td>
+              <td
+title="task PlotQuals {
+    input {
+        File vcf
+    }
+
+    command <<<
+        set -euo pipefail
+        python3 <<'PYTHON'
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from pysam import VariantFile
+
+        quals = [record.qual for record in VariantFile("~{vcf}")]
+
+        figure, axes = plt.subplots(figsize=(6, 4))
+        axes.hist(quals, bins=30, color="#3b6ea5", edgecolor="white")
+        axes.set_xlabel("variant quality (Phred)")
+        axes.set_ylabel("variants")
+        axes.set_title(f"{len(quals)} variants called across all samples")
+        figure.tight_layout()
+        figure.savefig("quals.svg")
+        PYTHON
+    >>>
+
+    output {
+        File plot = "quals.svg"
+    }
+}"
+              >
+                task PlotQuals {
+    input {
+        File vcf
+    }
+
+    command <<<
+        set -euo pipefail
+     ...
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>SamtoolsIndex</td>
+              <td
+title="task SamtoolsIndex {
+    input {
+        String sample
+        File bam
+    }
+
+    command <<<
+        set -euo pipefail
+        # the index has to sit beside the bam it indexes
+        ln -s ~{bam} ~{sample}.sorted.bam
+        samtools index ~{sample}.sorted.bam
+    >>>
+
+    output {
+        File index = "~{sample}.sorted.bam.bai"
+    }
+}"
+              >
+                task SamtoolsIndex {
+    input {
+        String sample
+        File bam
+    }
+
+    command <<<
+     ...
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>SamtoolsSort</td>
+              <td
+title="task SamtoolsSort {
+    input {
+        String sample
+        File bam
+    }
+
+    command <<<
+        set -euo pipefail
+        samtools sort -T ~{sample} -O bam ~{bam} > ~{sample}.sorted.bam
+    >>>
+
+    output {
+        File sorted_bam = "~{sample}.sorted.bam"
+    }
+}"
+              >
+                task SamtoolsSort {
+    input {
+        String sample
+        File bam
+    }
+
+    command <<<
+      ...
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>VariantSummary</td>
+              <td
+title="task VariantSummary {
+    input {
+        File vcf
+    }
+
+    command <<<
+        set -euo pipefail
+        printf 'chrom\tpos\tref\talt\tquality\tdepth\n' > variant_summary.tsv
+        bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%INFO/DP\n' ~{vcf} \
+            >> variant_summary.tsv
+    >>>
+
+    output {
+        File summary = "variant_summary.tsv"
+    }
+}"
+              >
+                task VariantSummary {
+    input {
+        File vcf
+    }
+
+    command <<<
+        set -euo pipefail
+...
+              </td>
+              <td><a href='variant-calling.wdl'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       <div
+        id="computations-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <table id="computations-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Date Created</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="schema-row" id="computation-row-1">
+              <td>Cromwell workflow run of 'VariantCalling'</td>
+              <td
+title="Execution of the WDL workflow 'VariantCalling' by Cromwell, reconstructed post-hoc from Cromwell's run metadata by cromwell-fairscape"
+              >
+                Execution of the WDL workflow 'VariantCalling' by Cromwell, reconstructed post-hoc from Cromwell's r...
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="1"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-1"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (9)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ad35c32</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-b40fe72</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-d6d8f1f</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-3de43e1</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-338e032</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-3c8a8cf</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-fastq-9f8fe00</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-fastq-2b74d7b</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-fastq-834f7f0</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (6)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.sorted.bam</td>
+                        <td class="mono-id">ark:59853/dataset-a-sorted-bam-feab38c</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>B.sorted.bam</td>
+                        <td class="mono-id">ark:59853/dataset-b-sorted-bam-a762e31</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>C.sorted.bam</td>
+                        <td class="mono-id">ark:59853/dataset-c-sorted-bam-4b72a7d</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>all.vcf</td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-07f232c</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                      <tr>
+                        <td>variant_summary.tsv</td>
+                        <td class="mono-id">ark:59853/dataset-variant-summary-tsv-f81f0cc</td>
+                        <td>text, tab-separated-values</td>
+                      </tr>
+                      <tr>
+                        <td>quals.svg</td>
+                        <td class="mono-id">ark:59853/dataset-quals-svg-130641f</td>
+                        <td>image, svg+xml</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>variant-calling.wdl</td>
+                        <td class="mono-id">ark:59853/software-variant-calling-wdl-eaa82aa</td>
+                      </tr>
+                      <tr>
+                        <td>Cromwell</td>
+                        <td class="mono-id">ark:59853/software-cromwell-b3e7233</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">cromwell run variant-calling.wdl</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-2">
+              <td>BcftoolsCall</td>
+              <td
+title="Cromwell call of WDL task 'BcftoolsCall'"
+              >
+                Cromwell call of WDL task 'BcftoolsCall'
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="2"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-2"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bcftoolscall-8ea519b</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ad35c32</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.sorted.bam.bai                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-sorted-bam-bai-8967d81</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.sorted.bam.bai                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-sorted-bam-bai-50ef104</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.sorted.bam.bai                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-sorted-bam-bai-2e89357</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.sorted.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-sorted-bam-feab38c</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.sorted.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-sorted-bam-a762e31</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.sorted.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-sorted-bam-4b72a7d</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>all.vcf</td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-07f232c</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>BcftoolsCall</td>
+                        <td class="mono-id">ark:59853/software-bcftoolscall-97b4d8e</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# pile the alignments and their indexes back into one directory
+mkdir -p alignments
+for bam in /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/230049286/A.sorted.bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-1566902073/B.sorted.bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/931113864/C.sorted.bam; do ln -s "$bam" alignments/; done
+for bai in /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-1581987200/A.sorted.bam.bai /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/916028737/B.sorted.bam.bai /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-880922622/C.sorted.bam.bai; do ln -s "$bai" alignments/; done
+
+bcftools mpileup -d 250 -a AD,DP -f /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/1495863733/genome.fa alignments/*.bam \
+    | bcftools call -mv -Ov -o all.vcf</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-3">
+              <td>BwaMem (shard=0)</td>
+              <td
+title="Cromwell call of WDL task 'BwaMem', scatter shard 0"
+              >
+                Cromwell call of WDL task 'BwaMem', scatter shard 0
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="3"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-3"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bwamem-shard-0-804de6e</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-b40fe72</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-3de43e1</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-d6d8f1f</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ad35c32</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-3c8a8cf</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-338e032</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-fastq-9f8fe00</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.bam</td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-c796871</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>BwaMem</td>
+                        <td class="mono-id">ark:59853/software-bwamem-8402ed5</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# bwa wants the index files beside the fasta under their original
+# names; Cromwell localizes each input into its own directory, so
+# rebuild that layout with symlinks.
+mkdir -p reference
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa     reference/genome.fa
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.amb reference/genome.fa.amb
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.ann reference/genome.fa.ann
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.pac reference/genome.fa.pac
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa
+
+bwa mem -t 2 \
+    -R "@RG\tID:A\tSM:A\tPL:ILLUMINA" \
+    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/23660975/A.fastq \
+    | samtools view -Sb - > A.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-4">
+              <td>BwaMem (shard=1)</td>
+              <td
+title="Cromwell call of WDL task 'BwaMem', scatter shard 1"
+              >
+                Cromwell call of WDL task 'BwaMem', scatter shard 1
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="4"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-4"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bwamem-shard-1-6e07ad5</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-b40fe72</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-3de43e1</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-d6d8f1f</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ad35c32</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-3c8a8cf</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-338e032</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-fastq-2b74d7b</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B.bam</td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-c5ee69f</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>BwaMem</td>
+                        <td class="mono-id">ark:59853/software-bwamem-8402ed5</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# bwa wants the index files beside the fasta under their original
+# names; Cromwell localizes each input into its own directory, so
+# rebuild that layout with symlinks.
+mkdir -p reference
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa     reference/genome.fa
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.amb reference/genome.fa.amb
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.ann reference/genome.fa.ann
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.pac reference/genome.fa.pac
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa
+
+bwa mem -t 2 \
+    -R "@RG\tID:B\tSM:B\tPL:ILLUMINA" \
+    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/23660975/B.fastq \
+    | samtools view -Sb - > B.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-5">
+              <td>BwaMem (shard=2)</td>
+              <td
+title="Cromwell call of WDL task 'BwaMem', scatter shard 2"
+              >
+                Cromwell call of WDL task 'BwaMem', scatter shard 2
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="5"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-5"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bwamem-shard-2-a914867</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-b40fe72</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-3de43e1</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-d6d8f1f</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ad35c32</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-3c8a8cf</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-338e032</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-fastq-834f7f0</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C.bam</td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-22ad6db</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>BwaMem</td>
+                        <td class="mono-id">ark:59853/software-bwamem-8402ed5</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# bwa wants the index files beside the fasta under their original
+# names; Cromwell localizes each input into its own directory, so
+# rebuild that layout with symlinks.
+mkdir -p reference
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa     reference/genome.fa
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.amb reference/genome.fa.amb
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.ann reference/genome.fa.ann
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.pac reference/genome.fa.pac
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa
+
+bwa mem -t 2 \
+    -R "@RG\tID:C\tSM:C\tPL:ILLUMINA" \
+    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/23660975/C.fastq \
+    | samtools view -Sb - > C.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-6">
+              <td>PlotQuals</td>
+              <td
+title="Cromwell call of WDL task 'PlotQuals'"
+              >
+                Cromwell call of WDL task 'PlotQuals'
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="6"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-6"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-plotquals-35cec30</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          all.vcf                        </td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-07f232c</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>quals.svg</td>
+                        <td class="mono-id">ark:59853/dataset-quals-svg-130641f</td>
+                        <td>image, svg+xml</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>PlotQuals</td>
+                        <td class="mono-id">ark:59853/software-plotquals-7f60f50</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+python3 <<'PYTHON'
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from pysam import VariantFile
+
+quals = [record.qual for record in VariantFile("/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/inputs/1301869358/all.vcf")]
+
+figure, axes = plt.subplots(figsize=(6, 4))
+axes.hist(quals, bins=30, color="#3b6ea5", edgecolor="white")
+axes.set_xlabel("variant quality (Phred)")
+axes.set_ylabel("variants")
+axes.set_title(f"{len(quals)} variants called across all samples")
+figure.tight_layout()
+figure.savefig("quals.svg")
+PYTHON</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-7">
+              <td>SamtoolsIndex (shard=0)</td>
+              <td
+title="Cromwell call of WDL task 'SamtoolsIndex', scatter shard 0"
+              >
+                Cromwell call of WDL task 'SamtoolsIndex', scatter shard 0
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="7"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-7"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtoolsindex-shard-0-3376a7c</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          A.sorted.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-sorted-bam-feab38c</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.sorted.bam.bai</td>
+                        <td class="mono-id">ark:59853/dataset-a-sorted-bam-bai-8967d81</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SamtoolsIndex</td>
+                        <td class="mono-id">ark:59853/software-samtoolsindex-3eb355e</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# the index has to sit beside the bam it indexes
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/inputs/230049286/A.sorted.bam A.sorted.bam
+samtools index A.sorted.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-8">
+              <td>SamtoolsIndex (shard=1)</td>
+              <td
+title="Cromwell call of WDL task 'SamtoolsIndex', scatter shard 1"
+              >
+                Cromwell call of WDL task 'SamtoolsIndex', scatter shard 1
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="8"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-8"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtoolsindex-shard-1-8842a0f</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          B.sorted.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-sorted-bam-a762e31</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B.sorted.bam.bai</td>
+                        <td class="mono-id">ark:59853/dataset-b-sorted-bam-bai-50ef104</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SamtoolsIndex</td>
+                        <td class="mono-id">ark:59853/software-samtoolsindex-3eb355e</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# the index has to sit beside the bam it indexes
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/inputs/-1566902073/B.sorted.bam B.sorted.bam
+samtools index B.sorted.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-9">
+              <td>SamtoolsIndex (shard=2)</td>
+              <td
+title="Cromwell call of WDL task 'SamtoolsIndex', scatter shard 2"
+              >
+                Cromwell call of WDL task 'SamtoolsIndex', scatter shard 2
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="9"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-9"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtoolsindex-shard-2-5ea9730</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          C.sorted.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-sorted-bam-4b72a7d</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C.sorted.bam.bai</td>
+                        <td class="mono-id">ark:59853/dataset-c-sorted-bam-bai-2e89357</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SamtoolsIndex</td>
+                        <td class="mono-id">ark:59853/software-samtoolsindex-3eb355e</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+# the index has to sit beside the bam it indexes
+ln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/inputs/931113864/C.sorted.bam C.sorted.bam
+samtools index C.sorted.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-10">
+              <td>SamtoolsSort (shard=0)</td>
+              <td
+title="Cromwell call of WDL task 'SamtoolsSort', scatter shard 0"
+              >
+                Cromwell call of WDL task 'SamtoolsSort', scatter shard 0
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="10"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-10"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtoolssort-shard-0-9640891</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          A.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-c796871</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.sorted.bam</td>
+                        <td class="mono-id">ark:59853/dataset-a-sorted-bam-feab38c</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SamtoolsSort</td>
+                        <td class="mono-id">ark:59853/software-samtoolssort-ee6c604</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+samtools sort -T A -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/inputs/217367413/A.bam > A.sorted.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-11">
+              <td>SamtoolsSort (shard=1)</td>
+              <td
+title="Cromwell call of WDL task 'SamtoolsSort', scatter shard 1"
+              >
+                Cromwell call of WDL task 'SamtoolsSort', scatter shard 1
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="11"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-11"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtoolssort-shard-1-6c00821</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          B.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-c5ee69f</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B.sorted.bam</td>
+                        <td class="mono-id">ark:59853/dataset-b-sorted-bam-a762e31</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SamtoolsSort</td>
+                        <td class="mono-id">ark:59853/software-samtoolssort-ee6c604</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+samtools sort -T B -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/inputs/-1579583946/B.bam > B.sorted.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-12">
+              <td>SamtoolsSort (shard=2)</td>
+              <td
+title="Cromwell call of WDL task 'SamtoolsSort', scatter shard 2"
+              >
+                Cromwell call of WDL task 'SamtoolsSort', scatter shard 2
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="12"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-12"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtoolssort-shard-2-c978d5d</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          C.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-22ad6db</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C.sorted.bam</td>
+                        <td class="mono-id">ark:59853/dataset-c-sorted-bam-4b72a7d</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SamtoolsSort</td>
+                        <td class="mono-id">ark:59853/software-samtoolssort-ee6c604</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+samtools sort -T C -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/inputs/918431991/C.bam > C.sorted.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-13">
+              <td>VariantSummary</td>
+              <td
+title="Cromwell call of WDL task 'VariantSummary'"
+              >
+                Cromwell call of WDL task 'VariantSummary'
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="13"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-13"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-variantsummary-0b2b77a</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          all.vcf                        </td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-07f232c</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>variant_summary.tsv</td>
+                        <td class="mono-id">ark:59853/dataset-variant-summary-tsv-f81f0cc</td>
+                        <td>text, tab-separated-values</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>VariantSummary</td>
+                        <td class="mono-id">ark:59853/software-variantsummary-8e9b1a6</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">set -euo pipefail
+printf 'chrom\tpos\tref\talt\tquality\tdepth\n' > variant_summary.tsv
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%INFO/DP\n' /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/inputs/1301869358/all.vcf \
+    >> variant_summary.tsv</code>
+                 </div>
+              </td>
+            </tr>
+           </tbody>
+        </table>
+      </div>
+       <div
+        id="samples-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No samples found in this RO-Crate.</p>
+      </div>
+       <div
+        id="experiments-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No experiments found in this RO-Crate.</p>
+      </div>
+       <div
+        id="instruments-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No instruments found in this RO-Crate.</p>
+      </div>
+       <div
+        id="schemas-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <table id="schemas-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="schema-row" id="schema-row-1">
+              <td>Schema for variant_summary.tsv</td>
+              <td
+title="Schema inferred from the tsv file '/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/variant_summary.tsv' by cromwell-fairscape"
+              >
+                Schema inferred from the tsv file '/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-call...
+              </td>
+              <td>Not specified</td>
+              <td>
+                <span class="toggle-schema" data-schema-id="1"
+                  >Show Properties</span
+                >
+              </td>
+            </tr>
+            <tr
+              class="schema-properties-row"
+              id="schema-details-row-1"
+              style="display: none"
+            >
+              <td colspan="4" class="schema-details-container">
+                <div
+                  id="schema-details-1"
+                  class="schema-details"
+                >
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>chrom</td>
+                        <td>string</td>
+                        <td>
+                          Column chrom
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>pos</td>
+                        <td>integer</td>
+                        <td>
+                          Column pos
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ref</td>
+                        <td>string</td>
+                        <td>
+                          Column ref
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>alt</td>
+                        <td>string</td>
+                        <td>
+                          Column alt
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>quality</td>
+                        <td>number</td>
+                        <td>
+                          Column quality
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>depth</td>
+                        <td>integer</td>
+                        <td>
+                          Column depth
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+           </tbody>
+        </table>
+      </div>
+       <div
+        id="other-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No other found in this RO-Crate.</p>
+      </div>
+
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".tab");
+        if (!tabs.length) return;
+
+        const activeTab = document.querySelector(".tab.active");
+        if (!activeTab) {
+          // Ensure first tab with content is active if none are pre-set
+          let firstContentTab = null;
+          for (let i = 0; i < tabs.length; i++) {
+            const tabId = tabs[i].getAttribute("data-tab");
+            const content = document.getElementById(`${tabId}-content`);
+            // Check if the tab content exists and has items or is not a "No items found" paragraph
+            if (
+              content &&
+              (content.querySelector("table") ||
+                !content.querySelector("p:only-child"))
+            ) {
+              firstContentTab = tabs[i];
+              break;
+            }
+          }
+          if (firstContentTab) {
+            firstContentTab.classList.add("active");
+            const firstTabId = firstContentTab.getAttribute("data-tab");
+            const firstTabContent = document.getElementById(
+              `${firstTabId}-content`
+            );
+            if (firstTabContent) {
+              firstTabContent.style.display = "block";
+            }
+          } else if (tabs.length > 0) {
+            // Fallback: if all tabs are empty, activate the first one anyway
+            tabs[0].classList.add("active");
+            const firstTabId = tabs[0].getAttribute("data-tab");
+            const firstTabContent = document.getElementById(
+              `${firstTabId}-content`
+            );
+            if (firstTabContent) {
+              firstTabContent.style.display = "block";
+            }
+          }
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            tabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            document.querySelectorAll(".tab-content").forEach((content) => {
+              content.style.display = "none";
+            });
+
+            const tabId = this.getAttribute("data-tab");
+            const targetContent = document.getElementById(`${tabId}-content`);
+            if (targetContent) {
+              targetContent.style.display = "block";
+            }
+          });
+        });
+
+        document.querySelectorAll(".toggle-schema").forEach((button) => {
+          button.addEventListener("click", function () {
+            const schemaId = this.getAttribute("data-schema-id");
+            const detailsRow = document.getElementById(
+              `schema-details-row-${schemaId}`
+            );
+
+            if (detailsRow.style.display === "table-row") {
+              detailsRow.style.display = "none";
+              this.textContent = "Show Properties";
+            } else {
+              detailsRow.style.display = "table-row";
+              this.textContent = "Hide Properties";
+            }
+          });
+        });
+
+        document.querySelectorAll(".toggle-computation").forEach((button) => {
+          button.addEventListener("click", function () {
+            const computationId = this.getAttribute("data-computation-id");
+            const detailsRow = document.getElementById(
+              `computation-details-row-${computationId}`
+            );
+
+            if (detailsRow.style.display === "table-row") {
+              detailsRow.style.display = "none";
+              this.textContent = "Show Details";
+            } else {
+              detailsRow.style.display = "table-row";
+              this.textContent = "Hide Details";
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

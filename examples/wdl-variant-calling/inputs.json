@@ -1,0 +1,14 @@
+{
+  "VariantCalling.reference": "data/genome.fa",
+  "VariantCalling.reference_amb": "data/genome.fa.amb",
+  "VariantCalling.reference_ann": "data/genome.fa.ann",
+  "VariantCalling.reference_bwt": "data/genome.fa.bwt",
+  "VariantCalling.reference_pac": "data/genome.fa.pac",
+  "VariantCalling.reference_sa": "data/genome.fa.sa",
+  "VariantCalling.sample_names": ["A", "B", "C"],
+  "VariantCalling.sample_reads": [
+    "data/samples/A.fastq",
+    "data/samples/B.fastq",
+    "data/samples/C.fastq"
+  ]
+}

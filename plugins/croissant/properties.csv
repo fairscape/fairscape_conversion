@@ -1,7 +1,7 @@
 source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
 ROCrateMetadataElem,,CroissantDataset,context,,,export,FALSE,,scalar,@DEFAULT_CROISSANT_CONTEXT,,,,,,
 ROCrateMetadataElem,,CroissantDataset,@type,,,export,FALSE,,scalar,sc:Dataset,,,,,,
-ROCrateMetadataElem,,CroissantDataset,dct:conformsTo,,,export,FALSE,,scalar,http://mlcommons.org/croissant/RAI/1.0,,,,,,
+ROCrateMetadataElem,,CroissantDataset,dct:conformsTo,,,export,FALSE,,scalar,@CROISSANT_CONFORMS_TO,,,,,,the Croissant version and the RAI extension
 ROCrateMetadataElem,name,CroissantDataset,name,,format_name,export,FALSE,,scalar,,,,,,,
 ROCrateMetadataElem,description,CroissantDataset,description,,,export,FALSE,,scalar,,,,,,,
 ROCrateMetadataElem,license,CroissantDataset,license,,,export,FALSE,,scalar,,,,,,,

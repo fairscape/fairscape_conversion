@@ -1,0 +1,559 @@
+{
+  "@type": "evi:EvidenceGraph",
+  "@id": "ark:59853/evidence-graph-dataset-quals-svg-130641f",
+  "owner": "ark:59853/dataset-quals-svg-130641f",
+  "description": "Evidence graph for quals.svg",
+  "name": "Evidence Graph - quals.svg",
+  "outputs": [
+    {
+      "@id": "ark:59853/dataset-quals-svg-130641f"
+    }
+  ],
+  "@graph": {
+    "ark:59853/dataset-genome-fa-ad35c32": {
+      "@id": "ark:59853/dataset-genome-fa-ad35c32",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa",
+      "description": "Input file 'genome.fa' used by the Cromwell workflow run"
+    },
+    "ark:59853/dataset-genome-fa-amb-b40fe72": {
+      "@id": "ark:59853/dataset-genome-fa-amb-b40fe72",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.amb",
+      "description": "Input file 'genome.fa.amb' used by the Cromwell workflow run"
+    },
+    "ark:59853/dataset-genome-fa-bwt-3de43e1": {
+      "@id": "ark:59853/dataset-genome-fa-bwt-3de43e1",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.bwt",
+      "description": "Input file 'genome.fa.bwt' used by the Cromwell workflow run"
+    },
+    "ark:59853/dataset-genome-fa-ann-d6d8f1f": {
+      "@id": "ark:59853/dataset-genome-fa-ann-d6d8f1f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.ann",
+      "description": "Input file 'genome.fa.ann' used by the Cromwell workflow run"
+    },
+    "ark:59853/dataset-genome-fa-sa-3c8a8cf": {
+      "@id": "ark:59853/dataset-genome-fa-sa-3c8a8cf",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.sa",
+      "description": "Input file 'genome.fa.sa' used by the Cromwell workflow run"
+    },
+    "ark:59853/dataset-genome-fa-pac-338e032": {
+      "@id": "ark:59853/dataset-genome-fa-pac-338e032",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genome.fa.pac",
+      "description": "Input file 'genome.fa.pac' used by the Cromwell workflow run"
+    },
+    "ark:59853/dataset-a-fastq-9f8fe00": {
+      "@id": "ark:59853/dataset-a-fastq-9f8fe00",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.fastq",
+      "description": "Input file 'A.fastq' used by the Cromwell workflow run"
+    },
+    "ark:59853/software-bwamem-8402ed5": {
+      "@id": "ark:59853/software-bwamem-8402ed5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "BwaMem",
+      "description": "task BwaMem {\n    input {\n        String sample\n        File reads\n        File reference\n        File reference_amb\n        File reference_ann\n        File reference_bwt\n        File reference_pac\n        File reference_sa\n        Int threads = 2\n    }\n\n    command <<<\n        set -euo pipefail\n        # bwa wants the index files beside the fasta under their original\n        # names; Cromwell localizes each input into its own directory, so\n        # rebuild that layout with symlinks.\n        mkdir -p reference\n        ln -s ~{reference}     reference/genome.fa\n        ln -s ~{reference_amb} reference/genome.fa.amb\n        ln -s ~{reference_ann} reference/genome.fa.ann\n        ln -s ~{reference_bwt} reference/genome.fa.bwt\n        ln -s ~{reference_pac} reference/genome.fa.pac\n        ln -s ~{reference_sa}  reference/genome.fa.sa\n\n        bwa mem -t ~{threads} \\\n            -R \"@RG\\tID:~{sample}\\tSM:~{sample}\\tPL:ILLUMINA\" \\\n            reference/genome.fa ~{reads} \\\n            | samtools view -Sb - > ~{sample}.bam\n    >>>\n\n    output {\n        File bam = \"~{sample}.bam\"\n    }\n\n    runtime {\n        cpu: threads\n    }\n}"
+    },
+    "ark:59853/computation-bwamem-shard-0-804de6e": {
+      "@id": "ark:59853/computation-bwamem-shard-0-804de6e",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "BwaMem (shard=0)",
+      "description": "Cromwell call of WDL task 'BwaMem', scatter shard 0",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-amb-b40fe72"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-bwt-3de43e1"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ann-d6d8f1f"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ad35c32"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-sa-3c8a8cf"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-pac-338e032"
+        },
+        {
+          "@id": "ark:59853/dataset-a-fastq-9f8fe00"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bwamem-8402ed5"
+        }
+      ]
+    },
+    "ark:59853/dataset-a-bam-c796871": {
+      "@id": "ark:59853/dataset-a-bam-c796871",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.bam",
+      "description": "File 'A.bam' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bwamem-shard-0-804de6e"
+      }
+    },
+    "ark:59853/software-samtoolssort-ee6c604": {
+      "@id": "ark:59853/software-samtoolssort-ee6c604",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "SamtoolsSort",
+      "description": "task SamtoolsSort {\n    input {\n        String sample\n        File bam\n    }\n\n    command <<<\n        set -euo pipefail\n        samtools sort -T ~{sample} -O bam ~{bam} > ~{sample}.sorted.bam\n    >>>\n\n    output {\n        File sorted_bam = \"~{sample}.sorted.bam\"\n    }\n}"
+    },
+    "ark:59853/computation-samtoolssort-shard-0-9640891": {
+      "@id": "ark:59853/computation-samtoolssort-shard-0-9640891",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SamtoolsSort (shard=0)",
+      "description": "Cromwell call of WDL task 'SamtoolsSort', scatter shard 0",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-a-bam-c796871"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtoolssort-ee6c604"
+        }
+      ]
+    },
+    "ark:59853/dataset-a-sorted-bam-feab38c": {
+      "@id": "ark:59853/dataset-a-sorted-bam-feab38c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.sorted.bam",
+      "description": "File 'A.sorted.bam' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtoolssort-shard-0-9640891"
+      }
+    },
+    "ark:59853/software-samtoolsindex-3eb355e": {
+      "@id": "ark:59853/software-samtoolsindex-3eb355e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "SamtoolsIndex",
+      "description": "task SamtoolsIndex {\n    input {\n        String sample\n        File bam\n    }\n\n    command <<<\n        set -euo pipefail\n        # the index has to sit beside the bam it indexes\n        ln -s ~{bam} ~{sample}.sorted.bam\n        samtools index ~{sample}.sorted.bam\n    >>>\n\n    output {\n        File index = \"~{sample}.sorted.bam.bai\"\n    }\n}"
+    },
+    "ark:59853/computation-samtoolsindex-shard-0-3376a7c": {
+      "@id": "ark:59853/computation-samtoolsindex-shard-0-3376a7c",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SamtoolsIndex (shard=0)",
+      "description": "Cromwell call of WDL task 'SamtoolsIndex', scatter shard 0",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtoolsindex-3eb355e"
+        }
+      ]
+    },
+    "ark:59853/dataset-a-sorted-bam-bai-8967d81": {
+      "@id": "ark:59853/dataset-a-sorted-bam-bai-8967d81",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "A.sorted.bam.bai",
+      "description": "File 'A.sorted.bam.bai' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtoolsindex-shard-0-3376a7c"
+      }
+    },
+    "ark:59853/dataset-b-fastq-2b74d7b": {
+      "@id": "ark:59853/dataset-b-fastq-2b74d7b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.fastq",
+      "description": "Input file 'B.fastq' used by the Cromwell workflow run"
+    },
+    "ark:59853/computation-bwamem-shard-1-6e07ad5": {
+      "@id": "ark:59853/computation-bwamem-shard-1-6e07ad5",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "BwaMem (shard=1)",
+      "description": "Cromwell call of WDL task 'BwaMem', scatter shard 1",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-amb-b40fe72"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-bwt-3de43e1"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ann-d6d8f1f"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ad35c32"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-sa-3c8a8cf"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-pac-338e032"
+        },
+        {
+          "@id": "ark:59853/dataset-b-fastq-2b74d7b"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bwamem-8402ed5"
+        }
+      ]
+    },
+    "ark:59853/dataset-b-bam-c5ee69f": {
+      "@id": "ark:59853/dataset-b-bam-c5ee69f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.bam",
+      "description": "File 'B.bam' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bwamem-shard-1-6e07ad5"
+      }
+    },
+    "ark:59853/computation-samtoolssort-shard-1-6c00821": {
+      "@id": "ark:59853/computation-samtoolssort-shard-1-6c00821",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SamtoolsSort (shard=1)",
+      "description": "Cromwell call of WDL task 'SamtoolsSort', scatter shard 1",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-b-bam-c5ee69f"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtoolssort-ee6c604"
+        }
+      ]
+    },
+    "ark:59853/dataset-b-sorted-bam-a762e31": {
+      "@id": "ark:59853/dataset-b-sorted-bam-a762e31",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.sorted.bam",
+      "description": "File 'B.sorted.bam' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtoolssort-shard-1-6c00821"
+      }
+    },
+    "ark:59853/computation-samtoolsindex-shard-1-8842a0f": {
+      "@id": "ark:59853/computation-samtoolsindex-shard-1-8842a0f",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SamtoolsIndex (shard=1)",
+      "description": "Cromwell call of WDL task 'SamtoolsIndex', scatter shard 1",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtoolsindex-3eb355e"
+        }
+      ]
+    },
+    "ark:59853/dataset-b-sorted-bam-bai-50ef104": {
+      "@id": "ark:59853/dataset-b-sorted-bam-bai-50ef104",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "B.sorted.bam.bai",
+      "description": "File 'B.sorted.bam.bai' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtoolsindex-shard-1-8842a0f"
+      }
+    },
+    "ark:59853/dataset-c-fastq-834f7f0": {
+      "@id": "ark:59853/dataset-c-fastq-834f7f0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.fastq",
+      "description": "Input file 'C.fastq' used by the Cromwell workflow run"
+    },
+    "ark:59853/computation-bwamem-shard-2-a914867": {
+      "@id": "ark:59853/computation-bwamem-shard-2-a914867",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "BwaMem (shard=2)",
+      "description": "Cromwell call of WDL task 'BwaMem', scatter shard 2",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-amb-b40fe72"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-bwt-3de43e1"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ann-d6d8f1f"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-ad35c32"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-sa-3c8a8cf"
+        },
+        {
+          "@id": "ark:59853/dataset-genome-fa-pac-338e032"
+        },
+        {
+          "@id": "ark:59853/dataset-c-fastq-834f7f0"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bwamem-8402ed5"
+        }
+      ]
+    },
+    "ark:59853/dataset-c-bam-22ad6db": {
+      "@id": "ark:59853/dataset-c-bam-22ad6db",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.bam",
+      "description": "File 'C.bam' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bwamem-shard-2-a914867"
+      }
+    },
+    "ark:59853/computation-samtoolssort-shard-2-c978d5d": {
+      "@id": "ark:59853/computation-samtoolssort-shard-2-c978d5d",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SamtoolsSort (shard=2)",
+      "description": "Cromwell call of WDL task 'SamtoolsSort', scatter shard 2",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-c-bam-22ad6db"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtoolssort-ee6c604"
+        }
+      ]
+    },
+    "ark:59853/dataset-c-sorted-bam-4b72a7d": {
+      "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.sorted.bam",
+      "description": "File 'C.sorted.bam' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtoolssort-shard-2-c978d5d"
+      }
+    },
+    "ark:59853/computation-samtoolsindex-shard-2-5ea9730": {
+      "@id": "ark:59853/computation-samtoolsindex-shard-2-5ea9730",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SamtoolsIndex (shard=2)",
+      "description": "Cromwell call of WDL task 'SamtoolsIndex', scatter shard 2",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-samtoolsindex-3eb355e"
+        }
+      ]
+    },
+    "ark:59853/dataset-c-sorted-bam-bai-2e89357": {
+      "@id": "ark:59853/dataset-c-sorted-bam-bai-2e89357",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "C.sorted.bam.bai",
+      "description": "File 'C.sorted.bam.bai' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-samtoolsindex-shard-2-5ea9730"
+      }
+    },
+    "ark:59853/software-bcftoolscall-97b4d8e": {
+      "@id": "ark:59853/software-bcftoolscall-97b4d8e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "BcftoolsCall",
+      "description": "task BcftoolsCall {\n    input {\n        File reference\n        Array[File] bams\n        Array[File] bais\n        String mpileup_options\n        String call_options\n    }\n\n    command <<<\n        set -euo pipefail\n        # pile the alignments and their indexes back into one directory\n        mkdir -p alignments\n        for bam in ~{sep=' ' bams}; do ln -s \"$bam\" alignments/; done\n        for bai in ~{sep=' ' bais}; do ln -s \"$bai\" alignments/; done\n\n        bcftools mpileup ~{mpileup_options} -f ~{reference} alignments/*.bam \\\n            | bcftools call ~{call_options} -o all.vcf\n    >>>\n\n    output {\n        File vcf = \"all.vcf\"\n    }\n}"
+    },
+    "ark:59853/computation-bcftoolscall-8ea519b": {
+      "@id": "ark:59853/computation-bcftoolscall-8ea519b",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "BcftoolsCall",
+      "description": "Cromwell call of WDL task 'BcftoolsCall'",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-genome-fa-ad35c32"
+        },
+        {
+          "@id": "ark:59853/dataset-a-sorted-bam-bai-8967d81"
+        },
+        {
+          "@id": "ark:59853/dataset-b-sorted-bam-bai-50ef104"
+        },
+        {
+          "@id": "ark:59853/dataset-c-sorted-bam-bai-2e89357"
+        },
+        {
+          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+        },
+        {
+          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+        },
+        {
+          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-bcftoolscall-97b4d8e"
+        }
+      ]
+    },
+    "ark:59853/dataset-all-vcf-07f232c": {
+      "@id": "ark:59853/dataset-all-vcf-07f232c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "all.vcf",
+      "description": "File 'all.vcf' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-bcftoolscall-8ea519b"
+      }
+    },
+    "ark:59853/software-plotquals-7f60f50": {
+      "@id": "ark:59853/software-plotquals-7f60f50",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "PlotQuals",
+      "description": "task PlotQuals {\n    input {\n        File vcf\n    }\n\n    command <<<\n        set -euo pipefail\n        python3 <<'PYTHON'\n        import matplotlib\n        matplotlib.use(\"Agg\")\n        import matplotlib.pyplot as plt\n        from pysam import VariantFile\n\n        quals = [record.qual for record in VariantFile(\"~{vcf}\")]\n\n        figure, axes = plt.subplots(figsize=(6, 4))\n        axes.hist(quals, bins=30, color=\"#3b6ea5\", edgecolor=\"white\")\n        axes.set_xlabel(\"variant quality (Phred)\")\n        axes.set_ylabel(\"variants\")\n        axes.set_title(f\"{len(quals)} variants called across all samples\")\n        figure.tight_layout()\n        figure.savefig(\"quals.svg\")\n        PYTHON\n    >>>\n\n    output {\n        File plot = \"quals.svg\"\n    }\n}"
+    },
+    "ark:59853/computation-plotquals-35cec30": {
+      "@id": "ark:59853/computation-plotquals-35cec30",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "PlotQuals",
+      "description": "Cromwell call of WDL task 'PlotQuals'",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-all-vcf-07f232c"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-plotquals-7f60f50"
+        }
+      ]
+    },
+    "ark:59853/dataset-quals-svg-130641f": {
+      "@id": "ark:59853/dataset-quals-svg-130641f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "quals.svg",
+      "description": "File 'quals.svg' produced by the Cromwell workflow run",
+      "generatedBy": {
+        "@id": "ark:59853/computation-plotquals-35cec30"
+      }
+    }
+  },
+  "condensation_stats": {
+    "condensed": false,
+    "originalEntityCount": 36,
+    "condensedEntityCount": 36,
+    "datasetGroupCount": 0
+  }
+}

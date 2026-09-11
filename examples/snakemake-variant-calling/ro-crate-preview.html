@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variant calling on three sequenced samples - RO-Crate Preview</title>
+    <style>
+      :root {
+        --color-primary: #1f3a52;
+        --color-primary-dark: #16293a;
+        --color-accent: #2d7dd2;
+        --color-bg: #f4f6f9;
+        --color-surface: #ffffff;
+        --color-surface-alt: #f8fafc;
+        --color-border: #e3e8ee;
+        --color-text: #24323f;
+        --color-text-muted: #5d6b7a;
+        --radius: 10px;
+        --radius-sm: 6px;
+        --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.06),
+          0 1px 3px rgba(16, 24, 40, 0.1);
+        --font-sans: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+      body {
+        font-family: var(--font-sans);
+        margin: 0;
+        padding: 0;
+        color: var(--color-text);
+        line-height: 1.55;
+        background-color: var(--color-bg);
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px 24px;
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-card);
+      }
+      header {
+        margin-bottom: 18px;
+        padding: 26px 24px 22px;
+        border-radius: var(--radius);
+        background: linear-gradient(
+          135deg,
+          var(--color-primary-dark) 0%,
+          var(--color-primary) 55%,
+          #2a5078 100%
+        );
+        color: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin: 0 0 10px 0;
+        color: #fff;
+      }
+      h2 {
+        font-size: 19px;
+        color: var(--color-primary);
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        border-left: 4px solid var(--color-accent);
+        letter-spacing: -0.01em;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .badge-row .badge {
+        display: inline-block;
+        padding: 3px 12px;
+        border-radius: 999px;
+        background-color: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        color: #fff;
+        font-size: 12.5px;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .badge-row a.badge:hover {
+        background-color: rgba(255, 255, 255, 0.26);
+      }
+      .summary-section {
+        background-color: var(--color-surface);
+        padding: 16px 18px;
+        border-radius: var(--radius);
+        margin-bottom: 24px;
+        border: 1px solid var(--color-border);
+        box-shadow: var(--shadow-card);
+        page-break-inside: avoid;
+      }
+      .summary-row {
+        display: flex;
+        margin-bottom: 0;
+        border-bottom: 1px solid var(--color-border);
+        padding: 7px 0;
+      }
+      .summary-row:last-child {
+        border-bottom: none;
+      }
+      .summary-label {
+        width: 220px;
+        flex-shrink: 0;
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--color-text-muted);
+        padding-top: 2px;
+      }
+      .summary-value {
+        flex: 1;
+      }
+      .tabs {
+        display: flex;
+        border-bottom: 2px solid var(--color-border);
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+      .tab {
+        padding: 10px 14px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+        transition: color 0.15s ease;
+      }
+      .tab:hover {
+        color: var(--color-primary);
+      }
+      .tab.active {
+        border-bottom: 3px solid var(--color-accent);
+        color: var(--color-primary);
+      }
+      .tab .badge {
+        display: inline-block;
+        background-color: var(--color-surface-alt);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        padding: 1px 8px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        margin-left: 5px;
+      }
+      .tab.active .badge {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #fff;
+      }
+      .tab-content {
+        margin-bottom: 30px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-card);
+        table-layout: fixed;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--color-border);
+        word-wrap: break-word;
+      }
+      th {
+        background-color: var(--color-surface-alt);
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--color-text-muted);
+        border-bottom: 2px solid var(--color-border);
+      }
+      tr:nth-child(even) {
+        background-color: var(--color-surface-alt);
+      }
+      tr:hover {
+        background-color: #eef5fc;
+      }
+      td:nth-child(2) {
+        max-width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      td:nth-child(2)[title] {
+        cursor: help;
+      }
+      .publications-list {
+        margin: 5px 0 0 15px;
+        padding: 0;
+        list-style: disc;
+      }
+      .publications-list li {
+        margin-bottom: 6px;
+      }
+      .schema-details {
+        margin: 0;
+        padding: 15px;
+        background-color: var(--color-surface-alt);
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .schema-details-container {
+        padding: 0;
+      }
+      .toggle-schema,
+      .toggle-computation {
+        cursor: pointer;
+        color: var(--color-accent);
+        text-decoration: underline;
+        white-space: nowrap;
+      }
+      .computation-meta {
+        margin-bottom: 10px;
+      }
+      .computation-meta div {
+        margin-bottom: 4px;
+      }
+      .io-heading {
+        font-weight: 600;
+        margin: 12px 0 6px;
+      }
+      .io-crate {
+        color: var(--color-text-muted);
+        font-size: 0.85em;
+      }
+      .mono-id {
+        font-family: monospace;
+        font-size: 0.85em;
+        word-break: break-all;
+      }
+      .computation-command {
+        display: block;
+        padding: 8px 12px;
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        font-family: monospace;
+        font-size: 0.85em;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .properties-table {
+        margin: 0;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+      }
+      .properties-table th,
+      .properties-table td {
+        padding: 8px 12px;
+        background-color: var(--color-surface);
+      }
+      .properties-table th {
+        background-color: var(--color-surface-alt);
+      }
+      .schema-properties-row {
+        background-color: var(--color-surface-alt) !important;
+      }
+      tr.schema-row:hover
+        + tr.schema-properties-row:not([style*="display: none"]) {
+        background-color: #eef5fc !important;
+      }
+      a {
+        color: var(--color-accent);
+      }
+      @media print {
+        body {
+          font-size: 11pt;
+          background-color: white;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        .container {
+          max-width: 100%;
+          padding: 10px;
+          box-shadow: none;
+        }
+        table {
+          border: 1px solid var(--color-border);
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+        }
+        th,
+        td {
+          border: 1px solid var(--color-border);
+        }
+        .tab-content {
+          display: block !important;
+          page-break-before: always;
+        }
+        .tab-content:first-of-type {
+          page-break-before: avoid;
+        }
+        .tabs {
+          display: none;
+        }
+        .summary-section {
+          box-shadow: none;
+        }
+        h1 {
+          font-size: 18pt;
+        }
+      }
+      @media (max-width: 768px) {
+        .summary-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .summary-label {
+          width: 100%;
+          margin-bottom: 3px;
+        }
+        .summary-value {
+          width: 100%;
+        }
+        td:nth-child(2) {
+          white-space: normal;
+        }
+        .tabs {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Variant calling on three sequenced samples</h1>
+        <div class="badge-row">
+          <span class="badge">Version 1.0</span>
+          <a class="badge" href="https://spdx.org/licenses/CC-BY-4.0" target="_blank" rel="noopener" title="https://spdx.org/licenses/CC-BY-4.0">License ↗</a>
+          <span class="badge">Released 2026-09-11T13:35:02.543766-04:00</span>
+        </div>
+      </header>
+
+      <div class="summary-section">
+        <h2>RO-Crate Summary</h2>
+        <div class="summary-row">
+          <div class="summary-label">ROCrate ID</div>
+          <div class="summary-value" id="accession">
+ ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-68f3c95           </div>
+        </div>
+         <div class="summary-row">
+          <div class="summary-label">Release Date</div>
+          <div class="summary-value" id="release-date">2026-09-11T13:35:02.543766-04:00</div>
+        </div>
+           <div class="summary-row">
+          <div class="summary-label">Description</div>
+          <div class="summary-value" id="description">Reads from three samples aligned to the reference with bwa-mem, sorted and indexed with samtools, and jointly called with bcftools; a Snakemake run captured as an EVI RO-Crate.</div>
+        </div>
+         <div class="summary-row">
+          <div class="summary-label">Authors</div>
+          <div class="summary-value" id="authors">Example Researcher</div>
+        </div>
+            <div class="summary-row">
+          <div class="summary-label">License</div>
+          <div class="summary-value" id="license">
+            <a href="https://spdx.org/licenses/CC-BY-4.0" target="_blank"
+              >https://spdx.org/licenses/CC-BY-4.0</a
+            >
+          </div>
+        </div>
+          <div class="summary-row">
+          <div class="summary-label">Keywords</div>
+          <div class="summary-value" id="keywords">
+snakemake, variant calling, bwa, bcftools, genomics          </div>
+        </div>
+         </div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="datasets">
+          Datasets <span class="badge">22</span>
+        </div>
+         <div
+          class="tab "
+          data-tab="software"
+        >
+          Software <span class="badge">8</span>
+        </div>
+         <div
+          class="tab "
+          data-tab="computations"
+        >
+          Computations <span class="badge">13</span>
+        </div>
+            <div
+          class="tab "
+          data-tab="schemas"
+        >
+          Schemas <span class="badge">1</span>
+        </div>
+       </div>
+
+          <div
+        id="datasets-content"
+        class="tab-content"
+        style="display: block;"
+      >
+        <table id="datasets-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Release Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>config.yaml</td>
+              <td
+title="Snakemake configuration file 'config.yaml' for this run"
+              >
+                Snakemake configuration file 'config.yaml' for this run
+              </td>
+              <td><a href='config.yaml'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa</td>
+              <td
+title="Input file 'data/genome.fa' used by the Snakemake workflow run"
+              >
+                Input file 'data/genome.fa' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/genome.fa'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.amb</td>
+              <td
+title="Input file 'data/genome.fa.amb' used by the Snakemake workflow run"
+              >
+                Input file 'data/genome.fa.amb' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/genome.fa.amb'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.ann</td>
+              <td
+title="Input file 'data/genome.fa.ann' used by the Snakemake workflow run"
+              >
+                Input file 'data/genome.fa.ann' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/genome.fa.ann'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.bwt</td>
+              <td
+title="Input file 'data/genome.fa.bwt' used by the Snakemake workflow run"
+              >
+                Input file 'data/genome.fa.bwt' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/genome.fa.bwt'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.pac</td>
+              <td
+title="Input file 'data/genome.fa.pac' used by the Snakemake workflow run"
+              >
+                Input file 'data/genome.fa.pac' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/genome.fa.pac'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>genome.fa.sa</td>
+              <td
+title="Input file 'data/genome.fa.sa' used by the Snakemake workflow run"
+              >
+                Input file 'data/genome.fa.sa' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/genome.fa.sa'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>A.fastq</td>
+              <td
+title="Input file 'data/samples/A.fastq' used by the Snakemake workflow run"
+              >
+                Input file 'data/samples/A.fastq' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/samples/A.fastq'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>B.fastq</td>
+              <td
+title="Input file 'data/samples/B.fastq' used by the Snakemake workflow run"
+              >
+                Input file 'data/samples/B.fastq' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/samples/B.fastq'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>C.fastq</td>
+              <td
+title="Input file 'data/samples/C.fastq' used by the Snakemake workflow run"
+              >
+                Input file 'data/samples/C.fastq' used by the Snakemake workflow run
+              </td>
+              <td><a href='data/samples/C.fastq'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>all.vcf</td>
+              <td
+title="File 'results/calls/all.vcf' produced by the Snakemake workflow run"
+              >
+                File 'results/calls/all.vcf' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/calls/all.vcf'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>variant_summary.tsv</td>
+              <td
+title="File 'results/calls/variant_summary.tsv' produced by the Snakemake workflow run"
+              >
+                File 'results/calls/variant_summary.tsv' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/calls/variant_summary.tsv'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>A.bam</td>
+              <td
+title="File 'results/mapped/A.bam' produced by the Snakemake workflow run"
+              >
+                File 'results/mapped/A.bam' produced by the Snakemake workflow run
+              </td>
+              <td>Not specified</td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>B.bam</td>
+              <td
+title="File 'results/mapped/B.bam' produced by the Snakemake workflow run"
+              >
+                File 'results/mapped/B.bam' produced by the Snakemake workflow run
+              </td>
+              <td>Not specified</td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>C.bam</td>
+              <td
+title="File 'results/mapped/C.bam' produced by the Snakemake workflow run"
+              >
+                File 'results/mapped/C.bam' produced by the Snakemake workflow run
+              </td>
+              <td>Not specified</td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>quals.svg</td>
+              <td
+title="File 'results/plots/quals.svg' produced by the Snakemake workflow run"
+              >
+                File 'results/plots/quals.svg' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/plots/quals.svg'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>A.bam</td>
+              <td
+title="File 'results/sorted/A.bam' produced by the Snakemake workflow run"
+              >
+                File 'results/sorted/A.bam' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/sorted/A.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>A.bam.bai</td>
+              <td
+title="File 'results/sorted/A.bam.bai' produced by the Snakemake workflow run"
+              >
+                File 'results/sorted/A.bam.bai' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/sorted/A.bam.bai'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>B.bam</td>
+              <td
+title="File 'results/sorted/B.bam' produced by the Snakemake workflow run"
+              >
+                File 'results/sorted/B.bam' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/sorted/B.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>B.bam.bai</td>
+              <td
+title="File 'results/sorted/B.bam.bai' produced by the Snakemake workflow run"
+              >
+                File 'results/sorted/B.bam.bai' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/sorted/B.bam.bai'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>C.bam</td>
+              <td
+title="File 'results/sorted/C.bam' produced by the Snakemake workflow run"
+              >
+                File 'results/sorted/C.bam' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/sorted/C.bam'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+            <tr>
+              <td>C.bam.bai</td>
+              <td
+title="File 'results/sorted/C.bam.bai' produced by the Snakemake workflow run"
+              >
+                File 'results/sorted/C.bam.bai' produced by the Snakemake workflow run
+              </td>
+              <td><a href='results/sorted/C.bam.bai'>Access / Download</a></td>
+              <td>2026-09-11T13:35:02.543766-04:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       <div
+        id="software-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <table id="software-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Release Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Snakefile</td>
+              <td
+title="Snakemake workflow definition 'Snakefile' for this run"
+              >
+                Snakemake workflow definition 'Snakefile' for this run
+              </td>
+              <td><a href='Snakefile'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>Snakemake</td>
+              <td
+title="Snakemake workflow management system (https://snakemake.github.io/)"
+              >
+                Snakemake workflow management system (https://snakemake.github.io/)
+              </td>
+              <td><a href='https://github.com/snakemake/snakemake'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>bcftools_call</td>
+              <td
+title="(bcftools mpileup {params.mpileup} -f {input.genome} {input.bam} | bcftools call {params.call} -o {output}) 2> {log}"
+              >
+                (bcftools mpileup {params.mpileup} -f {input.genome} {input.bam} | bcftools call {params.call} -o {o...
+              </td>
+              <td><a href='Snakefile'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>bwa_map</td>
+              <td
+title="bwa mem -t {threads} -R '{params.read_group}' {input.genome} {input.reads} 2> {log} | samtools view -Sb - > {output}"
+              >
+                bwa mem -t {threads} -R '{params.read_group}' {input.genome} {input.reads} 2> {log} | samtools view ...
+              </td>
+              <td><a href='Snakefile'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>plot_quals</td>
+              <td
+title=""""Plot the quality-score distribution of the called variants.
+
+Snakemake runs this with a ``snakemake`` object in scope carrying the rule's
+input and output paths — which is also why the crate records this file as the
+rule's Software rather than a shell command.
+"""
+
+import matplotlib
+
+matplotlib.use("Agg")
+
+import matplotlib.pyplot as plt
+from pysam import VariantFile
+
+quals = [record.qual for record in VariantFile(snakemake.input[0])]
+
+figure, axes = plt.subplots(figsize=(6, 4))
+axes.hist(quals, bins=30, color="#3b6ea5", edgecolor="white")
+axes.set_xlabel("variant quality (Phred)")
+axes.set_ylabel("variants")
+axes.set_title(f"{len(quals)} variants called across all samples")
+figure.tight_layout()
+figure.savefig(snakemake.output[0])"
+              >
+                """Plot the quality-score distribution of the called variants.
+
+Snakemake runs this with a ``snakema...
+              </td>
+              <td><a href='scripts/plot_quals.py'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>samtools_index</td>
+              <td
+title="samtools index {input}"
+              >
+                samtools index {input}
+              </td>
+              <td><a href='Snakefile'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>samtools_sort</td>
+              <td
+title="samtools sort -T results/sorted/{wildcards.sample} -O bam {input} > {output} 2> {log}"
+              >
+                samtools sort -T results/sorted/{wildcards.sample} -O bam {input} > {output} 2> {log}
+              </td>
+              <td><a href='Snakefile'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>variant_summary</td>
+              <td
+title="(printf 'chrom\tpos\tref\talt\tquality\tdepth\n'; bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%INFO/DP\n' {input}) > {output}"
+              >
+                (printf 'chrom\tpos\tref\talt\tquality\tdepth\n'; bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL...
+              </td>
+              <td><a href='Snakefile'>Access / Download</a></td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       <div
+        id="computations-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <table id="computations-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Date Created</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="schema-row" id="computation-row-1">
+              <td>Snakemake workflow run of 'Snakefile'</td>
+              <td
+title="Execution of the Snakemake workflow 'Snakefile', reconstructed post-hoc from Snakemake's persistence metadata by snakemake-report-plugin-fairscape"
+              >
+                Execution of the Snakemake workflow 'Snakefile', reconstructed post-hoc from Snakemake's persistence...
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="1"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-1"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (9)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-f891ca0</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-c2df282</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-936b248</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-0a9c7e3</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-28b255e</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-90bdcc1</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-fastq-d4611b6</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-fastq-7ed58c5</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-fastq-bef0063</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (2)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>variant_summary.tsv</td>
+                        <td class="mono-id">ark:59853/dataset-variant-summary-tsv-71310c4</td>
+                        <td>text, tab-separated-values</td>
+                      </tr>
+                      <tr>
+                        <td>quals.svg</td>
+                        <td class="mono-id">ark:59853/dataset-quals-svg-81b3cdb</td>
+                        <td>image, svg+xml</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Snakefile</td>
+                        <td class="mono-id">ark:59853/software-snakefile-68f3c95</td>
+                      </tr>
+                      <tr>
+                        <td>Snakemake</td>
+                        <td class="mono-id">ark:59853/software-snakemake-059f146</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">snakemake</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-2">
+              <td>bcftools_call</td>
+              <td
+title="Snakemake job for rule 'bcftools_call'"
+              >
+                Snakemake job for rule 'bcftools_call'
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="2"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-2"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bcftools-call-c76dde6</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-f891ca0</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-c0907f3</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.bam.bai                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-bai-9ebeb4d</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-cbee9ae</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.bam.bai                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-bai-6a20e1e</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-7ccb833</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.bam.bai                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-bai-39648ed</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>all.vcf</td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-637cf3e</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>bcftools_call</td>
+                        <td class="mono-id">ark:59853/software-bcftools-call-7c9ed78</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">(bcftools mpileup -d 250 -a AD,DP -f data/genome.fa results/sorted/A.bam results/sorted/B.bam results/sorted/C.bam | bcftools call -mv -Ov -o results/calls/all.vcf) 2> logs/bcftools_call/all.log</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-3">
+              <td>bwa_map (sample=A)</td>
+              <td
+title="Snakemake job for rule 'bwa_map' with wildcards {'sample': 'A'}"
+              >
+                Snakemake job for rule 'bwa_map' with wildcards {'sample': 'A'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="3"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-3"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bwa-map-sample-a-9183688</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-f891ca0</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-c2df282</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-936b248</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-0a9c7e3</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-28b255e</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-90bdcc1</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          A.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-fastq-d4611b6</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.bam</td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-016e31c</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>bwa_map</td>
+                        <td class="mono-id">ark:59853/software-bwa-map-0bcb380</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">bwa mem -t 2 -R '@RG\tID:A\tSM:A\tPL:ILLUMINA' data/genome.fa data/samples/A.fastq 2> logs/bwa_map/A.log | samtools view -Sb - > results/mapped/A.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-4">
+              <td>bwa_map (sample=B)</td>
+              <td
+title="Snakemake job for rule 'bwa_map' with wildcards {'sample': 'B'}"
+              >
+                Snakemake job for rule 'bwa_map' with wildcards {'sample': 'B'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="4"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-4"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bwa-map-sample-b-5025f30</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-f891ca0</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-c2df282</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-936b248</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-0a9c7e3</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-28b255e</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-90bdcc1</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          B.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-fastq-7ed58c5</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B.bam</td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-6b7c70e</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>bwa_map</td>
+                        <td class="mono-id">ark:59853/software-bwa-map-0bcb380</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">bwa mem -t 2 -R '@RG\tID:B\tSM:B\tPL:ILLUMINA' data/genome.fa data/samples/B.fastq 2> logs/bwa_map/B.log | samtools view -Sb - > results/mapped/B.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-5">
+              <td>bwa_map (sample=C)</td>
+              <td
+title="Snakemake job for rule 'bwa_map' with wildcards {'sample': 'C'}"
+              >
+                Snakemake job for rule 'bwa_map' with wildcards {'sample': 'C'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="5"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-5"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-bwa-map-sample-c-c80046e</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (7)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          genome.fa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-f891ca0</td>
+                        <td>text, x-fasta</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.amb                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-amb-c2df282</td>
+                        <td>amb</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.ann                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-ann-936b248</td>
+                        <td>ann</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.bwt                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-bwt-0a9c7e3</td>
+                        <td>bwt</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.pac                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-pac-28b255e</td>
+                        <td>application, x-ns-proxy-autoconfig</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          genome.fa.sa                        </td>
+                        <td class="mono-id">ark:59853/dataset-genome-fa-sa-90bdcc1</td>
+                        <td>sa</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          C.fastq                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-fastq-bef0063</td>
+                        <td>text, x-fastq</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C.bam</td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-3e0f2ac</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>bwa_map</td>
+                        <td class="mono-id">ark:59853/software-bwa-map-0bcb380</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">bwa mem -t 2 -R '@RG\tID:C\tSM:C\tPL:ILLUMINA' data/genome.fa data/samples/C.fastq 2> logs/bwa_map/C.log | samtools view -Sb - > results/mapped/C.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-6">
+              <td>plot_quals</td>
+              <td
+title="Snakemake job for rule 'plot_quals'"
+              >
+                Snakemake job for rule 'plot_quals'
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="6"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-6"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-plot-quals-8e2e10d</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          all.vcf                        </td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-637cf3e</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>quals.svg</td>
+                        <td class="mono-id">ark:59853/dataset-quals-svg-81b3cdb</td>
+                        <td>image, svg+xml</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>plot_quals</td>
+                        <td class="mono-id">ark:59853/software-plot-quals-d88cf8f</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">script: scripts/plot_quals.py</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-7">
+              <td>samtools_index (sample=A)</td>
+              <td
+title="Snakemake job for rule 'samtools_index' with wildcards {'sample': 'A'}"
+              >
+                Snakemake job for rule 'samtools_index' with wildcards {'sample': 'A'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="7"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-7"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtools-index-sample-a-13242d2</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          A.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-c0907f3</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.bam.bai</td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-bai-9ebeb4d</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>samtools_index</td>
+                        <td class="mono-id">ark:59853/software-samtools-index-b6cd086</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">samtools index results/sorted/A.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-8">
+              <td>samtools_index (sample=B)</td>
+              <td
+title="Snakemake job for rule 'samtools_index' with wildcards {'sample': 'B'}"
+              >
+                Snakemake job for rule 'samtools_index' with wildcards {'sample': 'B'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="8"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-8"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtools-index-sample-b-f89dac4</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          B.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-cbee9ae</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B.bam.bai</td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-bai-6a20e1e</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>samtools_index</td>
+                        <td class="mono-id">ark:59853/software-samtools-index-b6cd086</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">samtools index results/sorted/B.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-9">
+              <td>samtools_index (sample=C)</td>
+              <td
+title="Snakemake job for rule 'samtools_index' with wildcards {'sample': 'C'}"
+              >
+                Snakemake job for rule 'samtools_index' with wildcards {'sample': 'C'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="9"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-9"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtools-index-sample-c-d37cbd8</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          C.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-7ccb833</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C.bam.bai</td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-bai-39648ed</td>
+                        <td>application, octet-stream</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>samtools_index</td>
+                        <td class="mono-id">ark:59853/software-samtools-index-b6cd086</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">samtools index results/sorted/C.bam</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-10">
+              <td>samtools_sort (sample=A)</td>
+              <td
+title="Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'A'}"
+              >
+                Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'A'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="10"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-10"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtools-sort-sample-a-3bd01fd</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          A.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-016e31c</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A.bam</td>
+                        <td class="mono-id">ark:59853/dataset-a-bam-c0907f3</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>samtools_sort</td>
+                        <td class="mono-id">ark:59853/software-samtools-sort-65f7fb4</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">samtools sort -T results/sorted/A -O bam results/mapped/A.bam > results/sorted/A.bam 2> logs/samtools_sort/A.log</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-11">
+              <td>samtools_sort (sample=B)</td>
+              <td
+title="Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'B'}"
+              >
+                Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'B'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="11"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-11"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtools-sort-sample-b-74d837f</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          B.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-6b7c70e</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B.bam</td>
+                        <td class="mono-id">ark:59853/dataset-b-bam-cbee9ae</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>samtools_sort</td>
+                        <td class="mono-id">ark:59853/software-samtools-sort-65f7fb4</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">samtools sort -T results/sorted/B -O bam results/mapped/B.bam > results/sorted/B.bam 2> logs/samtools_sort/B.log</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-12">
+              <td>samtools_sort (sample=C)</td>
+              <td
+title="Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'C'}"
+              >
+                Snakemake job for rule 'samtools_sort' with wildcards {'sample': 'C'}
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="12"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-12"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-samtools-sort-sample-c-1828156</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          C.bam                        </td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-3e0f2ac</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C.bam</td>
+                        <td class="mono-id">ark:59853/dataset-c-bam-7ccb833</td>
+                        <td>application, x-bam</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>samtools_sort</td>
+                        <td class="mono-id">ark:59853/software-samtools-sort-65f7fb4</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">samtools sort -T results/sorted/C -O bam results/mapped/C.bam > results/sorted/C.bam 2> logs/samtools_sort/C.log</code>
+                 </div>
+              </td>
+            </tr>
+             <tr class="schema-row" id="computation-row-13">
+              <td>variant_summary</td>
+              <td
+title="Snakemake job for rule 'variant_summary'"
+              >
+                Snakemake job for rule 'variant_summary'
+              </td>
+              <td>Not specified</td>
+              <td>N/A</td>
+              <td>
+                <span
+                  class="toggle-computation"
+                  data-computation-id="13"
+                  >Show Details</span
+                >
+              </td>
+            </tr>
+             <tr
+              class="schema-properties-row"
+              id="computation-details-row-13"
+              style="display: none"
+            >
+              <td colspan="5" class="schema-details-container">
+                <div class="schema-details">
+                  <div class="computation-meta">
+                     <div>
+                      <strong>Computation @id:</strong>
+                      <span class="mono-id">ark:59853/computation-variant-summary-d29c059</span>
+                    </div>
+                  </div>
+                  <div class="io-heading">
+                    Inputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          all.vcf                        </td>
+                        <td class="mono-id">ark:59853/dataset-all-vcf-637cf3e</td>
+                        <td>text, x-vcf</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">
+                    Outputs (1)
+                  </div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                        <th>Format</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>variant_summary.tsv</td>
+                        <td class="mono-id">ark:59853/dataset-variant-summary-tsv-71310c4</td>
+                        <td>text, tab-separated-values</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Software Used</div>
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>@id</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>variant_summary</td>
+                        <td class="mono-id">ark:59853/software-variant-summary-aea5e1b</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   <div class="io-heading">Command</div>
+                  <code class="computation-command">(printf 'chrom\tpos\tref\talt\tquality\tdepth\n'; bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%INFO/DP\n' results/calls/all.vcf) > results/calls/variant_summary.tsv</code>
+                 </div>
+              </td>
+            </tr>
+           </tbody>
+        </table>
+      </div>
+       <div
+        id="samples-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No samples found in this RO-Crate.</p>
+      </div>
+       <div
+        id="experiments-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No experiments found in this RO-Crate.</p>
+      </div>
+       <div
+        id="instruments-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No instruments found in this RO-Crate.</p>
+      </div>
+       <div
+        id="schemas-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <table id="schemas-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Access</th>
+              <th>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="schema-row" id="schema-row-1">
+              <td>Schema for variant_summary.tsv</td>
+              <td
+title="Schema inferred from the tsv file 'results/calls/variant_summary.tsv' by snakemake-report-plugin-fairscape"
+              >
+                Schema inferred from the tsv file 'results/calls/variant_summary.tsv' by snakemake-report-plugin-fai...
+              </td>
+              <td>Not specified</td>
+              <td>
+                <span class="toggle-schema" data-schema-id="1"
+                  >Show Properties</span
+                >
+              </td>
+            </tr>
+            <tr
+              class="schema-properties-row"
+              id="schema-details-row-1"
+              style="display: none"
+            >
+              <td colspan="4" class="schema-details-container">
+                <div
+                  id="schema-details-1"
+                  class="schema-details"
+                >
+                  <table class="properties-table">
+                    <thead>
+                      <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>chrom</td>
+                        <td>string</td>
+                        <td>
+                          Column chrom
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>pos</td>
+                        <td>integer</td>
+                        <td>
+                          Column pos
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ref</td>
+                        <td>string</td>
+                        <td>
+                          Column ref
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>alt</td>
+                        <td>string</td>
+                        <td>
+                          Column alt
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>quality</td>
+                        <td>number</td>
+                        <td>
+                          Column quality
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>depth</td>
+                        <td>integer</td>
+                        <td>
+                          Column depth
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+           </tbody>
+        </table>
+      </div>
+       <div
+        id="other-content"
+        class="tab-content"
+        style="display: none;"
+      >
+        <p>No other found in this RO-Crate.</p>
+      </div>
+
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".tab");
+        if (!tabs.length) return;
+
+        const activeTab = document.querySelector(".tab.active");
+        if (!activeTab) {
+          // Ensure first tab with content is active if none are pre-set
+          let firstContentTab = null;
+          for (let i = 0; i < tabs.length; i++) {
+            const tabId = tabs[i].getAttribute("data-tab");
+            const content = document.getElementById(`${tabId}-content`);
+            // Check if the tab content exists and has items or is not a "No items found" paragraph
+            if (
+              content &&
+              (content.querySelector("table") ||
+                !content.querySelector("p:only-child"))
+            ) {
+              firstContentTab = tabs[i];
+              break;
+            }
+          }
+          if (firstContentTab) {
+            firstContentTab.classList.add("active");
+            const firstTabId = firstContentTab.getAttribute("data-tab");
+            const firstTabContent = document.getElementById(
+              `${firstTabId}-content`
+            );
+            if (firstTabContent) {
+              firstTabContent.style.display = "block";
+            }
+          } else if (tabs.length > 0) {
+            // Fallback: if all tabs are empty, activate the first one anyway
+            tabs[0].classList.add("active");
+            const firstTabId = tabs[0].getAttribute("data-tab");
+            const firstTabContent = document.getElementById(
+              `${firstTabId}-content`
+            );
+            if (firstTabContent) {
+              firstTabContent.style.display = "block";
+            }
+          }
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            tabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            document.querySelectorAll(".tab-content").forEach((content) => {
+              content.style.display = "none";
+            });
+
+            const tabId = this.getAttribute("data-tab");
+            const targetContent = document.getElementById(`${tabId}-content`);
+            if (targetContent) {
+              targetContent.style.display = "block";
+            }
+          });
+        });
+
+        document.querySelectorAll(".toggle-schema").forEach((button) => {
+          button.addEventListener("click", function () {
+            const schemaId = this.getAttribute("data-schema-id");
+            const detailsRow = document.getElementById(
+              `schema-details-row-${schemaId}`
+            );
+
+            if (detailsRow.style.display === "table-row") {
+              detailsRow.style.display = "none";
+              this.textContent = "Show Properties";
+            } else {
+              detailsRow.style.display = "table-row";
+              this.textContent = "Hide Properties";
+            }
+          });
+        });
+
+        document.querySelectorAll(".toggle-computation").forEach((button) => {
+          button.addEventListener("click", function () {
+            const computationId = this.getAttribute("data-computation-id");
+            const detailsRow = document.getElementById(
+              `computation-details-row-${computationId}`
+            );
+
+            if (detailsRow.style.display === "table-row") {
+              detailsRow.style.display = "none";
+              this.textContent = "Show Details";
+            } else {
+              detailsRow.style.display = "table-row";
+              this.textContent = "Hide Details";
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

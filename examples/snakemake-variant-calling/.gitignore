@@ -1,0 +1,10 @@
+# Fetched by run.sh (18 MB of reads and a bwa index).
+data/
+# Alignments: regenerate with ./run.sh. The small results (VCF, TSV, SVG) and
+# the crate itself are checked in so the example can be read without running.
+results/mapped/
+results/sorted/
+.snakemake/
+# RO-Crate Studio drops the reporter's records file here when it runs this
+# workflow; the copy this example uses lives in run/.
+/records.json

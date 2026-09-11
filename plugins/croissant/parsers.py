@@ -42,7 +42,11 @@ TARGET_CLASSES = {
     "CroissantFileObject": CroissantFileObject,
 }
 
-CONTEXT = {"@DEFAULT_CROISSANT_CONTEXT": DEFAULT_CROISSANT_CONTEXT}
+CONTEXT = {"@DEFAULT_CROISSANT_CONTEXT": DEFAULT_CROISSANT_CONTEXT,
+           # constant_value cells hold strings, so a multi-valued constant
+           # comes in by name — same list the production mapping fixes
+           "@CROISSANT_CONFORMS_TO": _c.CROISSANT_DATASET_MAPPING[
+               "dct:conformsTo"]["fixed_value"]}
 
 # Names the loader validates against (parsers + the builder: pseudo-names).
 _BUILDER_TOKENS = {"builder:none", "builder:record_sets", "builder:rai",
