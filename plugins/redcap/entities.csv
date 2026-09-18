@@ -1,0 +1,6 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+project,,Schema,evi:Schema,data,mint,,,FALSE,schema,one tabular EVI Schema for the whole project's record export; every non-descriptive field is a column (checkboxes expand to one column per choice) plus each form's _complete status column
+dictionary,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,the data dictionary file itself (only when convert() was given a path)
+records,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,the exported records CSV (only when one was given); its columns reorder and filter the schema
+export,,Computation,prov:Activity|https://w3id.org/EVI#Computation,workflow,mint,,,FALSE,computation,the REDCap export that produced the files above
+redcap,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,REDCap itself

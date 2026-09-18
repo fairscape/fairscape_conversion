@@ -1,0 +1,271 @@
+{
+  "@id": "ark:59853/evidence-graph-rocrate-vowel-score-of-the-letters-chain-halves-ee90e77",
+  "@type": "evi:EvidenceGraph",
+  "name": "Evidence Graph for ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77",
+  "description": "Automatically generated Evidence Graph for node ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77",
+  "owner": "local",
+  "outputs": [
+    {
+      "@id": "ark:59853/dataset-letter-report-json-e003d24"
+    },
+    {
+      "@id": "ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77"
+    }
+  ],
+  "@graph": {
+    "ark:59853/dataset-letter-report-json-e003d24": {
+      "@id": "ark:59853/dataset-letter-report-json-e003d24",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "letter_report.json",
+      "description": "Artifact 'letter_report.json' logged by MLflow run 'vowel-score'",
+      "generatedBy": {
+        "@id": "ark:59853/computation-vowel-score-ee90e77"
+      }
+    },
+    "ark:59853/computation-vowel-score-ee90e77": {
+      "@id": "ark:59853/computation-vowel-score-ee90e77",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'vowel-score'",
+      "description": "MLflow run 'vowel-score' of experiment 'letters-vowel-score', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-vowels-793a27d"
+        },
+        {
+          "@id": "ark:59853/dataset-first-half-txt-e00f213"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-dc9d500"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-analyze-py-e17a1b5"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ]
+    },
+    "ark:59853/dataset-vowels-793a27d": {
+      "@id": "ark:59853/dataset-vowels-793a27d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "vowels",
+      "description": "Dataset 'vowels' logged as an MLflow run input (5 rows, digest 62191ea1), used as reference data"
+    },
+    "ark:59853/dataset-first-half-txt-e00f213": {
+      "@id": "ark:59853/dataset-first-half-txt-e00f213",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "first_half.txt",
+      "description": "File 'first_half.txt' produced by the Nextflow workflow run 'main.nf'",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "generatedBy": {
+        "@id": "ark:59853/computation-split-halves-aa12fc2"
+      }
+    },
+    "ark:59853/computation-split-halves-aa12fc2": {
+      "@id": "ark:59853/computation-split-halves-aa12fc2",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "SPLIT_HALVES",
+      "description": "Nextflow task 'SPLIT_HALVES' (process SPLIT_HALVES)",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-reversed-txt-2f67281"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-split-halves-3b840d0"
+        }
+      ]
+    },
+    "ark:59853/dataset-reversed-txt-2f67281": {
+      "@id": "ark:59853/dataset-reversed-txt-2f67281",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "reversed.txt",
+      "description": "File 'reversed.txt' produced by the Nextflow workflow run 'main.nf'",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "generatedBy": {
+        "@id": "ark:59853/computation-reverse-1714a29"
+      }
+    },
+    "ark:59853/computation-reverse-1714a29": {
+      "@id": "ark:59853/computation-reverse-1714a29",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "REVERSE",
+      "description": "Nextflow task 'REVERSE' (process REVERSE)",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-letters-txt-3bdb960"
+        }
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-reverse-7f584ae"
+        }
+      ]
+    },
+    "ark:59853/dataset-letters-txt-3bdb960": {
+      "@id": "ark:59853/dataset-letters-txt-3bdb960",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "letters.txt",
+      "description": "File 'letters.txt' produced by the Nextflow workflow run 'main.nf'",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "generatedBy": {
+        "@id": "ark:59853/computation-make-list-3f8b7f8"
+      }
+    },
+    "ark:59853/computation-make-list-3f8b7f8": {
+      "@id": "ark:59853/computation-make-list-3f8b7f8",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MAKE_LIST",
+      "description": "Nextflow task 'MAKE_LIST' (process MAKE_LIST)",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-make-list-4b9cafe"
+        }
+      ]
+    },
+    "ark:59853/software-make-list-4b9cafe": {
+      "@id": "ark:59853/software-make-list-4b9cafe",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "head",
+      "description": "GNU coreutils head \u2014 here it takes the first n lines of a bash-generated a-to-z sequence to build the letter list.",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      }
+    },
+    "ark:59853/software-reverse-7f584ae": {
+      "@id": "ark:59853/software-reverse-7f584ae",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "tac",
+      "description": "GNU coreutils tac \u2014 a command-line utility that reverses the order of lines in a text file.",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      }
+    },
+    "ark:59853/software-split-halves-3b840d0": {
+      "@id": "ark:59853/software-split-halves-3b840d0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "GNU coreutils (wc, head, tail)",
+      "description": "GNU coreutils text utilities \u2014 wc counts the lines, then head and tail split the reversed list into a first and second half.",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      }
+    },
+    "ark:59853/dataset-second-half-txt-dc9d500": {
+      "@id": "ark:59853/dataset-second-half-txt-dc9d500",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "second_half.txt",
+      "description": "File 'second_half.txt' produced by the Nextflow workflow run 'main.nf'",
+      "crate": {
+        "@id": "ark:59853/rocrate-main-nf-600fc41",
+        "name": "letters-chain demonstration crate"
+      },
+      "generatedBy": {
+        "@id": "ark:59853/computation-split-halves-aa12fc2"
+      }
+    },
+    "ark:59853/software-analyze-py-e17a1b5": {
+      "@id": "ark:59853/software-analyze-py-e17a1b5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "analyze.py",
+      "description": "The script 'analyze.py' logged by MLflow as the source of run(s) in experiment 'letters-vowel-score' (git commit c41e255a11c6563c651e504d8fbe4e2e68705250)"
+    },
+    "ark:59853/software-mlflow-2ea5ff6": {
+      "@id": "ark:59853/software-mlflow-2ea5ff6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "MLflow",
+      "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)"
+    },
+    "ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77": {
+      "@id": "ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "name": "Vowel score of the letters-chain halves",
+      "description": "An MLflow run that scored the two halves of the letters-chain pipeline's output by vowel content, converted to an EVI RO-Crate that links back to the Nextflow crate for its inputs.",
+      "hasOutputs": [
+        {
+          "@id": "ark:59853/dataset-letter-report-json-e003d24"
+        }
+      ]
+    }
+  },
+  "condensation_stats": {
+    "condensed": false,
+    "originalEntityCount": 16,
+    "condensedEntityCount": 16,
+    "datasetGroupCount": 0
+  }
+}

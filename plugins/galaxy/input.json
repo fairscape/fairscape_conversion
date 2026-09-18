@@ -1,0 +1,753 @@
+{
+  "invocation": {
+    "encoded_id": "5280bd93c2a0433a",
+    "uuid": "cf2b9bf7cd6f11eda13d4598478c6a05",
+    "state": "scheduled",
+    "create_time": "2023-03-28 13:52:42.214286",
+    "update_time": "2023-03-28 13:52:44.327168",
+    "workflow_id": "2154bc930d1891d1",
+    "galaxy_version": "23.0",
+    "export_version": "2",
+    "steps": [
+      {
+        "index": 0,
+        "label": "input collection 1",
+        "type": "data_collection_input",
+        "tool_id": null,
+        "state": "scheduled",
+        "job_id": null,
+        "outputs": [],
+        "output_collections": [
+          "5e76b4bbab8aa67e"
+        ]
+      },
+      {
+        "index": 1,
+        "label": "input collection 2",
+        "type": "data_collection_input",
+        "tool_id": null,
+        "state": "scheduled",
+        "job_id": null,
+        "outputs": [],
+        "output_collections": [
+          "990438c6fd4d3b7e"
+        ]
+      },
+      {
+        "index": 2,
+        "label": "num_lines_param",
+        "type": "parameter_input",
+        "tool_id": null,
+        "state": "scheduled",
+        "job_id": null,
+        "outputs": [],
+        "output_collections": []
+      },
+      {
+        "index": 3,
+        "label": "merge collections tool",
+        "type": "tool",
+        "tool_id": "__MERGE_COLLECTION__",
+        "state": "scheduled",
+        "job_id": "a3c16932fb387e0b",
+        "outputs": [],
+        "output_collections": [
+          "08f3d08672d66ef1"
+        ]
+      },
+      {
+        "index": 4,
+        "label": "concat collection",
+        "type": "tool",
+        "tool_id": "cat_collection",
+        "state": "scheduled",
+        "job_id": "e1ea20c22cd65359",
+        "outputs": [
+          "7598eccd476edc72"
+        ],
+        "output_collections": []
+      },
+      {
+        "index": 5,
+        "label": "select lines",
+        "type": "tool",
+        "tool_id": "head",
+        "state": "scheduled",
+        "job_id": "043ca1aacef87820",
+        "outputs": [
+          "82fb8a73e14050cd"
+        ],
+        "output_collections": []
+      }
+    ],
+    "input_datasets": [],
+    "input_collections": [
+      "5e76b4bbab8aa67e",
+      "990438c6fd4d3b7e"
+    ],
+    "input_parameters": [
+      {
+        "label": "num_lines_param",
+        "value": "2"
+      }
+    ],
+    "output_datasets": [
+      {
+        "id": "7598eccd476edc72",
+        "label": "concatenated_collection"
+      },
+      {
+        "id": "82fb8a73e14050cd",
+        "label": "output"
+      }
+    ],
+    "output_collections": [
+      {
+        "id": "08f3d08672d66ef1",
+        "label": "output_collection"
+      }
+    ]
+  },
+  "workflow": {
+    "name": "collection_workflow",
+    "annotation": "Test workflow with a collection",
+    "uuid": "a7b8315e-0bd7-486b-8e8c-02a52b79269f",
+    "license": "MIT",
+    "creators": [
+      "Paul"
+    ],
+    "tags": [],
+    "format_version": "0.1",
+    "file": "2154bc930d1891d1.ga",
+    "local_path": "workflows/2154bc930d1891d1.ga",
+    "steps": [
+      {
+        "index": 0,
+        "type": "data_collection_input",
+        "tool_id": null,
+        "tool_version": null,
+        "label": "input collection 1",
+        "annotation": "collection 1",
+        "inputs": [],
+        "workflow_outputs": []
+      },
+      {
+        "index": 1,
+        "type": "data_collection_input",
+        "tool_id": null,
+        "tool_version": null,
+        "label": "input collection 2",
+        "annotation": "collection 2",
+        "inputs": [],
+        "workflow_outputs": []
+      },
+      {
+        "index": 2,
+        "type": "parameter_input",
+        "tool_id": null,
+        "tool_version": null,
+        "label": "num_lines_param",
+        "annotation": "number of lines to select",
+        "inputs": [],
+        "workflow_outputs": [
+          "output"
+        ]
+      },
+      {
+        "index": 3,
+        "type": "tool",
+        "tool_id": "__MERGE_COLLECTION__",
+        "tool_version": "1.0.0",
+        "label": "merge collections tool",
+        "annotation": "merged collections",
+        "inputs": [
+          "inputs_0|input",
+          "inputs_1|input"
+        ],
+        "workflow_outputs": [
+          "output_collection"
+        ]
+      },
+      {
+        "index": 4,
+        "type": "tool",
+        "tool_id": "cat_collection",
+        "tool_version": "1.0.0",
+        "label": "concat collection",
+        "annotation": "concatenate collection",
+        "inputs": [
+          "input1"
+        ],
+        "workflow_outputs": [
+          "concatenated_collection"
+        ]
+      },
+      {
+        "index": 5,
+        "type": "tool",
+        "tool_id": "head",
+        "tool_version": "1.0.0",
+        "label": "select lines",
+        "annotation": "select 3 lines",
+        "inputs": [
+          "input",
+          "lineNum"
+        ],
+        "workflow_outputs": [
+          "output"
+        ]
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "encoded_id": "44359355b52c5374",
+      "tool_id": "__DATA_FETCH__",
+      "tool_version": "0.1.0",
+      "state": "ok",
+      "exit_code": null,
+      "create_time": "2022-12-12T17:21:44.824149",
+      "command_line": "python '/home/padge/Elixir/workflow-export/galaxy/data_fetch.py' --galaxy-root '/home/padge/Elixir/workflow-export/galaxy' --datatypes-registry '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/50/registry.xml' --request-version '1' --request '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/50/configs/tmp65n27sdb'",
+      "params": {
+        "file_count": "1",
+        "request_version": "1",
+        "request": {
+          "targets": [
+            {
+              "destination": {
+                "type": "hdas"
+              },
+              "elements": [
+                {
+                  "ext": "auto",
+                  "space_to_tab": false,
+                  "to_posix_lines": true,
+                  "src": "pasted",
+                  "paste_content": "hello",
+                  "purge_source": false,
+                  "object_id": 54
+                }
+              ]
+            }
+          ],
+          "auto_decompress": true,
+          "check_content": true
+        }
+      },
+      "inputs": [],
+      "input_collections": [],
+      "outputs": [
+        "20cfd4d442486e0e"
+      ],
+      "output_collections": [],
+      "step_index": null
+    },
+    {
+      "encoded_id": "18787df2a1b221dc",
+      "tool_id": "__DATA_FETCH__",
+      "tool_version": "0.1.0",
+      "state": "ok",
+      "exit_code": null,
+      "create_time": "2022-12-12T17:21:44.920181",
+      "command_line": "python '/home/padge/Elixir/workflow-export/galaxy/data_fetch.py' --galaxy-root '/home/padge/Elixir/workflow-export/galaxy' --datatypes-registry '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/51/registry.xml' --request-version '1' --request '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/51/configs/tmp_s5w16w4'",
+      "params": {
+        "file_count": "1",
+        "request_version": "1",
+        "request": {
+          "targets": [
+            {
+              "destination": {
+                "type": "hdas"
+              },
+              "elements": [
+                {
+                  "ext": "auto",
+                  "space_to_tab": false,
+                  "to_posix_lines": true,
+                  "src": "pasted",
+                  "paste_content": "world",
+                  "purge_source": false,
+                  "object_id": 55
+                }
+              ]
+            }
+          ],
+          "auto_decompress": true,
+          "check_content": true
+        }
+      },
+      "inputs": [],
+      "input_collections": [],
+      "outputs": [
+        "fb51c01b7e1e3516"
+      ],
+      "output_collections": [],
+      "step_index": null
+    },
+    {
+      "encoded_id": "ab8c6b77d6eebdc0",
+      "tool_id": "__DATA_FETCH__",
+      "tool_version": "0.1.0",
+      "state": "ok",
+      "exit_code": null,
+      "create_time": "2022-12-12T17:22:43.604813",
+      "command_line": "python '/home/padge/Elixir/workflow-export/galaxy/data_fetch.py' --galaxy-root '/home/padge/Elixir/workflow-export/galaxy' --datatypes-registry '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/52/registry.xml' --request-version '1' --request '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/52/configs/tmpi9wy8e7l'",
+      "params": {
+        "file_count": "1",
+        "request_version": "1",
+        "request": {
+          "targets": [
+            {
+              "destination": {
+                "type": "hdas"
+              },
+              "elements": [
+                {
+                  "ext": "auto",
+                  "space_to_tab": false,
+                  "to_posix_lines": true,
+                  "src": "pasted",
+                  "paste_content": "universe",
+                  "purge_source": false,
+                  "object_id": 58
+                }
+              ]
+            }
+          ],
+          "auto_decompress": true,
+          "check_content": true
+        }
+      },
+      "inputs": [],
+      "input_collections": [],
+      "outputs": [
+        "dd8370888227f9a5"
+      ],
+      "output_collections": [],
+      "step_index": null
+    },
+    {
+      "encoded_id": "a3c16932fb387e0b",
+      "tool_id": "__MERGE_COLLECTION__",
+      "tool_version": "1.0.0",
+      "state": "ok",
+      "exit_code": null,
+      "create_time": "2023-03-28T13:52:43.584939",
+      "command_line": "",
+      "params": {
+        "advanced": {
+          "conflict": {
+            "duplicate_options": "keep_first"
+          }
+        }
+      },
+      "inputs": [
+        "043ca1aacef87820",
+        "d2012e05596dca04",
+        "a3c16932fb387e0b",
+        "e1ea20c22cd65359"
+      ],
+      "input_collections": [
+        "5e76b4bbab8aa67e",
+        "990438c6fd4d3b7e"
+      ],
+      "outputs": [],
+      "output_collections": [
+        "08f3d08672d66ef1"
+      ],
+      "step_index": 3
+    },
+    {
+      "encoded_id": "e1ea20c22cd65359",
+      "tool_id": "cat_collection",
+      "tool_version": "1.0.0",
+      "state": "ok",
+      "exit_code": 0,
+      "create_time": "2023-03-28T13:52:43.972653",
+      "command_line": "cat  '/home/padge/Elixir/workflow-export/galaxy/database/objects/d/4/e/dataset_d4e573fa-227f-4cdc-94a0-ac959de105e7.dat'  '/home/padge/Elixir/workflow-export/galaxy/database/objects/3/6/9/dataset_369edbf0-e16a-45d8-bad8-b0ecb4f566a2.dat'  '/home/padge/Elixir/workflow-export/galaxy/database/objects/b/a/8/dataset_ba8af7ec-ef40-405a-bcc4-33c2df9fffed.dat'  >'/home/padge/Elixir/workflow-export/galaxy/database/objects/e/d/a/dataset_eda9f373-52a4-4dd4-8983-54a6ed0aae80.dat'",
+      "params": {},
+      "inputs": [
+        "992cc6e910633706",
+        "d3a47b747aa2adad",
+        "6c87b6ae7aea5c22"
+      ],
+      "input_collections": [
+        "08f3d08672d66ef1"
+      ],
+      "outputs": [
+        "7598eccd476edc72"
+      ],
+      "output_collections": [],
+      "step_index": 4
+    },
+    {
+      "encoded_id": "043ca1aacef87820",
+      "tool_id": "head",
+      "tool_version": "1.0.0",
+      "state": "ok",
+      "exit_code": 0,
+      "create_time": "2023-03-28T13:52:44.213916",
+      "command_line": "head -n 2 '/home/padge/Elixir/workflow-export/galaxy/database/objects/e/d/a/dataset_eda9f373-52a4-4dd4-8983-54a6ed0aae80.dat' > '/home/padge/Elixir/workflow-export/galaxy/database/objects/1/3/e/dataset_13e34265-0eec-4639-932b-24811bb3682d.dat'",
+      "params": {
+        "lineNum": "2"
+      },
+      "inputs": [
+        "7598eccd476edc72"
+      ],
+      "input_collections": [],
+      "outputs": [
+        "82fb8a73e14050cd"
+      ],
+      "output_collections": [],
+      "step_index": 5
+    }
+  ],
+  "datasets": [
+    {
+      "encoded_id": "7598eccd476edc72",
+      "key": "eda9f373-52a4-4dd4-8983-54a6ed0aae80",
+      "name": "Concatenate dataset collection (for test workflows) on data 5, data 4, and data 3",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2023-03-28 13:52:43.995678",
+      "file_name": "datasets/Concatenate_dataset_collection_(for_test_workflows)_on_data_5,_data_4,_and_data_3_7.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 7,
+      "blurb": "3 lines",
+      "info": "",
+      "uuid": "eda9f373-52a4-4dd4-8983-54a6ed0aae80",
+      "copy_chain": [],
+      "deleted": false,
+      "visible": true
+    },
+    {
+      "encoded_id": "82fb8a73e14050cd",
+      "key": "13e34265-0eec-4639-932b-24811bb3682d",
+      "name": "Select first on data 7",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2023-03-28 13:52:44.232999",
+      "file_name": "datasets/Select_first_on_data_7_8.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 8,
+      "blurb": "2 lines",
+      "info": "",
+      "uuid": "13e34265-0eec-4639-932b-24811bb3682d",
+      "copy_chain": [],
+      "deleted": false,
+      "visible": true
+    },
+    {
+      "encoded_id": "043ca1aacef87820",
+      "key": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "name": "hello",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2022-12-12 17:29:06.608404",
+      "file_name": "datasets/hello_33.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 33,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "copy_chain": [
+        "20cfd4d442486e0e"
+      ],
+      "deleted": false,
+      "visible": false
+    },
+    {
+      "encoded_id": "d2012e05596dca04",
+      "key": "369edbf0-e16a-45d8-bad8-b0ecb4f566a2",
+      "name": "world",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2022-12-12 17:29:06.608413",
+      "file_name": "datasets/world_34.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 34,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "369edbf0-e16a-45d8-bad8-b0ecb4f566a2",
+      "copy_chain": [
+        "fb51c01b7e1e3516"
+      ],
+      "deleted": false,
+      "visible": false
+    },
+    {
+      "encoded_id": "a3c16932fb387e0b",
+      "key": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "name": "hello",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2022-12-12 17:27:11.330119",
+      "file_name": "datasets/hello_33.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 30,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "copy_chain": [
+        "20cfd4d442486e0e"
+      ],
+      "deleted": false,
+      "visible": false
+    },
+    {
+      "encoded_id": "e1ea20c22cd65359",
+      "key": "ba8af7ec-ef40-405a-bcc4-33c2df9fffed",
+      "name": "universe",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2022-12-12 17:27:11.330126",
+      "file_name": "datasets/universe_31.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 31,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "ba8af7ec-ef40-405a-bcc4-33c2df9fffed",
+      "copy_chain": [
+        "dd8370888227f9a5"
+      ],
+      "deleted": false,
+      "visible": false
+    },
+    {
+      "encoded_id": "992cc6e910633706",
+      "key": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "name": "hello",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2023-03-28 13:52:43.636816",
+      "file_name": "datasets/hello_33.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 3,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "copy_chain": [
+        "043ca1aacef87820",
+        "20cfd4d442486e0e"
+      ],
+      "deleted": false,
+      "visible": false
+    },
+    {
+      "encoded_id": "d3a47b747aa2adad",
+      "key": "369edbf0-e16a-45d8-bad8-b0ecb4f566a2",
+      "name": "world",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2023-03-28 13:52:43.636829",
+      "file_name": "datasets/world_34.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 4,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "369edbf0-e16a-45d8-bad8-b0ecb4f566a2",
+      "copy_chain": [
+        "d2012e05596dca04",
+        "fb51c01b7e1e3516"
+      ],
+      "deleted": false,
+      "visible": false
+    },
+    {
+      "encoded_id": "6c87b6ae7aea5c22",
+      "key": "ba8af7ec-ef40-405a-bcc4-33c2df9fffed",
+      "name": "universe",
+      "extension": "txt",
+      "state": "ok",
+      "create_time": "2023-03-28 13:52:43.636840",
+      "file_name": "datasets/universe_31.txt",
+      "local_path": null,
+      "size": null,
+      "hashes": {},
+      "hid": 5,
+      "blurb": "1 line",
+      "info": "uploaded txt file",
+      "uuid": "ba8af7ec-ef40-405a-bcc4-33c2df9fffed",
+      "copy_chain": [
+        "e1ea20c22cd65359",
+        "dd8370888227f9a5"
+      ],
+      "deleted": false,
+      "visible": false
+    }
+  ],
+  "collections": [
+    {
+      "encoded_id": "5e76b4bbab8aa67e",
+      "name": "hello_world",
+      "type": "list",
+      "state": "ok",
+      "hid": 1,
+      "copy_chain": [
+        "8b7438f895734444"
+      ],
+      "elements": [
+        {
+          "identifier": "hello",
+          "dataset": "043ca1aacef87820"
+        },
+        {
+          "identifier": "world",
+          "dataset": "d2012e05596dca04"
+        }
+      ]
+    },
+    {
+      "encoded_id": "990438c6fd4d3b7e",
+      "name": "hello_universe",
+      "type": "list",
+      "state": "ok",
+      "hid": 2,
+      "copy_chain": [
+        "060545072591c08d"
+      ],
+      "elements": [
+        {
+          "identifier": "hello",
+          "dataset": "a3c16932fb387e0b"
+        },
+        {
+          "identifier": "universe",
+          "dataset": "e1ea20c22cd65359"
+        }
+      ]
+    },
+    {
+      "encoded_id": "08f3d08672d66ef1",
+      "name": "data 31, data 30, and others (merged)",
+      "type": "list",
+      "state": "ok",
+      "hid": 6,
+      "copy_chain": [],
+      "elements": [
+        {
+          "identifier": "hello",
+          "dataset": "992cc6e910633706"
+        },
+        {
+          "identifier": "world",
+          "dataset": "d3a47b747aa2adad"
+        },
+        {
+          "identifier": "universe",
+          "dataset": "6c87b6ae7aea5c22"
+        }
+      ]
+    },
+    {
+      "encoded_id": "5e76b4bbab8aa67e",
+      "name": "hello_world",
+      "type": "list",
+      "state": "ok",
+      "hid": 1,
+      "copy_chain": [
+        "8b7438f895734444"
+      ],
+      "elements": [
+        {
+          "identifier": "hello",
+          "dataset": "043ca1aacef87820"
+        },
+        {
+          "identifier": "world",
+          "dataset": "d2012e05596dca04"
+        }
+      ]
+    },
+    {
+      "encoded_id": "990438c6fd4d3b7e",
+      "name": "hello_universe",
+      "type": "list",
+      "state": "ok",
+      "hid": 2,
+      "copy_chain": [
+        "060545072591c08d"
+      ],
+      "elements": [
+        {
+          "identifier": "hello",
+          "dataset": "a3c16932fb387e0b"
+        },
+        {
+          "identifier": "universe",
+          "dataset": "e1ea20c22cd65359"
+        }
+      ]
+    },
+    {
+      "encoded_id": "08f3d08672d66ef1",
+      "name": "data 31, data 30, and others (merged)",
+      "type": "list",
+      "state": "ok",
+      "hid": 6,
+      "copy_chain": [],
+      "elements": [
+        {
+          "identifier": "hello",
+          "dataset": "992cc6e910633706"
+        },
+        {
+          "identifier": "world",
+          "dataset": "d3a47b747aa2adad"
+        },
+        {
+          "identifier": "universe",
+          "dataset": "6c87b6ae7aea5c22"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "naan": "59853",
+    "name": "collection_workflow",
+    "description": "Test workflow with a collection",
+    "author": "Example Researcher",
+    "keywords": [
+      "galaxy",
+      "workflow",
+      "invocation"
+    ],
+    "license": "MIT",
+    "version": "1.0",
+    "date_published": "2023-03-28"
+  },
+  "tools": [
+    {
+      "tool_id": "__DATA_FETCH__",
+      "tool_version": "0.1.0"
+    },
+    {
+      "tool_id": "__MERGE_COLLECTION__",
+      "tool_version": "1.0.0"
+    },
+    {
+      "tool_id": "cat_collection",
+      "tool_version": "1.0.0"
+    },
+    {
+      "tool_id": "head",
+      "tool_version": "1.0.0"
+    }
+  ]
+}

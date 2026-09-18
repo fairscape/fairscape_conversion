@@ -1,0 +1,4 @@
+record_id,enroll_date,site,age,sex,zip,dob,phone,race___1,race___2,race___3,race___4,race___5,race___6,enrollment_complete,vaccinated,doses,last_dose_date,symptoms___1,symptoms___2,symptoms___3,symptoms___4,symptoms___5,onset_date,temp_c,exposure_complete,height_cm,weight_kg,bmi,satisfaction,notes,followup_complete
+1,2026-01-12,1,34,1,22903,1991-06-02,434-555-0101,0,0,1,0,0,0,2,1,2,2025-10-04,1,1,0,0,0,2026-01-08,38.4,2,165,64,23.5,80,Mild illness; advised rest,2
+2,2026-01-13,2,58,2,22901,1967-11-20,434-555-0102,0,0,0,0,1,0,2,0,,,0,0,0,0,0,,,2,178,92,29.0,60,,2
+3,2026-01-15,3,41,3,22902,1984-03-15,434-555-0103,0,1,0,0,0,0,2,1,1,2025-11-19,0,1,0,1,0,2026-01-11,37.9,2,,,,,No measurements taken,0

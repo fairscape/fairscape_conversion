@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vowel score of the letters-chain halves</title>
+<style>/* Direction A — "Technical Precision". Hairline borders instead of shadows,
+   2px radius, ink/slate text ramp, mono for ARKs/counts, amber unused here
+   (no CTA on a generated document). Palette mirrors ../web theme.ts. */
+:root {
+  --primary: #005f73;
+  --primary-tint: #ebf2f4;
+  --bg: #f7f9f9;
+  --surface: #ffffff;
+  --ink: #18242a;
+  --ink2: #51626b;
+  --ink3: #84939a;
+  --border: #e2e8ea;
+  --border-strong: #c3ced2;
+  --hero: #0a2127;
+  --hero-sub: #9fb9bf;
+  --hero-accent: #5fb3bf;
+  --success: #40916c;
+  --warning: #b27300;
+  --danger: #d00000;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+main { max-width: 960px; margin: 0 auto; padding: 0 24px 64px; }
+a { color: var(--primary); }
+
+/* Hero */
+header.hero { background: var(--hero); color: #fff; padding: 40px 24px 32px; }
+.hero-inner { max-width: 960px; margin: 0 auto; }
+.hero .kicker {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--hero-accent); margin: 0 0 8px;
+}
+.hero h1 { margin: 0 0 6px; font-size: 26px; line-height: 1.25; }
+.hero .ark { font-family: var(--mono); font-size: 13px; color: var(--hero-sub); }
+.hero .desc { color: var(--hero-sub); max-width: 70ch; margin: 14px 0 0; }
+.hero .chips { margin-top: 16px; }
+.chip {
+  display: inline-block; font-family: var(--mono); font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 2px;
+  padding: 2px 8px; margin: 0 6px 6px 0; color: #fff;
+}
+
+/* Sections */
+section { margin-top: 36px; }
+h2 {
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink3); font-family: var(--mono); font-weight: 500;
+  border-bottom: 1px solid var(--border); padding-bottom: 6px; margin: 0 0 16px;
+}
+
+/* Metadata grid */
+.meta { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.meta > div { background: var(--surface); padding: 12px 16px; }
+.meta .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); margin-bottom: 2px; }
+.meta .value { color: var(--ink); overflow-wrap: anywhere; }
+.meta .value.mono { font-family: var(--mono); font-size: 13px; }
+
+/* Summary tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.tile { background: var(--surface); padding: 14px 16px; }
+.tile .n { font-family: var(--mono); font-size: 22px; color: var(--ink); }
+.tile .label { font-size: 12px; color: var(--ink2); }
+
+.formats { margin-top: 12px; color: var(--ink2); font-size: 13px; }
+.formats .fmt { font-family: var(--mono); background: var(--primary-tint); border-radius: 2px; padding: 1px 6px; margin-right: 8px; white-space: nowrap; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); }
+th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); font-weight: 500; text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border-strong); }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+td.mono { font-family: var(--mono); font-size: 12.5px; color: var(--ink2); overflow-wrap: anywhere; }
+.table-scroll { overflow-x: auto; }
+
+/* AI-Ready score */
+.score-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 16px; }
+.score-total { font-family: var(--mono); font-size: 32px; }
+.score-sub { color: var(--ink2); font-size: 13px; }
+.crit { border: 1px solid var(--border); background: var(--surface); margin-bottom: 8px; }
+.crit summary { display: flex; align-items: center; gap: 12px; padding: 10px 14px; cursor: pointer; list-style: none; }
+.crit summary::-webkit-details-marker { display: none; }
+.crit .crit-name { flex: 0 0 220px; font-weight: 600; font-size: 14px; }
+.bar { flex: 1; height: 6px; background: var(--primary-tint); border-radius: 2px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--primary); }
+.crit .pts { font-family: var(--mono); font-size: 12.5px; color: var(--ink2); flex: 0 0 70px; text-align: right; }
+.rubric { border-top: 1px solid var(--border); padding: 10px 14px; }
+.rubric .r-head { display: flex; gap: 10px; align-items: baseline; }
+.rubric .r-id { font-family: var(--mono); font-size: 12px; color: var(--ink3); }
+.rubric .r-name { font-weight: 600; font-size: 13.5px; }
+.badge { font-family: var(--mono); font-size: 11px; border-radius: 2px; padding: 1px 7px; margin-left: auto; }
+.badge.s2 { color: var(--success); border: 1px solid var(--success); }
+.badge.s1 { color: var(--warning); border: 1px solid var(--warning); }
+.badge.s0 { color: var(--danger); border: 1px solid var(--danger); }
+.rubric p { margin: 6px 0 0; color: var(--ink2); font-size: 13px; }
+.rubric ul { margin: 6px 0 0; padding-left: 20px; color: var(--ink2); font-size: 13px; }
+.rubric .gaps li { color: var(--warning); }
+
+/* Evidence graph page */
+#evidence-graph { min-height: 640px; }
+.page-note { color: var(--ink2); font-size: 13px; margin: 12px 0 20px; }
+
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink3); font-size: 12px; font-family: var(--mono); }
+
+/* ------------------------------------------------------------------ */
+/* Local addendum. Everything above this line is the recovered         */
+/* stylesheet, byte-for-byte; see PROVENANCE.md.                       */
+/* ------------------------------------------------------------------ */
+
+/* `auto-fill` keeps empty tracks, and the grid gap is painted with the
+   border colour, so a crate with only two populated types rendered a row
+   of blank grey cells. `auto-fit` collapses the empty tracks instead. The
+   metadata grid had the same problem on a crate with few populated fields. */
+.tiles { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+.meta { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+/* Criteria the rubric reserves for human judgment: shown as awaiting review,
+   which must not read as a failing score. */
+.badge.sna { color: var(--ink3); border: 1px solid var(--border-strong); }
+
+/* Datasheet and preview pages, in the Direction A idiom of style.css:
+   hairline borders, 2px radii, the ink ramp for text, mono for labels and
+   numbers. Only this file is meant to be edited; style.css is recovered. */
+
+/* -- page frame: docked sidebar on wide screens, off-canvas below ------- */
+#sidebar-toggle, #back-to-top {
+  position: fixed; z-index: 40; width: 36px; height: 36px;
+  border: 1px solid var(--border-strong); border-radius: 2px;
+  background: var(--surface); color: var(--ink2); font-family: var(--mono);
+  font-size: 16px; line-height: 1; cursor: pointer;
+}
+#sidebar-toggle { top: 12px; left: 12px; }
+#sidebar-toggle:hover, #back-to-top:hover { color: var(--primary); border-color: var(--primary); }
+#back-to-top { right: 16px; bottom: 16px; opacity: 0; pointer-events: none; transition: opacity .15s; }
+#back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+#sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 30; width: 272px;
+  overflow-y: auto; padding: 56px 12px 24px; background: var(--surface);
+  border-right: 1px solid var(--border); transform: translateX(-100%);
+  transition: transform .15s ease-out; font-size: 13px;
+}
+#sidebar.active { transform: none; box-shadow: 0 0 0 100vmax rgba(10, 33, 39, 0.25); }
+#sidebar .sidebar-title {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink3); margin: 16px 8px 6px;
+}
+#sidebar .sidebar-title:first-child { margin-top: 0; }
+#sidebar a {
+  display: block; padding: 5px 8px; color: var(--ink2); text-decoration: none;
+  border-left: 2px solid transparent; border-radius: 0 2px 2px 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#sidebar a:hover { color: var(--primary); background: var(--primary-tint); }
+#sidebar a.active { color: var(--primary); border-left-color: var(--primary); background: var(--primary-tint); }
+#sidebar a.sub { padding-left: 22px; font-size: 12.5px; }
+#sidebar a.ext { color: var(--primary); }
+#sidebar details.sidebar-group > summary { list-style: none; cursor: pointer; }
+#sidebar details.sidebar-group > summary::-webkit-details-marker { display: none; }
+#sidebar details.sidebar-group > summary a { display: block; }
+#sidebar details.sidebar-group > summary a::before { content: "\25B8  "; color: var(--ink3); font-family: var(--mono); }
+#sidebar details.sidebar-group[open] > summary a::before { content: "\25BE  "; }
+
+#sidebar-toggle[aria-expanded="true"] { color: var(--primary); border-color: var(--primary); }
+
+/* -- hero additions ------------------------------------------------------ */
+.hero .ark a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--hero-sub); }
+.hero .badges { margin: 14px 0 0; }
+.hbadge {
+  display: inline-block; font-family: var(--mono); font-size: 12px; color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 2px;
+  padding: 3px 9px; margin: 0 6px 6px 0; text-decoration: none;
+}
+a.hbadge:hover { border-color: var(--hero-accent); color: var(--hero-accent); }
+.topbar { max-width: 960px; margin: 0 auto; padding: 10px 24px 0; display: flex; gap: 18px; font-size: 13px; font-family: var(--mono); }
+
+/* -- shared primitives --------------------------------------------------- */
+h2 .h2-count { float: right; color: var(--ink2); letter-spacing: 0; text-transform: none; }
+h3 { font-size: 15px; margin: 22px 0 6px; }
+h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); font-weight: 500; margin: 20px 0 8px; }
+.muted { color: var(--ink3); }
+.small { font-size: 12.5px; }
+.missing { color: var(--ink3); font-style: italic; }
+.hint { color: var(--ink2); font-size: 13px; margin: 4px 0 10px; }
+ul.plain { margin: 0; padding-left: 18px; }
+ul.plain li { margin: 2px 0; }
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: 12px;
+  background: var(--primary-tint); color: var(--ink2); border-radius: 2px;
+  padding: 1px 7px; margin: 0 4px 4px 0; white-space: nowrap;
+}
+.tag.fmt { background: transparent; border: 1px solid var(--border-strong); }
+.tag.muted { background: transparent; }
+.btn {
+  display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--primary); border: 1px solid var(--primary);
+  border-radius: 2px; padding: 7px 14px; text-decoration: none; margin: 0 8px 6px 0;
+}
+.btn:hover { background: var(--primary); color: #fff; }
+.btn.ghost { border-color: var(--border-strong); color: var(--ink2); }
+.btn.ghost:hover { background: var(--primary-tint); color: var(--primary); border-color: var(--primary); }
+.more-link { font-size: 13px; }
+
+/* key/value blocks */
+.kv { border: 1px solid var(--border); background: var(--surface); }
+.kv > div { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 4px 16px; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+.kv > div:last-child { border-bottom: none; }
+.kv .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); padding-top: 3px; }
+.kv .value { color: var(--ink); overflow-wrap: anywhere; white-space: pre-line; }
+.kv .value.mono { font-family: var(--mono); font-size: 13px; }
+.kv.compact > div { grid-template-columns: 160px minmax(0, 1fr); padding: 7px 12px; font-size: 14px; }
+@media (max-width: 720px) { .kv > div, .kv.compact > div { grid-template-columns: 1fr; } }
+
+/* -- summary --------------------------------------------------------------- */
+#datasheet-summary .lead { font-size: 15.5px; line-height: 1.6; max-width: 80ch; margin: 0 0 18px; }
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.summary-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 900px) { .summary-grid { grid-template-columns: 1fr; } }
+.panel { border: 1px solid var(--border); background: var(--surface); padding: 16px; min-width: 0; }
+.panel-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); margin-bottom: 12px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.panel-label .panel-links { text-transform: none; letter-spacing: 0; }
+.panel { display: flex; flex-direction: column; }
+/* Always four cards in two columns, so the panel mirrors the review beside it. */
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); flex: 1; }
+.stat { background: var(--surface); padding: 14px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.stat .n { font-family: var(--mono); font-size: 22px; color: var(--ink); line-height: 1.2; }
+.stat .label { font-size: 12px; color: var(--ink2); margin-top: 2px; }
+.summary-grid.single .stat-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 560px) { .summary-grid.single .stat-grid { grid-template-columns: 1fr 1fr; } }
+.panel .extra { margin: 10px 0 0; font-size: 13px; color: var(--ink2); }
+.panel .formats { margin: 10px 0 0; }
+.panel .stat-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); margin-right: 6px; }
+.panel .actions { margin: 14px 0 0; }
+.panel .actions:last-child, .panel .page-note.small:last-child { margin-top: auto; padding-top: 12px; }
+.panel .page-note.small { margin: 8px 0 0; font-size: 12px; }
+
+.review-flex { display: flex; gap: 20px; align-items: center; }
+@media (max-width: 480px) { .review-flex { flex-direction: column; align-items: stretch; } }
+.donut-wrap { flex: 0 0 116px; }
+.donut { width: 116px; height: 116px; display: block; }
+.donut circle { fill: none; stroke-width: 11; transform: rotate(-90deg); transform-origin: 50% 50%; }
+.donut .donut-track { stroke: var(--primary-tint); }
+.donut .seg.s2 { stroke: var(--success); }
+.donut .seg.s1 { stroke: var(--warning); }
+.donut .seg.sna { stroke: var(--border-strong); stroke-dasharray: 2 3; }
+.donut text { text-anchor: middle; font-family: var(--mono); fill: var(--ink); }
+.donut .donut-text { font-size: 19px; }
+.donut .donut-sub { font-size: 9.5px; fill: var(--ink3); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.rbars { flex: 1; min-width: 0; }
+.rbar-row { display: grid; grid-template-columns: minmax(90px, 150px) 1fr 44px; gap: 10px; align-items: center; font-size: 13px; margin: 5px 0; }
+.rbar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink2); }
+.rbar { display: flex; height: 8px; background: var(--primary-tint); border-radius: 2px; overflow: hidden; }
+.rbar i { display: block; height: 100%; }
+.rbar i.s2, .legend .s2::before { background: var(--success); }
+.rbar i.s1, .legend .s1::before { background: var(--warning); }
+.rbar i.sna, .legend .sna::before { background: repeating-linear-gradient(135deg, var(--border-strong) 0 2px, transparent 2px 5px); }
+.legend .none::before { background: var(--primary-tint); border: 1px solid var(--border-strong); box-sizing: border-box; }
+/* An absent criterion is not an alarm, just points not earned. */
+.badge.s0 { color: var(--ink2); border-color: var(--border-strong); }
+.rbar-n { font-family: var(--mono); font-size: 12px; color: var(--ink2); text-align: right; }
+.legend { margin: 12px 0 0; font-size: 12px; color: var(--ink2); }
+.legend span { margin-right: 14px; white-space: nowrap; }
+.legend span::before { content: ""; display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.crit summary .bar.rbar { flex: 1; }
+
+/* -- regulatory --------------------------------------------------------- */
+.reg { margin-top: 16px; }
+.reg h3 { margin-top: 0; }
+.reg-grid { display: flex; flex-wrap: wrap; border: 1px solid var(--border); background: var(--surface); overflow: hidden; }
+.reg-grid > div { flex: 1 1 240px; padding: 10px 14px; font-size: 14px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 0 -1px -1px 0; }
+.rlabel { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); margin-bottom: 3px; }
+.irb-name { display: block; font-weight: 600; }
+.irb-contact, .irb-address { display: block; color: var(--ink2); font-size: 13px; }
+
+/* -- composition --------------------------------------------------------- */
+.toolbar { display: flex; gap: 12px; align-items: center; margin: 8px 0 12px; }
+.filter {
+  flex: 1 1 320px; max-width: 460px; font: inherit; font-size: 14px; color: var(--ink);
+  padding: 7px 10px; border: 1px solid var(--border-strong); border-radius: 2px; background: var(--surface);
+}
+.filter:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-tint); }
+.filter-count { font-family: var(--mono); font-size: 12px; color: var(--ink2); white-space: nowrap; }
+table.index td:first-child { font-weight: 500; }
+td.nowrap, th.nowrap { white-space: nowrap; overflow-wrap: normal; }
+tr.idx-row { cursor: pointer; }
+tr.idx-row:hover td { background: var(--primary-tint); }
+a.jump { color: var(--ink); text-decoration: none; }
+a.jump:hover { color: var(--primary); }
+
+details.card { border: 1px solid var(--border); background: var(--surface); margin-top: 12px; }
+details.card > summary.card-head {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+  padding: 12px 16px 12px 36px; cursor: pointer; list-style: none; position: relative;
+}
+details.card > summary.card-head::-webkit-details-marker { display: none; }
+details.card > summary.card-head::before {
+  content: "\25B8"; position: absolute; left: 14px; top: 13px; font-family: var(--mono); color: var(--ink3);
+}
+details.card[open] > summary.card-head::before { content: "\25BE"; }
+details.card > summary.card-head:hover { background: var(--primary-tint); }
+details.card[open] > summary.card-head { border-bottom: 1px solid var(--border); }
+.card-title { font-weight: 600; font-size: 15px; flex: 1 1 320px; }
+.card-chips { display: flex; flex-wrap: wrap; gap: 0 2px; }
+.card-chips .tag { margin-bottom: 0; }
+.card-body { padding: 16px; }
+details.more { margin-top: 8px; }
+details.more > summary { cursor: pointer; font-family: var(--mono); font-size: 12px; color: var(--primary); padding: 4px 0; }
+details.more > .kv { margin-top: 6px; }
+
+.cards4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.ccard { background: var(--surface); padding: 12px 14px; min-width: 0; }
+.ccard h5 { margin: 0 0 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); font-weight: 500; }
+.ccard h5 .n { color: var(--ink); font-size: 14px; letter-spacing: 0; margin-left: 4px; }
+.srow { font-size: 13px; margin: 3px 0; overflow-wrap: anywhere; }
+.srow b { font-weight: 500; color: var(--ink2); margin-right: 4px; }
+.srow.indent { padding-left: 12px; color: var(--ink2); font-size: 12.5px; }
+.pattern { font-family: var(--mono); font-size: 12px; }
+.pattern b { font-family: Inter, system-ui, sans-serif; font-weight: 500; color: var(--ink); }
+.pattern .arrow { color: var(--primary); }
+.view-full { margin: 16px 0 0; text-align: right; }
+
+/* -- preview page -------------------------------------------------------- */
+.tabs { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid var(--border-strong); margin-top: 4px; }
+.tab {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink2); background: transparent; border: 1px solid transparent; border-bottom: none;
+  border-radius: 2px 2px 0 0; padding: 8px 14px; cursor: pointer; margin-bottom: -1px;
+}
+.tab .n { color: var(--ink3); margin-left: 4px; }
+.tab:hover { color: var(--primary); }
+.tab.active { color: var(--primary); background: var(--surface); border-color: var(--border-strong); border-bottom: 1px solid var(--surface); }
+.tab-panel .toolbar { margin-top: 12px; }
+#contents .toolbar { margin-top: 12px; }
+.toggle { font: 500 12px var(--mono); color: var(--primary); background: none; border: 1px solid var(--border-strong); border-radius: 2px; padding: 3px 8px; cursor: pointer; white-space: nowrap; }
+.toggle:hover { border-color: var(--primary); }
+tr.details-row > td { background: var(--bg); padding: 12px 16px 16px; }
+.io-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); margin: 10px 0 6px; }
+.io-heading .n { color: var(--ink); letter-spacing: 0; }
+table.inner { margin: 0; }
+.cmd { display: block; font-family: var(--mono); font-size: 12px; background: var(--hero); color: #fff; padding: 8px 10px; border-radius: 2px; white-space: pre-wrap; overflow-wrap: anywhere; }
+td[title] { cursor: help; }
+
+/* -- footer -------------------------------------------------------------- */
+footer p { margin: 0 0 6px; font-family: Inter, system-ui, sans-serif; }
+footer p:last-child { font-family: var(--mono); }
+
+/* -- print --------------------------------------------------------------- */
+@media print {
+  #sidebar, #sidebar-toggle, #back-to-top, .toolbar, .view-full, .topbar { display: none !important; }
+  header.hero { background: #fff; color: #000; border-bottom: 1px solid #000; padding: 0 0 12px; }
+  .hero .kicker, .hero .ark, .hero .desc, .hbadge, .chip { color: #000; border-color: #000; }
+  main { max-width: none; padding: 0; }
+  details.card, .panel, .kv, .cards4 { break-inside: avoid; }
+  tr.details-row { display: table-row !important; }
+  a { color: inherit; text-decoration: none; }
+}
+</style></head>
+<body class="has-nav"><button id="sidebar-toggle" aria-label="Toggle navigation" aria-controls="sidebar">&#9776;</button>
+<button id="back-to-top" title="Back to top" aria-label="Back to top">&uarr;</button>
+<nav id="sidebar" aria-label="Datasheet sections">
+  <div class="sidebar-title">Contents</div>  <a href="#datasheet-summary">Datasheet Summary</a>  <a href="#dataset-details">Release Overview</a>  <details class="sidebar-group" open>
+    <summary><a href="#composition">Composition</a></summary>    <a class="sub" href="#subcrate-1" title="Vowel score of the letters-chain halves">Vowel score of the letters-chain halves</a>  </details>  <a href="#distribution">Distribution</a>  <div class="sidebar-title">Companion pages</div>  <a class="ext" href="ro-crate-evidence-graph.html">Evidence graph &#8599;</a></nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="kicker">Datasheet</p>
+    <h1>Vowel score of the letters-chain halves</h1>    <p class="ark">ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77</p>    <p class="badges">      <span class="hbadge">Version 1.0</span>      <a class="hbadge" href="https://spdx.org/licenses/CC-BY-4.0" target="_blank" rel="noopener" title="https://spdx.org/licenses/CC-BY-4.0">License &#8599;</a>      <span class="hbadge">Released 2026-09-18T00:00:00-04:00</span>    </p>    <p class="chips"><span class="chip">mlflow</span> <span class="chip">letters-chain</span> <span class="chip">linked crates</span> <span class="chip">provenance</span> </p>  </div>
+</header>
+
+<main><section id="datasheet-summary">
+  <h2>Datasheet Summary</h2>  <p class="lead">An MLflow run that scored the two halves of the letters-chain pipeline&#39;s output by vowel content, converted to an EVI RO-Crate that links back to the Nextflow crate for its inputs.</p>  <div class="summary-grid single">
+    <div class="panel">
+      <div class="panel-label">Dataset statistics</div>
+      <div class="stat-grid">        <div class="stat"><span class="n">197 B</span><span class="label">Total size</span></div>        <div class="stat"><span class="n">4</span><span class="label">Datasets</span></div>        <div class="stat"><span class="n">1</span><span class="label">Computations</span></div>        <div class="stat"><span class="n">2</span><span class="label">Software</span></div>      </div>      <p class="extra"><span class="stat-sub">Also</span> 1 linked crates &middot; 3 schemas</p>      <p class="formats"><span class="stat-sub">Formats</span> <span class="tag">txt</span> <span class="tag">local</span> <span class="tag">json</span> </p>      <p class="actions">        <a class="btn ghost" href="ro-crate-evidence-graph.html">Evidence graph</a>      </p>    </div>  </div>
+</section><section id="dataset-details">
+  <h2>Release Overview</h2>
+  <div class="kv">    <div id="accession">
+  <div class="label">RO-Crate ID</div>
+  <div class="value mono">ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77  </div>
+</div>    <div id="doi">
+  <div class="label">DOI</div>
+  <div class="value"><span class="missing">Not specified</span>  </div>
+</div>    <div id="release-date">
+  <div class="label">Release Date</div>
+  <div class="value">2026-09-18T00:00:00-04:00  </div>
+</div>    <div id="version">
+  <div class="label">Version</div>
+  <div class="value mono">1.0  </div>
+</div>    <div id="description">
+  <div class="label">Description</div>
+  <div class="value">An MLflow run that scored the two halves of the letters-chain pipeline&#39;s output by vowel content, converted to an EVI RO-Crate that links back to the Nextflow crate for its inputs.  </div>
+</div>    <div id="authors">
+  <div class="label">Authors</div>
+  <div class="value">Ada Lovelace  </div>
+</div>    <div id="license">
+  <div class="label">License</div>
+  <div class="value"><a href="https://spdx.org/licenses/CC-BY-4.0" target="_blank" rel="noopener">https://spdx.org/licenses/CC-BY-4.0</a>  </div>
+</div>    <div id="keywords">
+  <div class="label">Keywords</div>
+  <div class="value">mlflow, letters-chain, linked crates, provenance  </div>
+</div>    <div id="linked-crates">
+  <div class="label">Linked Crates</div>
+  <div class="value"><ul class="plain"><li><a href="../../nextflow-run/results/ro-crate-datasheet.html" target="_blank" rel="noopener">letters-chain demonstration crate (ark:59853/rocrate-main-nf-600fc41) — 2 entities from this crate</a></li></ul>  </div>
+</div>    <div id="conforms-to">
+  <div class="label">Conforms To</div>
+  <div class="value"><ul class="plain"><li><a href="https://w3id.org/fairscape/profile/0.1" target="_blank" rel="noopener">https://w3id.org/fairscape/profile/0.1</a></li></ul>  </div>
+</div>  </div>
+  <div class="reg">
+    <h3>Human Subjects &amp; Regulatory</h3>
+    <div class="reg-grid">
+      <div><span class="rlabel">Human subjects research</span><span class="missing">Not specified</span></div>
+      <div><span class="rlabel">De-identified samples</span><span class="missing">Not specified</span></div>
+      <div><span class="rlabel">FDA regulated</span><span class="missing">Not specified</span></div>
+      <div><span class="rlabel">IRB protocol ID</span><span class="missing">Not specified</span></div>
+      <div><span class="rlabel">Institutional review board</span><span class="missing">Not specified</span>      </div>
+      <div><span class="rlabel">Human subjects exemptions</span><span class="missing">Not specified</span></div>    </div>
+  </div>
+</section><section id="composition">
+  <h2>Composition</h2>  <details class="card" id="subcrate-1" data-search="vowel score of the letters-chain halves mlflow letters-chain linked crates provenance txt local json" open>
+    <summary class="card-head">
+      <span class="card-title">Vowel score of the letters-chain halves</span>
+      <span class="card-chips"><span class="tag">610.1 KB</span>        <span class="tag">4 files</span><span class="tag">1 computation</span><span class="tag fmt">txt</span><span class="tag fmt">local</span><span class="tag fmt">json</span>      </span>
+    </summary>
+    <div class="card-body">
+      <div class="kv compact">
+        <div>
+  <div class="label">RO-Crate ID</div>
+  <div class="value mono">ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77</div>
+</div>
+        <div>
+  <div class="label">Description</div>
+  <div class="value">An MLflow run that scored the two halves of the letters-chain pipeline&#39;s output by vowel content, converted to an EVI RO-Crate that links back to the Nextflow crate for its inputs.</div>
+</div>
+        <div>
+  <div class="label">Authors</div>
+  <div class="value">Ada Lovelace</div>
+</div>
+        <div>
+  <div class="label">Date</div>
+  <div class="value">2026-09-18</div>
+</div>
+        <div>
+  <div class="label">Version</div>
+  <div class="value mono">1.0</div>
+</div>
+        <div>
+  <div class="label">Size</div>
+  <div class="value mono">610.1 KB</div>
+</div>
+        
+        <div>
+  <div class="label">License</div>
+  <div class="value"><a href="https://spdx.org/licenses/CC-BY-4.0" target="_blank" rel="noopener">https://spdx.org/licenses/CC-BY-4.0</a></div>
+</div>        <div>
+  <div class="label">Keywords</div>
+  <div class="value">mlflow, letters-chain, linked crates, provenance</div>
+</div>        <div>
+  <div class="label">Provenance graph</div>
+  <div class="value mono"><a href="ro-crate-evidence-graph.html">ro-crate-evidence-graph.html</a></div>
+</div>
+        
+      </div>
+      <h4>Content summary</h4>
+      <div class="cards4">
+        <div class="ccard">
+          <h5>Files <span class="n">4</span></h5><div class="srow"><b>Formats</b> txt <span class="muted">(2)</span>, local <span class="muted">(1)</span>, json <span class="muted">(1)</span></div><div class="srow"><b>Access</b> No link <span class="muted">(3)</span>, Available <span class="muted">(1)</span></div><div class="srow"><b>With provenance</b> 1 of 4</div>        </div>
+        <div class="ccard">
+          <h5>Software &amp; instruments <span class="n">2</span></h5>
+          <div class="srow"><b>Software</b> 2 <span class="muted">(python <span class="muted">(2)</span>)</span></div>
+          <div class="srow"><b>Instruments</b> 0</div>
+        </div>
+        <div class="ccard">
+          <h5>Inputs <span class="n">3</span></h5>          <div class="srow"><b>Datasets</b> 3</div>
+          <div class="srow indent">letters-chain demonstration crate (txt) <span class="muted">(2)</span>, local <span class="muted">(1)</span></div>        </div>
+        <div class="ccard">
+          <h5>Other components</h5>
+          <div class="srow"><b>Experiments</b> 0</div>          <div class="srow"><b>Computations</b> 1</div><div class="srow indent"><span class="pattern">local + <b>letters-chain demonstration crate</b>: txt <span class="arrow">&rarr;</span> json</span></div><div class="srow indent muted">Inputs, outputs and commands are listed in the <a href="ro-crate-preview.html">full dataset details</a>.</div>          <div class="srow"><b>Schemas</b> 3</div>
+          <div class="srow"><b>Other</b> 0</div>
+        </div>
+      </div>      <p class="view-full"><a class="btn" href="ro-crate-preview.html">View full dataset details</a></p>    </div>
+  </details></section><section id="distribution">
+  <h2>Distribution Information</h2>
+  <div class="kv">    <div>
+  <div class="label">License</div>
+  <div class="value"><a href="https://spdx.org/licenses/CC-BY-4.0" target="_blank" rel="noopener">https://spdx.org/licenses/CC-BY-4.0</a>  </div>
+</div>    <div>
+  <div class="label">Release Date</div>
+  <div class="value">2026-09-18T00:00:00-04:00  </div>
+</div>    <div>
+  <div class="label">Version</div>
+  <div class="value mono">1.0  </div>
+</div>  </div>
+</section><footer>
+  <p>Datasheet provenance: this datasheet and its metadata were generated by the FAIRSCAPE AI-readiness platform (Al Manir et al. 2024, bioRxiv 2024.12.23.629818; <a href="https://doi.org/10.1101/2024.12.23.629818" target="_blank" rel="noopener">https://doi.org/10.1101/2024.12.23.629818</a>).</p>
+  <p>Generated by fairscape-artifacts from ro-crate-metadata.json on 2026-09-18 10:01.</p>
+</footer>
+</main><script>
+document.addEventListener("DOMContentLoaded", function () {
+  var body = document.body;
+
+  /* Sidebar toggle (narrow screens; the sidebar is docked on wide ones). */
+  var toggle = document.getElementById("sidebar-toggle");
+  var sidebar = document.getElementById("sidebar");
+  if (toggle && sidebar) {
+    function setOpen(open) {
+      sidebar.classList.toggle("active", open);
+      body.classList.toggle("sidebar-active", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.addEventListener("click", function () {
+      setOpen(!sidebar.classList.contains("active"));
+    });
+    sidebar.addEventListener("click", function (e) {
+      if (e.target.closest("a[href^='#']")) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+  }
+
+  /* Jump to a dataset card and open it. */
+  function openCard(id) {
+    var card = document.getElementById(id);
+    if (card && card.tagName.toLowerCase() === "details") card.open = true;
+    return card;
+  }
+  function jumpToCard(id) {
+    var card = openCard(id);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  body.addEventListener("click", function (e) {
+    var link = e.target.closest('a[href^="#subcrate-"]');
+    if (link) {
+      var id = link.getAttribute("href").slice(1);
+      e.preventDefault();
+      jumpToCard(id);
+      history.replaceState(null, "", "#" + id);
+      return;
+    }
+    var row = e.target.closest(".idx-row");
+    if (row && !e.target.closest("a")) jumpToCard(row.getAttribute("data-target"));
+  });
+  if (location.hash.indexOf("#subcrate-") === 0) openCard(location.hash.slice(1));
+  window.addEventListener("hashchange", function () {
+    if (location.hash.indexOf("#subcrate-") === 0) openCard(location.hash.slice(1));
+  });
+
+  /* Dataset filter: index rows and cards share a data-search string. */
+  var filter = document.getElementById("dataset-filter");
+  var countEl = document.getElementById("dataset-filter-count");
+  var noMatches = document.getElementById("dataset-no-matches");
+  if (filter) {
+    var rows = Array.prototype.slice.call(document.querySelectorAll(".idx-row"));
+    var cards = Array.prototype.slice.call(document.querySelectorAll("details.card"));
+    var total = cards.length;
+    function matches(el, q) {
+      return (el.getAttribute("data-search") || "").indexOf(q) !== -1;
+    }
+    function apply() {
+      var q = filter.value.trim().toLowerCase();
+      var shown = 0;
+      rows.forEach(function (r) { r.hidden = !!q && !matches(r, q); });
+      cards.forEach(function (c) {
+        var ok = !q || matches(c, q);
+        c.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (noMatches) noMatches.hidden = shown !== 0;
+      if (countEl) countEl.textContent = q ? shown + " of " + total + " datasets" : "";
+    }
+    filter.addEventListener("input", apply);
+  }
+
+  /* Back to top. */
+  var toTop = document.getElementById("back-to-top");
+  if (toTop) {
+    window.addEventListener("scroll", function () {
+      toTop.classList.toggle("visible", window.scrollY > 400);
+    });
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* Scrollspy: highlight the section in view. */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#sidebar a[href^="#"]'));
+  var linkById = {};
+  navLinks.forEach(function (a) { linkById[a.getAttribute("href").slice(1)] = a; });
+  var watched = Object.keys(linkById).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (watched.length && "IntersectionObserver" in window) {
+    var current = null;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var a = linkById[entry.target.id];
+        if (a && a !== current) {
+          if (current) current.classList.remove("active");
+          a.classList.add("active");
+          current = a;
+        }
+      });
+    }, { rootMargin: "-10% 0px -80% 0px", threshold: 0 });
+    watched.forEach(function (el) { observer.observe(el); });
+  }
+
+  /* Print: open every collapsible, then restore. */
+  var snapshot = [];
+  window.addEventListener("beforeprint", function () {
+    snapshot = [];
+    document.querySelectorAll("details").forEach(function (d) { snapshot.push([d, d.open]); d.open = true; });
+  });
+  window.addEventListener("afterprint", function () {
+    snapshot.forEach(function (pair) { pair[0].open = pair[1]; });
+    snapshot = [];
+  });
+});
+</script>
+
+</body>
+</html>

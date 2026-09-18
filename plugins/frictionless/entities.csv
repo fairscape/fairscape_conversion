@@ -1,0 +1,4 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+resource,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per resource; a tabular resource also gets a Schema (next row) and points at it with evi:Schema
+schema,,Schema,evi:Schema,data,mint,,,FALSE,schema,one per resource that carries a Table Schema (schema.fields)
+descriptor,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,datapackage.json itself (only when convert() was given a path)

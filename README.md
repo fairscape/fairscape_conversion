@@ -20,10 +20,13 @@ Pick the row that matches what you have.
 |---|---|---|
 | A Datasheet for Datasets (D4D) | the datasheet as YAML or JSON | `fairscape import d4d datasheet.yaml -o ./crate` |
 | A CFDE C2M2 datapackage | the directory of TSVs + `C2M2_datapackage.json` | `fairscape import c2m2 ./datapackage-dir -o ./crate` |
-| A Workflow Run RO-Crate | its `ro-crate-metadata.json` | `fairscape import wrroc ro-crate-metadata.json -o ./crate` |
+| A Workflow Run RO-Crate (CWL, Galaxy's RO-Crate export, …) | its `ro-crate-metadata.json` | `fairscape import wrroc ro-crate-metadata.json -o ./crate` |
+| A Galaxy invocation | the invocation export from Galaxy (*Workflow Invocations → Export*, any format: `.tar.gz`, `.zip`, `.rocrate.zip`, or unpacked), or just a `.ga` workflow file | `fairscape import galaxy invocation-export.tar.gz -o ./crate` |
 | A finished Cromwell/WDL run | the file from `cromwell run -m metadata.json` | `fairscape import cromwell metadata.json -o ./crate` |
 | A finished Snakemake run | the records JSON from `snakemake --reporter fairscape` | `fairscape import snakemake records.json -o ./crate` |
 | Finished MLflow runs | the tracking store (an `mlruns` dir or tracking URI) and `pip install mlflow` | `fairscape import mlflow ./mlruns --experiment NAME -o ./crate` |
+| A REDCap project | the data dictionary CSV (*Project Setup → Data Dictionary → Download*, or the API's `content=metadata` JSON), plus optionally the records export CSV | `fairscape import redcap MyStudy_DataDictionary.csv --records MyStudy_DATA.csv -o ./crate` |
+| A Frictionless Data Package (any `datapackage.json`) | the package folder, or the descriptor | `fairscape import frictionless ./package-dir -o ./crate` |
 | A CPM RO-Crate (distributed provenance bundles) | the crate directory: `ro-crate-metadata.json` + its `CPMProvenanceFile` PROV-N/PROV-JSON files | `fairscape import cpm ./crate-dir -o ./evi-crate` |
 
 ## Export — from an RO-Crate
@@ -34,6 +37,7 @@ Pick the row that matches what you have.
 | A Workflow Run RO-Crate | `fairscape export wrroc ro-crate-metadata.json` |
 | An MLCommons Croissant document | `fairscape export croissant ro-crate-metadata.json` |
 | A CPM provenance document (PROV-JSON, or PROV-N with `--provn`) | `fairscape export cpm ro-crate-metadata.json` |
+| A Frictionless Data Package descriptor (`datapackage.json`; a Table Schema per tabular Dataset) | `fairscape export frictionless ro-crate-metadata.json` |
 
 ## Try it — no data needed
 
@@ -41,7 +45,7 @@ Every conversion above has a runnable example in [`examples/`](examples),
 on real input that ships with the package. They need nothing installed:
 
 ```bash
-python examples/run_all.py            # all nine, with a pass/fail table
+python examples/run_all.py            # every one, with a pass/fail table
 python examples/import_d4d.py         # or just the one you care about
 ```
 
@@ -66,7 +70,27 @@ The inputs and expected outputs the examples run on live inside each plugin:
 | snakemake | `plugins/snakemake/input.json` (3-rule chain records) | `plugins/snakemake/golden.json` |
 | mlflow | `plugins/mlflow/input.json` (iris experiment records) | `plugins/mlflow/golden.json` |
 | croissant | `plugins/croissant/input.json` (export this crate) | `plugins/croissant/golden.json` |
+| galaxy | `plugins/galaxy/input-store/` (Galaxy 23.0's export of the WRROC spec's collection workflow) | `plugins/galaxy/golden.json` |
+| redcap | `plugins/redcap/input-dictionary.csv` + `input-records.csv` (a three-form public-health survey) | `plugins/redcap/golden.json` |
+| frictionless | `plugins/frictionless/input-datapackage/` (county surveillance: two tables with keys + a remote PDF) | `plugins/frictionless/golden.json` |
 | cpm | `plugins/cpm/input-crate/` (the CPM reference crate's provenance files, [zenodo 7676924](https://zenodo.org/records/7676924)) | `plugins/cpm/golden.json` (+ `golden-export.json`) |
+
+## Linked crates — when one run's inputs were another run's outputs
+
+Two independently converted crates do not know about each other. Pass the
+upstream crate to the conversion and the new crate reuses its identifiers for
+whatever it consumed from it, as a stub that points back:
+
+```bash
+fairscape import mlflow ./mlruns --experiment NAME -o ./crate --link-crate /path/to/upstream-crate
+fairscape_conversion link ./crate --link-crate /path/to/upstream-crate    # or any crate, after the fact
+```
+
+The match is by file path, then md5, then containing directory; it runs after
+every importer, so it is not specific to any format. `fairscape-artifacts`
+follows the pointer and draws one evidence graph across both crates. The
+convention and two runnable pairs (Nextflow → MLflow, Snakemake → Snakemake)
+are in [`examples/linked-crates/`](examples/linked-crates).
 
 ## From Python
 
@@ -78,7 +102,7 @@ crate = d4d.convert("import", yaml.safe_load(open("datasheet.yaml")))
 ```
 
 Same shape for every format: `wrroc`, `c2m2`, `cromwell`, `snakemake`,
-`mlflow`, `cpm` (`convert("import", ...)`), and `d4d`/`wrroc`/`croissant`/`cpm`
+`mlflow`, `cpm`, `redcap`, `frictionless`, `galaxy` (`convert("import", ...)`), and `d4d`/`wrroc`/`croissant`/`cpm`/`frictionless`
 (`convert("export", crate)`). `cpm` takes the crate *directory* rather than a
 parsed document, because it reads the PROV bundle files registered in the
 metadata alongside it.

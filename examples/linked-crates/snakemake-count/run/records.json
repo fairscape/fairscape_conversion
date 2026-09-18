@@ -1,0 +1,71 @@
+{
+  "settings": {
+    "naan": "59853",
+    "name": "Variants per chromosome",
+    "description": "A one-rule Snakemake run that counted the variants the variant-calling pipeline called, per chromosome; its only input is that pipeline's summary table.",
+    "author": "Example Researcher",
+    "keywords": [
+      "snakemake",
+      "variant calling",
+      "linked crates",
+      "provenance"
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0",
+    "version": "1.0",
+    "date_published": "2026-09-18T09:52:12.083752-04:00"
+  },
+  "run": {
+    "name": "Variants per chromosome",
+    "snakefile": "Snakefile",
+    "snakefile_key": "/home/oj/fairscape/fairscape_conversion/examples/linked-crates/snakemake-count/Snakefile",
+    "engine_version": "9.26.1",
+    "starttime": "2026-09-18T09:51:11.949147-04:00",
+    "endtime": "2026-09-18T09:51:11.949147-04:00"
+  },
+  "jobs": [
+    {
+      "rule": "variants_per_chrom",
+      "wildcards": {},
+      "shellcmd": "(printf 'chrom\\tvariants\\tmean_quality\\n'; tail -n +2 ../../snakemake-variant-calling/results/calls/variant_summary.tsv | awk -F'\\t' '{ n[$1]++; q[$1] += $5 } END { for (c in n) printf \"%s\\t%d\\t%.2f\\n\", c, n[c], q[c] / n[c] }' | sort) > results/variants_per_chrom.tsv",
+      "params": [],
+      "inputs": [
+        "../../snakemake-variant-calling/results/calls/variant_summary.tsv"
+      ],
+      "outputs": [
+        "results/variants_per_chrom.tsv"
+      ],
+      "starttime": "2026-09-18T09:51:11.949147-04:00",
+      "endtime": "2026-09-18T09:51:11.949147-04:00",
+      "container_img_url": null,
+      "conda_env": null
+    }
+  ],
+  "rules": {
+    "variants_per_chrom": {
+      "source": "(printf 'chrom\\tvariants\\tmean_quality\\n'; tail -n +2 {input} | awk -F'\\t' '{{ n[$1]++; q[$1] += $5 }} END {{ for (c in n) printf \"%s\\t%d\\t%.2f\\n\", c, n[c], q[c] / n[c] }}' | sort) > {output}",
+      "language": "bash",
+      "container_img_url": null,
+      "conda_env": null,
+      "definition_kind": null,
+      "definition_ref": null
+    }
+  },
+  "files": {
+    "../../snakemake-variant-calling/results/calls/variant_summary.tsv": {
+      "size": 14609,
+      "parent": null,
+      "is_dir": false,
+      "locator": "localPath",
+      "locator_value": "../../snakemake-variant-calling/results/calls/variant_summary.tsv"
+    },
+    "results/variants_per_chrom.tsv": {
+      "size": 40,
+      "parent": null,
+      "is_dir": false,
+      "locator": "contentUrl",
+      "locator_value": "results/variants_per_chrom.tsv"
+    }
+  },
+  "configfiles": [],
+  "schemas": {}
+}

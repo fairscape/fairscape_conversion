@@ -1,0 +1,45 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+project,name,Schema,name,schema_name,,import,,required,scalar,,,,,,,Schema for REDCap project '<name>'
+project,name,Schema,description,schema_description,,import,,required,scalar,,,,,,,counts forms/fields/columns; names the identifier fields when there are any
+project,,Schema,conformsTo,json_schema_ref,,import,,required,scalar,,,,,,,JSON Schema 2020-12
+project,,Schema,properties,schema_properties,,import,,required,scalar,,,,,,,one Property per export column: type/pattern from field_types.csv; choices; PHI flag; branching logic; min/max
+project,,Schema,type,constant_object,,import,,required,scalar,,,,,,,
+project,,Schema,additionalProperties,additional_properties,,import,,required,scalar,,,,,,,false once a records header pinned the exact column set
+project,,Schema,required,schema_required,,import,,required,scalar,,,,,,,record_id + every 'Required Field? = y' column present in the export
+project,,Schema,separator,constant_comma,,import,,required,scalar,,,,,,,
+project,,Schema,header,constant_true,,import,,required,scalar,,,,,,,
+project,,Schema,forms,form_list,,import,,recommended,list,,,,,,,instrument names in dictionary order
+project,,Schema,identifierFields,identifier_fields,,import,,recommended,list,,,,,,,columns REDCap flags 'Identifier? = y' (PHI); the fact a de-identified export drops them is why records columns filter the schema
+dictionary,file,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+dictionary,file,Dataset,description,dictionary_description,,import,,required,scalar,,,,,,,
+dictionary,,Dataset,author,crate_author,,import,,recommended,scalar,,,,,,,
+dictionary,,Dataset,datePublished,crate_date,,import,,required,scalar,,,,,,,
+dictionary,,Dataset,keywords,crate_keywords,,import,,recommended,list,,,,,,,
+dictionary,format,Dataset,format,scalar,,import,,required,scalar,,,,,,,text/csv or application/json (the API metadata export)
+dictionary,local_path,Dataset,localPath,scalar,,import,,recommended,scalar,,,,,,,
+dictionary,size,Dataset,contentSize,scalar,,import,,optional,scalar,,,,,,,
+dictionary,,Dataset,generatedBy,export_ref,,import,,required,scalar,,,,,,,
+records,file,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+records,file,Dataset,description,records_description,,import,,required,scalar,,,,,,,rows/columns; says raw vs labels export
+records,,Dataset,author,crate_author,,import,,recommended,scalar,,,,,,,
+records,,Dataset,datePublished,crate_date,,import,,required,scalar,,,,,,,
+records,,Dataset,keywords,crate_keywords,,import,,recommended,list,,,,,,,
+records,,Dataset,format,constant_csv,,import,,required,scalar,,,,,,,
+records,local_path,Dataset,localPath,scalar,,import,,recommended,scalar,,,,,,,
+records,size,Dataset,contentSize,scalar,,import,,optional,scalar,,,,,,,
+records,,Dataset,evi:Schema,schema_ref,,import,,required,scalar,,,,,,,the project schema describes exactly this file's columns
+records,,Dataset,generatedBy,export_ref,,import,,required,scalar,,,,,,,
+records,,Dataset,conditionsOfAccess,records_access,,import,,optional,scalar,,,,,,,only when the export still carries identifier-flagged columns
+export,,Computation,name,export_name,,import,,required,scalar,,,,,,,
+export,,Computation,description,export_description,,import,,required,scalar,,,,,,,
+export,,Computation,runBy,crate_author,,import,,recommended,scalar,,,,,,,
+export,,Computation,dateCreated,crate_date,,import,,required,scalar,,,,,,,
+export,,Computation,usedSoftware,used_software,,import,,required,list,,,,,,,REDCap
+export,,Computation,generated,export_generated,,import,,required,list,,,,,,,dictionary file + records file
+redcap,,Software,name,constant_redcap,,import,,required,scalar,,,,,,,
+redcap,,Software,description,redcap_description,,import,,required,scalar,,,,,,,
+redcap,version,Software,version,scalar,,import,,recommended,scalar,,,,,,,from --redcap-version / the API's version export; REDCap does not write it into the dictionary
+redcap,,Software,url,constant_redcap_url,,import,,recommended,scalar,,,,,,,
+redcap,,Software,author,constant_vanderbilt,,import,,recommended,scalar,,,,,,,
+redcap,,Software,datePublished,crate_date,,import,,required,scalar,,,,,,,
+redcap,,Software,format,constant_web_app,,import,,required,scalar,,,,,,,

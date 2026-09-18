@@ -1,0 +1,5 @@
+county_fips,week_start,cases,hospitalized,pathogen,rate_per_100k,provisional
+51003,2026-01-04,42,3,influenza,37.1,false
+51003,2026-01-11,57,5,influenza,50.4,false
+51540,2026-01-04,18,NA,rsv,38.9,true
+51540,2026-01-11,25,2,covid-19,54.0,true

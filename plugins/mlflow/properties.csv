@@ -36,6 +36,7 @@ dataset,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
 dataset,source_type,Dataset,format,dataset_format,,import,,required,scalar,,,,,,,the mlflow dataset source type (pandas/code/delta/...)
 dataset,,Dataset,generatedBy,empty_list,,import,,required,list,,,,,,,logged inputs; [] like other plugins' input files (LakeDB parity)
 dataset,digest,Dataset,digest,scalar,,import,,optional,scalar,,,,,,,mlflow's content-based dataset digest
+dataset,source_uri,Dataset,localPath,dataset_local_path,,import,,optional,scalar,,,,,,,the local file the logged dataset was read from (its mlflow.data source uri); what linked-crate matching keys on
 dataset,,Dataset,evi:Schema,dataset_schema_ref,,import,,optional,scalar,,,,,,,link to the colspec-derived Schema node
 model,name,MLModel,name,scalar,,import,,required,scalar,,,,,,,
 model,,MLModel,additionalType,csv_constant,,import,,required,scalar,http://www.w3.org/ns/mls#Model,,,,,,W3C ML-Schema Model class (verified: www.w3.org/ns/mls)

@@ -1,0 +1,704 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-collection-workflow-44f23b9"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-collection-workflow-44f23b9",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "collection_workflow",
+      "description": "Test workflow with a collection",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "version": "1.0",
+      "author": "Example Researcher",
+      "license": "MIT",
+      "datePublished": "2023-03-28",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-collection-workflow-4d335f7"
+        },
+        {
+          "@id": "ark:59853/computation-data-fetch-8f5c80f"
+        },
+        {
+          "@id": "ark:59853/computation-data-fetch-ee0f47e"
+        },
+        {
+          "@id": "ark:59853/computation-data-fetch-5e97149"
+        },
+        {
+          "@id": "ark:59853/computation-merge-collection-f104a6d"
+        },
+        {
+          "@id": "ark:59853/computation-cat-collection-9892315"
+        },
+        {
+          "@id": "ark:59853/computation-head-3f3b9f6"
+        },
+        {
+          "@id": "ark:59853/software-collection-workflow-3d3d34d"
+        },
+        {
+          "@id": "ark:59853/software-galaxy-b721819"
+        },
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        },
+        {
+          "@id": "ark:59853/software-merge-collection-78ad824"
+        },
+        {
+          "@id": "ark:59853/software-cat-collection-f70bb96"
+        },
+        {
+          "@id": "ark:59853/software-head-063ac75"
+        },
+        {
+          "@id": "ark:59853/dataset-concatenate-dataset-collection-for-test-6de66be"
+        },
+        {
+          "@id": "ark:59853/dataset-select-first-on-data-7-d0e785b"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        },
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-world-13926d3"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-universe-04f90a0"
+        },
+        {
+          "@id": "ark:59853/dataset-data-31-data-30-and-others-merged-8b6c715"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-collection-workflow-4d335f7",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Galaxy invocation of 'collection_workflow'",
+      "description": "Invocation of the Galaxy workflow 'collection_workflow' (6 steps, 3 tool jobs), state 'scheduled', on Galaxy 23.0. Reconstructed from Galaxy's invocation export (model store) by fairscape_conversion.",
+      "runBy": "Example Researcher",
+      "dateCreated": "2023-03-28T13:52:42",
+      "dateModified": "2023-03-28T13:52:44",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-collection-workflow-3d3d34d"
+        },
+        {
+          "@id": "ark:59853/software-galaxy-b721819"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-hello-world-13926d3"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-universe-04f90a0"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-concatenate-dataset-collection-for-test-6de66be"
+        },
+        {
+          "@id": "ark:59853/dataset-select-first-on-data-7-d0e785b"
+        },
+        {
+          "@id": "ark:59853/dataset-data-31-data-30-and-others-merged-8b6c715"
+        }
+      ],
+      "parameter": [
+        "num_lines_param=2"
+      ],
+      "status": "scheduled",
+      "identifier": "5280bd93c2a0433a"
+    },
+    {
+      "@id": "ark:59853/computation-data-fetch-8f5c80f",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "upload (__DATA_FETCH__)",
+      "description": "Galaxy job running tool '__DATA_FETCH__' version 0.1.0, state 'ok'; an upload that produced an input of the invocation.",
+      "runBy": "Example Researcher",
+      "dateCreated": "2022-12-12T17:21:44",
+      "command": "python '/home/padge/Elixir/workflow-export/galaxy/data_fetch.py' --galaxy-root '/home/padge/Elixir/workflow-export/galaxy' --datatypes-registry '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/50/registry.xml' --request-version '1' --request '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/50/configs/tmp65n27sdb'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        }
+      ],
+      "parameter": [
+        "file_count=1",
+        "request_version=1",
+        "request|targets_0|destination|type=hdas",
+        "request|targets_0|elements_0|ext=auto",
+        "request|targets_0|elements_0|space_to_tab=False",
+        "request|targets_0|elements_0|to_posix_lines=True",
+        "request|targets_0|elements_0|src=pasted",
+        "request|targets_0|elements_0|paste_content=hello",
+        "request|targets_0|elements_0|purge_source=False",
+        "request|targets_0|elements_0|object_id=54",
+        "request|auto_decompress=True",
+        "request|check_content=True"
+      ],
+      "status": "ok",
+      "identifier": "44359355b52c5374"
+    },
+    {
+      "@id": "ark:59853/computation-data-fetch-ee0f47e",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "upload (__DATA_FETCH__)",
+      "description": "Galaxy job running tool '__DATA_FETCH__' version 0.1.0, state 'ok'; an upload that produced an input of the invocation.",
+      "runBy": "Example Researcher",
+      "dateCreated": "2022-12-12T17:21:44",
+      "command": "python '/home/padge/Elixir/workflow-export/galaxy/data_fetch.py' --galaxy-root '/home/padge/Elixir/workflow-export/galaxy' --datatypes-registry '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/51/registry.xml' --request-version '1' --request '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/51/configs/tmp_s5w16w4'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        }
+      ],
+      "parameter": [
+        "file_count=1",
+        "request_version=1",
+        "request|targets_0|destination|type=hdas",
+        "request|targets_0|elements_0|ext=auto",
+        "request|targets_0|elements_0|space_to_tab=False",
+        "request|targets_0|elements_0|to_posix_lines=True",
+        "request|targets_0|elements_0|src=pasted",
+        "request|targets_0|elements_0|paste_content=world",
+        "request|targets_0|elements_0|purge_source=False",
+        "request|targets_0|elements_0|object_id=55",
+        "request|auto_decompress=True",
+        "request|check_content=True"
+      ],
+      "status": "ok",
+      "identifier": "18787df2a1b221dc"
+    },
+    {
+      "@id": "ark:59853/computation-data-fetch-5e97149",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "upload (__DATA_FETCH__)",
+      "description": "Galaxy job running tool '__DATA_FETCH__' version 0.1.0, state 'ok'; an upload that produced an input of the invocation.",
+      "runBy": "Example Researcher",
+      "dateCreated": "2022-12-12T17:22:43",
+      "command": "python '/home/padge/Elixir/workflow-export/galaxy/data_fetch.py' --galaxy-root '/home/padge/Elixir/workflow-export/galaxy' --datatypes-registry '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/52/registry.xml' --request-version '1' --request '/home/padge/Elixir/workflow-export/galaxy/database/jobs_directory/000/52/configs/tmpi9wy8e7l'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        }
+      ],
+      "parameter": [
+        "file_count=1",
+        "request_version=1",
+        "request|targets_0|destination|type=hdas",
+        "request|targets_0|elements_0|ext=auto",
+        "request|targets_0|elements_0|space_to_tab=False",
+        "request|targets_0|elements_0|to_posix_lines=True",
+        "request|targets_0|elements_0|src=pasted",
+        "request|targets_0|elements_0|paste_content=universe",
+        "request|targets_0|elements_0|purge_source=False",
+        "request|targets_0|elements_0|object_id=58",
+        "request|auto_decompress=True",
+        "request|check_content=True"
+      ],
+      "status": "ok",
+      "identifier": "ab8c6b77d6eebdc0"
+    },
+    {
+      "@id": "ark:59853/computation-merge-collection-f104a6d",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "__MERGE_COLLECTION__ (step 3: merge collections tool)",
+      "description": "Galaxy job running tool '__MERGE_COLLECTION__' version 1.0.0, state 'ok'; step 3 of the invocation (merged collections).",
+      "runBy": "Example Researcher",
+      "dateCreated": "2023-03-28T13:52:43",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-merge-collection-78ad824"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        },
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-world-13926d3"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-universe-04f90a0"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-data-31-data-30-and-others-merged-8b6c715"
+        },
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        },
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-collection-workflow-4d335f7"
+        }
+      ],
+      "parameter": [
+        "advanced|conflict|duplicate_options=keep_first"
+      ],
+      "status": "ok",
+      "identifier": "a3c16932fb387e0b"
+    },
+    {
+      "@id": "ark:59853/computation-cat-collection-9892315",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "cat_collection (step 4: concat collection)",
+      "description": "Galaxy job running tool 'cat_collection' version 1.0.0, state 'ok', exit code 0; step 4 of the invocation (concatenate collection).",
+      "runBy": "Example Researcher",
+      "dateCreated": "2023-03-28T13:52:43",
+      "command": "cat  '/home/padge/Elixir/workflow-export/galaxy/database/objects/d/4/e/dataset_d4e573fa-227f-4cdc-94a0-ac959de105e7.dat'  '/home/padge/Elixir/workflow-export/galaxy/database/objects/3/6/9/dataset_369edbf0-e16a-45d8-bad8-b0ecb4f566a2.dat'  '/home/padge/Elixir/workflow-export/galaxy/database/objects/b/a/8/dataset_ba8af7ec-ef40-405a-bcc4-33c2df9fffed.dat'  >'/home/padge/Elixir/workflow-export/galaxy/database/objects/e/d/a/dataset_eda9f373-52a4-4dd4-8983-54a6ed0aae80.dat'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-cat-collection-f70bb96"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        },
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        },
+        {
+          "@id": "ark:59853/dataset-data-31-data-30-and-others-merged-8b6c715"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-concatenate-dataset-collection-for-test-6de66be"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-collection-workflow-4d335f7"
+        }
+      ],
+      "status": "ok",
+      "exitCode": 0,
+      "identifier": "e1ea20c22cd65359"
+    },
+    {
+      "@id": "ark:59853/computation-head-3f3b9f6",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "head (step 5: select lines)",
+      "description": "Galaxy job running tool 'head' version 1.0.0, state 'ok', exit code 0; step 5 of the invocation (select 3 lines).",
+      "runBy": "Example Researcher",
+      "dateCreated": "2023-03-28T13:52:44",
+      "command": "head -n 2 '/home/padge/Elixir/workflow-export/galaxy/database/objects/e/d/a/dataset_eda9f373-52a4-4dd4-8983-54a6ed0aae80.dat' > '/home/padge/Elixir/workflow-export/galaxy/database/objects/1/3/e/dataset_13e34265-0eec-4639-932b-24811bb3682d.dat'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-head-063ac75"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-concatenate-dataset-collection-for-test-6de66be"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-select-first-on-data-7-d0e785b"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-collection-workflow-4d335f7"
+        }
+      ],
+      "parameter": [
+        "lineNum=2"
+      ],
+      "status": "ok",
+      "exitCode": 0,
+      "identifier": "043ca1aacef87820"
+    },
+    {
+      "@id": "ark:59853/software-collection-workflow-3d3d34d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "collection_workflow",
+      "description": "Galaxy workflow 'collection_workflow': Test workflow with a collection. 6 steps: 3 input(s) and 3 tool step(s) (__MERGE_COLLECTION__, cat_collection, head).",
+      "author": "Paul",
+      "datePublished": "2023-03-28",
+      "license": "MIT",
+      "format": "application/json",
+      "localPath": "workflows/2154bc930d1891d1.ga",
+      "identifier": "a7b8315e-0bd7-486b-8e8c-02a52b79269f",
+      "version": "0.1"
+    },
+    {
+      "@id": "ark:59853/software-galaxy-b721819",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Galaxy",
+      "description": "The Galaxy platform (galaxyproject.org), which scheduled the workflow invocation and ran each tool job",
+      "version": "23.0",
+      "url": "https://galaxyproject.org",
+      "author": "The Galaxy Community",
+      "datePublished": "2023-03-28",
+      "format": "application/x-web-application"
+    },
+    {
+      "@id": "ark:59853/software-data-fetch-58a5c74",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "__DATA_FETCH__",
+      "description": "Galaxy built-in model operation '__DATA_FETCH__'",
+      "version": "0.1.0",
+      "identifier": "__DATA_FETCH__",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-merge-collection-78ad824",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "__MERGE_COLLECTION__",
+      "description": "Galaxy built-in model operation '__MERGE_COLLECTION__'",
+      "version": "1.0.0",
+      "identifier": "__MERGE_COLLECTION__",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-cat-collection-f70bb96",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "cat_collection",
+      "description": "Galaxy tool 'cat_collection' (built into the Galaxy server)",
+      "version": "1.0.0",
+      "identifier": "cat_collection",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-head-063ac75",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "head",
+      "description": "Galaxy tool 'head' (built into the Galaxy server)",
+      "version": "1.0.0",
+      "identifier": "head",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/dataset-concatenate-dataset-collection-for-test-6de66be",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Concatenate dataset collection (for test workflows) on data 5, data 4, and data 3",
+      "description": "Galaxy dataset of type 'txt', 3 lines. History item #7.",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28T13:52:43",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "text/plain",
+      "generatedBy": {
+        "@id": "ark:59853/computation-cat-collection-9892315"
+      },
+      "identifier": "eda9f373-52a4-4dd4-8983-54a6ed0aae80",
+      "additionalType": "txt"
+    },
+    {
+      "@id": "ark:59853/dataset-select-first-on-data-7-d0e785b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Select first on data 7",
+      "description": "Galaxy dataset of type 'txt', 2 lines. History item #8.",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28T13:52:44",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "text/plain",
+      "generatedBy": {
+        "@id": "ark:59853/computation-head-3f3b9f6"
+      },
+      "identifier": "13e34265-0eec-4639-932b-24811bb3682d",
+      "additionalType": "txt"
+    },
+    {
+      "@id": "ark:59853/dataset-hello-819180f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hello",
+      "description": "Galaxy dataset of type 'txt', 1 line; uploaded txt file. History items #3, #30, #33 (3 history copies of one file).",
+      "author": "Example Researcher",
+      "datePublished": "2022-12-12T17:29:06",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "text/plain",
+      "generatedBy": {
+        "@id": "ark:59853/computation-data-fetch-8f5c80f"
+      },
+      "identifier": "d4e573fa-227f-4cdc-94a0-ac959de105e7",
+      "additionalType": "txt"
+    },
+    {
+      "@id": "ark:59853/dataset-world-2210a17",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "world",
+      "description": "Galaxy dataset of type 'txt', 1 line; uploaded txt file. History items #4, #34 (2 history copies of one file).",
+      "author": "Example Researcher",
+      "datePublished": "2022-12-12T17:29:06",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "text/plain",
+      "generatedBy": {
+        "@id": "ark:59853/computation-data-fetch-ee0f47e"
+      },
+      "identifier": "369edbf0-e16a-45d8-bad8-b0ecb4f566a2",
+      "additionalType": "txt"
+    },
+    {
+      "@id": "ark:59853/dataset-universe-89ee38b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "universe",
+      "description": "Galaxy dataset of type 'txt', 1 line; uploaded txt file. History items #5, #31 (2 history copies of one file).",
+      "author": "Example Researcher",
+      "datePublished": "2022-12-12T17:27:11",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "text/plain",
+      "generatedBy": {
+        "@id": "ark:59853/computation-data-fetch-5e97149"
+      },
+      "identifier": "ba8af7ec-ef40-405a-bcc4-33c2df9fffed",
+      "additionalType": "txt"
+    },
+    {
+      "@id": "ark:59853/dataset-hello-world-13926d3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hello_world",
+      "description": "Galaxy dataset collection of type 'list' with 2 element(s): hello, world.",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "application/vnd.galaxy.collection",
+      "hasPart": [
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        }
+      ],
+      "additionalType": "galaxy:list"
+    },
+    {
+      "@id": "ark:59853/dataset-hello-universe-04f90a0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hello_universe",
+      "description": "Galaxy dataset collection of type 'list' with 2 element(s): hello, universe.",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "application/vnd.galaxy.collection",
+      "hasPart": [
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        }
+      ],
+      "additionalType": "galaxy:list"
+    },
+    {
+      "@id": "ark:59853/dataset-data-31-data-30-and-others-merged-8b6c715",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "data 31, data 30, and others (merged)",
+      "description": "Galaxy dataset collection of type 'list' with 3 element(s): hello, world, universe.",
+      "author": "Example Researcher",
+      "datePublished": "2023-03-28",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "application/vnd.galaxy.collection",
+      "hasPart": [
+        {
+          "@id": "ark:59853/dataset-hello-819180f"
+        },
+        {
+          "@id": "ark:59853/dataset-world-2210a17"
+        },
+        {
+          "@id": "ark:59853/dataset-universe-89ee38b"
+        }
+      ],
+      "generatedBy": {
+        "@id": "ark:59853/computation-merge-collection-f104a6d"
+      },
+      "additionalType": "galaxy:list"
+    }
+  ]
+}

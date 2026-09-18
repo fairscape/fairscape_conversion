@@ -1,0 +1,16 @@
+frictionless_type,json_type,source_type,note
+string,string,,
+integer,integer,,
+number,number,,
+boolean,boolean,,
+date,string,date,ISO date; source-type lets fairscape_models rebuild a DateField for validation
+datetime,string,datetime,
+time,string,time,
+year,integer,year,
+yearmonth,string,yearmonth,
+duration,string,duration,
+geopoint,array,,
+geojson,object,,
+array,array,,
+object,object,,
+any,string,,

@@ -45,6 +45,6 @@ written = work / "c2m2-example-crate"
 print(f"\nwrote {written.relative_to(ex.OUT.parent)}/ "
       f"({len(list(written.rglob('*')))} files: the crate + the preserved tables)")
 
-# No golden check here: this crate carries today's date and the path it was
-# invoked with, so it is machine-specific by design. The pinned comparison
-# lives in tests/test_plugin_examples.py::test_c2m2_example.
+# No golden check here: this crate carries today's date, the running
+# fairscape_models version and the path it was invoked with, so it is
+# machine- and day-specific by design.

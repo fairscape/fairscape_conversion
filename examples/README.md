@@ -57,6 +57,16 @@ that reproduces it from nothing (it fetches ~18 MB of reads; the WDL one also
 fetches the Cromwell jar), and a README explaining what the crate says about
 the run.
 
+## Two runs, one chain — linked crates
+
+| Example | What it shows |
+|---|---|
+| [`import_mlflow_linked.py`](import_mlflow_linked.py) | an MLflow run over a Nextflow pipeline's outputs, converted with `linked_crates=[…]`: its inputs become the Nextflow crate's entities, and the evidence graph runs through both |
+| [`import_snakemake_linked.py`](import_snakemake_linked.py) | the same pass run standalone (`fairscape_conversion link`) over a crate the Snakemake reporter wrote, linking it to the variant-calling crate |
+
+The convention — what a stub is, what the pointer is, what is deliberately
+left unlinked — is written up in [`linked-crates/README.md`](linked-crates/README.md).
+
 ## The full walk-through
 
 **[`mlflow/mlflow_to_rocrate.ipynb`](mlflow/mlflow_to_rocrate.ipynb)** is the

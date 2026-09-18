@@ -1,0 +1,72 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+run,,Computation,name,run_name,,import,,required,scalar,,,,,,,Galaxy invocation of '<workflow name>'
+run,,Computation,description,run_description,,import,,required,scalar,,,,,,,state; step and job counts; Galaxy version
+run,,Computation,runBy,crate_author,,import,,recommended,scalar,,,,,,,
+run,create_time,Computation,dateCreated,iso_datetime,,import,,required,scalar,,,,,,,
+run,update_time,Computation,dateModified,iso_datetime,,import,,optional,scalar,,,,,,,when the invocation last changed (scheduling finished)
+run,,Computation,usedSoftware,run_used_software,,import,,required,list,,,,,,,workflow + engine
+run,,Computation,usedDataset,run_used_datasets,,import,,required,list,,,,,,,the invocation's input datasets and collections
+run,,Computation,generated,run_generated,,import,,required,list,,,,,,,the invocation's declared workflow outputs
+run,,Computation,parameter,run_parameters,,import,,optional,list,,,,,,,workflow-level parameter inputs as label=value
+run,state,Computation,status,scalar,,import,,optional,scalar,,,,,,,Galaxy invocation state (scheduled / ...)
+run,encoded_id,Computation,identifier,scalar,,import,,optional,scalar,,,,,,,Galaxy's encoded invocation id
+job,,Computation,name,job_name,,import,,required,scalar,,,,,,,<tool_id> (step N: <label>) or <tool_id> (upload)
+job,,Computation,description,job_description,,import,,required,scalar,,,,,,,tool + version; state and exit code; the step label / annotation
+job,,Computation,runBy,crate_author,,import,,recommended,scalar,,,,,,,
+job,create_time,Computation,dateCreated,iso_datetime,,import,,required,scalar,,,,,,,
+job,command_line,Computation,command,scalar,,import,,recommended,scalar,,,,,,,Galaxy's recorded command line
+job,,Computation,usedSoftware,job_used_software,,import,,required,list,,,,,,,the tool Software
+job,,Computation,usedDataset,job_used_datasets,,import,,required,list,,,,,,,input datasets + input collections
+job,,Computation,generated,job_generated,,import,,required,list,,,,,,,output datasets + output collections
+job,,Computation,isPartOf,job_part_of,,import,,optional,list,,,,,,,the invocation Computation (jobs in the invocation only)
+job,params,Computation,parameter,job_parameters,,import,,optional,list,,,,,,,tool params flattened to name=value; Galaxy's __ bookkeeping and dataset refs dropped
+job,state,Computation,status,scalar,,import,,optional,scalar,,,,,,,
+job,exit_code,Computation,exitCode,identity,,import,,optional,scalar,,,,,,,
+job,encoded_id,Computation,identifier,scalar,,import,,optional,scalar,,,,,,,Galaxy's encoded job id
+workflow,name,Software,name,scalar,,import,,required,scalar,,,,,,,
+workflow,,Software,description,workflow_description,,import,,required,scalar,,,,,,,the .ga annotation + step summary
+workflow,,Software,author,workflow_author,,import,,recommended,scalar,,,,,,,.ga creator names else the crate author
+workflow,,Software,datePublished,crate_date,,import,,required,scalar,,,,,,,
+workflow,license,Software,license,scalar,,import,,optional,scalar,,,,,,,
+workflow,,Software,format,constant_ga_format,,import,,required,scalar,,,,,,,application/json (a .ga is JSON)
+workflow,local_path,Software,localPath,scalar,,import,,recommended,scalar,,,,,,,
+workflow,uuid,Software,identifier,scalar,,import,,optional,scalar,,,,,,,
+workflow,format_version,Software,version,scalar,,import,,optional,scalar,,,,,,,
+workflow,,Software,keywords,workflow_tags,,import,,optional,list,,,,,,,.ga tags
+engine,,Software,name,constant_galaxy,,import,,required,scalar,,,,,,,
+engine,,Software,description,engine_description,,import,,required,scalar,,,,,,,
+engine,version,Software,version,scalar,,import,,recommended,scalar,,,,,,,
+engine,,Software,url,constant_galaxy_url,,import,,recommended,scalar,,,,,,,
+engine,,Software,author,constant_galaxy_author,,import,,recommended,scalar,,,,,,,
+engine,,Software,datePublished,crate_date,,import,,required,scalar,,,,,,,
+engine,,Software,format,constant_web_app,,import,,required,scalar,,,,,,,
+tool,tool_id,Software,name,tool_name,,import,,required,scalar,,,,,,,short tool name (the last path part of a ToolShed id)
+tool,,Software,description,tool_description,,import,,required,scalar,,,,,,,
+tool,tool_version,Software,version,scalar,,import,,recommended,scalar,,,,,,,
+tool,tool_id,Software,url,tool_url,,import,,optional,scalar,,,,,,,ToolShed repository page for toolshed.g2.bx.psu.edu/... ids
+tool,tool_id,Software,identifier,scalar,,import,,recommended,scalar,,,,,,,the full Galaxy tool id
+tool,,Software,author,crate_author,,import,,recommended,scalar,,,,,,,
+tool,,Software,datePublished,crate_date,,import,,required,scalar,,,,,,,
+tool,,Software,format,constant_tool_format,,import,,required,scalar,,,,,,,
+dataset,name,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+dataset,,Dataset,description,dataset_description,,import,,required,scalar,,,,,,,extension; blurb; info; history item numbers of every copy
+dataset,,Dataset,author,crate_author,,import,,recommended,scalar,,,,,,,
+dataset,create_time,Dataset,datePublished,iso_datetime,,import,,required,scalar,,crate_date,crate_date,,,,
+dataset,,Dataset,keywords,crate_keywords,,import,,recommended,list,,,,,,,
+dataset,extension,Dataset,format,dataset_format,,import,,required,scalar,,,,,,,Galaxy datatype -> MIME via field_types.csv
+dataset,local_path,Dataset,localPath,scalar,,import,,recommended,scalar,,,,,,,datasets/<name>_<hid>.<ext> inside the export (when files were included)
+dataset,size,Dataset,contentSize,scalar,,import,,optional,scalar,,,,,,,
+dataset,,Dataset,md5,dataset_hash_md5,,import,,optional,scalar,,,,,,,from hashes[] when Galaxy computed one
+dataset,,Dataset,sha256,dataset_hash_sha256,,import,,optional,scalar,,,,,,,
+dataset,,Dataset,generatedBy,dataset_generated_by,,import,,optional,scalar,,,,,,,the job whose output it is
+dataset,uuid,Dataset,identifier,scalar,,import,,optional,scalar,,,,,,,Galaxy's dataset uuid
+dataset,extension,Dataset,additionalType,galaxy_datatype,,import,,optional,scalar,,,,,,,the Galaxy datatype name (fastqsanger, tabular, ...)
+collection,name,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+collection,,Dataset,description,collection_description,,import,,required,scalar,,,,,,,collection type + element identifiers
+collection,,Dataset,author,crate_author,,import,,recommended,scalar,,,,,,,
+collection,,Dataset,datePublished,crate_date,,import,,required,scalar,,,,,,,
+collection,,Dataset,keywords,crate_keywords,,import,,recommended,list,,,,,,,
+collection,,Dataset,format,constant_collection_format,,import,,required,scalar,,,,,,,
+collection,,Dataset,hasPart,collection_parts,,import,,required,list,,,,,,,element datasets and sub-collections
+collection,,Dataset,generatedBy,collection_generated_by,,import,,optional,scalar,,,,,,,
+collection,type,Dataset,additionalType,collection_type,,import,,optional,scalar,,,,,,,list / paired / list:paired

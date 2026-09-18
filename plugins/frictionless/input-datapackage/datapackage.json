@@ -1,0 +1,68 @@
+{
+  "profile": "tabular-data-package",
+  "name": "county-respiratory-surveillance-2026",
+  "title": "County respiratory illness surveillance, season 2025-26",
+  "description": "Weekly counts of reported respiratory illness by county, with the county reference table used for rates.",
+  "version": "1.2.0",
+  "created": "2026-03-02T09:00:00Z",
+  "homepage": "https://example.org/surveillance/2026",
+  "keywords": ["surveillance", "respiratory", "public health", "county"],
+  "licenses": [{"name": "CC-BY-4.0", "path": "https://creativecommons.org/licenses/by/4.0/", "title": "Creative Commons Attribution 4.0"}],
+  "contributors": [
+    {"title": "Example Public Health Group", "role": "author", "organization": "Example University"},
+    {"title": "A. Analyst", "role": "maintainer", "email": "analyst@example.org"}
+  ],
+  "sources": [{"title": "State notifiable disease reports", "path": "https://example.org/ndr"}],
+  "resources": [
+    {
+      "profile": "tabular-data-resource",
+      "name": "cases_by_county",
+      "path": "cases_by_county.csv",
+      "title": "Weekly case counts by county",
+      "description": "One row per county per MMWR week.",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "dialect": {"delimiter": ",", "header": true},
+      "schema": {
+        "fields": [
+          {"name": "county_fips", "type": "string", "description": "Five-digit county FIPS code", "constraints": {"required": true, "pattern": "^[0-9]{5}$"}},
+          {"name": "week_start", "type": "date", "description": "First day of the MMWR week", "constraints": {"required": true}},
+          {"name": "cases", "type": "integer", "description": "Reported cases in the week", "constraints": {"required": true, "minimum": 0}},
+          {"name": "hospitalized", "type": "integer", "description": "Of the cases, those hospitalized", "constraints": {"minimum": 0}},
+          {"name": "pathogen", "type": "string", "description": "Pathogen group", "constraints": {"enum": ["influenza", "rsv", "covid-19", "other"]}},
+          {"name": "rate_per_100k", "type": "number", "title": "Rate", "description": "Cases per 100,000 residents", "rdfType": "http://purl.obolibrary.org/obo/NCIT_C16345"},
+          {"name": "provisional", "type": "boolean", "description": "Counts may still change"}
+        ],
+        "primaryKey": ["county_fips", "week_start"],
+        "foreignKeys": [{"fields": "county_fips", "reference": {"resource": "counties", "fields": "fips"}}],
+        "missingValues": ["", "NA"]
+      }
+    },
+    {
+      "profile": "tabular-data-resource",
+      "name": "counties",
+      "path": "counties.csv",
+      "title": "County reference",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {"name": "fips", "type": "string", "constraints": {"required": true, "unique": true}},
+          {"name": "county", "type": "string"},
+          {"name": "population", "type": "integer", "description": "2025 estimate", "constraints": {"minimum": 1}},
+          {"name": "region", "type": "string"}
+        ],
+        "primaryKey": "fips"
+      }
+    },
+    {
+      "name": "methods",
+      "path": "https://example.org/surveillance/2026/methods.pdf",
+      "title": "Case definitions and methods",
+      "format": "pdf",
+      "mediatype": "application/pdf",
+      "bytes": 184320
+    }
+  ]
+}

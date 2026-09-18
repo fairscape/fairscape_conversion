@@ -25,12 +25,18 @@ EXAMPLES = [
     ("import_cromwell.py", "Cromwell run -> crate"),
     ("import_snakemake.py", "Snakemake run -> crate"),
     ("import_mlflow.py", "MLflow experiment -> crate"),
+    ("import_galaxy.py", "Galaxy invocation export -> crate"),
+    ("import_redcap.py", "REDCap data dictionary -> crate"),
+    ("import_frictionless.py", "Frictionless Data Package -> crate"),
+    ("export_frictionless.py", "crate -> Frictionless Data Package"),
     ("export_d4d.py", "crate -> D4D datasheet"),
     ("export_wrroc.py", "crate -> Workflow Run RO-Crate"),
     ("export_croissant.py", "crate -> MLCommons Croissant"),
     ("import_snakemake_variants.py", "real Snakemake run -> crate"),
     ("import_cromwell_variants.py", "real Cromwell run -> crate"),
     ("export_croissant_variants.py", "real run's crate -> Croissant"),
+    ("import_mlflow_linked.py", "MLflow run over Nextflow outputs -> linked crate"),
+    ("import_snakemake_linked.py", "reporter crate linked to an upstream crate"),
 ]
 
 NOTEBOOK = HERE / "mlflow" / "mlflow_to_rocrate.ipynb"

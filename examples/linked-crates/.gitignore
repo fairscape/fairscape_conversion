@@ -1,0 +1,8 @@
+# scratch left behind by the runs; the crates and their pages are committed
+nextflow-run/work/
+nextflow-run/.nextflow*
+snakemake-count/.snakemake/
+mlflow-analysis/mlruns/
+mlflow-analysis/mlflow.db
+mlflow-analysis/vowels.txt
+mlflow-analysis/letter_report.json

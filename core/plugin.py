@@ -101,8 +101,25 @@ class PluginBase:
         raise ValueError(f"direction must be import|export, got {direction!r}")
 
     def import_(self, source, options: dict):
-        """Source format -> fairscape crate, via the shared pipeline."""
-        return run_pipeline(self, "import", source, options=options)
+        """Source format -> fairscape crate, via the shared pipeline.
+
+        ``linked_crates`` (a path, or a list of paths, to crates already on
+        disk) runs the generic linking pass afterwards: consumed entities
+        that an upstream crate already describes reuse its ids
+        (:mod:`fairscape_conversion.core.linking`). ``crate_dir`` anchors
+        relative locators for that pass, the same option plugins already
+        take. The report lands on the result as ``crate["_linking"]`` only
+        when ``link_report=True``; otherwise the crate is returned untouched
+        beyond the rewrite.
+        """
+        crate = run_pipeline(self, "import", source, options=options)
+        linked = options.get("linked_crates")
+        if linked and isinstance(crate, dict):
+            from .linking import link_crate
+            report = link_crate(crate, linked, crate_dir=options.get("crate_dir"))
+            if options.get("link_report"):
+                crate["_linking"] = [m.as_dict() for m in report.matches]
+        return crate
 
     def export(self, source, options: dict):
         """Fairscape crate -> source format.

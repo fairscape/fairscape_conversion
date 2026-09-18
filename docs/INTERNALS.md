@@ -30,6 +30,17 @@ a new engine.
 > Rule of thumb: **if it is data it lives in a CSV; if it is an algorithm it is a
 > named parser or hook.**
 
+One pass runs *after* every import, outside the plugin: **linking**
+(`core/linking.py`). Given `linked_crates=[…]` it reads the finished crate,
+finds the producer-less entities, and for each one asks the linked crates
+(by path, then md5, then containing directory) whether they already describe
+that file; a hit replaces the node with a stub under the upstream `@id`,
+rewrites every reference, and adds one pointer node per upstream crate
+(`ro-crate-metadata`, the release-crate field, on a node the root does not
+list in `hasPart`). It is wired in `PluginBase.import_`, so a plugin takes
+part by putting a resolvable `contentUrl`/`localPath` on what it consumed and
+nothing else. `examples/linked-crates/README.md` has the convention.
+
 ## Layout
 
 ```
@@ -59,6 +70,32 @@ fairscape_conversion/
                  MlflowClient read API post-hoc; convert() takes a tracking
                  URI / mlruns dir or plain records. Deterministic ARKs keep the
                  MLflow run_id by design. nf/mlflow-fairscape is the harness.)
+    galaxy/     entities.csv properties.csv field_types.csv parsers.py extract.py
+                input-store/ input.json golden.json
+                (import-only, self-contained: Galaxy's invocation export
+                 (model store: *_attrs.txt + workflows/*.ga; archive or
+                 folder), a bare .ga, or a Galaxy server via the API ->
+                 the invocation + every job as Computations, tools /
+                 workflow / Galaxy as Software, datasets (history copies
+                 collapsed) and collections. field_types.csv maps Galaxy
+                 datatypes to MIME types. The wrroc plugin covers Galaxy's
+                 RO-Crate flavoured export; this one keeps what it drops.)
+    redcap/     entities.csv properties.csv field_types.csv parsers.py extract.py
+                input-dictionary.csv input-records.csv input.json golden.json
+                (import-only, self-contained: a REDCap data dictionary (CSV
+                 download or API metadata JSON) -> a tabular EVI Schema of the
+                 record export's columns, plus Datasets for the files and the
+                 export Computation. field_types.csv is the REDCap type ->
+                 JSON-Schema type table; extract.py owns the file I/O.)
+    frictionless/ entities.csv properties.csv field_types.csv parsers.py extract.py
+                input-datapackage/ input.json golden.json
+                (bidirectional, self-contained: any Frictionless Data Package
+                 -> a Dataset per resource + a tabular EVI Schema per Table
+                 Schema (constraints, keys, missingValues kept), and any
+                 EVI crate -> datapackage.json (export composes
+                 apply_export_rules like wrroc). No provenance is invented.
+                 c2m2 stays separate: it is one profile with fixed tables
+                 and ontology columns.)
   docs/NEW-PLUGIN.md     how to add a plugin, start to finish
   docs/MIGRATION.md      how to roll this out to production
   archive/               inert snapshot of the pre-PluginBase implementation

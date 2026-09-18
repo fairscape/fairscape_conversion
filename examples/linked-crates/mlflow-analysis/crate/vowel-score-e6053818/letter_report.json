@@ -1,0 +1,12 @@
+{
+  "first_half.txt": {
+    "letters": 4,
+    "vowels": 1,
+    "vowel_fraction": 0.25
+  },
+  "second_half.txt": {
+    "letters": 4,
+    "vowels": 1,
+    "vowel_fraction": 0.25
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-variants-per-chromosome-d7c4c7c"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-variants-per-chromosome-d7c4c7c",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Variants per chromosome",
+      "description": "A one-rule Snakemake run that counted the variants the variant-calling pipeline called, per chromosome; its only input is that pipeline's summary table.",
+      "keywords": [
+        "snakemake",
+        "variant calling",
+        "linked crates",
+        "provenance"
+      ],
+      "version": "1.0",
+      "author": "Example Researcher",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-18T09:52:12.083752-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b"
+        },
+        {
+          "@id": "ark:59853/computation-variants-per-chrom-9537d23"
+        },
+        {
+          "@id": "ark:59853/software-snakefile-d7c4c7c"
+        },
+        {
+          "@id": "ark:59853/software-snakemake-059f146"
+        },
+        {
+          "@id": "ark:59853/software-variants-per-chrom-059c7db"
+        },
+        {
+          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+        },
+        {
+          "@id": "ark:59853/dataset-variants-per-chrom-tsv-ecc5016"
+        }
+      ],
+      "https://w3id.org/EVI#inputs": [
+        {
+          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+        }
+      ],
+      "https://w3id.org/EVI#outputs": [
+        {
+          "@id": "ark:59853/dataset-variants-per-chrom-tsv-ecc5016"
+        }
+      ],
+      "localEvidenceGraph": {
+        "@id": "ro-crate-prov-graph.html"
+      }
+    },
+    {
+      "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Snakemake workflow run of 'Snakefile'",
+      "description": "Execution of the Snakemake workflow 'Snakefile', reconstructed post-hoc from Snakemake's persistence metadata by snakemake-report-plugin-fairscape",
+      "runBy": "Example Researcher",
+      "dateCreated": "2026-09-18T09:51:11.949147-04:00",
+      "command": "snakemake",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-snakefile-d7c4c7c"
+        },
+        {
+          "@id": "ark:59853/software-snakemake-059f146"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-variants-per-chrom-tsv-ecc5016"
+        }
+      ],
+      "snakemakeVersion": "9.26.1",
+      "startTime": "2026-09-18T09:51:11.949147-04:00",
+      "endTime": "2026-09-18T09:51:11.949147-04:00"
+    },
+    {
+      "@id": "ark:59853/computation-variants-per-chrom-9537d23",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "variants_per_chrom",
+      "description": "Snakemake job for rule 'variants_per_chrom'",
+      "runBy": "Example Researcher",
+      "dateCreated": "2026-09-18T09:51:11.949147-04:00",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-variants-per-chrom-059c7db"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-variants-per-chrom-tsv-ecc5016"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b"
+        }
+      ],
+      "command": "(printf 'chrom\\tvariants\\tmean_quality\\n'; tail -n +2 ../../snakemake-variant-calling/results/calls/variant_summary.tsv | awk -F'\\t' '{ n[$1]++; q[$1] += $5 } END { for (c in n) printf \"%s\\t%d\\t%.2f\\n\", c, n[c], q[c] / n[c] }' | sort) > results/variants_per_chrom.tsv",
+      "startTime": "2026-09-18T09:51:11.949147-04:00",
+      "endTime": "2026-09-18T09:51:11.949147-04:00"
+    },
+    {
+      "@id": "ark:59853/software-snakefile-d7c4c7c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Snakefile",
+      "author": "Example Researcher",
+      "description": "Snakemake workflow definition 'Snakefile' for this run",
+      "format": "snakemake",
+      "contentUrl": "Snakefile",
+      "softwareUsedBy": [
+        {
+          "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/software-snakemake-059f146",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Snakemake",
+      "author": "Johannes K\u00f6ster",
+      "description": "Snakemake workflow management system (https://snakemake.github.io/)",
+      "format": "application/x-python",
+      "version": "9.26.1",
+      "contentUrl": "https://github.com/snakemake/snakemake",
+      "softwareUsedBy": [
+        {
+          "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/software-variants-per-chrom-059c7db",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "variants_per_chrom",
+      "author": "Example Researcher",
+      "description": "(printf 'chrom\\tvariants\\tmean_quality\\n'; tail -n +2 {input} | awk -F'\\t' '{{ n[$1]++; q[$1] += $5 }} END {{ for (c in n) printf \"%s\\t%d\\t%.2f\\n\", c, n[c], q[c] / n[c] }}' | sort) > {output}",
+      "format": "snakemake",
+      "contentUrl": "Snakefile",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-snakefile-d7c4c7c"
+        }
+      ],
+      "softwareUsedBy": [
+        {
+          "@id": "ark:59853/computation-variants-per-chrom-9537d23"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-variant-summary-tsv-71310c4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "variant_summary.tsv",
+      "author": "Example Researcher",
+      "description": "File 'results/calls/variant_summary.tsv' produced by the Snakemake workflow run",
+      "datePublished": "2026-09-11T13:35:02.543766-04:00",
+      "keywords": [
+        "snakemake",
+        "variant calling",
+        "bwa",
+        "bcftools",
+        "genomics"
+      ],
+      "format": "text/tab-separated-values",
+      "contentSize": "14609",
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/snakemake-variant-calling/results/calls/variant_summary.tsv",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-68f3c95"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-variants-per-chrom-tsv-ecc5016",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "variants_per_chrom.tsv",
+      "author": "Example Researcher",
+      "description": "File 'results/variants_per_chrom.tsv' produced by the Snakemake workflow run",
+      "datePublished": "2026-09-18T09:52:12.083752-04:00",
+      "keywords": [
+        "snakemake",
+        "variant calling",
+        "linked crates",
+        "provenance"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-variants-per-chrom-9537d23"
+        },
+        {
+          "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b"
+        }
+      ],
+      "contentUrl": "results/variants_per_chrom.tsv",
+      "contentSize": "40"
+    },
+    {
+      "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-68f3c95",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "name": "Variant calling on three sequenced samples",
+      "description": "Reads from three samples aligned to the reference with bwa-mem, sorted and indexed with samtools, and jointly called with bcftools; a Snakemake run captured as an EVI RO-Crate.",
+      "version": "1.0",
+      "datePublished": "2026-09-11T13:35:02.543766-04:00",
+      "author": "Example Researcher",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "keywords": [
+        "snakemake",
+        "variant calling",
+        "bwa",
+        "bcftools",
+        "genomics"
+      ],
+      "hasPart": [
+        {
+          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+        }
+      ],
+      "ro-crate-metadata": "../../snakemake-variant-calling/ro-crate-metadata.json",
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/snakemake-variant-calling/ro-crate-metadata.json"
+    }
+  ]
+}

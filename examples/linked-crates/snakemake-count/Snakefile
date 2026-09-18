@@ -1,0 +1,33 @@
+"""Count the variants another pipeline called.
+
+A one-rule Snakemake workflow whose only input is a file the variant-calling
+pipeline in ``../../snakemake-variant-calling`` produced. It knows nothing
+about that pipeline's crate; it just reads the table.
+
+    snakemake --cores 1
+    snakemake --reporter fairscape ...       # the crate for THIS run
+
+Then ``fairscape_conversion link . --link-crate ../../snakemake-variant-calling``
+turns the input into a stub of the upstream crate's entity.
+"""
+
+UPSTREAM = "../../snakemake-variant-calling/results/calls/variant_summary.tsv"
+
+
+rule all:
+    input:
+        "results/variants_per_chrom.tsv",
+
+
+rule variants_per_chrom:
+    """Variants and mean quality per chromosome, from the upstream summary."""
+    input:
+        UPSTREAM,
+    output:
+        "results/variants_per_chrom.tsv",
+    shell:
+        "(printf 'chrom\\tvariants\\tmean_quality\\n'; "
+        "tail -n +2 {input} "
+        "| awk -F'\\t' '{{ n[$1]++; q[$1] += $5 }} "
+        "END {{ for (c in n) printf \"%s\\t%d\\t%.2f\\n\", c, n[c], q[c] / n[c] }}' "
+        "| sort) > {output}"

@@ -1,0 +1,8 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+run,,Computation,prov:Activity|https://w3id.org/EVI#Computation,workflow,mint,,,FALSE,computation,the workflow invocation as a whole; job Computations link to it via isPartOf
+job,,Computation,prov:Activity|https://w3id.org/EVI#Computation,tool,mint,,,FALSE,computation,one per Galaxy job (an invocation step's job or an upload job that made an input)
+workflow,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,the .ga workflow definition
+engine,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,Galaxy itself (version from the jobs)
+tool,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,one per distinct tool_id + tool_version; ToolShed tools get their repository URL
+dataset,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per underlying dataset (HDA copies sharing a dataset_uuid / file collapse onto one node)
+collection,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per dataset collection (HDCA); hasPart lists its element datasets / sub-collections

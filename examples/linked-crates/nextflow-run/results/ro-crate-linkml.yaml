@@ -1,0 +1,18 @@
+citation: Lovelace A. The letters-chain demonstration pipeline. 2026.
+conforms_to: D4D Schema
+created_by: Ada Lovelace
+creators:
+- description: Ada Lovelace
+description: "A three-step demonstration pipeline that builds a letter list, reverses\
+  \ it, and splits it in half \u2014 a full provenance chain packaged as a FAIRSCAPE\
+  \ EVI RO-Crate."
+id: ark:59853/rocrate-main-nf-600fc41
+keywords:
+- example
+- letters-chain
+- coreutils
+license: https://spdx.org/licenses/CC-BY-4.0
+name: letters-chain demonstration crate
+publisher: Analytical Engine Institute
+title: letters-chain demonstration crate
+version: '1.0'

@@ -192,6 +192,10 @@ def convert(direction: str, source, **options):
     arguments) or an already-extracted records dict.
     """
     if direction == "import" and isinstance(source, (str, os.PathLike)):
+        linking = {k: options.pop(k) for k in ("linked_crates", "link_report")
+                   if k in options}
+        if "crate_dir" in options:
+            linking["crate_dir"] = options["crate_dir"]
         source = extract(source, **options)
-        options = {}
+        options = linking
     return PLUGIN.convert(direction, source, **options)

@@ -1,0 +1,37 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+resource,title,Dataset,name,scalar,x_scalar,both,TRUE,required,scalar,,name,scalar,,,,title else the resource name; export: Dataset.name -> title
+resource,description,Dataset,description,resource_description,x_description,both,,required,scalar,,,,,,,description else a sentence built from name/path/rows
+resource,name,Dataset,alternateName,scalar,x_resource_name,both,,required,scalar,,,,,,,the resource name survives as alternateName so an export keeps it (foreign keys point at resource names)
+resource,,Dataset,author,package_author,,import,,recommended,scalar,,,,,,,contributors with role author (else all contributors) joined
+resource,,Dataset,datePublished,package_date,,import,,required,scalar,,,,,,,package created else the crate date
+resource,,Dataset,keywords,package_keywords,,import,,recommended,list,,,,,,,
+resource,licenses,Dataset,license,package_license,x_licenses,both,,recommended,scalar,,,,,,,resource licenses else package licenses (first path/name); export: only when it differs from the package licence
+resource,mediatype,Dataset,format,resource_format,x_mediatype,both,,required,scalar,,,,,,,mediatype else guessed from format/path
+resource,format,Dataset,format,,x_format,export,,recommended,scalar,,,,,,,export only: extension from the path or the media type
+resource,path,Dataset,localPath,resource_local_path,x_path,both,,recommended,scalar,,,,,,,relative path for a local file; export: localPath else contentUrl
+resource,,Dataset,contentUrl,resource_content_url,,import,,recommended,scalar,,,,,,,an http(s) path stays a URL (export folds it into path)
+resource,bytes,Dataset,contentSize,resource_size,x_int,both,,optional,scalar,,,,,,,bytes from the descriptor else the file on disk
+resource,hash,Dataset,md5,resource_hash,x_hash,both,,optional,scalar,,,,,,,frictionless 'hash' is md5 unless prefixed (sha256:...); export re-attaches hashAlgorithm
+resource,encoding,Dataset,encodingFormat,drop,,import,,nohome,scalar,,,,,,,already in format
+resource,,Dataset,evi:Schema,resource_schema_ref,,import,,recommended,scalar,,,,,,,only for tabular resources
+resource,sources,Dataset,isBasedOn,sources_refs,x_sources,both,,optional,list,,,,,,,resource sources else package sources; title + path
+schema,,Schema,name,schema_name,,import,,required,scalar,,,,,,,
+schema,,Schema,description,schema_description,,import,,required,scalar,,,,,,,
+schema,,Schema,conformsTo,json_schema_ref,,import,,required,scalar,,,,,,,
+schema,fields,Schema,properties,schema_properties,x_fields,both,,required,scalar,,,,,,,one Property per field: type via field_types.csv; constraints -> pattern/min/max/enum/minLength/maxLength; rdfType -> valueURL. Export reverses it (required comes from Schema.required)
+schema,,Schema,type,constant_object,,import,,required,scalar,,,,,,,
+schema,,Schema,additionalProperties,constant_false,,import,,required,scalar,,,,,,,a Table Schema is exhaustive
+schema,,Schema,required,schema_required,,import,,required,scalar,,,,,,,constraints.required fields
+schema,,Schema,separator,schema_separator,,import,,required,scalar,,,,,,,dialect.delimiter else tab for .tsv else comma
+schema,,Schema,header,schema_header,,import,,required,scalar,,,,,,,dialect.header (default true)
+schema,primaryKey,Schema,primaryKey,schema_primary_key,x_key,both,,optional,list,,,,,,,passthrough (a one-column key exports as a string)
+schema,foreignKeys,Schema,foreignKeys,schema_foreign_keys,x_identity,both,,optional,list,,,,,,,passthrough; reference.resource is left as the resource name
+schema,missingValues,Schema,missingValues,schema_missing_values,x_identity,both,,optional,list,,,,,,,passthrough
+descriptor,file,Dataset,name,scalar,,import,,required,scalar,,,,,,,
+descriptor,,Dataset,description,descriptor_description,,import,,required,scalar,,,,,,,
+descriptor,,Dataset,author,package_author,,import,,recommended,scalar,,,,,,,
+descriptor,,Dataset,datePublished,package_date,,import,,required,scalar,,,,,,,
+descriptor,,Dataset,keywords,package_keywords,,import,,recommended,list,,,,,,,
+descriptor,,Dataset,format,constant_json,,import,,required,scalar,,,,,,,
+descriptor,local_path,Dataset,localPath,scalar,,import,,recommended,scalar,,,,,,,
+descriptor,size,Dataset,contentSize,scalar,,import,,optional,scalar,,,,,,,

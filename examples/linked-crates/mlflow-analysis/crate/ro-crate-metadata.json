@@ -1,0 +1,392 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "mls": "http://www.w3.org/ns/mls#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "usedMLModel": {
+      "@id": "https://w3id.org/EVI#usedMLModel",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-vowel-score-of-the-letters-chain-halves-ee90e77",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Vowel score of the letters-chain halves",
+      "description": "An MLflow run that scored the two halves of the letters-chain pipeline's output by vowel content, converted to an EVI RO-Crate that links back to the Nextflow crate for its inputs.",
+      "keywords": [
+        "mlflow",
+        "letters-chain",
+        "linked crates",
+        "provenance"
+      ],
+      "version": "1.0",
+      "author": "Ada Lovelace",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-18T00:00:00-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-vowel-score-ee90e77"
+        },
+        {
+          "@id": "ark:59853/software-analyze-py-e17a1b5"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        },
+        {
+          "@id": "ark:59853/dataset-first-half-txt-e00f213"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-dc9d500"
+        },
+        {
+          "@id": "ark:59853/dataset-vowels-793a27d"
+        },
+        {
+          "@id": "ark:59853/dataset-letter-report-json-e003d24"
+        },
+        {
+          "@id": "ark:59853/schema-first-half-txt-47e2d5f"
+        },
+        {
+          "@id": "ark:59853/schema-second-half-txt-b42e66f"
+        },
+        {
+          "@id": "ark:59853/schema-vowels-bde46fa"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-vowel-score-ee90e77",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "MLflow run 'vowel-score'",
+      "description": "MLflow run 'vowel-score' of experiment 'letters-vowel-score', reconstructed post-hoc from the MLflow tracking store by mlflow-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2026-09-18T09:49:45.907000-04:00",
+      "command": "python /home/oj/fairscape/fairscape_conversion/examples/linked-crates/mlflow-analysis/analyze.py",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-analyze-py-e17a1b5"
+        },
+        {
+          "@id": "ark:59853/software-mlflow-2ea5ff6"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-vowels-793a27d"
+        },
+        {
+          "@id": "ark:59853/dataset-first-half-txt-e00f213"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-dc9d500"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-letter-report-json-e003d24"
+        }
+      ],
+      "parameter": [
+        "vowel_set=aeiou"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "vowel_fraction_first",
+          "value": 0.25
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "vowel_fraction_second",
+          "value": 0.25
+        }
+      ],
+      "startTime": "2026-09-18T09:49:45.907000-04:00",
+      "endTime": "2026-09-18T09:49:46.031000-04:00",
+      "mlflowRunId": "e605381892924f119d324f28aa70fa71"
+    },
+    {
+      "@id": "ark:59853/software-analyze-py-e17a1b5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "analyze.py",
+      "author": "Ada Lovelace",
+      "description": "The script 'analyze.py' logged by MLflow as the source of run(s) in experiment 'letters-vowel-score' (git commit c41e255a11c6563c651e504d8fbe4e2e68705250)",
+      "format": "text/x-python",
+      "version": "c41e255a11c6563c651e504d8fbe4e2e68705250",
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/linked-crates/mlflow-analysis/analyze.py"
+    },
+    {
+      "@id": "ark:59853/software-mlflow-2ea5ff6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "MLflow",
+      "author": "MLflow Project, a Series of LF Projects, LLC",
+      "description": "MLflow open source platform for the machine learning lifecycle (https://mlflow.org/)",
+      "format": "application/x-python",
+      "version": "3.16.0",
+      "contentUrl": "https://github.com/mlflow/mlflow"
+    },
+    {
+      "@id": "ark:59853/dataset-first-half-txt-e00f213",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "first_half.txt",
+      "author": "Ada Lovelace",
+      "description": "File 'first_half.txt' produced by the Nextflow workflow run 'main.nf'",
+      "datePublished": "2026-09-18T09:48:28.30523123-04:00",
+      "keywords": [
+        "example",
+        "letters-chain",
+        "coreutils"
+      ],
+      "format": "text/plain",
+      "contentSize": "8",
+      "digest": "30a5d88a",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-first-half-txt-47e2d5f"
+      },
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/linked-crates/nextflow-run/results/first_half.txt",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/rocrate-main-nf-600fc41"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-second-half-txt-dc9d500",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "second_half.txt",
+      "author": "Ada Lovelace",
+      "description": "File 'second_half.txt' produced by the Nextflow workflow run 'main.nf'",
+      "datePublished": "2026-09-18T09:48:28.30523123-04:00",
+      "keywords": [
+        "example",
+        "letters-chain",
+        "coreutils"
+      ],
+      "format": "text/plain",
+      "contentSize": "8",
+      "digest": "d6bca19d",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-second-half-txt-b42e66f"
+      },
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/linked-crates/nextflow-run/results/second_half.txt",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/rocrate-main-nf-600fc41"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-vowels-793a27d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "vowels",
+      "author": "Ada Lovelace",
+      "description": "Dataset 'vowels' logged as an MLflow run input (5 rows, digest 62191ea1), used as reference data",
+      "datePublished": "2026-09-18T00:00:00-04:00",
+      "keywords": [
+        "mlflow",
+        "letters-chain",
+        "linked crates",
+        "provenance"
+      ],
+      "format": "local",
+      "generatedBy": [],
+      "digest": "62191ea1",
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/linked-crates/mlflow-analysis/vowels.txt",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-vowels-bde46fa"
+      }
+    },
+    {
+      "@id": "ark:59853/dataset-letter-report-json-e003d24",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "letter_report.json",
+      "author": "Ada Lovelace",
+      "description": "Artifact 'letter_report.json' logged by MLflow run 'vowel-score'",
+      "datePublished": "2026-09-18T00:00:00-04:00",
+      "keywords": [
+        "mlflow",
+        "letters-chain",
+        "linked crates",
+        "provenance"
+      ],
+      "format": "application/json",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-vowel-score-ee90e77"
+        }
+      ],
+      "contentUrl": "vowel-score-e6053818/letter_report.json",
+      "contentSize": "181"
+    },
+    {
+      "@id": "ark:59853/schema-first-half-txt-47e2d5f",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for MLflow dataset 'first_half.txt'",
+      "description": "Schema derived from the column spec MLflow logged for dataset 'first_half.txt' (digest 30a5d88a)",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "letter": {
+          "description": "Column 'letter' of MLflow dataset 'first_half.txt' (string)",
+          "index": 0,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "letter"
+      ]
+    },
+    {
+      "@id": "ark:59853/schema-second-half-txt-b42e66f",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for MLflow dataset 'second_half.txt'",
+      "description": "Schema derived from the column spec MLflow logged for dataset 'second_half.txt' (digest d6bca19d)",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "letter": {
+          "description": "Column 'letter' of MLflow dataset 'second_half.txt' (string)",
+          "index": 0,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "letter"
+      ]
+    },
+    {
+      "@id": "ark:59853/schema-vowels-bde46fa",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for MLflow dataset 'vowels'",
+      "description": "Schema derived from the column spec MLflow logged for dataset 'vowels' (digest 62191ea1)",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "letter": {
+          "description": "Column 'letter' of MLflow dataset 'vowels' (string)",
+          "index": 0,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "letter"
+      ]
+    },
+    {
+      "@id": "ark:59853/rocrate-main-nf-600fc41",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "name": "letters-chain demonstration crate",
+      "description": "A three-step demonstration pipeline that builds a letter list, reverses it, and splits it in half \u2014 a full provenance chain packaged as a FAIRSCAPE EVI RO-Crate.",
+      "version": "1.0",
+      "datePublished": "2026-09-18T09:48:28.30523123-04:00",
+      "author": "Ada Lovelace",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "keywords": [
+        "example",
+        "letters-chain",
+        "coreutils"
+      ],
+      "hasPart": [
+        {
+          "@id": "ark:59853/dataset-first-half-txt-e00f213"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-dc9d500"
+        }
+      ],
+      "ro-crate-metadata": "../../nextflow-run/results/ro-crate-metadata.json",
+      "localPath": "/home/oj/fairscape/fairscape_conversion/examples/linked-crates/nextflow-run/results/ro-crate-metadata.json"
+    }
+  ]
+}

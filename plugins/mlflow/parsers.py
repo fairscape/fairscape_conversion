@@ -237,6 +237,21 @@ def dataset_format(value, rule, ctx):
     return value or "unknown"
 
 
+def dataset_local_path(value, rule, ctx):
+    """A logged dataset's source uri when it names a local file. MLflow
+    writes ``file:///abs/path`` or a bare path for ``from_pandas(...,
+    source=path)``; remote sources (s3://, http://, delta tables) are not a
+    path on this machine and yield nothing."""
+    if not value:
+        return None
+    uri = str(value)
+    if uri.startswith("file://"):
+        uri = uri[len("file://"):]
+    if "://" in uri or uri.startswith(REMOTE_SCHEMES):
+        return None
+    return uri or None
+
+
 def dataset_schema_ref(value, rule, ctx):
     schema = ctx.extras["schemas"].get(f"dataset:{ctx.node['key']}")
     return ref(schema["@id"]) if schema else None
@@ -327,6 +342,7 @@ IMPORT_PARSERS = {
     "source_content_url": source_content_url,
     "source_local_path": source_local_path,
     "dataset_description": dataset_description,
+    "dataset_local_path": dataset_local_path,
     "dataset_format": dataset_format,
     "dataset_schema_ref": dataset_schema_ref,
     "model_description": model_description,
