@@ -258,6 +258,35 @@ def test_relative_content_url_resolves_against_crate_dir(upstream, tmp_path):
     assert any(m.new_id == UP_FILE and m.method == "path" for m in report.matches)
 
 
+def test_search_dirs_anchor_a_path_relative_to_where_the_run_happened(upstream, tmp_path):
+    """Some reporters write a path relative to the run directory, not to the
+    crate. That folder is the caller's to name, and a wrong base matches
+    nothing rather than something else."""
+    from fairscape_conversion.core.linking import link_crate
+
+    run_dir = tmp_path / "run"
+    (run_dir / "deep").mkdir(parents=True)
+    crate = _consumer(upstream, run_dir)
+    # the other node for the same file carries an absolute locator; drop it so
+    # only the relative one can do the matching here
+    crate["@graph"] = [n for n in crate["@graph"]
+                       if n["@id"] != "ark:59853/dataset-table-tsv-copy-a2a2a2a"]
+    nodes = _by_id(crate)
+    nodes["ark:59853/dataset-table-tsv-aaaaaaa"]["localPath"] = \
+        os.path.relpath(upstream / "table.tsv", run_dir)
+
+    without = link_crate(json.loads(json.dumps(crate)), [upstream], crate_dir=str(run_dir / "deep"))
+    assert not [m for m in without.matches if m.new_id == UP_FILE]
+
+    with_base = link_crate(crate, [upstream], crate_dir=str(run_dir / "deep"),
+                           search_dirs=[str(run_dir), "/nowhere/at/all"])
+    assert [m.method for m in with_base.matches if m.new_id == UP_FILE] == ["path"]
+    # the pointer still comes from crate_dir, not from the search dir
+    stub = _by_id(crate)[UP_ROOT]
+    assert stub["ro-crate-metadata"] == os.path.relpath(
+        upstream / "ro-crate-metadata.json", run_dir / "deep")
+
+
 def test_link_crate_file_round_trips_on_disk(upstream, tmp_path):
     from fairscape_conversion.core.linking import link_crate_file
 

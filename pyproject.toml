@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fairscape-conversion"
-version = "0.2.0"
+version = "0.2.1"
 description = "One mapping format and one engine for every fairscape RO-Crate converter (wrroc, d4d, c2m2, croissant, snakemake, cromwell, mlflow)"
 readme = "README.md"
 license = "Apache-2.0"
@@ -20,7 +20,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "fairscape-models>=1.1.5",
+    "fairscape-models>=1.2.6",
     "pyyaml",
 ]
 

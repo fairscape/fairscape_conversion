@@ -116,7 +116,8 @@ class PluginBase:
         linked = options.get("linked_crates")
         if linked and isinstance(crate, dict):
             from .linking import link_crate
-            report = link_crate(crate, linked, crate_dir=options.get("crate_dir"))
+            report = link_crate(crate, linked, crate_dir=options.get("crate_dir"),
+                                search_dirs=options.get("link_search_dirs") or ())
             if options.get("link_report"):
                 crate["_linking"] = [m.as_dict() for m in report.matches]
         return crate

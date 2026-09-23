@@ -204,9 +204,12 @@ class LinkedCrate:
     @classmethod
     def load(cls, path: str) -> "LinkedCrate":
         import json
-        path = os.path.abspath(os.path.expanduser(str(path)))
+        given = str(path)
+        path = os.path.abspath(os.path.expanduser(given))
         if os.path.isdir(path):
             path = os.path.join(path, METADATA_FILENAME)
+        if not os.path.isfile(path):
+            raise FileNotFoundError(f"no {METADATA_FILENAME} to link to in {given}")
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
         graph = [n for n in data.get("@graph", []) if isinstance(n, dict)]
@@ -341,6 +344,25 @@ def _stub_of(upstream: Dict[str, Any], consumer: Dict[str, Any],
     return stub
 
 
+def pointer_path(metadata_path: str, crate_dir: Optional[str]) -> str:
+    """How one crate should write the path of another: relative when the two
+    sit near each other (so the pair survives being moved or zipped together),
+    absolute when they do not. A relative pointer that climbs to the
+    filesystem root is noise, not portability, so three levels up is the
+    limit.
+    """
+    metadata_path = os.path.abspath(metadata_path)
+    if not crate_dir:
+        return metadata_path
+    try:
+        rel = os.path.relpath(metadata_path, os.path.abspath(os.path.expanduser(str(crate_dir))))
+    except ValueError:                  # different drive on Windows
+        return metadata_path
+    if rel.count(".." + os.sep) > 3:
+        return metadata_path
+    return rel.replace(os.sep, "/")
+
+
 def _crate_stub(crate: LinkedCrate, crate_dir: Optional[str],
                 parts: Iterable[str] = ()) -> Dict[str, Any]:
     """One node standing for the upstream crate, pointing at its metadata file.
@@ -349,17 +371,7 @@ def _crate_stub(crate: LinkedCrate, crate_dir: Optional[str],
     of — true (they are part of it), resolvable here, and enough for
     ``fairscape_models``, which requires the field on every RO-Crate node.
     """
-    pointer = crate.metadata_path
-    if crate_dir:
-        try:
-            rel = os.path.relpath(crate.metadata_path, os.path.abspath(crate_dir))
-        except ValueError:             # different drive on Windows
-            rel = None
-        # a relative pointer survives the pair of crates moving together, but
-        # one that climbs to the filesystem root is noise: keep it only when
-        # the two crates are near each other
-        if rel and rel.count(".." + os.sep) <= 3:
-            pointer = rel
+    pointer = pointer_path(crate.metadata_path, crate_dir)
     stub: Dict[str, Any] = {
         "@id": crate.root_id,
         "@type": crate.root.get("@type") or ["Dataset", EVI + "ROCrate"],
@@ -369,7 +381,7 @@ def _crate_stub(crate: LinkedCrate, crate_dir: Optional[str],
         if crate.root.get(key) not in (None, "", [], {}):
             stub[key] = crate.root[key]
     stub["hasPart"] = [{"@id": i} for i in parts]
-    stub[SUBCRATE_PATH_FIELD] = pointer.replace(os.sep, "/")
+    stub[SUBCRATE_PATH_FIELD] = pointer
     stub["localPath"] = crate.metadata_path
     return stub
 
@@ -396,13 +408,22 @@ def _rewrite_refs(value, mapping: Dict[str, str]):
 
 
 def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None,
-               only_inputs: bool = True) -> LinkReport:
+               search_dirs: Iterable[str] = (), only_inputs: bool = True) -> LinkReport:
     """Rewrite `crate` in place so its consumed entities reuse upstream ids.
 
     ``linked`` is anything ``load_linked_crates`` accepts. ``crate_dir`` is
     where this crate's relative ``contentUrl`` values resolve and where the
     relative ``ro-crate-metadata`` pointer is computed from; without it only
     absolute locators can match and the pointer is absolute.
+
+    ``search_dirs`` are further folders a *relative* locator may be counted
+    from, tried after ``crate_dir``. Some importers record a path relative to
+    where the run happened rather than to the crate — the Snakemake reporter
+    writes ``../../other-run/results/x.tsv`` — and that folder is the caller's
+    to know. Only ``crate_dir`` decides where the pointer is written from. A
+    wrong base is harmless: the path it produces is simply not in any linked
+    crate's index, so it matches nothing.
+
     ``only_inputs`` restricts matching to producer-less entities, which is
     what "consumed" means; pass False to also let this crate's own outputs
     be claimed by an upstream crate (rarely what you want).
@@ -416,6 +437,10 @@ def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None
     root = _find_root(graph)
     root_id = root.get("@id")
     base_dirs = [os.path.abspath(crate_dir)] if crate_dir else []
+    for extra in search_dirs:
+        extra = os.path.abspath(os.path.expanduser(str(extra)))
+        if extra not in base_dirs:
+            base_dirs.append(extra)
     linked_root_ids = {c.root_id for c in crates}
 
     mapping: Dict[str, str] = {}          # old consumer id -> upstream id
@@ -535,6 +560,7 @@ def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None
 
 
 def link_crate_file(path: str, linked, *, output: Optional[str] = None,
+                    search_dirs: Iterable[str] = (),
                     only_inputs: bool = True) -> LinkReport:
     """``link_crate`` for a crate on disk; writes back in place unless `output`."""
     import json
@@ -544,7 +570,7 @@ def link_crate_file(path: str, linked, *, output: Optional[str] = None,
     with open(path, encoding="utf-8") as fh:
         crate = json.load(fh)
     report = link_crate(crate, linked, crate_dir=os.path.dirname(path),
-                        only_inputs=only_inputs)
+                        search_dirs=search_dirs, only_inputs=only_inputs)
     target = os.path.abspath(output) if output else path
     with open(target, "w", encoding="utf-8") as fh:
         json.dump(crate, fh, indent=2, default=str)
