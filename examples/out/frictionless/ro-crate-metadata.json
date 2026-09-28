@@ -1,0 +1,321 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-county-respiratory-illness-surveillance-2d0f95d"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-county-respiratory-illness-surveillance-2d0f95d",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "County respiratory illness surveillance, season 2025-26",
+      "description": "Weekly counts of reported respiratory illness by county, with the county reference table used for rates.",
+      "keywords": [
+        "surveillance",
+        "respiratory",
+        "public health",
+        "county"
+      ],
+      "version": "1.2.0",
+      "author": "Example Public Health Group",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "datePublished": "2026-03-02",
+      "hasPart": [
+        {
+          "@id": "ark:59853/schema-cases-by-county-b2a7aad"
+        },
+        {
+          "@id": "ark:59853/schema-counties-7ab000c"
+        },
+        {
+          "@id": "ark:59853/dataset-cases-by-county-f96e353"
+        },
+        {
+          "@id": "ark:59853/dataset-counties-a27df2e"
+        },
+        {
+          "@id": "ark:59853/dataset-methods-5d229b6"
+        },
+        {
+          "@id": "ark:59853/dataset-datapackage-json-cbb0db2"
+        }
+      ],
+      "url": "https://example.org/surveillance/2026",
+      "alternateName": "county-respiratory-surveillance-2026"
+    },
+    {
+      "@id": "ark:59853/schema-cases-by-county-b2a7aad",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for resource 'cases_by_county'",
+      "description": "Table Schema of resource 'cases_by_county' (Weekly case counts by county) in Data Package 'County respiratory illness surveillance, season 2025-26': 7 typed columns; primary key county_fips, week_start",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "county_fips": {
+          "description": "Five-digit county FIPS code",
+          "index": 0,
+          "type": "string",
+          "pattern": "^[0-9]{5}$"
+        },
+        "week_start": {
+          "description": "First day of the MMWR week",
+          "index": 1,
+          "type": "string",
+          "source-type": "date"
+        },
+        "cases": {
+          "description": "Reported cases in the week",
+          "index": 2,
+          "type": "integer",
+          "minimum": 0
+        },
+        "hospitalized": {
+          "description": "Of the cases, those hospitalized",
+          "index": 3,
+          "type": "integer",
+          "minimum": 0
+        },
+        "pathogen": {
+          "description": "Pathogen group",
+          "index": 4,
+          "type": "string",
+          "enum": [
+            "influenza",
+            "rsv",
+            "covid-19",
+            "other"
+          ]
+        },
+        "rate_per_100k": {
+          "description": "Cases per 100,000 residents",
+          "index": 5,
+          "type": "number",
+          "title": "Rate",
+          "valueURL": "http://purl.obolibrary.org/obo/NCIT_C16345"
+        },
+        "provisional": {
+          "description": "Counts may still change",
+          "index": 6,
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "county_fips",
+        "week_start",
+        "cases"
+      ],
+      "separator": ",",
+      "header": true,
+      "primaryKey": [
+        "county_fips",
+        "week_start"
+      ],
+      "foreignKeys": [
+        {
+          "fields": "county_fips",
+          "reference": {
+            "resource": "counties",
+            "fields": "fips"
+          }
+        }
+      ],
+      "missingValues": [
+        "",
+        "NA"
+      ]
+    },
+    {
+      "@id": "ark:59853/schema-counties-7ab000c",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for resource 'counties'",
+      "description": "Table Schema of resource 'counties' (County reference) in Data Package 'County respiratory illness surveillance, season 2025-26': 4 typed columns; primary key fips",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "fips": {
+          "description": "Column 'fips' of resource 'counties'",
+          "index": 0,
+          "type": "string",
+          "unique": true
+        },
+        "county": {
+          "description": "Column 'county' of resource 'counties'",
+          "index": 1,
+          "type": "string"
+        },
+        "population": {
+          "description": "2025 estimate",
+          "index": 2,
+          "type": "integer",
+          "minimum": 1
+        },
+        "region": {
+          "description": "Column 'region' of resource 'counties'",
+          "index": 3,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fips"
+      ],
+      "separator": ",",
+      "header": true,
+      "primaryKey": [
+        "fips"
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-cases-by-county-f96e353",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Weekly case counts by county",
+      "description": "One row per county per MMWR week.",
+      "alternateName": "cases_by_county",
+      "author": "Example Public Health Group",
+      "datePublished": "2026-03-02",
+      "keywords": [
+        "surveillance",
+        "respiratory",
+        "public health",
+        "county"
+      ],
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "format": "text/csv",
+      "localPath": "cases_by_county.csv",
+      "contentSize": "241",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-cases-by-county-b2a7aad"
+      },
+      "isBasedOn": [
+        "https://example.org/ndr"
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-counties-a27df2e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "County reference",
+      "description": "File 'counties.csv' of resource 'counties' in Data Package 'County respiratory illness surveillance, season 2025-26' (4 columns)",
+      "alternateName": "counties",
+      "author": "Example Public Health Group",
+      "datePublished": "2026-03-02",
+      "keywords": [
+        "surveillance",
+        "respiratory",
+        "public health",
+        "county"
+      ],
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "format": "text/csv",
+      "localPath": "counties.csv",
+      "contentSize": "106",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-counties-7ab000c"
+      },
+      "isBasedOn": [
+        "https://example.org/ndr"
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-methods-5d229b6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Case definitions and methods",
+      "description": "File 'https://example.org/surveillance/2026/methods.pdf' of resource 'methods' in Data Package 'County respiratory illness surveillance, season 2025-26'",
+      "alternateName": "methods",
+      "author": "Example Public Health Group",
+      "datePublished": "2026-03-02",
+      "keywords": [
+        "surveillance",
+        "respiratory",
+        "public health",
+        "county"
+      ],
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "format": "application/pdf",
+      "contentUrl": "https://example.org/surveillance/2026/methods.pdf",
+      "contentSize": "184320",
+      "isBasedOn": [
+        "https://example.org/ndr"
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-datapackage-json-cbb0db2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "datapackage.json",
+      "description": "Frictionless Data Package descriptor for 'County respiratory illness surveillance, season 2025-26' (package name 'county-respiratory-surveillance-2026'): 3 resource(s)",
+      "author": "Example Public Health Group",
+      "datePublished": "2026-03-02",
+      "keywords": [
+        "surveillance",
+        "respiratory",
+        "public health",
+        "county"
+      ],
+      "format": "application/json",
+      "localPath": "datapackage.json",
+      "contentSize": "3377"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.1/context",
+    {
+      "ParameterConnection": "https://w3id.org/ro/terms/workflow-run#ParameterConnection",
+      "connection": "https://w3id.org/ro/terms/workflow-run#connection",
+      "sha1": "https://w3id.org/ro/terms/workflow-run#sha1",
+      "sourceParameter": "https://w3id.org/ro/terms/workflow-run#sourceParameter",
+      "targetParameter": "https://w3id.org/ro/terms/workflow-run#targetParameter"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "conformsTo": [
+        {
+          "@id": "https://w3id.org/ro/wfrun/process/0.5"
+        }
+      ],
+      "name": "Run of workflow/packed.cwl#main",
+      "description": "EVI RO-Crate converted from the Workflow Run RO-Crate 'Run of workflow/packed.cwl#main'.",
+      "datePublished": "2023-03-23T14:39:57+00:00",
+      "license": "Apache-2.0",
+      "hasPart": [
+        {
+          "@id": "327fc7aedf4f6b69a42a7c8b808dc5a7aff61376"
+        },
+        {
+          "@id": "b9214658cc453331b62c2282b772a5c063dbd284"
+        },
+        {
+          "@id": "97fe1b50b4582cebc7d853796ebd62e3e163aa3f"
+        },
+        {
+          "@id": "packed.cwl"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "#654421a2-66b7-47c0-889a-4047fd22aace"
+        },
+        {
+          "@id": "#1b0a99b0-bff6-486f-b9d9-50e89f9f8cc0"
+        },
+        {
+          "@id": "#4d406f10-e4a8-4767-8b91-fc0631825b3a"
+        }
+      ]
+    },
+    {
+      "@id": "https://w3id.org/ro/wfrun/process/0.5",
+      "@type": "CreativeWork",
+      "name": "Process Run Crate",
+      "version": "0.5"
+    },
+    {
+      "@id": "packed.cwl",
+      "@type": "SoftwareApplication",
+      "name": "packed.cwl",
+      "description": "Software packed.cwl converted from a Workflow Run RO-Crate."
+    },
+    {
+      "@id": "packed.cwl#revtool.cwl",
+      "@type": "SoftwareApplication",
+      "name": "revtool.cwl",
+      "description": "Reverse each line using the `rev` command"
+    },
+    {
+      "@id": "packed.cwl#sorttool.cwl",
+      "@type": "SoftwareApplication",
+      "name": "sorttool.cwl",
+      "description": "Sort lines using the `sort` command"
+    },
+    {
+      "@id": "327fc7aedf4f6b69a42a7c8b808dc5a7aff61376",
+      "@type": "File",
+      "name": "whale.txt",
+      "alternateName": "whale.txt",
+      "encodingFormat": "text/plain",
+      "sha1": "327fc7aedf4f6b69a42a7c8b808dc5a7aff61376"
+    },
+    {
+      "@id": "b9214658cc453331b62c2282b772a5c063dbd284",
+      "@type": "File",
+      "name": "output.txt",
+      "alternateName": "output.txt",
+      "encodingFormat": "text/plain",
+      "sha1": "b9214658cc453331b62c2282b772a5c063dbd284"
+    },
+    {
+      "@id": "97fe1b50b4582cebc7d853796ebd62e3e163aa3f",
+      "@type": "File",
+      "name": "output.txt",
+      "alternateName": "output.txt",
+      "encodingFormat": "text/plain",
+      "sha1": "97fe1b50b4582cebc7d853796ebd62e3e163aa3f"
+    },
+    {
+      "@id": "#654421a2-66b7-47c0-889a-4047fd22aace",
+      "@type": "CreateAction",
+      "name": "Run of workflow/packed.cwl#main",
+      "description": "Run of workflow/packed.cwl#main",
+      "instrument": {
+        "@id": "packed.cwl"
+      },
+      "object": [
+        {
+          "@id": "327fc7aedf4f6b69a42a7c8b808dc5a7aff61376"
+        },
+        {
+          "@id": "#pv-reverse-sort--run-of"
+        }
+      ],
+      "result": [
+        {
+          "@id": "b9214658cc453331b62c2282b772a5c063dbd284"
+        }
+      ],
+      "endTime": "2018-10-25T15:46:43.020168",
+      "startTime": "2018-10-25T15:46:35.211153"
+    },
+    {
+      "@id": "#1b0a99b0-bff6-486f-b9d9-50e89f9f8cc0",
+      "@type": "CreateAction",
+      "name": "Run of workflow/packed.cwl#main/rev",
+      "description": "Run of workflow/packed.cwl#main/rev \u2014 Reverse each line using the `rev` command",
+      "instrument": {
+        "@id": "packed.cwl#revtool.cwl"
+      },
+      "object": [
+        {
+          "@id": "327fc7aedf4f6b69a42a7c8b808dc5a7aff61376"
+        }
+      ],
+      "result": [
+        {
+          "@id": "97fe1b50b4582cebc7d853796ebd62e3e163aa3f"
+        }
+      ],
+      "endTime": "2018-10-25T15:46:36.967359",
+      "startTime": "2018-10-25T15:46:35.314101"
+    },
+    {
+      "@id": "#4d406f10-e4a8-4767-8b91-fc0631825b3a",
+      "@type": "CreateAction",
+      "name": "Run of workflow/packed.cwl#main/sorted",
+      "description": "Run of workflow/packed.cwl#main/sorted \u2014 Sort lines using the `sort` command",
+      "instrument": {
+        "@id": "packed.cwl#sorttool.cwl"
+      },
+      "object": [
+        {
+          "@id": "97fe1b50b4582cebc7d853796ebd62e3e163aa3f"
+        },
+        {
+          "@id": "#pv-reverse-f-workf"
+        }
+      ],
+      "result": [
+        {
+          "@id": "b9214658cc453331b62c2282b772a5c063dbd284"
+        }
+      ],
+      "endTime": "2018-10-25T15:46:38.069110",
+      "startTime": "2018-10-25T15:46:36.975235"
+    },
+    {
+      "@id": "#pv-reverse-sort--run-of",
+      "@type": "PropertyValue",
+      "name": "reverse_sort",
+      "value": "True"
+    },
+    {
+      "@id": "#pv-reverse-f-workf",
+      "@type": "PropertyValue",
+      "name": "reverse",
+      "value": "True"
+    }
+  ]
+}

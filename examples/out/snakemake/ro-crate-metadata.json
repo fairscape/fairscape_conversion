@@ -1,0 +1,407 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-snakemake-workflow-snakefile-c231952"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-snakemake-workflow-snakefile-c231952",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Snakemake workflow 'Snakefile'",
+      "description": "FAIRSCAPE EVI RO-Crate describing a run of the Snakemake workflow 'Snakefile'",
+      "keywords": [
+        "snakemake",
+        "workflow"
+      ],
+      "version": "1.0",
+      "author": "oj",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-08-06T09:23:13.829075-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+        },
+        {
+          "@id": "ark:59853/computation-make-list-9fafdfb"
+        },
+        {
+          "@id": "ark:59853/computation-reverse-74f82b4"
+        },
+        {
+          "@id": "ark:59853/computation-split-halves-165c4dc"
+        },
+        {
+          "@id": "ark:59853/software-snakefile-c231952"
+        },
+        {
+          "@id": "ark:59853/software-snakemake-416395a"
+        },
+        {
+          "@id": "ark:59853/software-make-list-5542f8e"
+        },
+        {
+          "@id": "ark:59853/software-reverse-27b9bf2"
+        },
+        {
+          "@id": "ark:59853/software-split-halves-8bc6b50"
+        },
+        {
+          "@id": "ark:59853/dataset-first-half-txt-893cee7"
+        },
+        {
+          "@id": "ark:59853/dataset-letters-txt-2ef78ba"
+        },
+        {
+          "@id": "ark:59853/dataset-reversed-txt-baab9b2"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-b68cb24"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Snakemake workflow run of 'Snakefile'",
+      "description": "Execution of the Snakemake workflow 'Snakefile', reconstructed post-hoc from Snakemake's persistence metadata by snakemake-report-plugin-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2026-08-06T08:38:00.039968-04:00",
+      "command": "snakemake",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-snakefile-c231952"
+        },
+        {
+          "@id": "ark:59853/software-snakemake-416395a"
+        }
+      ],
+      "usedDataset": [],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-first-half-txt-893cee7"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-b68cb24"
+        }
+      ],
+      "snakemakeVersion": "9.25.1",
+      "startTime": "2026-08-06T08:38:00.039968-04:00",
+      "endTime": "2026-08-06T08:38:00.065969-04:00"
+    },
+    {
+      "@id": "ark:59853/computation-make-list-9fafdfb",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "make_list",
+      "description": "Snakemake job for rule 'make_list'",
+      "runBy": "oj",
+      "dateCreated": "2026-08-06T08:38:00.039968-04:00",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-make-list-5542f8e"
+        }
+      ],
+      "usedDataset": [],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-letters-txt-2ef78ba"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+        }
+      ],
+      "command": "printf '%s\\n' a b c d e f g h > results/letters.txt",
+      "startTime": "2026-08-06T08:38:00.039968-04:00",
+      "endTime": "2026-08-06T08:38:00.040968-04:00"
+    },
+    {
+      "@id": "ark:59853/computation-reverse-74f82b4",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "reverse",
+      "description": "Snakemake job for rule 'reverse'",
+      "runBy": "oj",
+      "dateCreated": "2026-08-06T08:38:00.045969-04:00",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-reverse-27b9bf2"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-letters-txt-2ef78ba"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-reversed-txt-baab9b2"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+        }
+      ],
+      "command": "tac results/letters.txt > results/reversed.txt",
+      "startTime": "2026-08-06T08:38:00.045969-04:00",
+      "endTime": "2026-08-06T08:38:00.054969-04:00"
+    },
+    {
+      "@id": "ark:59853/computation-split-halves-165c4dc",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "split_halves",
+      "description": "Snakemake job for rule 'split_halves'",
+      "runBy": "oj",
+      "dateCreated": "2026-08-06T08:38:00.061969-04:00",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-split-halves-8bc6b50"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-reversed-txt-baab9b2"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-first-half-txt-893cee7"
+        },
+        {
+          "@id": "ark:59853/dataset-second-half-txt-b68cb24"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+        }
+      ],
+      "command": "head -n 4 results/reversed.txt > results/first_half.txt && tail -n 4 results/reversed.txt > results/second_half.txt",
+      "startTime": "2026-08-06T08:38:00.061969-04:00",
+      "endTime": "2026-08-06T08:38:00.065969-04:00"
+    },
+    {
+      "@id": "ark:59853/software-snakefile-c231952",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Snakefile",
+      "author": "oj",
+      "description": "Snakemake workflow definition 'Snakefile' for this run",
+      "format": "snakemake",
+      "contentUrl": "Snakefile"
+    },
+    {
+      "@id": "ark:59853/software-snakemake-416395a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Snakemake",
+      "author": "Johannes K\u00f6ster",
+      "description": "Snakemake workflow management system (https://snakemake.github.io/)",
+      "format": "application/x-python",
+      "version": "9.25.1",
+      "contentUrl": "https://github.com/snakemake/snakemake"
+    },
+    {
+      "@id": "ark:59853/software-make-list-5542f8e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "make_list",
+      "author": "oj",
+      "description": "printf '%s\\n' a b c d e f g h > {output}",
+      "format": "snakemake",
+      "contentUrl": "Snakefile",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-snakefile-c231952"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/software-reverse-27b9bf2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "reverse",
+      "author": "oj",
+      "description": "tac {input} > {output}",
+      "format": "snakemake",
+      "contentUrl": "Snakefile",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-snakefile-c231952"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/software-split-halves-8bc6b50",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "split_halves",
+      "author": "oj",
+      "description": "head -n 4 {input} > {output.first} && tail -n 4 {input} > {output.second}",
+      "format": "snakemake",
+      "contentUrl": "Snakefile",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-snakefile-c231952"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-first-half-txt-893cee7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "first_half.txt",
+      "author": "oj",
+      "description": "File 'results/first_half.txt' produced by the Snakemake workflow run",
+      "datePublished": "2026-08-06T09:23:13.829075-04:00",
+      "keywords": [
+        "snakemake",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-split-halves-165c4dc"
+        }
+      ],
+      "contentUrl": "results/first_half.txt",
+      "contentSize": "8"
+    },
+    {
+      "@id": "ark:59853/dataset-letters-txt-2ef78ba",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "letters.txt",
+      "author": "oj",
+      "description": "File 'results/letters.txt' produced by the Snakemake workflow run",
+      "datePublished": "2026-08-06T09:23:13.829075-04:00",
+      "keywords": [
+        "snakemake",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-make-list-9fafdfb"
+        }
+      ],
+      "contentUrl": "results/letters.txt",
+      "contentSize": "16"
+    },
+    {
+      "@id": "ark:59853/dataset-reversed-txt-baab9b2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "reversed.txt",
+      "author": "oj",
+      "description": "File 'results/reversed.txt' produced by the Snakemake workflow run",
+      "datePublished": "2026-08-06T09:23:13.829075-04:00",
+      "keywords": [
+        "snakemake",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reverse-74f82b4"
+        }
+      ],
+      "contentUrl": "results/reversed.txt",
+      "contentSize": "16"
+    },
+    {
+      "@id": "ark:59853/dataset-second-half-txt-b68cb24",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "second_half.txt",
+      "author": "oj",
+      "description": "File 'results/second_half.txt' produced by the Snakemake workflow run",
+      "datePublished": "2026-08-06T09:23:13.829075-04:00",
+      "keywords": [
+        "snakemake",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-split-halves-165c4dc"
+        }
+      ],
+      "contentUrl": "results/second_half.txt",
+      "contentSize": "8"
+    }
+  ]
+}

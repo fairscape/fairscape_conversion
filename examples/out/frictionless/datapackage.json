@@ -1,0 +1,532 @@
+{
+  "profile": "data-package",
+  "name": "seasonal-respiratory-illness-survey",
+  "title": "Seasonal respiratory illness survey",
+  "description": "REDCap project 'Seasonal respiratory illness survey': its data dictionary (21 fields over 3 form(s)) as an EVI schema, with the exported records",
+  "version": "1.0",
+  "created": "2026-01-20",
+  "keywords": [
+    "redcap",
+    "survey",
+    "public health",
+    "respiratory"
+  ],
+  "licenses": [
+    {
+      "path": "https://spdx.org/licenses/CC-BY-4.0"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Example Public Health Group",
+      "role": "author"
+    }
+  ],
+  "resources": [
+    {
+      "name": "input-dictionary.csv",
+      "path": "input-dictionary.csv",
+      "title": "input-dictionary.csv",
+      "description": "REDCap data dictionary for project 'Seasonal respiratory illness survey': 21 fields on 3 form(s) (enrollment, exposure, followup), as downloaded from REDCap",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 2476
+    },
+    {
+      "profile": "tabular-data-resource",
+      "name": "input-records.csv",
+      "path": "input-records.csv",
+      "title": "input-records.csv",
+      "description": "Records exported from REDCap project 'Seasonal respiratory illness survey' (3 row(s), 32 columns, raw codes)",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 703,
+      "schema": {
+        "fields": [
+          {
+            "name": "record_id",
+            "type": "string",
+            "description": "Record ID",
+            "constraints": {
+              "required": true
+            },
+            "form": "enrollment",
+            "fieldType": "text",
+            "requiredField": true
+          },
+          {
+            "name": "enroll_date",
+            "type": "date",
+            "description": "Enrollment date",
+            "constraints": {
+              "required": true
+            },
+            "form": "enrollment",
+            "fieldType": "text",
+            "validation": "date_ymd",
+            "requiredField": true
+          },
+          {
+            "name": "site",
+            "type": "integer",
+            "description": "Enrollment site",
+            "constraints": {
+              "required": true,
+              "enum": [
+                1,
+                2,
+                3
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "dropdown",
+            "requiredField": true,
+            "choices": {
+              "1": "County clinic A",
+              "2": "County clinic B",
+              "3": "Mobile unit"
+            }
+          },
+          {
+            "name": "age",
+            "type": "integer",
+            "description": "Age at enrollment (years)",
+            "constraints": {
+              "required": true,
+              "minimum": 18,
+              "maximum": 110
+            },
+            "form": "enrollment",
+            "fieldType": "text",
+            "validation": "integer",
+            "sectionHeader": "Demographics",
+            "requiredField": true
+          },
+          {
+            "name": "sex",
+            "type": "integer",
+            "description": "Sex",
+            "constraints": {
+              "required": true,
+              "enum": [
+                1,
+                2,
+                3,
+                99
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "radio",
+            "requiredField": true,
+            "choices": {
+              "1": "Female",
+              "2": "Male",
+              "3": "Intersex",
+              "99": "Prefer not to say"
+            }
+          },
+          {
+            "name": "zip",
+            "type": "string",
+            "description": "ZIP code of residence",
+            "constraints": {
+              "pattern": "^[0-9]{5}(-[0-9]{4})?$"
+            },
+            "form": "enrollment",
+            "fieldType": "text",
+            "validation": "zipcode",
+            "fieldNote": "5 digits",
+            "phiIdentifier": true
+          },
+          {
+            "name": "dob",
+            "type": "date",
+            "description": "Date of birth",
+            "form": "enrollment",
+            "fieldType": "text",
+            "validation": "date_ymd",
+            "phiIdentifier": true
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "description": "Phone number",
+            "form": "enrollment",
+            "fieldType": "text",
+            "validation": "phone",
+            "phiIdentifier": true
+          },
+          {
+            "name": "race___1",
+            "type": "integer",
+            "description": "Race (select all that apply) \u2014 American Indian or Alaska Native (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "checkbox",
+            "choice": {
+              "code": "1",
+              "label": "American Indian or Alaska Native"
+            }
+          },
+          {
+            "name": "race___2",
+            "type": "integer",
+            "description": "Race (select all that apply) \u2014 Asian (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "checkbox",
+            "choice": {
+              "code": "2",
+              "label": "Asian"
+            }
+          },
+          {
+            "name": "race___3",
+            "type": "integer",
+            "description": "Race (select all that apply) \u2014 Black or African American (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "checkbox",
+            "choice": {
+              "code": "3",
+              "label": "Black or African American"
+            }
+          },
+          {
+            "name": "race___4",
+            "type": "integer",
+            "description": "Race (select all that apply) \u2014 Native Hawaiian or Other Pacific Islander (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "checkbox",
+            "choice": {
+              "code": "4",
+              "label": "Native Hawaiian or Other Pacific Islander"
+            }
+          },
+          {
+            "name": "race___5",
+            "type": "integer",
+            "description": "Race (select all that apply) \u2014 White (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "checkbox",
+            "choice": {
+              "code": "5",
+              "label": "White"
+            }
+          },
+          {
+            "name": "race___6",
+            "type": "integer",
+            "description": "Race (select all that apply) \u2014 Other (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "checkbox",
+            "choice": {
+              "code": "6",
+              "label": "Other"
+            }
+          },
+          {
+            "name": "enrollment_complete",
+            "type": "integer",
+            "description": "REDCap form status for 'enrollment': 0 = Incomplete, 1 = Unverified, 2 = Complete",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 2,
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "form": "enrollment",
+            "fieldType": "form_status"
+          },
+          {
+            "name": "vaccinated",
+            "type": "boolean",
+            "description": "Received any dose of the seasonal vaccine?",
+            "constraints": {
+              "required": true
+            },
+            "form": "exposure",
+            "fieldType": "yesno",
+            "sectionHeader": "Vaccination history",
+            "requiredField": true
+          },
+          {
+            "name": "doses",
+            "type": "integer",
+            "description": "Number of doses received",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 5
+            },
+            "form": "exposure",
+            "fieldType": "text",
+            "validation": "integer",
+            "branchingLogic": "[vaccinated] = '1'"
+          },
+          {
+            "name": "last_dose_date",
+            "type": "date",
+            "description": "Date of most recent dose",
+            "form": "exposure",
+            "fieldType": "text",
+            "validation": "date_ymd",
+            "branchingLogic": "[vaccinated] = '1'"
+          },
+          {
+            "name": "symptoms___1",
+            "type": "integer",
+            "description": "Symptoms \u2014 Fever (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "exposure",
+            "fieldType": "checkbox",
+            "sectionHeader": "Symptoms in the past 14 days",
+            "choice": {
+              "code": "1",
+              "label": "Fever"
+            }
+          },
+          {
+            "name": "symptoms___2",
+            "type": "integer",
+            "description": "Symptoms \u2014 Cough (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "exposure",
+            "fieldType": "checkbox",
+            "sectionHeader": "Symptoms in the past 14 days",
+            "choice": {
+              "code": "2",
+              "label": "Cough"
+            }
+          },
+          {
+            "name": "symptoms___3",
+            "type": "integer",
+            "description": "Symptoms \u2014 Shortness of breath (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "exposure",
+            "fieldType": "checkbox",
+            "sectionHeader": "Symptoms in the past 14 days",
+            "choice": {
+              "code": "3",
+              "label": "Shortness of breath"
+            }
+          },
+          {
+            "name": "symptoms___4",
+            "type": "integer",
+            "description": "Symptoms \u2014 Fatigue (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "exposure",
+            "fieldType": "checkbox",
+            "sectionHeader": "Symptoms in the past 14 days",
+            "choice": {
+              "code": "4",
+              "label": "Fatigue"
+            }
+          },
+          {
+            "name": "symptoms___5",
+            "type": "integer",
+            "description": "Symptoms \u2014 Loss of taste or smell (1 = checked)",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 1,
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "form": "exposure",
+            "fieldType": "checkbox",
+            "sectionHeader": "Symptoms in the past 14 days",
+            "choice": {
+              "code": "5",
+              "label": "Loss of taste or smell"
+            }
+          },
+          {
+            "name": "onset_date",
+            "type": "date",
+            "description": "Symptom onset date",
+            "form": "exposure",
+            "fieldType": "text",
+            "validation": "date_ymd",
+            "branchingLogic": "[symptoms(1)] = '1' or [symptoms(2)] = '1' or [symptoms(3)] = '1' or [symptoms(4)] = '1' or [symptoms(5)] = '1'"
+          },
+          {
+            "name": "temp_c",
+            "type": "number",
+            "description": "Highest measured temperature (C)",
+            "constraints": {
+              "minimum": 34.0,
+              "maximum": 43.0
+            },
+            "form": "exposure",
+            "fieldType": "text",
+            "validation": "number_1dp"
+          },
+          {
+            "name": "exposure_complete",
+            "type": "integer",
+            "description": "REDCap form status for 'exposure': 0 = Incomplete, 1 = Unverified, 2 = Complete",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 2,
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "form": "exposure",
+            "fieldType": "form_status"
+          },
+          {
+            "name": "height_cm",
+            "type": "number",
+            "description": "Height (cm)",
+            "constraints": {
+              "minimum": 50,
+              "maximum": 250
+            },
+            "form": "followup",
+            "fieldType": "text",
+            "validation": "number",
+            "sectionHeader": "Measurements"
+          },
+          {
+            "name": "weight_kg",
+            "type": "number",
+            "description": "Weight (kg)",
+            "constraints": {
+              "minimum": 2,
+              "maximum": 400
+            },
+            "form": "followup",
+            "fieldType": "text",
+            "validation": "number"
+          },
+          {
+            "name": "bmi",
+            "type": "number",
+            "description": "Body mass index",
+            "form": "followup",
+            "fieldType": "calc",
+            "calculation": "[weight_kg]/(([height_cm]/100)^(2))"
+          },
+          {
+            "name": "satisfaction",
+            "type": "integer",
+            "description": "How satisfied were you with the clinic visit?",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 100
+            },
+            "form": "followup",
+            "fieldType": "slider",
+            "validation": "number"
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "description": "Clinician notes",
+            "form": "followup",
+            "fieldType": "notes"
+          },
+          {
+            "name": "followup_complete",
+            "type": "integer",
+            "description": "REDCap form status for 'followup': 0 = Incomplete, 1 = Unverified, 2 = Complete",
+            "constraints": {
+              "minimum": 0,
+              "maximum": 2,
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "form": "followup",
+            "fieldType": "form_status"
+          }
+        ]
+      }
+    }
+  ]
+}

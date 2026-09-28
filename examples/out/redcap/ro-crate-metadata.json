@@ -1,0 +1,633 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-seasonal-respiratory-illness-survey-93cb04c"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-seasonal-respiratory-illness-survey-93cb04c",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Seasonal respiratory illness survey",
+      "description": "REDCap project 'Seasonal respiratory illness survey': its data dictionary (21 fields over 3 form(s)) as an EVI schema, with the exported records",
+      "keywords": [
+        "redcap",
+        "survey",
+        "public health",
+        "respiratory"
+      ],
+      "version": "1.0",
+      "author": "Example Public Health Group",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-01-20",
+      "hasPart": [
+        {
+          "@id": "ark:59853/schema-seasonal-respiratory-illness-survey-8a1c6b7"
+        },
+        {
+          "@id": "ark:59853/dataset-input-dictionary-csv-2c2b6b9"
+        },
+        {
+          "@id": "ark:59853/dataset-input-records-csv-813885a"
+        },
+        {
+          "@id": "ark:59853/computation-redcap-export-seasonal-respiratory-illne-677c3bb"
+        },
+        {
+          "@id": "ark:59853/software-redcap-e7aec9f"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/schema-seasonal-respiratory-illness-survey-8a1c6b7",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "evi:Schema",
+      "name": "Schema for REDCap project 'Seasonal respiratory illness survey' record export",
+      "description": "Columns of a REDCap raw record export for project 'Seasonal respiratory illness survey': 20 fields on 3 form(s) become 32 columns (checkbox fields expand to one column per choice; each form adds a _complete status column). Derived from the project's data dictionary. 3 column(s) are flagged as identifiers in REDCap: zip, dob, phone.",
+      "conformsTo": {
+        "@id": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "properties": {
+        "record_id": {
+          "description": "Record ID",
+          "index": 0,
+          "type": "string",
+          "form": "enrollment",
+          "fieldType": "text",
+          "requiredField": true
+        },
+        "enroll_date": {
+          "description": "Enrollment date",
+          "index": 1,
+          "type": "string",
+          "form": "enrollment",
+          "fieldType": "text",
+          "source-type": "date",
+          "validation": "date_ymd",
+          "requiredField": true
+        },
+        "site": {
+          "description": "Enrollment site",
+          "index": 2,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "dropdown",
+          "requiredField": true,
+          "enum": [
+            1,
+            2,
+            3
+          ],
+          "choices": {
+            "1": "County clinic A",
+            "2": "County clinic B",
+            "3": "Mobile unit"
+          }
+        },
+        "age": {
+          "description": "Age at enrollment (years)",
+          "index": 3,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "text",
+          "validation": "integer",
+          "sectionHeader": "Demographics",
+          "requiredField": true,
+          "minimum": 18,
+          "maximum": 110
+        },
+        "sex": {
+          "description": "Sex",
+          "index": 4,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "radio",
+          "requiredField": true,
+          "enum": [
+            1,
+            2,
+            3,
+            99
+          ],
+          "choices": {
+            "1": "Female",
+            "2": "Male",
+            "3": "Intersex",
+            "99": "Prefer not to say"
+          }
+        },
+        "zip": {
+          "description": "ZIP code of residence",
+          "index": 5,
+          "type": "string",
+          "form": "enrollment",
+          "fieldType": "text",
+          "pattern": "^[0-9]{5}(-[0-9]{4})?$",
+          "validation": "zipcode",
+          "fieldNote": "5 digits",
+          "phiIdentifier": true
+        },
+        "dob": {
+          "description": "Date of birth",
+          "index": 6,
+          "type": "string",
+          "form": "enrollment",
+          "fieldType": "text",
+          "source-type": "date",
+          "validation": "date_ymd",
+          "phiIdentifier": true
+        },
+        "phone": {
+          "description": "Phone number",
+          "index": 7,
+          "type": "string",
+          "form": "enrollment",
+          "fieldType": "text",
+          "validation": "phone",
+          "phiIdentifier": true
+        },
+        "race___1": {
+          "description": "Race (select all that apply) \u2014 American Indian or Alaska Native (1 = checked)",
+          "index": 8,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "checkbox",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "1",
+            "label": "American Indian or Alaska Native"
+          }
+        },
+        "race___2": {
+          "description": "Race (select all that apply) \u2014 Asian (1 = checked)",
+          "index": 9,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "checkbox",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "2",
+            "label": "Asian"
+          }
+        },
+        "race___3": {
+          "description": "Race (select all that apply) \u2014 Black or African American (1 = checked)",
+          "index": 10,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "checkbox",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "3",
+            "label": "Black or African American"
+          }
+        },
+        "race___4": {
+          "description": "Race (select all that apply) \u2014 Native Hawaiian or Other Pacific Islander (1 = checked)",
+          "index": 11,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "checkbox",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "4",
+            "label": "Native Hawaiian or Other Pacific Islander"
+          }
+        },
+        "race___5": {
+          "description": "Race (select all that apply) \u2014 White (1 = checked)",
+          "index": 12,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "checkbox",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "5",
+            "label": "White"
+          }
+        },
+        "race___6": {
+          "description": "Race (select all that apply) \u2014 Other (1 = checked)",
+          "index": 13,
+          "type": "integer",
+          "form": "enrollment",
+          "fieldType": "checkbox",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "6",
+            "label": "Other"
+          }
+        },
+        "enrollment_complete": {
+          "description": "REDCap form status for 'enrollment': 0 = Incomplete, 1 = Unverified, 2 = Complete",
+          "index": 14,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2,
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "form": "enrollment",
+          "fieldType": "form_status"
+        },
+        "vaccinated": {
+          "description": "Received any dose of the seasonal vaccine?",
+          "index": 15,
+          "type": "boolean",
+          "form": "exposure",
+          "fieldType": "yesno",
+          "sectionHeader": "Vaccination history",
+          "requiredField": true
+        },
+        "doses": {
+          "description": "Number of doses received",
+          "index": 16,
+          "type": "integer",
+          "form": "exposure",
+          "fieldType": "text",
+          "validation": "integer",
+          "branchingLogic": "[vaccinated] = '1'",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "last_dose_date": {
+          "description": "Date of most recent dose",
+          "index": 17,
+          "type": "string",
+          "form": "exposure",
+          "fieldType": "text",
+          "source-type": "date",
+          "validation": "date_ymd",
+          "branchingLogic": "[vaccinated] = '1'"
+        },
+        "symptoms___1": {
+          "description": "Symptoms \u2014 Fever (1 = checked)",
+          "index": 18,
+          "type": "integer",
+          "form": "exposure",
+          "fieldType": "checkbox",
+          "sectionHeader": "Symptoms in the past 14 days",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "1",
+            "label": "Fever"
+          }
+        },
+        "symptoms___2": {
+          "description": "Symptoms \u2014 Cough (1 = checked)",
+          "index": 19,
+          "type": "integer",
+          "form": "exposure",
+          "fieldType": "checkbox",
+          "sectionHeader": "Symptoms in the past 14 days",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "2",
+            "label": "Cough"
+          }
+        },
+        "symptoms___3": {
+          "description": "Symptoms \u2014 Shortness of breath (1 = checked)",
+          "index": 20,
+          "type": "integer",
+          "form": "exposure",
+          "fieldType": "checkbox",
+          "sectionHeader": "Symptoms in the past 14 days",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "3",
+            "label": "Shortness of breath"
+          }
+        },
+        "symptoms___4": {
+          "description": "Symptoms \u2014 Fatigue (1 = checked)",
+          "index": 21,
+          "type": "integer",
+          "form": "exposure",
+          "fieldType": "checkbox",
+          "sectionHeader": "Symptoms in the past 14 days",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "4",
+            "label": "Fatigue"
+          }
+        },
+        "symptoms___5": {
+          "description": "Symptoms \u2014 Loss of taste or smell (1 = checked)",
+          "index": 22,
+          "type": "integer",
+          "form": "exposure",
+          "fieldType": "checkbox",
+          "sectionHeader": "Symptoms in the past 14 days",
+          "minimum": 0,
+          "maximum": 1,
+          "enum": [
+            0,
+            1
+          ],
+          "choice": {
+            "code": "5",
+            "label": "Loss of taste or smell"
+          }
+        },
+        "onset_date": {
+          "description": "Symptom onset date",
+          "index": 23,
+          "type": "string",
+          "form": "exposure",
+          "fieldType": "text",
+          "source-type": "date",
+          "validation": "date_ymd",
+          "branchingLogic": "[symptoms(1)] = '1' or [symptoms(2)] = '1' or [symptoms(3)] = '1' or [symptoms(4)] = '1' or [symptoms(5)] = '1'"
+        },
+        "temp_c": {
+          "description": "Highest measured temperature (C)",
+          "index": 24,
+          "type": "number",
+          "form": "exposure",
+          "fieldType": "text",
+          "validation": "number_1dp",
+          "minimum": 34.0,
+          "maximum": 43.0
+        },
+        "exposure_complete": {
+          "description": "REDCap form status for 'exposure': 0 = Incomplete, 1 = Unverified, 2 = Complete",
+          "index": 25,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2,
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "form": "exposure",
+          "fieldType": "form_status"
+        },
+        "height_cm": {
+          "description": "Height (cm)",
+          "index": 26,
+          "type": "number",
+          "form": "followup",
+          "fieldType": "text",
+          "validation": "number",
+          "sectionHeader": "Measurements",
+          "minimum": 50,
+          "maximum": 250
+        },
+        "weight_kg": {
+          "description": "Weight (kg)",
+          "index": 27,
+          "type": "number",
+          "form": "followup",
+          "fieldType": "text",
+          "validation": "number",
+          "minimum": 2,
+          "maximum": 400
+        },
+        "bmi": {
+          "description": "Body mass index",
+          "index": 28,
+          "type": "number",
+          "form": "followup",
+          "fieldType": "calc",
+          "calculation": "[weight_kg]/(([height_cm]/100)^(2))"
+        },
+        "satisfaction": {
+          "description": "How satisfied were you with the clinic visit?",
+          "index": 29,
+          "type": "integer",
+          "form": "followup",
+          "fieldType": "slider",
+          "validation": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "notes": {
+          "description": "Clinician notes",
+          "index": 30,
+          "type": "string",
+          "form": "followup",
+          "fieldType": "notes"
+        },
+        "followup_complete": {
+          "description": "REDCap form status for 'followup': 0 = Incomplete, 1 = Unverified, 2 = Complete",
+          "index": 31,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2,
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "form": "followup",
+          "fieldType": "form_status"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_id",
+        "enroll_date",
+        "site",
+        "age",
+        "sex",
+        "vaccinated"
+      ],
+      "separator": ",",
+      "header": true,
+      "forms": [
+        "enrollment",
+        "exposure",
+        "followup"
+      ],
+      "identifierFields": [
+        "zip",
+        "dob",
+        "phone"
+      ]
+    },
+    {
+      "@id": "ark:59853/dataset-input-dictionary-csv-2c2b6b9",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "input-dictionary.csv",
+      "description": "REDCap data dictionary for project 'Seasonal respiratory illness survey': 21 fields on 3 form(s) (enrollment, exposure, followup), as downloaded from REDCap",
+      "author": "Example Public Health Group",
+      "datePublished": "2026-01-20",
+      "keywords": [
+        "redcap",
+        "survey",
+        "public health",
+        "respiratory"
+      ],
+      "format": "text/csv",
+      "localPath": "input-dictionary.csv",
+      "contentSize": "2476",
+      "generatedBy": {
+        "@id": "ark:59853/computation-redcap-export-seasonal-respiratory-illne-677c3bb"
+      }
+    },
+    {
+      "@id": "ark:59853/dataset-input-records-csv-813885a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "input-records.csv",
+      "description": "Records exported from REDCap project 'Seasonal respiratory illness survey' (3 row(s), 32 columns, raw codes)",
+      "author": "Example Public Health Group",
+      "datePublished": "2026-01-20",
+      "keywords": [
+        "redcap",
+        "survey",
+        "public health",
+        "respiratory"
+      ],
+      "format": "text/csv",
+      "localPath": "input-records.csv",
+      "contentSize": "703",
+      "evi:Schema": {
+        "@id": "ark:59853/schema-seasonal-respiratory-illness-survey-8a1c6b7"
+      },
+      "generatedBy": {
+        "@id": "ark:59853/computation-redcap-export-seasonal-respiratory-illne-677c3bb"
+      },
+      "conditionsOfAccess": "Contains columns REDCap flags as identifiers: zip, dob, phone. Handle under the project's IRB and data use terms."
+    },
+    {
+      "@id": "ark:59853/computation-redcap-export-seasonal-respiratory-illne-677c3bb",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "REDCap export from project 'Seasonal respiratory illness survey'",
+      "description": "Download of the data dictionary and a record export from REDCap project 'Seasonal respiratory illness survey' (REDCap's Data Dictionary and Data Exports pages, or the API)",
+      "runBy": "Example Public Health Group",
+      "dateCreated": "2026-01-20",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-redcap-e7aec9f"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-input-dictionary-csv-2c2b6b9"
+        },
+        {
+          "@id": "ark:59853/dataset-input-records-csv-813885a"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/software-redcap-e7aec9f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "REDCap",
+      "description": "Research Electronic Data Capture (REDCap), the web application that hosted the project and produced its data dictionary and record exports",
+      "version": "14.5.10",
+      "url": "https://projectredcap.org",
+      "author": "Vanderbilt University",
+      "datePublished": "2026-01-20",
+      "format": "application/x-web-application"
+    }
+  ]
+}
