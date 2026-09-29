@@ -1,0 +1,27 @@
+{
+  "settings": {
+    "naan": "59853",
+    "name": "Tracked computations in 'demo'",
+    "description": "FAIRSCAPE RO-Crate of Python runs recorded with fairscape_conversion track",
+    "author": "Jane Doe",
+    "keywords": ["demo", "computation"],
+    "license": "https://spdx.org/licenses/CC-BY-4.0",
+    "version": "1.0",
+    "date_published": "2026-09-29T10:00:05-04:00"
+  },
+  "run": {
+    "name": "clean",
+    "script": {"name": "clean.py", "locator": "contentUrl", "locator_value": "software/clean-ea6559b.py"},
+    "code_sha1": "ea6559b3f1a0c2d4e5f60718293a4b5c6d7e8f90",
+    "argv": ["clean.py", "data/raw.csv", "data/clean.csv", "--drop-na"],
+    "python_version": "3.11.9",
+    "starttime": "2026-09-29T10:00:00-04:00",
+    "endtime": "2026-09-29T10:00:05-04:00",
+    "exit_code": 0
+  },
+  "files": {
+    "/data/demo/data/raw.csv": {"role": "input", "size": 12, "locator": "contentUrl", "locator_value": "data/raw.csv"},
+    "/data/reference/genes.tsv": {"role": "input", "size": 2048, "locator": "localPath", "locator_value": "/data/reference/genes.tsv"},
+    "/data/demo/data/clean.csv": {"role": "output", "size": 18, "locator": "contentUrl", "locator_value": "data/clean.csv"}
+  }
+}

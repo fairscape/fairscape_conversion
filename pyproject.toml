@@ -44,6 +44,7 @@ packages = [
     "fairscape_conversion.plugins.frictionless",
     "fairscape_conversion.plugins.galaxy",
     "fairscape_conversion.plugins.redcap",
+    "fairscape_conversion.plugins.python",
 ]
 # This list is explicit because package-dir maps the import name onto the repo
 # root, which defeats automatic discovery. tests/test_packaging.py fails if it

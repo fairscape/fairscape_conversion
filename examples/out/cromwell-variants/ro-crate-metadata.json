@@ -63,7 +63,7 @@
       "version": "1.0",
       "author": "Example Researcher",
       "license": "https://spdx.org/licenses/CC-BY-4.0",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "hasPart": [
         {
           "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
@@ -922,7 +922,7 @@
       "name": "all.vcf",
       "author": "Example Researcher",
       "description": "File 'all.vcf' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -949,7 +949,7 @@
       "name": "A.bam",
       "author": "Example Researcher",
       "description": "File 'A.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -976,7 +976,7 @@
       "name": "B.bam",
       "author": "Example Researcher",
       "description": "File 'B.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1003,7 +1003,7 @@
       "name": "C.bam",
       "author": "Example Researcher",
       "description": "File 'C.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1030,7 +1030,7 @@
       "name": "quals.svg",
       "author": "Example Researcher",
       "description": "File 'quals.svg' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1057,7 +1057,7 @@
       "name": "A.sorted.bam.bai",
       "author": "Example Researcher",
       "description": "File 'A.sorted.bam.bai' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1084,7 +1084,7 @@
       "name": "B.sorted.bam.bai",
       "author": "Example Researcher",
       "description": "File 'B.sorted.bam.bai' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1111,7 +1111,7 @@
       "name": "C.sorted.bam.bai",
       "author": "Example Researcher",
       "description": "File 'C.sorted.bam.bai' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1138,7 +1138,7 @@
       "name": "A.sorted.bam",
       "author": "Example Researcher",
       "description": "File 'A.sorted.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1165,7 +1165,7 @@
       "name": "B.sorted.bam",
       "author": "Example Researcher",
       "description": "File 'B.sorted.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1192,7 +1192,7 @@
       "name": "C.sorted.bam",
       "author": "Example Researcher",
       "description": "File 'C.sorted.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1219,7 +1219,7 @@
       "name": "variant_summary.tsv",
       "author": "Example Researcher",
       "description": "File 'variant_summary.tsv' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1246,7 +1246,7 @@
       "name": "genome.fa",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1269,7 +1269,7 @@
       "name": "genome.fa.amb",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.amb' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1292,7 +1292,7 @@
       "name": "genome.fa.ann",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.ann' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1315,7 +1315,7 @@
       "name": "genome.fa.bwt",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.bwt' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1338,7 +1338,7 @@
       "name": "genome.fa.pac",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.pac' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1361,7 +1361,7 @@
       "name": "genome.fa.sa",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.sa' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1384,7 +1384,7 @@
       "name": "A.fastq",
       "author": "Example Researcher",
       "description": "Input file 'A.fastq' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1407,7 +1407,7 @@
       "name": "B.fastq",
       "author": "Example Researcher",
       "description": "Input file 'B.fastq' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1430,7 +1430,7 @@
       "name": "C.fastq",
       "author": "Example Researcher",
       "description": "Input file 'C.fastq' used by the Cromwell workflow run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1453,7 +1453,7 @@
       "name": "inputs.json",
       "author": "Example Researcher",
       "description": "File 'inputs.json' submitted to Cromwell for this run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1481,7 +1481,7 @@
       "name": "variant-calling.wdl",
       "author": "Example Researcher",
       "description": "File 'variant-calling.wdl' submitted to Cromwell for this run",
-      "datePublished": "2026-09-23T13:51:27.653662-04:00",
+      "datePublished": "2026-09-29T12:20:40.321310-04:00",
       "keywords": [
         "cromwell",
         "wdl",

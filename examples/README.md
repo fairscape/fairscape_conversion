@@ -51,6 +51,19 @@ datasheets and their outputs, so you can open them without running anything.
 | [`import_cromwell_variants.py`](import_cromwell_variants.py) | 12 Cromwell calls, 3 of them scatter shards | [`wdl-variant-calling/`](wdl-variant-calling) |
 | [`export_croissant_variants.py`](export_croissant_variants.py) | that crate's variant table as Croissant, then read back with MLCommons' own `mlcroissant` — 654 rows | ← the Snakemake crate |
 
+## Other people's runs
+
+| Example | What it converts | Where the runs came from |
+|---|---|---|
+| [`import_cromwell_public.py`](import_cromwell_public.py) | 3 Cromwell runs on Google Cloud: the ENCODE ATAC-seq and miRNA-seq pipelines, a Broad subworkflow test | [`public-runs/`](public-runs) |
+| [`import_galaxy_public.py`](import_galaxy_public.py) | 2 usegalaxy.eu invocation exports of X-ray spectroscopy workflows | [`public-runs/`](public-runs) |
+
+These are runs nobody here executed, kept exactly as their engines wrote
+them. Both scripts end with the check that matters: the computation graph in
+the crate is compared, edge by edge, with the call graph of the WDL the run
+submitted or the step connections of the `.ga` in the export. The README in
+`public-runs/` lists sources and licences.
+
 Together they are the whole chain on one analysis: **pipeline → run records →
 EVI crate → Croissant → rows back out**. Each workflow folder has a `run.sh`
 that reproduces it from nothing (it fetches ~18 MB of reads; the WDL one also

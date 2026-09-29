@@ -1,0 +1,1836 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-mirna-seq-p-8597795"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-mirna-seq-p-8597795",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Cromwell run of WDL workflow 'mirna_seq_pipeline'",
+      "description": "FAIRSCAPE EVI RO-Crate describing a Cromwell run of the WDL workflow 'mirna_seq_pipeline'",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "version": "1.0",
+      "author": "oj",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        },
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-0-5591aea"
+        },
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-1-2fc990c"
+        },
+        {
+          "@id": "ark:59853/computation-spearman-correlation-61ec833"
+        },
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        },
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        },
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-0-80ef1dd"
+        },
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-1-515c4a6"
+        },
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        },
+        {
+          "@id": "ark:59853/software-cromwell-cb587dd"
+        },
+        {
+          "@id": "ark:59853/software-cutadapt-962ce5a"
+        },
+        {
+          "@id": "ark:59853/software-spearman-correlation-3bf6a6c"
+        },
+        {
+          "@id": "ark:59853/software-star-229913e"
+        },
+        {
+          "@id": "ark:59853/software-wigtobigwig-0bb1eb9"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-trim-fastq-ab2082a"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-no5ad-fastq-711d7bf"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-short-fail-fastq-3068faf"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-no3ad-fastq-821bb41"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-trim-fastq-b6051d2"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-no5ad-fastq-db3912b"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-short-fail-fastq-b633257"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-no3ad-fastq-86035ec"
+        },
+        {
+          "@id": "ark:59853/dataset-encsr715nez-spearman-json-295f969"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-bam-e579f92"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-9c2b7a8"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-ead7d78"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-star-qc-json-d25d8c7"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-7ffc005"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-e2e6430"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-tsv-057c3d9"
+        },
+        {
+          "@id": "ark:59853/dataset-star-qc-log-125f4d8"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-2230b59"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-99421c2"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-star-qc-json-9a30945"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-691b8e3"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-bam-2d2b97e"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-fd92ce8"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-tsv-2d50a1e"
+        },
+        {
+          "@id": "ark:59853/dataset-star-qc-log-ee1e66e"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-plus-bigwi-3ae920e"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-minus-bigw-327a16d"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-plus-bigwig-53b3cad"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-minus-bigwig-17e5002"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-plus-bigwi-2240560"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-minus-bigw-2f46da7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-plus-bigwig-c5b72c0"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-minus-bigwig-f14f23b"
+        },
+        {
+          "@id": "ark:59853/dataset-encff094icj-gtf-gz-ae864cc"
+        },
+        {
+          "@id": "ark:59853/dataset-encff795aaa-tar-gz-d06aee3"
+        },
+        {
+          "@id": "ark:59853/dataset-mm10-no-alt-chrom-sizes-tsv-5313c34"
+        },
+        {
+          "@id": "ark:59853/dataset-encff463qel-txt-e8ed4c4"
+        },
+        {
+          "@id": "ark:59853/dataset-encff642ymx-txt-762b771"
+        },
+        {
+          "@id": "ark:59853/dataset-encff961hxv-fastq-gz-94b73b8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff414hiz-fastq-gz-31d3f98"
+        },
+        {
+          "@id": "ark:59853/dataset-inputs-json-6d9f4ba"
+        },
+        {
+          "@id": "ark:59853/dataset-mirna-seq-pipeline-wdl-81db306"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Cromwell workflow run of 'mirna_seq_pipeline'",
+      "description": "Execution of the WDL workflow 'mirna_seq_pipeline' by Cromwell, reconstructed post-hoc from Cromwell's run metadata by cromwell-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T04:50:59.191Z",
+      "command": "cromwell run mirna_seq_pipeline.wdl",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        },
+        {
+          "@id": "ark:59853/software-cromwell-cb587dd"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff094icj-gtf-gz-ae864cc"
+        },
+        {
+          "@id": "ark:59853/dataset-encff795aaa-tar-gz-d06aee3"
+        },
+        {
+          "@id": "ark:59853/dataset-mm10-no-alt-chrom-sizes-tsv-5313c34"
+        },
+        {
+          "@id": "ark:59853/dataset-encff463qel-txt-e8ed4c4"
+        },
+        {
+          "@id": "ark:59853/dataset-encff642ymx-txt-762b771"
+        },
+        {
+          "@id": "ark:59853/dataset-encff961hxv-fastq-gz-94b73b8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff414hiz-fastq-gz-31d3f98"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-no3ad-fastq-821bb41"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-no3ad-fastq-86035ec"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-no5ad-fastq-711d7bf"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-no5ad-fastq-db3912b"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-short-fail-fastq-3068faf"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-short-fail-fastq-b633257"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-trim-fastq-ab2082a"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-trim-fastq-b6051d2"
+        },
+        {
+          "@id": "ark:59853/dataset-encsr715nez-spearman-json-295f969"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-bam-e579f92"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-bam-2d2b97e"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-e2e6430"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-fd92ce8"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-7ffc005"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-691b8e3"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-ead7d78"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-99421c2"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-9c2b7a8"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-2230b59"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-star-qc-json-d25d8c7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-star-qc-json-9a30945"
+        },
+        {
+          "@id": "ark:59853/dataset-star-qc-log-125f4d8"
+        },
+        {
+          "@id": "ark:59853/dataset-star-qc-log-ee1e66e"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-tsv-057c3d9"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-tsv-2d50a1e"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-minus-bigwig-17e5002"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-minus-bigwig-f14f23b"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-minus-bigw-327a16d"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-minus-bigw-2f46da7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-plus-bigwig-53b3cad"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-plus-bigwig-c5b72c0"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-plus-bigwi-3ae920e"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-plus-bigwi-2240560"
+        }
+      ],
+      "cromwellVersion": "42",
+      "cromwellWorkflowId": "ff2a61b1-8708-407f-a075-6a262d7d1ca0",
+      "startTime": "2019-07-14T04:50:59.191Z",
+      "endTime": "2019-07-14T05:41:26.822Z"
+    },
+    {
+      "@id": "ark:59853/computation-cutadapt-shard-0-5591aea",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "cutadapt (shard=0)",
+      "description": "Cromwell call of WDL task 'cutadapt', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T04:51:03.362Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-cutadapt-962ce5a"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff961hxv-fastq-gz-94b73b8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff642ymx-txt-762b771"
+        },
+        {
+          "@id": "ark:59853/dataset-encff463qel-txt-e8ed4c4"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-no3ad-fastq-821bb41"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-no5ad-fastq-711d7bf"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-short-fail-fastq-3068faf"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-trim-fastq-ab2082a"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "cutadapt \\\n    -a file:/cromwell_root/encode-processing/caper_tmp/meenakshi/ca31b14d4535436a9d7959bdcf77e706/ENCFF463QEL.txt \\\n    -e 0.25 \\\n    --match-read-wildcards \\\n    --untrimmed-output=rep1ENCSR715NEZ_NO3AD.fastq \\\n    /cromwell_root/encode-processing/caper_tmp/meenakshi/encode-public/2017/06/29/5e59f7f5-02aa-482a-bb3e-7e49ab8828e8/ENCFF961HXV.fastq.gz \\\n    | cutadapt \\\n    -e 0.34 \\\n    --match-read-wildcards \\\n    --no-indels \\\n    -m 15 \\\n    -O 6 \\\n    -n 1 \\\n    -g file:/cromwell_root/encode-processing/caper_tmp/meenakshi/df8acfb115cb667ef5a787093c4115bd/ENCFF642YMX.txt \\\n    --untrimmed-output=rep1ENCSR715NEZ_NO5AD.fastq \\\n    --too-short-output=rep1ENCSR715NEZ_SHORT_FAIL.fastq \\\n    - > rep1ENCSR715NEZ_trim.fastq",
+      "parameter": [
+        "disk=local-disk 200 SSD",
+        "ncpus=2",
+        "output_prefix=rep1ENCSR715NEZ",
+        "ramGB=7"
+      ],
+      "startTime": "2019-07-14T04:51:03.362Z",
+      "endTime": "2019-07-14T05:05:44.812Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/computation-cutadapt-shard-1-2fc990c",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "cutadapt (shard=1)",
+      "description": "Cromwell call of WDL task 'cutadapt', scatter shard 1",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T04:51:03.362Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-cutadapt-962ce5a"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff414hiz-fastq-gz-31d3f98"
+        },
+        {
+          "@id": "ark:59853/dataset-encff642ymx-txt-762b771"
+        },
+        {
+          "@id": "ark:59853/dataset-encff463qel-txt-e8ed4c4"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-no3ad-fastq-86035ec"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-no5ad-fastq-db3912b"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-short-fail-fastq-b633257"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-trim-fastq-b6051d2"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "cutadapt \\\n    -a file:/cromwell_root/encode-processing/caper_tmp/meenakshi/ca31b14d4535436a9d7959bdcf77e706/ENCFF463QEL.txt \\\n    -e 0.25 \\\n    --match-read-wildcards \\\n    --untrimmed-output=rep2ENCSR715NEZ_NO3AD.fastq \\\n    /cromwell_root/encode-processing/caper_tmp/meenakshi/encode-public/2017/06/29/9bf53883-a8c2-404b-b9f5-59b3665ea023/ENCFF414HIZ.fastq.gz \\\n    | cutadapt \\\n    -e 0.34 \\\n    --match-read-wildcards \\\n    --no-indels \\\n    -m 15 \\\n    -O 6 \\\n    -n 1 \\\n    -g file:/cromwell_root/encode-processing/caper_tmp/meenakshi/df8acfb115cb667ef5a787093c4115bd/ENCFF642YMX.txt \\\n    --untrimmed-output=rep2ENCSR715NEZ_NO5AD.fastq \\\n    --too-short-output=rep2ENCSR715NEZ_SHORT_FAIL.fastq \\\n    - > rep2ENCSR715NEZ_trim.fastq",
+      "parameter": [
+        "disk=local-disk 200 SSD",
+        "ncpus=2",
+        "output_prefix=rep2ENCSR715NEZ",
+        "ramGB=7"
+      ],
+      "startTime": "2019-07-14T04:51:03.362Z",
+      "endTime": "2019-07-14T05:10:44.790Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/computation-spearman-correlation-61ec833",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "spearman_correlation",
+      "description": "Cromwell call of WDL task 'spearman_correlation'",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T05:34:46.989Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-spearman-correlation-3bf6a6c"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-tsv-057c3d9"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-tsv-2d50a1e"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-encsr715nez-spearman-json-295f969"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "python3 $(which calculate_correlation.py) --quants /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-ee3cac44669b7460fea102fa893f1b06/rep1ENCSR715NEZ.tsv /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-ee3cac44669b7460fea102fa893f1b06/rep2ENCSR715NEZ.tsv --output_filename ENCSR715NEZ_spearman.json",
+      "parameter": [
+        "output_filename=ENCSR715NEZ_spearman.json"
+      ],
+      "startTime": "2019-07-14T05:34:46.989Z",
+      "endTime": "2019-07-14T05:39:11.765Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/computation-star-shard-0-fd2e7d9",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "star (shard=0)",
+      "description": "Cromwell call of WDL task 'star', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T05:05:46.780Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-star-229913e"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff094icj-gtf-gz-ae864cc"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-trim-fastq-ab2082a"
+        },
+        {
+          "@id": "ark:59853/dataset-encff795aaa-tar-gz-d06aee3"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-bam-e579f92"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-e2e6430"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-7ffc005"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-ead7d78"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-9c2b7a8"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-star-qc-json-d25d8c7"
+        },
+        {
+          "@id": "ark:59853/dataset-star-qc-log-125f4d8"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-tsv-057c3d9"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "tar -xzvf /cromwell_root/encode-processing/caper_tmp/meenakshi/8d73a50a7aab6aa71cbd489cf81e26a3/ENCFF795AAA.tar.gz\ngzip -cd /cromwell_root/encode-processing/caper_tmp/meenakshi/59b8f3ac1bad56f32e98f8b6223ddc81/ENCFF094ICJ.gtf.gz > anno.gtf\nSTAR \\\n    --genomeDir out \\\n    --readFilesIn /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-0/glob-13510a96631ebcd33b0389553a698adf/rep1ENCSR715NEZ_trim.fastq \\\n    --sjdbGTFfile anno.gtf \\\n    --runThreadN 16 \\\n    --alignEndsType EndToEnd \\\n    --outFilterMismatchNmax 1 \\\n    --outFilterMultimapScoreRange 0 \\\n    --quantMode TranscriptomeSAM GeneCounts \\\n    --outReadsUnmapped Fastx \\\n    --outSAMtype BAM SortedByCoordinate \\\n    --outFilterMultimapNmax 10 \\\n    --outSAMunmapped Within \\\n    --outFilterScoreMinOverLread 0 \\\n    --outFilterMatchNminOverLread 0 \\\n    --outFilterMatchNmin 16 \\\n    --alignSJDBoverhangMin 1000 \\\n    --alignIntronMax 1 \\\n    --outWigType wiggle \\\n    --outWigStrand Stranded \\\n    --outWigNorm RPM\nmv Aligned.sortedByCoord.out.bam rep1ENCSR715NEZ.bam\nmv ReadsPerGene.out.tab rep1ENCSR715NEZ.tsv\nmv Log.final.out rep1ENCSR715NEZ.Log.final.out\npython3  $(which make_star_qc.py) --quants rep1ENCSR715NEZ.tsv \\\n                                  --star_log rep1ENCSR715NEZ.Log.final.out \\\n                                  --output_filename rep1ENCSR715NEZ_star_qc.json",
+      "parameter": [
+        "disk=local-disk 200 SSD",
+        "ncpus=16",
+        "output_prefix=rep1ENCSR715NEZ",
+        "ramGB=60"
+      ],
+      "startTime": "2019-07-14T05:05:46.780Z",
+      "endTime": "2019-07-14T05:28:36.059Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/computation-star-shard-1-bd57789",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "star (shard=1)",
+      "description": "Cromwell call of WDL task 'star', scatter shard 1",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T05:10:46.649Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-star-229913e"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff094icj-gtf-gz-ae864cc"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-trim-fastq-b6051d2"
+        },
+        {
+          "@id": "ark:59853/dataset-encff795aaa-tar-gz-d06aee3"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-bam-2d2b97e"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-fd92ce8"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-691b8e3"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-99421c2"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-2230b59"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-star-qc-json-9a30945"
+        },
+        {
+          "@id": "ark:59853/dataset-star-qc-log-ee1e66e"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-tsv-2d50a1e"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "tar -xzvf /cromwell_root/encode-processing/caper_tmp/meenakshi/8d73a50a7aab6aa71cbd489cf81e26a3/ENCFF795AAA.tar.gz\ngzip -cd /cromwell_root/encode-processing/caper_tmp/meenakshi/59b8f3ac1bad56f32e98f8b6223ddc81/ENCFF094ICJ.gtf.gz > anno.gtf\nSTAR \\\n    --genomeDir out \\\n    --readFilesIn /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-1/glob-13510a96631ebcd33b0389553a698adf/rep2ENCSR715NEZ_trim.fastq \\\n    --sjdbGTFfile anno.gtf \\\n    --runThreadN 16 \\\n    --alignEndsType EndToEnd \\\n    --outFilterMismatchNmax 1 \\\n    --outFilterMultimapScoreRange 0 \\\n    --quantMode TranscriptomeSAM GeneCounts \\\n    --outReadsUnmapped Fastx \\\n    --outSAMtype BAM SortedByCoordinate \\\n    --outFilterMultimapNmax 10 \\\n    --outSAMunmapped Within \\\n    --outFilterScoreMinOverLread 0 \\\n    --outFilterMatchNminOverLread 0 \\\n    --outFilterMatchNmin 16 \\\n    --alignSJDBoverhangMin 1000 \\\n    --alignIntronMax 1 \\\n    --outWigType wiggle \\\n    --outWigStrand Stranded \\\n    --outWigNorm RPM\nmv Aligned.sortedByCoord.out.bam rep2ENCSR715NEZ.bam\nmv ReadsPerGene.out.tab rep2ENCSR715NEZ.tsv\nmv Log.final.out rep2ENCSR715NEZ.Log.final.out\npython3  $(which make_star_qc.py) --quants rep2ENCSR715NEZ.tsv \\\n                                  --star_log rep2ENCSR715NEZ.Log.final.out \\\n                                  --output_filename rep2ENCSR715NEZ_star_qc.json",
+      "parameter": [
+        "disk=local-disk 200 SSD",
+        "ncpus=16",
+        "output_prefix=rep2ENCSR715NEZ",
+        "ramGB=60"
+      ],
+      "startTime": "2019-07-14T05:10:46.649Z",
+      "endTime": "2019-07-14T05:34:44.789Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/computation-wigtobigwig-shard-0-80ef1dd",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "wigtobigwig (shard=0)",
+      "description": "Cromwell call of WDL task 'wigtobigwig', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T05:28:37.750Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-wigtobigwig-0bb1eb9"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-mm10-no-alt-chrom-sizes-tsv-5313c34"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-e2e6430"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-7ffc005"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-ead7d78"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-9c2b7a8"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-minus-bigwig-17e5002"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-minus-bigw-327a16d"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-plus-bigwig-53b3cad"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-plus-bigwi-3ae920e"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "wigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-41773c7ab111b23d6eb594bba78fa1d9/Signal.UniqueMultiple.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.all.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-95ad94f4655a5da1faa51c905e436322/Signal.UniqueMultiple.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.all.minus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-34e0341cc922c3159cacc690d41b117b/Signal.Unique.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.unique.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-581651af3e8d85ac9aecfba9cf6eaea5/Signal.Unique.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.unique.minus.bigWig",
+      "parameter": [
+        "disk=local-disk 200 SSD",
+        "ncpus=2",
+        "output_prefix=rep1ENCSR715NEZ",
+        "ramGB=7"
+      ],
+      "startTime": "2019-07-14T05:28:37.750Z",
+      "endTime": "2019-07-14T05:34:44.788Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/computation-wigtobigwig-shard-1-515c4a6",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "wigtobigwig (shard=1)",
+      "description": "Cromwell call of WDL task 'wigtobigwig', scatter shard 1",
+      "runBy": "oj",
+      "dateCreated": "2019-07-14T05:34:45.970Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-wigtobigwig-0bb1eb9"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-mm10-no-alt-chrom-sizes-tsv-5313c34"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-fd92ce8"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str2-out-wig-691b8e3"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-99421c2"
+        },
+        {
+          "@id": "ark:59853/dataset-signal-unique-str1-out-wig-2230b59"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-minus-bigwig-f14f23b"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-minus-bigw-2f46da7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-plus-bigwig-c5b72c0"
+        },
+        {
+          "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-plus-bigwi-2240560"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+        }
+      ],
+      "command": "wigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-41773c7ab111b23d6eb594bba78fa1d9/Signal.UniqueMultiple.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.all.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-95ad94f4655a5da1faa51c905e436322/Signal.UniqueMultiple.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.all.minus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-34e0341cc922c3159cacc690d41b117b/Signal.Unique.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.unique.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-581651af3e8d85ac9aecfba9cf6eaea5/Signal.Unique.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.unique.minus.bigWig",
+      "parameter": [
+        "disk=local-disk 200 SSD",
+        "ncpus=2",
+        "output_prefix=rep2ENCSR715NEZ",
+        "ramGB=7"
+      ],
+      "startTime": "2019-07-14T05:34:45.970Z",
+      "endTime": "2019-07-14T05:41:23.771Z",
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline@sha256:0b25e3493c87cb16403bcd870b3446d2c99fae6848ebe46bd5338cec51918703"
+    },
+    {
+      "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "mirna_seq_pipeline.wdl",
+      "author": "oj",
+      "description": "WDL draft-2 workflow definition 'mirna_seq_pipeline.wdl' for this run",
+      "format": "wdl",
+      "contentUrl": "mirna_seq_pipeline.wdl"
+    },
+    {
+      "@id": "ark:59853/software-cromwell-cb587dd",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Cromwell",
+      "author": "Broad Institute",
+      "description": "Cromwell workflow execution engine (https://cromwell.readthedocs.io/)",
+      "format": "application/java-archive",
+      "version": "42",
+      "contentUrl": "https://github.com/broadinstitute/cromwell"
+    },
+    {
+      "@id": "ark:59853/software-cutadapt-962ce5a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "cutadapt",
+      "author": "oj",
+      "description": "task cutadapt {\n    File fastq\n    File five_prime_adapters\n    File three_prime_adapters\n    String output_prefix\n    Int ncpus\n    Int ramGB\n    String disk\n\n    command {\n        cutadapt \\\n            -a file:${three_prime_adapters} \\\n            -e 0.25 \\\n            --match-read-wildcards \\\n            --untrimmed-output=${output_prefix + \"_NO3AD.fastq\"} \\\n            ${fastq} \\\n            | cutadapt \\\n            -e 0.34 \\\n            --match-read-wildcards \\\n            --no-indels \\\n            -m 15 \\\n            -O 6 \\\n            -n 1 \\\n            -g file:${five_prime_adapters} \\\n            --untrimmed-output=${output_prefix + \"_NO5AD.fastq\"} \\\n            --too-short-output=${output_prefix + \"_SHORT_FAIL.fastq\"} \\\n            - > ${output_prefix + \"_trim.fastq\"}\n    }\n\n    output {\n        File no3ad_untrimmed_fastq = glob(\"*_NO3AD.fastq\")[0]\n        File no5ad_untrimmed_fastq = glob(\"*_NO5AD.fastq\")[0]\n        File too_short_fastq = glob(\"*_SHORT_FAIL.fastq\")[0]\n        File trimmed_fastq = glob(\"*_trim.fastq\")[0]\n    }\n\n    runtime {\n        cpu: ncpus\n        memory: \"${ramGB} GB\"\n        disks: disk\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "mirna_seq_pipeline.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        }
+      ],
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline:v1.0"
+    },
+    {
+      "@id": "ark:59853/software-spearman-correlation-3bf6a6c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "spearman_correlation",
+      "author": "oj",
+      "description": "task spearman_correlation {\n    Array[File] quants\n    String output_filename\n\n    command {\n        python3 $(which calculate_correlation.py) --quants ${sep=' ' quants} --output_filename ${output_filename}\n    }\n\n    output {\n        File spearman_json = glob(\"*spearman.json\")[0]\n    }\n\n    runtime {\n        cpu: 1\n        memory: \"2 GB\"\n        disks: \"local-disk 20 SSD\"\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "mirna_seq_pipeline.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        }
+      ],
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline:v1.0"
+    },
+    {
+      "@id": "ark:59853/software-star-229913e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "star",
+      "author": "oj",
+      "description": "task star {\n    File fastq\n    File index\n    File annotation\n    String output_prefix\n    Int ncpus\n    Int ramGB\n    String disk\n\n    command {\n        tar -xzvf ${index}\n        gzip -cd ${annotation} > anno.gtf\n        STAR \\\n            --genomeDir out \\\n            --readFilesIn ${fastq} \\\n            --sjdbGTFfile anno.gtf \\\n            --runThreadN ${ncpus} \\\n            --alignEndsType EndToEnd \\\n            --outFilterMismatchNmax 1 \\\n            --outFilterMultimapScoreRange 0 \\\n            --quantMode TranscriptomeSAM GeneCounts \\\n            --outReadsUnmapped Fastx \\\n            --outSAMtype BAM SortedByCoordinate \\\n            --outFilterMultimapNmax 10 \\\n            --outSAMunmapped Within \\\n            --outFilterScoreMinOverLread 0 \\\n            --outFilterMatchNminOverLread 0 \\\n            --outFilterMatchNmin 16 \\\n            --alignSJDBoverhangMin 1000 \\\n            --alignIntronMax 1 \\\n            --outWigType wiggle \\\n            --outWigStrand Stranded \\\n            --outWigNorm RPM\n        mv Aligned.sortedByCoord.out.bam ${output_prefix}.bam\n        mv ReadsPerGene.out.tab ${output_prefix}.tsv\n        mv Log.final.out ${output_prefix}.Log.final.out\n        python3  $(which make_star_qc.py) --quants ${output_prefix}.tsv \\\n                                          --star_log ${output_prefix}.Log.final.out \\\n                                          --output_filename ${output_prefix}_star_qc.json\n    }\n\n    output {\n        File bam = glob(\"${output_prefix}.bam\")[0]\n        File tsv = glob(\"*.tsv\")[0]\n        File plus_strand_all_wig = glob(\"Signal.UniqueMultiple.str1.out.wig\")[0]\n        File minus_strand_all_wig = glob(\"Signal.UniqueMultiple.str2.out.wig\")[0]\n        File plus_strand_unique_wig = glob(\"Signal.Unique.str1.out.wig\")[0]\n        File minus_strand_unique_wig = glob(\"Signal.Unique.str2.out.wig\")[0]\n        File star_qc_json = glob(\"*_star_qc.json\")[0]\n        File star_qc_log = glob(\"star_qc.log\")[0]\n    }\n\n    runtime {\n        cpu: ncpus\n        memory: \"${ramGB} GB\"\n        disks: disk\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "mirna_seq_pipeline.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        }
+      ],
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline:v1.0"
+    },
+    {
+      "@id": "ark:59853/software-wigtobigwig-0bb1eb9",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "wigtobigwig",
+      "author": "oj",
+      "description": "task wigtobigwig {\n    File plus_strand_all_wig\n    File minus_strand_all_wig\n    File plus_strand_unique_wig\n    File minus_strand_unique_wig\n    File chrom_sizes\n    String output_prefix\n    Int ncpus\n    Int ramGB\n    String disk\n\n    command {\n        wigToBigWig ${plus_strand_all_wig} ${chrom_sizes} ${output_prefix}.signal.all.plus.bigWig\n        wigToBigWig ${minus_strand_all_wig} ${chrom_sizes} ${output_prefix}.signal.all.minus.bigWig\n        wigToBigWig ${plus_strand_unique_wig} ${chrom_sizes} ${output_prefix}.signal.unique.plus.bigWig\n        wigToBigWig ${minus_strand_unique_wig} ${chrom_sizes} ${output_prefix}.signal.unique.minus.bigWig\n    }\n\n    output {\n        File plus_strand_all_bigwig = glob(\"*.signal.all.plus.bigWig\")[0]\n        File minus_strand_all_bigwig = glob(\"*.signal.all.minus.bigWig\")[0]\n        File plus_strand_unique_bigwig = glob(\"*.signal.unique.plus.bigWig\")[0]\n        File minus_strand_unique_bigwig = glob(\"*.signal.unique.minus.bigWig\")[0]\n    }\n\n    runtime {\n        cpu: ncpus\n        memory: \"${ramGB} GB\"\n        disks: disk\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "mirna_seq_pipeline.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        }
+      ],
+      "containerImage": "quay.io/encode-dcc/mirna-seq-pipeline:v1.0"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-trim-fastq-ab2082a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ_trim.fastq",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ_trim.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-0-5591aea"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-0/glob-13510a96631ebcd33b0389553a698adf/rep1ENCSR715NEZ_trim.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-no5ad-fastq-711d7bf",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ_NO5AD.fastq",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ_NO5AD.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-0-5591aea"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-0/glob-572b7543d93f95b496a2056e7f497e36/rep1ENCSR715NEZ_NO5AD.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-short-fail-fastq-3068faf",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ_SHORT_FAIL.fastq",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ_SHORT_FAIL.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-0-5591aea"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-0/glob-5d1a0338bc17768917cfb246a1d2fd6c/rep1ENCSR715NEZ_SHORT_FAIL.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-no3ad-fastq-821bb41",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ_NO3AD.fastq",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ_NO3AD.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-0-5591aea"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-0/glob-98d26fbed0c2af6137e088cfa3d900ec/rep1ENCSR715NEZ_NO3AD.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-trim-fastq-b6051d2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ_trim.fastq",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ_trim.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-1-2fc990c"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-1/glob-13510a96631ebcd33b0389553a698adf/rep2ENCSR715NEZ_trim.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-no5ad-fastq-db3912b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ_NO5AD.fastq",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ_NO5AD.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-1-2fc990c"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-1/glob-572b7543d93f95b496a2056e7f497e36/rep2ENCSR715NEZ_NO5AD.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-short-fail-fastq-b633257",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ_SHORT_FAIL.fastq",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ_SHORT_FAIL.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-1-2fc990c"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-1/glob-5d1a0338bc17768917cfb246a1d2fd6c/rep2ENCSR715NEZ_SHORT_FAIL.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-no3ad-fastq-86035ec",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ_NO3AD.fastq",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ_NO3AD.fastq' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/x-fastq",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-cutadapt-shard-1-2fc990c"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-1/glob-98d26fbed0c2af6137e088cfa3d900ec/rep2ENCSR715NEZ_NO3AD.fastq"
+    },
+    {
+      "@id": "ark:59853/dataset-encsr715nez-spearman-json-295f969",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCSR715NEZ_spearman.json",
+      "author": "oj",
+      "description": "File 'ENCSR715NEZ_spearman.json' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/json",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-spearman-correlation-61ec833"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-spearman_correlation/glob-a561370dd84a477b9f6b00e9824fbde0/ENCSR715NEZ_spearman.json"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-bam-e579f92",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ.bam",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ.bam' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/x-bam",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-0d2b4556b219bc41f9a10d12eee46cec/rep1ENCSR715NEZ.bam"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-unique-str1-out-wig-9c2b7a8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.Unique.str1.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.Unique.str1.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-34e0341cc922c3159cacc690d41b117b/Signal.Unique.str1.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-ead7d78",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.UniqueMultiple.str1.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.UniqueMultiple.str1.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-41773c7ab111b23d6eb594bba78fa1d9/Signal.UniqueMultiple.str1.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-star-qc-json-d25d8c7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ_star_qc.json",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ_star_qc.json' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/json",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-4c4d21ad2cdbd65d478f6b4b36f6c20a/rep1ENCSR715NEZ_star_qc.json"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-unique-str2-out-wig-7ffc005",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.Unique.str2.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.Unique.str2.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-581651af3e8d85ac9aecfba9cf6eaea5/Signal.Unique.str2.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-e2e6430",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.UniqueMultiple.str2.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.UniqueMultiple.str2.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-95ad94f4655a5da1faa51c905e436322/Signal.UniqueMultiple.str2.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-tsv-057c3d9",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ.tsv",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ.tsv' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-ee3cac44669b7460fea102fa893f1b06/rep1ENCSR715NEZ.tsv"
+    },
+    {
+      "@id": "ark:59853/dataset-star-qc-log-125f4d8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "star_qc.log",
+      "author": "oj",
+      "description": "File 'star_qc.log' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "log",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-0-fd2e7d9"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-fdee3fa8e419c9ae7368882e11dc0027/star_qc.log"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-unique-str1-out-wig-2230b59",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.Unique.str1.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.Unique.str1.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-34e0341cc922c3159cacc690d41b117b/Signal.Unique.str1.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-uniquemultiple-str1-out-wig-99421c2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.UniqueMultiple.str1.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.UniqueMultiple.str1.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-41773c7ab111b23d6eb594bba78fa1d9/Signal.UniqueMultiple.str1.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-star-qc-json-9a30945",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ_star_qc.json",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ_star_qc.json' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/json",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-4c4d21ad2cdbd65d478f6b4b36f6c20a/rep2ENCSR715NEZ_star_qc.json"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-unique-str2-out-wig-691b8e3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.Unique.str2.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.Unique.str2.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-581651af3e8d85ac9aecfba9cf6eaea5/Signal.Unique.str2.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-bam-2d2b97e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ.bam",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ.bam' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/x-bam",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-884b52e26475eb0e01d160f1c7e5a9b5/rep2ENCSR715NEZ.bam"
+    },
+    {
+      "@id": "ark:59853/dataset-signal-uniquemultiple-str2-out-wig-fd92ce8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "Signal.UniqueMultiple.str2.out.wig",
+      "author": "oj",
+      "description": "File 'Signal.UniqueMultiple.str2.out.wig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-95ad94f4655a5da1faa51c905e436322/Signal.UniqueMultiple.str2.out.wig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-tsv-2d50a1e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ.tsv",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ.tsv' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-ee3cac44669b7460fea102fa893f1b06/rep2ENCSR715NEZ.tsv"
+    },
+    {
+      "@id": "ark:59853/dataset-star-qc-log-ee1e66e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "star_qc.log",
+      "author": "oj",
+      "description": "File 'star_qc.log' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "log",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-star-shard-1-bd57789"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-fdee3fa8e419c9ae7368882e11dc0027/star_qc.log"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-plus-bigwi-3ae920e",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ.signal.unique.plus.bigWig",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ.signal.unique.plus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-0-80ef1dd"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-0/glob-5d1de83c72d3b961f02eb173e9f6d5a2/rep1ENCSR715NEZ.signal.unique.plus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-signal-unique-minus-bigw-327a16d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ.signal.unique.minus.bigWig",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ.signal.unique.minus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-0-80ef1dd"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-0/glob-e26cce3d0ca522acfdb935f7efeb3e0f/rep1ENCSR715NEZ.signal.unique.minus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-plus-bigwig-53b3cad",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ.signal.all.plus.bigWig",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ.signal.all.plus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-0-80ef1dd"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-0/glob-ecf13a1f988469a7767bed84843bd510/rep1ENCSR715NEZ.signal.all.plus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1encsr715nez-signal-all-minus-bigwig-17e5002",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1ENCSR715NEZ.signal.all.minus.bigWig",
+      "author": "oj",
+      "description": "File 'rep1ENCSR715NEZ.signal.all.minus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-0-80ef1dd"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-0/glob-f2920e4cd5a28e8c120bd92e7ba31ecf/rep1ENCSR715NEZ.signal.all.minus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-plus-bigwi-2240560",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ.signal.unique.plus.bigWig",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ.signal.unique.plus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-1-515c4a6"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-1/glob-5d1de83c72d3b961f02eb173e9f6d5a2/rep2ENCSR715NEZ.signal.unique.plus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-signal-unique-minus-bigw-2f46da7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ.signal.unique.minus.bigWig",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ.signal.unique.minus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-1-515c4a6"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-1/glob-e26cce3d0ca522acfdb935f7efeb3e0f/rep2ENCSR715NEZ.signal.unique.minus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-plus-bigwig-c5b72c0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ.signal.all.plus.bigWig",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ.signal.all.plus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-1-515c4a6"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-1/glob-ecf13a1f988469a7767bed84843bd510/rep2ENCSR715NEZ.signal.all.plus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep2encsr715nez-signal-all-minus-bigwig-f14f23b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep2ENCSR715NEZ.signal.all.minus.bigWig",
+      "author": "oj",
+      "description": "File 'rep2ENCSR715NEZ.signal.all.minus.bigWig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-wigtobigwig-shard-1-515c4a6"
+        }
+      ],
+      "contentUrl": "gs://encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-wigtobigwig/shard-1/glob-f2920e4cd5a28e8c120bd92e7ba31ecf/rep2ENCSR715NEZ.signal.all.minus.bigWig"
+    },
+    {
+      "@id": "ark:59853/dataset-encff094icj-gtf-gz-ae864cc",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF094ICJ.gtf.gz",
+      "author": "oj",
+      "description": "Input file 'ENCFF094ICJ.gtf.gz' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/59b8f3ac1bad56f32e98f8b6223ddc81/ENCFF094ICJ.gtf.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff795aaa-tar-gz-d06aee3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF795AAA.tar.gz",
+      "author": "oj",
+      "description": "Input file 'ENCFF795AAA.tar.gz' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/x-tar",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/8d73a50a7aab6aa71cbd489cf81e26a3/ENCFF795AAA.tar.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-mm10-no-alt-chrom-sizes-tsv-5313c34",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "mm10_no_alt.chrom.sizes.tsv",
+      "author": "oj",
+      "description": "Input file 'mm10_no_alt.chrom.sizes.tsv' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv"
+    },
+    {
+      "@id": "ark:59853/dataset-encff463qel-txt-e8ed4c4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF463QEL.txt",
+      "author": "oj",
+      "description": "Input file 'ENCFF463QEL.txt' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/ca31b14d4535436a9d7959bdcf77e706/ENCFF463QEL.txt"
+    },
+    {
+      "@id": "ark:59853/dataset-encff642ymx-txt-762b771",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF642YMX.txt",
+      "author": "oj",
+      "description": "Input file 'ENCFF642YMX.txt' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/df8acfb115cb667ef5a787093c4115bd/ENCFF642YMX.txt"
+    },
+    {
+      "@id": "ark:59853/dataset-encff961hxv-fastq-gz-94b73b8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF961HXV.fastq.gz",
+      "author": "oj",
+      "description": "Input file 'ENCFF961HXV.fastq.gz' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/encode-public/2017/06/29/5e59f7f5-02aa-482a-bb3e-7e49ab8828e8/ENCFF961HXV.fastq.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff414hiz-fastq-gz-31d3f98",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF414HIZ.fastq.gz",
+      "author": "oj",
+      "description": "Input file 'ENCFF414HIZ.fastq.gz' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [],
+      "contentUrl": "gs://encode-processing/caper_tmp/meenakshi/encode-public/2017/06/29/9bf53883-a8c2-404b-b9f5-59b3665ea023/ENCFF414HIZ.fastq.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-inputs-json-6d9f4ba",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "inputs.json",
+      "author": "oj",
+      "description": "File 'inputs.json' submitted to Cromwell for this run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/json",
+      "generatedBy": [],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        }
+      ],
+      "contentUrl": "inputs.json",
+      "contentSize": "1507"
+    },
+    {
+      "@id": "ark:59853/dataset-mirna-seq-pipeline-wdl-81db306",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "mirna_seq_pipeline.wdl",
+      "author": "oj",
+      "description": "File 'mirna_seq_pipeline.wdl' submitted to Cromwell for this run",
+      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wdl",
+      "generatedBy": [],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-mirna-seq-pipeline-wdl-8597795"
+        }
+      ],
+      "contentUrl": "mirna_seq_pipeline.wdl",
+      "contentSize": "7738"
+    }
+  ]
+}

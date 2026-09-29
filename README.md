@@ -46,6 +46,7 @@ Every format works the same way:
 | `frictionless` | a `datapackage.json` or its folder |
 | `c2m2` | a CFDE C2M2 datapackage folder |
 | `cpm` | a CPM RO-Crate folder with its PROV bundle files |
+| `python` | a run record from `track` (below) |
 
 | Export to | |
 |---|---|
@@ -54,6 +55,33 @@ Every format works the same way:
 | `wrroc` | Workflow Run RO-Crate |
 | `frictionless` | Frictionless `datapackage.json` |
 | `cpm` | PROV-JSON (or PROV-N with `--provn`) |
+
+## Tracking a Python run
+
+`track` runs a script, records the files it reads and writes, and adds the run
+to a crate directory. The crate is created on first use, and each later run is
+appended to it:
+
+```bash
+python -m fairscape_conversion.core.cli track clean.py --crate-dir my-crate -- data/raw.csv data/clean.csv
+python -m fairscape_conversion.core.cli track plot.py  --crate-dir my-crate -- data/clean.csv data/plot.png
+```
+
+The second run's input is the first run's output node, so the provenance chain
+runs through the crate. The capture covers `open`, `pathlib`, and (when
+installed) pandas, numpy and matplotlib. Use `--input FILE` for anything it
+misses and `--link-crate DIR` when inputs come from another crate.
+
+In Jupyter:
+
+```python
+%load_ext fairscape_conversion.plugins.python
+```
+```python
+%%fairscape track --crate-dir my-crate --name normalize
+df = pd.read_csv("raw.csv")
+df.to_csv("normalized.csv")
+```
 
 ## Details
 

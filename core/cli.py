@@ -22,6 +22,9 @@ identifiers (see ``core/linking.py``). ``--crate-dir DIR`` says where this
 crate's relative ``contentUrl`` values resolve. The same pass runs standalone
 over a crate already on disk with
 ``fairscape_conversion link <crate> --link-crate DIR [-o OUT]``.
+
+``track SCRIPT [options] [-- args]`` runs a Python script and adds the run to
+a crate directory (``plugins/python/track.py``; ``track --help`` for options).
 """
 
 from __future__ import annotations
@@ -56,6 +59,9 @@ def _write(path: Path, data):
 def main(argv=None):
     argv = argv if argv is not None else sys.argv[1:]
     argv = list(argv)
+    if argv and argv[0] == "track":            # own parser; script args pass through
+        from ..plugins.python.track import main as track_main
+        return track_main(argv[1:])
     provn = "--provn" in argv
     argv = [a for a in argv if a != "--provn"]
     options = {}

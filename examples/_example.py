@@ -184,3 +184,46 @@ def check_golden(result, plugin_name):
     print(f"\n{'MATCHES' if ok else 'DIFFERS FROM'} "
           f"plugins/{plugin_name}/golden.json")
     return ok
+
+
+# ------------------------------------------------ does the graph match the pipeline?
+
+
+def computation_edges(crate):
+    """The computation -> computation edges the crate implies: B depends on
+    A when B ``usedDataset`` something A ``generated``. Run-level nodes (no
+    ``isPartOf``) are skipped, so this is the step graph of the run."""
+    comps = {n["@id"]: n for n in crate["@graph"] if "Computation" in str(n.get("@type"))}
+    producer = {}
+    for c in comps.values():
+        if c.get("isPartOf"):
+            for g in c.get("generated") or []:
+                producer.setdefault(g["@id"], c["name"])
+    edges = set()
+    for c in comps.values():
+        if not c.get("isPartOf"):
+            continue
+        for u in c.get("usedDataset") or []:
+            src = producer.get(u["@id"])
+            if src and src != c["name"]:
+                edges.add((src, c["name"]))
+    return edges
+
+
+def check_pipeline(actual, expected, what, explain=()):
+    """Compare the crate's step graph with the one the workflow definition
+    says should exist. Every crate edge must be in the definition; the
+    definition may have edges the crate cannot see (``explain`` says which
+    and why — e.g. a WDL value passed as a String rather than a File)."""
+    wrong = sorted(actual - expected)
+    unseen = sorted(expected - actual)
+    unexplained = [e for e in unseen if e not in explain]
+    ok = not wrong and not unexplained
+    print(f"\n{'MATCHES' if ok else 'DIFFERS FROM'} the {what} "
+          f"({len(actual & expected)} edge(s) in both)")
+    for a, b in wrong:
+        print(f"  in the crate but not the {what}: {a} -> {b}")
+    for a, b in unseen:
+        note = explain.get((a, b)) if isinstance(explain, dict) else None
+        print(f"  in the {what} but not the crate: {a} -> {b}" + (f"  ({note})" if note else ""))
+    return ok

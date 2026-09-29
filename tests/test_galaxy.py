@@ -86,9 +86,12 @@ def test_collections_have_parts_and_a_producing_job():
     assert len(merged["hasPart"]) == 3 and merged["additionalType"] == "galaxy:list"
     merge_job = _named(crate, "__MERGE_COLLECTION__ (step 3")
     assert merged["generatedBy"] == {"@id": merge_job["@id"]}
-    assert {"@id": merged["@id"]} in merge_job["generated"]
-    members = {p["@id"] for p in merged["hasPart"]}
-    assert members <= {g["@id"] for g in merge_job["generated"]}
+    # the merge made the collection, not its members: those are the uploaded
+    # files, and one file has one producer (so no upload -> merge -> reader edge)
+    assert merge_job["generated"] == [{"@id": merged["@id"]}]
+    uploads = {n["@id"] for n in _by_kind(crate, "Computation") if n["name"].startswith("upload")}
+    members = [next(n for n in crate["@graph"] if n["@id"] == p["@id"]) for p in merged["hasPart"]]
+    assert all(m["generatedBy"]["@id"] in uploads for m in members)
     inputs = _named(crate, "hello_world")
     assert "generatedBy" not in inputs and len(inputs["hasPart"]) == 2
 
@@ -144,3 +147,52 @@ def test_galaxy_export_unsupported():
     from fairscape_conversion.plugins import galaxy
     with pytest.raises(NotImplementedError):
         galaxy.convert("export", _load("golden.json"))
+
+
+PUBLIC_RUN = Path(__file__).resolve().parents[1] / "examples" / "public-runs" / "galaxy" / "N2O-LaMnO3-Figs6.rocrate.zip"
+
+
+@pytest.mark.skipif(not PUBLIC_RUN.exists(), reason="examples/public-runs not checked out")
+def test_extract_dataset_is_pass_through():
+    """A real usegalaxy.eu run: larch_athena writes a collection, three
+    __EXTRACT_DATASET__ steps each copy one element out of it, three
+    larch_artemis steps read the copies. The copy shares the original's
+    dataset uuid, so the file has one node and one producer (athena); the
+    extract step must not claim it too, or the three extract steps would
+    appear to feed each other (each lists all four elements as inputs)."""
+    from fairscape_conversion.plugins import galaxy
+    crate = galaxy.convert("import", PUBLIC_RUN, author="test")
+    comps = {n["@id"]: n for n in _by_kind(crate, "Computation")}
+    producer = {g["@id"]: c["@id"] for c in comps.values() for g in c.get("generated") or []}
+    # one producer per dataset: no two computations list the same generated id
+    assert sum(len(c.get("generated") or []) for c in comps.values()) == len(producer)
+    extracts = [c for c in comps.values() if c["name"].startswith("__EXTRACT_DATASET__")]
+    assert len(extracts) == 3 and all(c["isPartOf"] for c in extracts)
+    assert all(not c.get("generated") for c in extracts)
+    athena = _named(crate, "larch_athena (step 2")
+    for artemis in (c for c in comps.values() if c["name"].startswith("larch_artemis")):
+        prj = [u["@id"] for u in artemis["usedDataset"] if producer.get(u["@id"]) == athena["@id"]]
+        assert len(prj) == 1                      # its Athena project file came from athena
+
+
+def test_mapped_over_steps_join_the_invocation(tmp_path):
+    """A step mapped over a collection runs one job per element; Galaxy
+    lists them under the step's implicit_collection_jobs, not its job.
+    They still belong to the step."""
+    import json as _json
+    import shutil
+    from fairscape_conversion.plugins import galaxy
+    store = tmp_path / "store"
+    shutil.copytree(STORE, store)
+    inv = _json.loads((store / "invocation_attrs.txt").read_text())
+    head = next(s for s in inv[0]["steps"] if s.get("order_index") == 5)
+    job_id = head.pop("job")["encoded_id"]
+    head["implicit_collection_jobs"] = {"encoded_id": "icj-test"}
+    (store / "invocation_attrs.txt").write_text(_json.dumps(inv))
+    (store / "implicit_collection_jobs_attrs.txt").write_text(
+        _json.dumps([{"encoded_id": "icj-test", "jobs": [job_id], "model_class": "ImplicitCollectionJobs"}]))
+    crate = galaxy.convert("import", store, author="test", crate_dir=store)
+    run = _named(crate, "Galaxy invocation of")
+    job = _named(crate, "head (step 5")
+    assert job["isPartOf"] == [{"@id": run["@id"]}]
+    assert not any(n["name"].endswith("(outside the invocation)") for n in _by_kind(crate, "Computation"))

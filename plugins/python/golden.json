@@ -1,0 +1,188 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-tracked-computations-in-demo-a7ac4bf"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-tracked-computations-in-demo-a7ac4bf",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Tracked computations in 'demo'",
+      "description": "FAIRSCAPE RO-Crate of Python runs recorded with fairscape_conversion track",
+      "keywords": [
+        "demo",
+        "computation"
+      ],
+      "version": "1.0",
+      "author": "Jane Doe",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-29T10:00:05-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-clean-a7ac4bf"
+        },
+        {
+          "@id": "ark:59853/software-clean-45a2276"
+        },
+        {
+          "@id": "ark:59853/dataset-clean-csv-64d66f1"
+        },
+        {
+          "@id": "ark:59853/dataset-raw-csv-8ab4197"
+        },
+        {
+          "@id": "ark:59853/dataset-genes-tsv-06bc9f9"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-clean-a7ac4bf",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Python run of 'clean'",
+      "description": "Execution of the Python code 'clean', recorded by fairscape_conversion track",
+      "runBy": "Jane Doe",
+      "dateCreated": "2026-09-29T10:00:00-04:00",
+      "command": "python clean.py data/raw.csv data/clean.csv --drop-na",
+      "keywords": [
+        "demo",
+        "computation"
+      ],
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-clean-45a2276"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-raw-csv-8ab4197"
+        },
+        {
+          "@id": "ark:59853/dataset-genes-tsv-06bc9f9"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-clean-csv-64d66f1"
+        }
+      ],
+      "startTime": "2026-09-29T10:00:00-04:00",
+      "endTime": "2026-09-29T10:00:05-04:00",
+      "pythonVersion": "3.11.9"
+    },
+    {
+      "@id": "ark:59853/software-clean-45a2276",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "clean.py",
+      "author": "Jane Doe",
+      "description": "Python code 'clean' executed by the tracked run",
+      "format": "text/x-python",
+      "keywords": [
+        "demo",
+        "computation"
+      ],
+      "dateModified": "2026-09-29T10:00:05-04:00",
+      "contentUrl": "software/clean-ea6559b.py"
+    },
+    {
+      "@id": "ark:59853/dataset-clean-csv-64d66f1",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "clean.csv",
+      "author": "Jane Doe",
+      "description": "File 'clean.csv' written by the Python run 'clean'",
+      "datePublished": "2026-09-29T10:00:05-04:00",
+      "keywords": [
+        "demo",
+        "computation"
+      ],
+      "format": "text/csv",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-clean-a7ac4bf"
+        }
+      ],
+      "contentUrl": "data/clean.csv",
+      "contentSize": "18"
+    },
+    {
+      "@id": "ark:59853/dataset-raw-csv-8ab4197",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "raw.csv",
+      "author": "Jane Doe",
+      "description": "Input file 'raw.csv' read by the Python run 'clean'",
+      "datePublished": "2026-09-29T10:00:05-04:00",
+      "keywords": [
+        "demo",
+        "computation"
+      ],
+      "format": "text/csv",
+      "generatedBy": [],
+      "contentUrl": "data/raw.csv",
+      "contentSize": "12"
+    },
+    {
+      "@id": "ark:59853/dataset-genes-tsv-06bc9f9",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "genes.tsv",
+      "author": "Jane Doe",
+      "description": "Input file 'genes.tsv' read by the Python run 'clean'",
+      "datePublished": "2026-09-29T10:00:05-04:00",
+      "keywords": [
+        "demo",
+        "computation"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [],
+      "localPath": "/data/reference/genes.tsv",
+      "contentSize": "2048"
+    }
+  ]
+}

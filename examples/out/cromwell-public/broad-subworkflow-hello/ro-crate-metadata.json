@@ -1,0 +1,210 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-main-workfl-3d11061"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-main-workfl-3d11061",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Cromwell run of WDL workflow 'main_workflow'",
+      "description": "FAIRSCAPE EVI RO-Crate describing a Cromwell run of the WDL workflow 'main_workflow'",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "version": "1.0",
+      "author": "oj",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-29T12:20:40.361451-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-20d43b3"
+        },
+        {
+          "@id": "ark:59853/computation-hello-a1ece25"
+        },
+        {
+          "@id": "ark:59853/software-main-workflow-wdl-3d11061"
+        },
+        {
+          "@id": "ark:59853/software-cromwell-3adfc6b"
+        },
+        {
+          "@id": "ark:59853/software-hello-ce95f64"
+        },
+        {
+          "@id": "ark:59853/dataset-main-workflow-wdl-10b849c"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-20d43b3",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Cromwell workflow run of 'main_workflow'",
+      "description": "Execution of the WDL workflow 'main_workflow' by Cromwell, reconstructed post-hoc from Cromwell's run metadata by cromwell-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2020-04-16T20:48:49.736Z",
+      "command": "cromwell run main_workflow.wdl",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-main-workflow-wdl-3d11061"
+        },
+        {
+          "@id": "ark:59853/software-cromwell-3adfc6b"
+        }
+      ],
+      "usedDataset": [],
+      "generated": [],
+      "cromwellVersion": "cromwell-version.conf-to-be-generated-by-sbt",
+      "cromwellWorkflowId": "f6cf8176-f7f9-458c-9bf7-e2b2a416e28e",
+      "startTime": "2020-04-16T20:48:49.736Z",
+      "endTime": "2020-04-16T20:51:22.877Z"
+    },
+    {
+      "@id": "ark:59853/computation-hello-a1ece25",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "hello",
+      "description": "Cromwell call of WDL task 'hello'",
+      "runBy": "oj",
+      "dateCreated": "2020-04-16T20:48:56.074Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-hello-ce95f64"
+        }
+      ],
+      "usedDataset": [],
+      "generated": [],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-20d43b3"
+        }
+      ],
+      "command": "echo \"Hello sub world!\"",
+      "parameter": [
+        "addressee=sub world"
+      ],
+      "startTime": "2020-04-16T20:48:56.074Z",
+      "endTime": "2020-04-16T20:51:18.909Z",
+      "containerImage": "ubuntu@sha256:e5dd9dbb37df5b731a6688fa49f4003359f6f126958c9c928f937bec69836320"
+    },
+    {
+      "@id": "ark:59853/software-main-workflow-wdl-3d11061",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "main_workflow.wdl",
+      "author": "oj",
+      "description": "WDL draft-2 workflow definition 'main_workflow.wdl' for this run",
+      "format": "wdl",
+      "contentUrl": "main_workflow.wdl"
+    },
+    {
+      "@id": "ark:59853/software-cromwell-3adfc6b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Cromwell",
+      "author": "Broad Institute",
+      "description": "Cromwell workflow execution engine (https://cromwell.readthedocs.io/)",
+      "format": "application/java-archive",
+      "version": "cromwell-version.conf-to-be-generated-by-sbt",
+      "contentUrl": "https://github.com/broadinstitute/cromwell"
+    },
+    {
+      "@id": "ark:59853/software-hello-ce95f64",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "hello",
+      "author": "oj",
+      "description": "WDL task 'hello' from 'main_workflow.wdl'",
+      "format": "wdl",
+      "contentUrl": "main_workflow.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-main-workflow-wdl-3d11061"
+        }
+      ],
+      "containerImage": "ubuntu:latest"
+    },
+    {
+      "@id": "ark:59853/dataset-main-workflow-wdl-10b849c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "main_workflow.wdl",
+      "author": "oj",
+      "description": "File 'main_workflow.wdl' submitted to Cromwell for this run",
+      "datePublished": "2026-09-29T12:20:40.361451-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wdl",
+      "generatedBy": [],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-main-workflow-wdl-3d11061"
+        }
+      ],
+      "contentUrl": "main_workflow.wdl",
+      "contentSize": "209"
+    }
+  ]
+}

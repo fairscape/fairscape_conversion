@@ -202,7 +202,17 @@ def job_used_datasets(value, rule, ctx):
 
 
 def job_generated(value, rule, ctx):
+    """What this job made — and only what it made *first*. A Galaxy job whose
+    output HDA is a copy of a dataset another job already produced (the
+    ``__EXTRACT_DATASET__`` tool copies one element out of a collection, and
+    the copy shares the original's dataset uuid) is pass-through: the file's
+    single producer is the earlier job, which is what ``produced_by`` (first
+    job wins, jobs in creation order) already records for the Dataset node's
+    ``generatedBy``. Listing the copy here too would give one file two
+    producers and every later reader of it a spurious edge to this job."""
     job = ctx.node
+    mine = _guid(ctx, "job:" + job["encoded_id"])
+    produced_by = ctx.extras["produced_by"]
     arks = [dataset_ark(ctx, d) for d in job["outputs"]]
     arks += [collection_ark(ctx, c) for c in job["output_collections"]]
     # a collection-producing job also made the elements it lists
@@ -210,6 +220,7 @@ def job_generated(value, rule, ctx):
         for element in ctx.extras["by_collection"].get(c, {}).get("elements", []):
             if element.get("dataset"):
                 arks.append(dataset_ark(ctx, element["dataset"]))
+    arks = [a for a in arks if produced_by.get(a, mine) == mine]
     return refs(_dedupe(arks)) or None
 
 

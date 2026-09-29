@@ -204,6 +204,14 @@ def read_store(store: str, crate_dir=None) -> dict:
             ga_path = os.path.join(wf_dir, preferred[0])
             workflow = workflow_record(read_ga(ga_path), ga_path, crate_dir)
 
+    # A step mapped over a collection runs one job per element; Galaxy
+    # records those under an ImplicitCollectionJobs entry rather than as
+    # the step's ``job``. Resolve the entry to its job ids so every one of
+    # them lands in the step (and so in the invocation).
+    implicit_jobs = {e["encoded_id"]: list(e.get("jobs") or [])
+                     for e in _read_json(os.path.join(store, "implicit_collection_jobs_attrs.txt"), [])
+                     if isinstance(e, dict) and e.get("encoded_id")}
+
     # steps: which job belongs to which step, and what each step put out
     steps = []
     job_step = {}
@@ -227,6 +235,8 @@ def read_store(store: str, crate_dir=None) -> dict:
         })
         if job_id:
             job_step[job_id] = index
+        for mapped in implicit_jobs.get((step.get("implicit_collection_jobs") or {}).get("encoded_id"), []):
+            job_step.setdefault(mapped, index)
 
     def labelled(entries, key):
         out = []

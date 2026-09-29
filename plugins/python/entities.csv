@@ -1,0 +1,4 @@
+source_type,discriminator,target_type,target_type_iri,level,id_strategy,id_template,id_column,keep_identifier,mint_prefix,note
+run,,Computation,prov:Activity|https://w3id.org/EVI#Computation,tool,mint,,,FALSE,computation,one per tracked run; ARK hashes the script + start time
+software,,Software,prov:Entity|https://w3id.org/EVI#Software,software,mint,,,FALSE,software,the code the run executed; ARK hashes the code so identical code is one Software
+file,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,FALSE,dataset,one per file read or written; inputs hash the path; outputs hash path + start time

@@ -1,0 +1,3912 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "annotates": {
+      "@id": "https://w3id.org/EVI#annotates",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-atac-0d9c345"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-atac-0d9c345",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "Cromwell run of WDL workflow 'atac'",
+      "description": "FAIRSCAPE EVI RO-Crate describing a Cromwell run of the WDL workflow 'atac'",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "version": "1.0",
+      "author": "oj",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        },
+        {
+          "@id": "ark:59853/computation-annot-enrich-shard-0-7ab38f1"
+        },
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        },
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        },
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        },
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        },
+        {
+          "@id": "ark:59853/computation-macs2-signal-track-shard-0-4e4f081"
+        },
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        },
+        {
+          "@id": "ark:59853/computation-qc-report-465b9e0"
+        },
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        },
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        },
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        },
+        {
+          "@id": "ark:59853/computation-spr-shard-0-8ee4851"
+        },
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        },
+        {
+          "@id": "ark:59853/software-cromwell-8ce5f84"
+        },
+        {
+          "@id": "ark:59853/software-annot-enrich-8ae5647"
+        },
+        {
+          "@id": "ark:59853/software-call-peak-1d2407d"
+        },
+        {
+          "@id": "ark:59853/software-call-peak-pr1-3aff8a8"
+        },
+        {
+          "@id": "ark:59853/software-call-peak-pr2-7fa6987"
+        },
+        {
+          "@id": "ark:59853/software-idr-pr-6ee4df0"
+        },
+        {
+          "@id": "ark:59853/software-macs2-signal-track-5f6650c"
+        },
+        {
+          "@id": "ark:59853/software-overlap-pr-0235dee"
+        },
+        {
+          "@id": "ark:59853/software-qc-report-7980322"
+        },
+        {
+          "@id": "ark:59853/software-read-genome-tsv-72e48fd"
+        },
+        {
+          "@id": "ark:59853/software-reproducibility-idr-183c5c5"
+        },
+        {
+          "@id": "ark:59853/software-reproducibility-overlap-49cd7c2"
+        },
+        {
+          "@id": "ark:59853/software-spr-f57843d"
+        },
+        {
+          "@id": "ark:59853/dataset-atac-wdl-63fae2a"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-gcs-tsv-cfcdc78"
+        },
+        {
+          "@id": "ark:59853/dataset-encff140xlu-bed-gz-b6bc44c"
+        },
+        {
+          "@id": "ark:59853/dataset-encff212uav-bed-gz-47e921a"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-dnase-avg-fseq-signal-formatted-txt-47c91f5"
+        },
+        {
+          "@id": "ark:59853/dataset-encff110mcl-tar-gz-d01333d"
+        },
+        {
+          "@id": "ark:59853/dataset-encff304xex-bed-gz-be835c6"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-dnase-avg-fseq-signal-metadata-txt-2d2a243"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-celltype-compare-subsample-bed-gz-2bc908a"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-496ae90"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-02878d8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff766fgl-bed-gz-7de42b8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-96a8e73"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-annot-enrich-qc-66b06a6"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-544ec1f"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-f977493"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-9203131"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-frip-q-658c615"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-narrowpeak-g-6936213"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-77d9e4a"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-num-pe-5d54efd"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-086246b"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-c406d63"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-042c910"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-6b0d933"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-da442d7"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-74a2ee5"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-fr-389d303"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-narrowpe-e9731d7"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-be38747"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-nu-6c24bd8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-pe-4a8fa79"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-87b15ee"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-pe-85667c4"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-fc93000"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-cb347c0"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-089be38"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-fr-eaf2a7d"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-narrowpe-d6531a0"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-a78663c"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-nu-93ce0b0"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-pe-e6a3e57"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-a025e8d"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-pe-d2c51e7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-5a7bd90"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-9a573f5"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-bbdb09a"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-frip-a80b699"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-narrowpeak-46e9bfd"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-a2d0945"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-log-237d075"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-31fceff"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-fcfc9a4"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-8c297e6"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval-signal-bigwig-ce9e5a4"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-fc-signal-bigwig-875360a"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-8acf0c1"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-7104324"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-adc20a6"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-frip-3d69966"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-narrowpeak-f8c7979"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-b2491a7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-077ae77"
+        },
+        {
+          "@id": "ark:59853/dataset-qc-json-b66b448"
+        },
+        {
+          "@id": "ark:59853/dataset-qc-html-5d0d700"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-gz-1f7c02b"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-bb-96b0554"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-hammock-ac95c13"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-hammock-a91b72b"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-reproducibility-qc-8ef2132"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-num-peak-qc-1f9ac2b"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-starch-e3bd0c0"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-starch-86bbaf5"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-qc-ca7d302"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-gz-d0890fa"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-png-7f7bd13"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-bb-f9bb049"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-hammock-gz-e41358c"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-hammock-gz-t-9fa54ec"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-gz-36c7cc2"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-bb-086cb5f"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-ham-1279fc1"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-ham-10af99b"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-reproducibility-qc-dfb0da7"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-num-peak-qc-2f8fd0a"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-sta-fcf214c"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-starch-56b37f3"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-qc-435d4be"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-gz-6da51ce"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-pn-e9936bd"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-bb-bd4c9d7"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-hammock-efed52a"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-hammock-eedbf5d"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-tagalign-gz-610e1f3"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-tagalign-gz-800a3cb"
+        },
+        {
+          "@id": "ark:59853/dataset-inputs-json-e3c4040"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Cromwell workflow run of 'atac'",
+      "description": "Execution of the WDL workflow 'atac' by Cromwell, reconstructed post-hoc from Cromwell's run metadata by cromwell-fairscape",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T00:51:39.387Z",
+      "command": "cromwell run atac.wdl",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        },
+        {
+          "@id": "ark:59853/software-cromwell-8ce5f84"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-gcs-tsv-cfcdc78"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-qc-html-5d0d700"
+        },
+        {
+          "@id": "ark:59853/dataset-qc-json-b66b448"
+        }
+      ],
+      "cromwellVersion": "59",
+      "cromwellWorkflowId": "8e71d2e1-c751-459e-aefd-0845a9de40c2",
+      "startTime": "2024-06-10T00:51:39.387Z",
+      "endTime": "2024-06-10T01:41:53.954Z"
+    },
+    {
+      "@id": "ark:59853/computation-annot-enrich-shard-0-7ab38f1",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "annot_enrich (shard=0)",
+      "description": "Cromwell call of WDL task 'annot_enrich', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:07:47.341Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-annot-enrich-8ae5647"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff212uav-bed-gz-47e921a"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-encff140xlu-bed-gz-b6bc44c"
+        },
+        {
+          "@id": "ark:59853/dataset-encff304xex-bed-gz-be835c6"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-annot-enrich-qc-66b06a6"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\npython3 $(which encode_task_annot_enrich.py) \\\n    --ta /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz \\\n    --blacklist /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz \\\n    --dnase /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/805e179275a9c0fb7a37def40c4312d1/ENCFF304XEX.bed.gz \\\n    --prom /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/0cbd2c602ddad252bc39729fc8a29286/ENCFF140XLU.bed.gz \\\n    --enh /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/1d3aa436b05f16a509edb94789c061d3/ENCFF212UAV.bed.gz",
+      "startTime": "2024-06-10T01:07:47.341Z",
+      "endTime": "2024-06-10T01:14:31.310Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-call-peak-shard-0-af33ce7",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "call_peak (shard=0)",
+      "description": "Cromwell call of WDL task 'call_peak', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:07:45.302Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-call-peak-1d2407d"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-042c910"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-77d9e4a"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-086246b"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-544ec1f"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-9203131"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-narrowpeak-g-6936213"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-c406d63"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-frip-q-658c615"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-num-pe-5d54efd"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-f977493"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\n\nif [ 'macs2' == 'macs2' ]; then\n    python3 $(which encode_task_macs2_atac.py) \\\n        /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz \\\n        --gensz hs \\\n        --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n        --cap-num-peak 300000 \\\n        --pval-thresh 0.01 \\\n        --smooth-win 150 \\\n        --mem-gb 4.226484142243862\nfi\n\npython3 $(which encode_task_post_call_peak_atac.py) \\\n    $(ls *Peak.gz) \\\n    --ta /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz \\\n    --regex-bfilt-peak-chr-name 'chr[\\dXY]+' \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n    --peak-type narrowPeak \\\n    --blacklist /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "mem_factor=4.0",
+        "cap_num_peak=300000",
+        "input_file_size_gb=0.05662103556096554",
+        "time_hr=24",
+        "pval_thresh=0.01",
+        "disk_factor=30.0",
+        "disk_gb=22",
+        "gensz=hs",
+        "regex_bfilt_peak_chr_name=chr[\\dXY]+",
+        "cpu=2",
+        "mem_gb=4.226484142243862",
+        "peak_caller=macs2",
+        "smooth_win=150"
+      ],
+      "startTime": "2024-06-10T01:07:45.302Z",
+      "endTime": "2024-06-10T01:17:52.345Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "call_peak_pr1 (shard=0)",
+      "description": "Cromwell call of WDL task 'call_peak_pr1', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:07:45.302Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-call-peak-pr1-3aff8a8"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-tagalign-gz-610e1f3"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-pe-85667c4"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-be38747"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-pe-4a8fa79"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-6b0d933"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-74a2ee5"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-narrowpe-e9731d7"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-87b15ee"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-fr-389d303"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-nu-6c24bd8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-da442d7"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\n\nif [ 'macs2' == 'macs2' ]; then\n    python3 $(which encode_task_macs2_atac.py) \\\n        /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-spr/shard-0/glob-478c0ad30d0d033ce59a75ef84dab32e/ameen_2022.PC.pr1.tagAlign.gz \\\n        --gensz hs \\\n        --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n        --cap-num-peak 300000 \\\n        --pval-thresh 0.01 \\\n        --smooth-win 150 \\\n        --mem-gb 4.147524174302816\nfi\n\npython3 $(which encode_task_post_call_peak_atac.py) \\\n    $(ls *Peak.gz) \\\n    --ta /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-spr/shard-0/glob-478c0ad30d0d033ce59a75ef84dab32e/ameen_2022.PC.pr1.tagAlign.gz \\\n    --regex-bfilt-peak-chr-name 'chr[\\dXY]+' \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n    --peak-type narrowPeak \\\n    --blacklist /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "mem_factor=4.0",
+        "cap_num_peak=300000",
+        "input_file_size_gb=0.0368810435757041",
+        "time_hr=24",
+        "pval_thresh=0.01",
+        "disk_factor=30.0",
+        "disk_gb=21",
+        "gensz=hs",
+        "regex_bfilt_peak_chr_name=chr[\\dXY]+",
+        "cpu=2",
+        "mem_gb=4.147524174302816",
+        "peak_caller=macs2",
+        "smooth_win=150"
+      ],
+      "startTime": "2024-06-10T01:07:45.302Z",
+      "endTime": "2024-06-10T01:16:46.349Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "call_peak_pr2 (shard=0)",
+      "description": "Cromwell call of WDL task 'call_peak_pr2', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:07:45.303Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-call-peak-pr2-7fa6987"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-tagalign-gz-800a3cb"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-pe-d2c51e7"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-a78663c"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-pe-e6a3e57"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-fc93000"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-089be38"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-narrowpe-d6531a0"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-a025e8d"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-fr-eaf2a7d"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-nu-93ce0b0"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-cb347c0"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\n\nif [ 'macs2' == 'macs2' ]; then\n    python3 $(which encode_task_macs2_atac.py) \\\n        /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-spr/shard-0/glob-a7cc663e5a8a49cc3d9bc036f4370f1c/ameen_2022.PC.pr2.tagAlign.gz \\\n        --gensz hs \\\n        --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n        --cap-num-peak 300000 \\\n        --pval-thresh 0.01 \\\n        --smooth-win 150 \\\n        --mem-gb 4.147540554404259\nfi\n\npython3 $(which encode_task_post_call_peak_atac.py) \\\n    $(ls *Peak.gz) \\\n    --ta /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-spr/shard-0/glob-a7cc663e5a8a49cc3d9bc036f4370f1c/ameen_2022.PC.pr2.tagAlign.gz \\\n    --regex-bfilt-peak-chr-name 'chr[\\dXY]+' \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n    --peak-type narrowPeak \\\n    --blacklist /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "mem_factor=4.0",
+        "cap_num_peak=300000",
+        "input_file_size_gb=0.03688513860106468",
+        "time_hr=24",
+        "pval_thresh=0.01",
+        "disk_factor=30.0",
+        "disk_gb=21",
+        "gensz=hs",
+        "regex_bfilt_peak_chr_name=chr[\\dXY]+",
+        "cpu=2",
+        "mem_gb=4.147540554404259",
+        "peak_caller=macs2",
+        "smooth_win=150"
+      ],
+      "startTime": "2024-06-10T01:07:45.303Z",
+      "endTime": "2024-06-10T01:19:01.430Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "idr_pr (shard=0)",
+      "description": "Cromwell call of WDL task 'idr_pr', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:19:05.662Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-idr-pr-6ee4df0"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-narrowpe-d6531a0"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-narrowpe-e9731d7"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-narrowpeak-g-6936213"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-5a7bd90"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-9a573f5"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-31fceff"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-fcfc9a4"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-frip-a80b699"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-narrowpeak-46e9bfd"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-a2d0945"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-8c297e6"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-log-237d075"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-bbdb09a"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\ntouch null\npython3 $(which encode_task_idr.py) \\\n    /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pr1.pval0.01.300K.narrowPeak.gz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pr2.pval0.01.300K.narrowPeak.gz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pval0.01.300K.narrowPeak.gz \\\n    --prefix rep1-pr1_vs_rep1-pr2 \\\n    --idr-thresh 0.05 \\\n    --peak-type narrowPeak \\\n    --idr-rank p.value \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n    --blacklist /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz \\\n    --regex-bfilt-peak-chr-name 'chr[\\dXY]+' \\\n    --ta /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "prefix=rep1-pr1_vs_rep1-pr2",
+        "rank=p.value",
+        "idr_thresh=0.05",
+        "regex_bfilt_peak_chr_name=chr[\\dXY]+"
+      ],
+      "startTime": "2024-06-10T01:19:05.662Z",
+      "endTime": "2024-06-10T01:28:25.396Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-macs2-signal-track-shard-0-4e4f081",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "macs2_signal_track (shard=0)",
+      "description": "Cromwell call of WDL task 'macs2_signal_track', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:07:41.222Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-macs2-signal-track-5f6650c"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval-signal-bigwig-ce9e5a4"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-fc-signal-bigwig-875360a"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\npython3 $(which encode_task_macs2_signal_track_atac.py) \\\n    /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz \\\n    --gensz hs \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n    --pval-thresh 0.01 \\\n    --smooth-win 150 \\\n    --mem-gb 4.6794524267315865",
+      "parameter": [
+        "mem_factor=12.0",
+        "input_file_size_gb=0.05662103556096554",
+        "time_hr=24",
+        "pval_thresh=0.01",
+        "disk_factor=80.0",
+        "disk_gb=25",
+        "gensz=hs",
+        "mem_gb=4.6794524267315865",
+        "smooth_win=150"
+      ],
+      "startTime": "2024-06-10T01:07:41.222Z",
+      "endTime": "2024-06-10T01:26:46.412Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "overlap_pr (shard=0)",
+      "description": "Cromwell call of WDL task 'overlap_pr', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:19:05.662Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-overlap-pr-0235dee"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-narrowpe-d6531a0"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-narrowpe-e9731d7"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-narrowpeak-g-6936213"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-b2491a7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-8acf0c1"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-frip-3d69966"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-077ae77"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-narrowpeak-f8c7979"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-adc20a6"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-7104324"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\ntouch null \npython3 $(which encode_task_overlap.py) \\\n    /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pr1.pval0.01.300K.narrowPeak.gz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pr2.pval0.01.300K.narrowPeak.gz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pval0.01.300K.narrowPeak.gz \\\n    --prefix rep1-pr1_vs_rep1-pr2 \\\n    --peak-type narrowPeak \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv \\\n    --blacklist /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz \\\n    --nonamecheck \\\n    --regex-bfilt-peak-chr-name 'chr[\\dXY]+' \\\n    --ta /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "prefix=rep1-pr1_vs_rep1-pr2",
+        "regex_bfilt_peak_chr_name=chr[\\dXY]+"
+      ],
+      "startTime": "2024-06-10T01:19:05.662Z",
+      "endTime": "2024-06-10T01:26:16.294Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-qc-report-465b9e0",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "qc_report",
+      "description": "Cromwell call of WDL task 'qc_report'",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:34:40.392Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-qc-report-7980322"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-086246b"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-fr-389d303"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-reproducibility-qc-dfb0da7"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-frip-a80b699"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-num-peak-qc-1f9ac2b"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-reproducibility-qc-8ef2132"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-042c910"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-num-peak-qc-2f8fd0a"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-qc-ca7d302"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-annot-enrich-qc-66b06a6"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-num-pe-5d54efd"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-31fceff"
+        },
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-frip-3d69966"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-fr-eaf2a7d"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-frip-q-658c615"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-pn-e9936bd"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-qc-435d4be"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-pn-e9936bd"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-qc-json-b66b448"
+        },
+        {
+          "@id": "ark:59853/dataset-qc-html-5d0d700"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\npython3 $(which encode_task_qc_report.py) \\\n    --pipeline-ver v1.10.0 \\\n    --title 'ameen_2022.PC' \\\n    --desc 'No description' \\\n    --genome hg38 \\\n    --multimapping 4 \\\n    --paired-ends true \\\n    --pipeline-type atac \\\n    --aligner bowtie2 \\\n    --peak-caller macs2 \\\n    --cap-num-peak 300000 \\\n    --idr-thresh 0.05 \\\n    --pval-thresh 0.01 \\\n    --xcor-subsample-reads 25000000 \\\n    --frac-mito-qcs  \\\n    --samstat-qcs  \\\n    --nodup-samstat-qcs  \\\n    --dup-qcs  \\\n    --lib-complexity-qcs  \\\n    --xcor-plots  \\\n    --xcor-scores  \\\n    --idr-plots  \\\n    --idr-plots-pr /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-8da83e7748d9e54f3e082eb4aa171757/rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.png \\\n     \\\n    --jsd-qcs  \\\n     \\\n    --frip-qcs /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/ameen_2022.PC.pval0.01.300K.bfilt.frip.qc \\\n    --frip-qcs-pr1 /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/ameen_2022.PC.pr1.pval0.01.300K.bfilt.frip.qc \\\n    --frip-qcs-pr2 /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/ameen_2022.PC.pr2.pval0.01.300K.bfilt.frip.qc \\\n     \\\n     \\\n     \\\n    --frip-idr-qcs  \\\n    --frip-idr-qcs-pr /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.frip.qc \\\n     \\\n    --frip-overlap-qcs  \\\n    --frip-overlap-qcs-pr /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/rep1-pr1_vs_rep1-pr2.overlap.bfilt.frip.qc \\\n     \\\n    --idr-reproducibility-qc /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-2e0755477c7b64fb4cd35cd75c0b0f2a/idr.reproducibility.qc \\\n    --overlap-reproducibility-qc /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-2e0755477c7b64fb4cd35cd75c0b0f2a/overlap.reproducibility.qc \\\n    --annot-enrich-qcs /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-annot_enrich/shard-0/glob-5dc2759e1f2ec1b9d52ef565e3202c4e/ameen_2022.PC.annot_enrich.qc \\\n    --tss-enrich-qcs  \\\n    --tss-large-plots  \\\n    --roadmap-compare-plots  \\\n    --fraglen-dist-plots  \\\n    --fraglen-nucleosomal-qcs  \\\n    --gc-plots  \\\n    --preseq-plots  \\\n    --picard-est-lib-size-qcs  \\\n    --peak-region-size-qcs /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-9826117ee260a5b864d958fe9ca989b0/ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.qc \\\n    --peak-region-size-plots /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-e2c73ffa35e91a202da536e2007c07a4/ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.png \\\n    --num-peak-qcs /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-3b1229fa29433fa118c2c80578c3259b/ameen_2022.PC.pval0.01.300K.bfilt.num_peak.qc \\\n    --idr-opt-peak-region-size-qc /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-9826117ee260a5b864d958fe9ca989b0/idr.optimal_peak.peak_region_size.qc \\\n    --idr-opt-peak-region-size-plot /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-e2c73ffa35e91a202da536e2007c07a4/overlap.optimal_peak.peak_region_size.png \\\n    --idr-opt-num-peak-qc /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-3b1229fa29433fa118c2c80578c3259b/idr.optimal_peak.num_peak.qc \\\n    --overlap-opt-peak-region-size-qc /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-9826117ee260a5b864d958fe9ca989b0/overlap.optimal_peak.peak_region_size.qc \\\n    --overlap-opt-peak-region-size-plot /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-e2c73ffa35e91a202da536e2007c07a4/overlap.optimal_peak.peak_region_size.png \\\n    --overlap-opt-num-peak-qc /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-3b1229fa29433fa118c2c80578c3259b/overlap.optimal_peak.num_peak.qc \\\n    --out-qc-html qc.html \\\n    --out-qc-json qc.json \\",
+      "parameter": [
+        "fraglen_dist_plots=[]",
+        "frip_overlap_qcs=[]",
+        "cap_num_peak=300000",
+        "picard_est_lib_size_qcs=[]",
+        "pipeline_ver=v1.10.0",
+        "multimapping=4",
+        "description=No description",
+        "pipeline_type=atac",
+        "lib_complexity_qcs=[]",
+        "pval_thresh=0.01",
+        "dup_qcs=[]",
+        "idr_thresh=0.05",
+        "xcor_subsample_reads=25000000",
+        "roadmap_compare_plots=[]",
+        "xcor_scores=[]",
+        "gc_plots=[]",
+        "nodup_samstat_qcs=[]",
+        "aligner=bowtie2",
+        "genome=hg38",
+        "xcor_plots=[]",
+        "samstat_qcs=[]",
+        "title=ameen_2022.PC",
+        "preseq_plots=[]",
+        "peak_caller=macs2",
+        "fraglen_nucleosomal_qcs=[]",
+        "frac_mito_qcs=[]",
+        "tss_large_plots=[]",
+        "frip_idr_qcs=[]",
+        "paired_ends=[true]",
+        "tss_enrich_qcs=[]",
+        "idr_plots=[]"
+      ],
+      "startTime": "2024-06-10T01:34:40.392Z",
+      "endTime": "2024-06-10T01:41:52.341Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-read-genome-tsv-1c5a41c",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "read_genome_tsv",
+      "description": "Cromwell call of WDL task 'read_genome_tsv'",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T00:51:44.101Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-read-genome-tsv-72e48fd"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-hg38-gcs-tsv-cfcdc78"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff766fgl-bed-gz-7de42b8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff212uav-bed-gz-47e921a"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-96a8e73"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-496ae90"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-dnase-avg-fseq-signal-formatted-txt-47c91f5"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-dnase-avg-fseq-signal-metadata-txt-2d2a243"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        },
+        {
+          "@id": "ark:59853/dataset-encff110mcl-tar-gz-d01333d"
+        },
+        {
+          "@id": "ark:59853/dataset-hg38-celltype-compare-subsample-bed-gz-2bc908a"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-02878d8"
+        },
+        {
+          "@id": "ark:59853/dataset-encff140xlu-bed-gz-b6bc44c"
+        },
+        {
+          "@id": "ark:59853/dataset-encff304xex-bed-gz-be835c6"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "echo \"$(basename /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/064fc44179753a3d83d3bd56ae3aeb84/hg38.gcs.tsv)\" > genome_name\n# create empty files for all entries\ntouch ref_fa bowtie2_idx_tar chrsz gensz blacklist blacklist2\ntouch ref_mito_fa\ntouch bowtie2_mito_idx_tar\ntouch tss tss_enrich # for backward compatibility\ntouch dnase prom enh reg2map reg2map_bed roadmap_meta\ntouch mito_chr_name\ntouch regex_bfilt_peak_chr_name\n\npython <<CODE\nimport os\nwith open('/cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/064fc44179753a3d83d3bd56ae3aeb84/hg38.gcs.tsv','r') as fp:\n    for line in fp:\n        arr = line.strip('\\n').split('\\t')\n        if arr:\n            key, val = arr\n            with open(key,'w') as fp2:\n                fp2.write(val)\nCODE",
+      "startTime": "2024-06-10T00:51:44.101Z",
+      "endTime": "2024-06-10T01:07:37.290Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-reproducibility-idr-15110f7",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "reproducibility_idr",
+      "description": "Cromwell call of WDL task 'reproducibility_idr'",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:28:28.902Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-reproducibility-idr-183c5c5"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-a2d0945"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-starch-86bbaf5"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-starch-e3bd0c0"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-png-7f7bd13"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-qc-ca7d302"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-bb-f9bb049"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-bb-96b0554"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-gz-d0890fa"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-hammock-ac95c13"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-gz-1f7c02b"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-hammock-gz-e41358c"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-reproducibility-qc-8ef2132"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-hammock-a91b72b"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-hammock-gz-t-9fa54ec"
+        },
+        {
+          "@id": "ark:59853/dataset-idr-optimal-peak-num-peak-qc-1f9ac2b"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\npython3 $(which encode_task_reproducibility.py) \\\n     \\\n    --peaks-pr /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.gz \\\n     \\\n    --prefix idr \\\n    --peak-type narrowPeak \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "prefix=idr",
+        "peaks=[]"
+      ],
+      "startTime": "2024-06-10T01:28:28.902Z",
+      "endTime": "2024-06-10T01:34:37.379Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "reproducibility_overlap",
+      "description": "Cromwell call of WDL task 'reproducibility_overlap'",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T01:26:20.352Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-reproducibility-overlap-49cd7c2"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-b2491a7"
+        },
+        {
+          "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-starch-56b37f3"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-sta-fcf214c"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-pn-e9936bd"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-qc-435d4be"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-bb-bd4c9d7"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-bb-086cb5f"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-gz-6da51ce"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-ham-1279fc1"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-gz-36c7cc2"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-hammock-efed52a"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-reproducibility-qc-dfb0da7"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-ham-10af99b"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-hammock-eedbf5d"
+        },
+        {
+          "@id": "ark:59853/dataset-overlap-optimal-peak-num-peak-qc-2f8fd0a"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\npython3 $(which encode_task_reproducibility.py) \\\n     \\\n    --peaks-pr /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.gz \\\n     \\\n    --prefix overlap \\\n    --peak-type narrowPeak \\\n    --chrsz /cromwell_root/neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv",
+      "parameter": [
+        "peak_type=narrowPeak",
+        "prefix=overlap",
+        "peaks=[]"
+      ],
+      "startTime": "2024-06-10T01:26:20.352Z",
+      "endTime": "2024-06-10T01:33:25.344Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/computation-spr-shard-0-8ee4851",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "spr (shard=0)",
+      "description": "Cromwell call of WDL task 'spr', scatter shard 0",
+      "runBy": "oj",
+      "dateCreated": "2024-06-10T00:52:03.483Z",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-spr-f57843d"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr2-tagalign-gz-800a3cb"
+        },
+        {
+          "@id": "ark:59853/dataset-ameen-2022-pc-pr1-tagalign-gz-610e1f3"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-atac-212b03c"
+        }
+      ],
+      "command": "set -e\npython3 $(which encode_task_spr.py) \\\n    /cromwell_root/neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz \\\n    --pseudoreplication-random-seed 0 \\\n    --paired-end",
+      "parameter": [
+        "mem_factor=13.5",
+        "input_file_size_gb=0.05662103556096554",
+        "disk_factor=18.0",
+        "disk_gb=21",
+        "pseudoreplication_random_seed=0",
+        "paired_end=true",
+        "mem_gb=4.764383980073035"
+      ],
+      "startTime": "2024-06-10T00:52:03.483Z",
+      "endTime": "2024-06-10T00:58:55.269Z",
+      "containerImage": "encodedcc/atac-seq-pipeline@sha256:b29984294619e9c1a1a9814d6a37a375d51b05beba481302246698b4b903ee30"
+    },
+    {
+      "@id": "ark:59853/software-atac-wdl-0d9c345",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "atac.wdl",
+      "author": "oj",
+      "description": "WDL 1.0 workflow definition 'atac.wdl' for this run",
+      "format": "wdl",
+      "contentUrl": "atac.wdl"
+    },
+    {
+      "@id": "ark:59853/software-cromwell-8ce5f84",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Cromwell",
+      "author": "Broad Institute",
+      "description": "Cromwell workflow execution engine (https://cromwell.readthedocs.io/)",
+      "format": "application/java-archive",
+      "version": "59",
+      "contentUrl": "https://github.com/broadinstitute/cromwell"
+    },
+    {
+      "@id": "ark:59853/software-annot-enrich-8ae5647",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "annot_enrich",
+      "author": "oj",
+      "description": "task annot_enrich {\n    input {\n        # Fraction of Reads In Annotated Regions\n        File? ta\n        File? blacklist\n        File? dnase\n        File? prom\n        File? enh\n    }\n    command {\n        set -e\n        python3 $(which encode_task_annot_enrich.py) \\\n            ${'--ta ' + ta} \\\n            ${'--blacklist ' + blacklist} \\\n            ${'--dnase ' + dnase} \\\n            ${'--prom ' + prom} \\\n            ${'--enh ' + enh}\n    }\n    output {\n        File annot_enrich_qc = glob('*.annot_enrich.qc')[0]\n    }\n    runtime {\n        cpu : 1\n        memory : '8 GB'\n        time : 1\n        disks : 'local-disk 50 SSD'\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-call-peak-1d2407d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "call_peak",
+      "author": "oj",
+      "description": "task call_peak {\n    input {\n        String peak_caller\n        String peak_type\n\n        File? ta\n        String gensz        # Genome size (sum of entries in 2nd column of \n                            # chr. sizes file, or hs for human, ms for mouse)\n        File chrsz            # 2-col chromosome sizes file\n        Int cap_num_peak    # cap number of raw peaks called from MACS2\n        Float pval_thresh      # p.value threshold\n        Int smooth_win         # size of smoothing window\n        File? blacklist     # blacklist BED to filter raw peaks\n        String? regex_bfilt_peak_chr_name\n\n        Int cpu\n        Float mem_factor\n        Int time_hr\n        Float disk_factor\n    }\n    Float input_file_size_gb = size(ta, \"G\")\n    Float mem_gb = 4.0 + mem_factor * input_file_size_gb\n    Int disk_gb = round(20.0 + disk_factor * input_file_size_gb)\n\n    command {\n        set -e\n\n        if [ '${peak_caller}' == 'macs2' ]; then\n            python3 $(which encode_task_macs2_atac.py) \\\n                ${ta} \\\n                ${'--gensz ' + gensz} \\\n                ${'--chrsz ' + chrsz} \\\n                ${'--cap-num-peak ' + cap_num_peak} \\\n                ${'--pval-thresh '+ pval_thresh} \\\n                ${'--smooth-win '+ smooth_win} \\\n                ${'--mem-gb ' + mem_gb}\n        fi\n\n        python3 $(which encode_task_post_call_peak_atac.py) \\\n            $(ls *Peak.gz) \\\n            ${'--ta ' + ta} \\\n            ${'--regex-bfilt-peak-chr-name \\'' + regex_bfilt_peak_chr_name + '\\''} \\\n            ${'--chrsz ' + chrsz} \\\n            ${'--peak-type ' + peak_type} \\\n            ${'--blacklist ' + blacklist}\n    }\n    output {\n        File peak = glob('*[!.][!b][!f][!i][!l][!t].'+peak_type+'.gz')[0]\n        # generated by post_call_peak py\n        File bfilt_peak = glob('*.bfilt.'+peak_type+'.gz')[0]\n        File bfilt_peak_bb = glob('*.bfilt.'+peak_type+'.bb')[0]\n        File bfilt_peak_starch = glob('*.bfilt.'+peak_type+'.starch')[0]\n        File bfilt_peak_hammock = glob('*.bfilt.'+peak_type+'.hammock.gz*')[0]\n        File bfilt_peak_hammock_tbi = glob('*.bfilt.'+peak_type+'.hammock.gz*')[1]\n        File frip_qc = glob('*.frip.qc')[0]\n        File peak_region_size_qc = glob('*.peak_region_size.qc')[0]\n        File peak_region_size_plot = glob('*.peak_region_size.png')[0]\n        File num_peak_qc = glob('*.num_peak.qc')[0]\n    }\n    runtime {\n        cpu : if peak_caller == 'macs2' then 1 else cpu\n        memory : '${mem_gb} GB'\n        time : time_hr\n        disks : 'local-disk ${disk_gb} SSD'\n        preemptible: 0\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-call-peak-pr1-3aff8a8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "call_peak_pr1",
+      "author": "oj",
+      "description": "WDL task 'call_peak_pr1' from 'atac.wdl'",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-call-peak-pr2-7fa6987",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "call_peak_pr2",
+      "author": "oj",
+      "description": "WDL task 'call_peak_pr2' from 'atac.wdl'",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-idr-pr-6ee4df0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "idr_pr",
+      "author": "oj",
+      "description": "WDL task 'idr_pr' from 'atac.wdl'",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-macs2-signal-track-5f6650c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "macs2_signal_track",
+      "author": "oj",
+      "description": "task macs2_signal_track {\n    input {\n        File? ta\n        String gensz        # Genome size (sum of entries in 2nd column of \n                            # chr. sizes file, or hs for human, ms for mouse)\n        File chrsz            # 2-col chromosome sizes file\n        Float pval_thresh      # p.value threshold\n        Int smooth_win         # size of smoothing window\n\n        Float mem_factor\n        Int time_hr\n        Float disk_factor\n    }\n    Float input_file_size_gb = size(ta, \"G\")\n    Float mem_gb = 4.0 + mem_factor * input_file_size_gb\n    Int disk_gb = round(20.0 + disk_factor * input_file_size_gb)\n\n    command {\n        set -e\n        python3 $(which encode_task_macs2_signal_track_atac.py) \\\n            ${ta} \\\n            ${'--gensz '+ gensz} \\\n            ${'--chrsz ' + chrsz} \\\n            ${'--pval-thresh '+ pval_thresh} \\\n            ${'--smooth-win '+ smooth_win} \\\n            ${'--mem-gb ' + mem_gb}\n    }\n    output {\n        File pval_bw = glob('*.pval.signal.bigwig')[0]\n        File fc_bw = glob('*.fc.signal.bigwig')[0]\n    }\n    runtime {\n        cpu : 1\n        memory : '${mem_gb} GB'\n        time : time_hr\n        disks : 'local-disk ${disk_gb} SSD'\n        preemptible: 0\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-overlap-pr-0235dee",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "overlap_pr",
+      "author": "oj",
+      "description": "WDL task 'overlap_pr' from 'atac.wdl'",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-qc-report-7980322",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "qc_report",
+      "author": "oj",
+      "description": "task qc_report {\n    input {\n        String pipeline_ver\n        String title\n        String description\n        String? genome\n        # workflow params\n        Int multimapping\n        Array[Boolean] paired_ends\n        String pipeline_type\n        String aligner\n        String peak_caller\n        Int cap_num_peak\n        Float idr_thresh\n        Float pval_thresh\n        Int xcor_subsample_reads\n        # QCs\n        Array[File] frac_mito_qcs\n        Array[File] samstat_qcs\n        Array[File] nodup_samstat_qcs\n        Array[File] dup_qcs\n        Array[File] lib_complexity_qcs\n        Array[File] xcor_plots\n        Array[File] xcor_scores\n        File? jsd_plot\n        Array[File]? jsd_qcs\n        Array[File] idr_plots\n        Array[File]? idr_plots_pr\n        File? idr_plot_ppr\n        Array[File] frip_qcs\n        Array[File] frip_qcs_pr1\n        Array[File] frip_qcs_pr2\n        File? frip_qc_pooled\n        File? frip_qc_ppr1\n        File? frip_qc_ppr2\n        Array[File] frip_idr_qcs\n        Array[File]? frip_idr_qcs_pr\n        File? frip_idr_qc_ppr\n        Array[File] frip_overlap_qcs\n        Array[File]? frip_overlap_qcs_pr\n        File? frip_overlap_qc_ppr\n        File? idr_reproducibility_qc\n        File? overlap_reproducibility_qc\n\n        Array[File] annot_enrich_qcs\n        Array[File] tss_enrich_qcs\n        Array[File] tss_large_plots\n        Array[File] roadmap_compare_plots\n        Array[File] fraglen_dist_plots\n        Array[File] fraglen_nucleosomal_qcs\n        Array[File] gc_plots\n        Array[File] preseq_plots\n        Array[File] picard_est_lib_size_qcs\n\n        Array[File] peak_region_size_qcs\n        Array[File] peak_region_size_plots\n        Array[File] num_peak_qcs\n\n        File? idr_opt_peak_region_size_qc\n        File? idr_opt_peak_region_size_plot\n        File? idr_opt_num_peak_qc\n\n        File? overlap_opt_peak_region_size_qc\n        File? overlap_opt_peak_region_size_plot\n        File? overlap_opt_num_peak_qc\n\n        File? qc_json_ref\n    }\n    command {\n        set -e\n        python3 $(which encode_task_qc_report.py) \\\n            ${'--pipeline-ver ' + pipeline_ver} \\\n            ${\"--title '\" + sub(title,\"'\",\"_\") + \"'\"} \\\n            ${\"--desc '\" + sub(description,\"'\",\"_\") + \"'\"} \\\n            ${'--genome ' + genome} \\\n            ${'--multimapping ' + multimapping} \\\n            --paired-ends ${sep=' ' paired_ends} \\\n            --pipeline-type ${pipeline_type} \\\n            --aligner ${aligner} \\\n            --peak-caller ${peak_caller} \\\n            ${'--cap-num-peak ' + cap_num_peak} \\\n            --idr-thresh ${idr_thresh} \\\n            --pval-thresh ${pval_thresh} \\\n            --xcor-subsample-reads ${xcor_subsample_reads} \\\n            --frac-mito-qcs ${sep='_:_' frac_mito_qcs} \\\n            --samstat-qcs ${sep='_:_' samstat_qcs} \\\n            --nodup-samstat-qcs ${sep='_:_' nodup_samstat_qcs} \\\n            --dup-qcs ${sep='_:_' dup_qcs} \\\n            --lib-complexity-qcs ${sep='_:_' lib_complexity_qcs} \\\n            --xcor-plots ${sep='_:_' xcor_plots} \\\n            --xcor-scores ${sep='_:_' xcor_scores} \\\n            --idr-plots ${sep='_:_' idr_plots} \\\n            --idr-plots-pr ${sep='_:_' idr_plots_pr} \\\n            ${'--jsd-plot ' + jsd_plot} \\\n            --jsd-qcs ${sep='_:_' jsd_qcs} \\\n            ${'--idr-plot-ppr ' + idr_plot_ppr} \\\n            --frip-qcs ${sep='_:_' frip_qcs} \\\n            --frip-qcs-pr1 ${sep='_:_' frip_qcs_pr1} \\\n            --frip-qcs-pr2 ${sep='_:_' frip_qcs_pr2} \\\n            ${'--frip-qc-pooled ' + frip_qc_pooled} \\\n            ${'--frip-qc-ppr1 ' + frip_qc_ppr1} \\\n            ${'--frip-qc-ppr2 ' + frip_qc_ppr2} \\\n            --frip-idr-qcs ${sep='_:_' frip_idr_qcs} \\\n            --frip-idr-qcs-pr ${sep='_:_' frip_idr_qcs_pr} \\\n            ${'--frip-idr-qc-ppr ' + frip_idr_qc_ppr} \\\n            --frip-overlap-qcs ${sep='_:_' frip_overlap_qcs} \\\n            --frip-overlap-qcs-pr ${sep='_:_' frip_overlap_qcs_pr} \\\n            ${'--frip-overlap-qc-ppr ' + frip_overlap_qc_ppr} \\\n            ${'--idr-reproducibility-qc ' + idr_reproducibility_qc} \\\n            ${'--overlap-reproducibility-qc ' + overlap_reproducibility_qc} \\\n            --annot-enrich-qcs ${sep='_:_' annot_enrich_qcs} \\\n            --tss-enrich-qcs ${sep='_:_' tss_enrich_qcs} \\\n            --tss-large-plots ${sep='_:_' tss_large_plots} \\\n            --roadmap-compare-plots ${sep='_:_' roadmap_compare_plots} \\\n            --fraglen-dist-plots ${sep='_:_' fraglen_dist_plots} \\\n            --fraglen-nucleosomal-qcs ${sep='_:_' fraglen_nucleosomal_qcs} \\\n            --gc-plots ${sep='_:_' gc_plots} \\\n            --preseq-plots ${sep='_:_' preseq_plots} \\\n            --picard-est-lib-size-qcs ${sep='_:_' picard_est_lib_size_qcs} \\\n            --peak-region-size-qcs ${sep='_:_' peak_region_size_qcs} \\\n            --peak-region-size-plots ${sep='_:_' peak_region_size_plots} \\\n            --num-peak-qcs ${sep='_:_' num_peak_qcs} \\\n            ${'--idr-opt-peak-region-size-qc ' + idr_opt_peak_region_size_qc} \\\n            ${'--idr-opt-peak-region-size-plot ' + idr_opt_peak_region_size_plot} \\\n            ${'--idr-opt-num-peak-qc ' + idr_opt_num_peak_qc} \\\n            ${'--overlap-opt-peak-region-size-qc ' + overlap_opt_peak_region_size_qc} \\\n            ${'--overlap-opt-peak-region-size-plot ' + overlap_opt_peak_region_size_plot} \\\n            ${'--overlap-opt-num-peak-qc ' + overlap_opt_num_peak_qc} \\\n            --out-qc-html qc.html \\\n            --out-qc-json qc.json \\\n            ${'--qc-json-ref ' + qc_json_ref}\n    }\n    output {\n        File report = glob('*qc.html')[0]\n        File qc_json = glob('*qc.json')[0]\n        Boolean qc_json_ref_match = read_string('qc_json_ref_match.txt')=='True'\n    }\n    runtime {\n        cpu : 1\n        memory : '4 GB'\n        time : 1\n        disks : 'local-disk 50 SSD'\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-read-genome-tsv-72e48fd",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "read_genome_tsv",
+      "author": "oj",
+      "description": "task read_genome_tsv {\n    input {\n        File? genome_tsv\n        String? null_s\n    }\n    command <<<\n        echo \"$(basename ~{genome_tsv})\" > genome_name\n        # create empty files for all entries\n        touch ref_fa bowtie2_idx_tar chrsz gensz blacklist blacklist2\n        touch ref_mito_fa\n        touch bowtie2_mito_idx_tar\n        touch tss tss_enrich # for backward compatibility\n        touch dnase prom enh reg2map reg2map_bed roadmap_meta\n        touch mito_chr_name\n        touch regex_bfilt_peak_chr_name\n\n        python <<CODE\n        import os\n        with open('~{genome_tsv}','r') as fp:\n            for line in fp:\n                arr = line.strip('\\n').split('\\t')\n                if arr:\n                    key, val = arr\n                    with open(key,'w') as fp2:\n                        fp2.write(val)\n        CODE\n    >>>\n    output {\n        String? genome_name = read_string('genome_name')\n        String? ref_fa = if size('ref_fa')==0 then null_s else read_string('ref_fa')\n        String? ref_mito_fa = if size('ref_mito_fa')==0 then null_s else read_string('ref_mito_fa')\n        String? bowtie2_idx_tar = if size('bowtie2_idx_tar')==0 then null_s else read_string('bowtie2_idx_tar')\n        String? bowtie2_mito_idx_tar = if size('bowtie2_mito_idx_tar')==0 then null_s else read_string('bowtie2_mito_idx_tar')\n        String? chrsz = if size('chrsz')==0 then null_s else read_string('chrsz')\n        String? gensz = if size('gensz')==0 then null_s else read_string('gensz')\n        String? blacklist = if size('blacklist')==0 then null_s else read_string('blacklist')\n        String? blacklist2 = if size('blacklist2')==0 then null_s else read_string('blacklist2')\n        String? mito_chr_name = if size('mito_chr_name')==0 then null_s else read_string('mito_chr_name')\n        String? regex_bfilt_peak_chr_name = if size('regex_bfilt_peak_chr_name')==0 then 'chr[\\\\dXY]+'\n            else read_string('regex_bfilt_peak_chr_name')\n        String? tss = if size('tss')!=0 then read_string('tss')\n            else if size('tss_enrich')!=0 then read_string('tss_enrich') else null_s\n        String? dnase = if size('dnase')==0 then null_s else read_string('dnase')\n        String? prom = if size('prom')==0 then null_s else read_string('prom')\n        String? enh = if size('enh')==0 then null_s else read_string('enh')\n        String? reg2map = if size('reg2map')==0 then null_s else read_string('reg2map')\n        String? reg2map_bed = if size('reg2map_bed')==0 then null_s else read_string('reg2map_bed')\n        String? roadmap_meta = if size('roadmap_meta')==0 then null_s else read_string('roadmap_meta')\n    }\n    runtime {\n        maxRetries : 0\n        cpu : 1\n        memory : '2 GB'\n        time : 1\n        disks : 'local-disk 10 SSD'\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-reproducibility-idr-183c5c5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "reproducibility_idr",
+      "author": "oj",
+      "description": "WDL task 'reproducibility_idr' from 'atac.wdl'",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-reproducibility-overlap-49cd7c2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "reproducibility_overlap",
+      "author": "oj",
+      "description": "WDL task 'reproducibility_overlap' from 'atac.wdl'",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/software-spr-f57843d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "spr",
+      "author": "oj",
+      "description": "task spr {\n    input {\n        File? ta\n        Boolean paired_end\n        Int pseudoreplication_random_seed\n\n        Float mem_factor\n        Float disk_factor\n    }\n    Float input_file_size_gb = size(ta, \"G\")\n    Float mem_gb = 4.0 + mem_factor * input_file_size_gb\n    Int disk_gb = round(20.0 + disk_factor * input_file_size_gb)\n\n    command {\n        set -e\n        python3 $(which encode_task_spr.py) \\\n            ${ta} \\\n            ${'--pseudoreplication-random-seed ' + pseudoreplication_random_seed} \\\n            ${if paired_end then '--paired-end' else ''}\n    }\n    output {\n        File ta_pr1 = glob('*.pr1.tagAlign.gz')[0]\n        File ta_pr2 = glob('*.pr2.tagAlign.gz')[0]\n    }\n    runtime {\n        cpu : 1\n        memory : '${mem_gb} GB'\n        time : 1\n        disks : 'local-disk ${disk_gb} SSD'\n    }\n}",
+      "format": "wdl",
+      "contentUrl": "atac.wdl",
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "containerImage": "encodedcc/atac-seq-pipeline:v1.10.0"
+    },
+    {
+      "@id": "ark:59853/dataset-atac-wdl-63fae2a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "atac.wdl",
+      "author": "oj",
+      "description": "File 'atac.wdl' submitted to Cromwell for this run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "wdl",
+      "generatedBy": [],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "contentUrl": "atac.wdl",
+      "contentSize": "118784"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-tagalign-gz-c06ea83",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.tagAlign.gz",
+      "author": "oj",
+      "description": "Input file 'ameen_2022.PC.tagAlign.gz' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [],
+      "contentUrl": "gs://neuro-variants/data/processed/ameen_2022/tagaligns/ameen_2022.PC.tagAlign.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-hg38-gcs-tsv-cfcdc78",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hg38.gcs.tsv",
+      "author": "oj",
+      "description": "Input file 'hg38.gcs.tsv' used by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/064fc44179753a3d83d3bd56ae3aeb84/hg38.gcs.tsv"
+    },
+    {
+      "@id": "ark:59853/dataset-encff140xlu-bed-gz-b6bc44c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF140XLU.bed.gz",
+      "author": "oj",
+      "description": "File 'ENCFF140XLU.bed.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/0cbd2c602ddad252bc39729fc8a29286/ENCFF140XLU.bed.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff212uav-bed-gz-47e921a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF212UAV.bed.gz",
+      "author": "oj",
+      "description": "File 'ENCFF212UAV.bed.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/1d3aa436b05f16a509edb94789c061d3/ENCFF212UAV.bed.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-hg38-dnase-avg-fseq-signal-formatted-txt-47c91f5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hg38_dnase_avg_fseq_signal_formatted.txt.gz",
+      "author": "oj",
+      "description": "File 'hg38_dnase_avg_fseq_signal_formatted.txt.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/3b39284516e676ea52238f0636c0bbbf/hg38_dnase_avg_fseq_signal_formatted.txt.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff110mcl-tar-gz-d01333d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF110MCL.tar.gz",
+      "author": "oj",
+      "description": "File 'ENCFF110MCL.tar.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/x-tar",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/3ff4ac4c3f59d096b1a3842a182072ae/ENCFF110MCL.tar.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff304xex-bed-gz-be835c6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF304XEX.bed.gz",
+      "author": "oj",
+      "description": "File 'ENCFF304XEX.bed.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/805e179275a9c0fb7a37def40c4312d1/ENCFF304XEX.bed.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-hg38-dnase-avg-fseq-signal-metadata-txt-2d2a243",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hg38_dnase_avg_fseq_signal_metadata.txt",
+      "author": "oj",
+      "description": "File 'hg38_dnase_avg_fseq_signal_metadata.txt' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/a9745b33b4ffdd83d7d2c5a7d3c8036a/hg38_dnase_avg_fseq_signal_metadata.txt"
+    },
+    {
+      "@id": "ark:59853/dataset-grch38-ebv-chrom-sizes-tsv-3a4e683",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "GRCh38_EBV.chrom.sizes.tsv",
+      "author": "oj",
+      "description": "File 'GRCh38_EBV.chrom.sizes.tsv' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/tab-separated-values",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c52f52c7bfa357f55a39b1de7e4d0b0c/GRCh38_EBV.chrom.sizes.tsv"
+    },
+    {
+      "@id": "ark:59853/dataset-hg38-celltype-compare-subsample-bed-gz-2bc908a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "hg38_celltype_compare_subsample.bed.gz",
+      "author": "oj",
+      "description": "File 'hg38_celltype_compare_subsample.bed.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/c73f434c3fa4f3f54bc2ecad09c065c2/hg38_celltype_compare_subsample.bed.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-496ae90",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta.gz",
+      "author": "oj",
+      "description": "File 'GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/caf534ed3cf684406e731d19be272b4a/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-02878d8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "GRCh38_no_alt_analysis_set_GCA_000001405.15_mito_only_bowtie2_index.tar.gz",
+      "author": "oj",
+      "description": "File 'GRCh38_no_alt_analysis_set_GCA_000001405.15_mito_only_bowtie2_index.tar.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/x-tar",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/df5193e07055d13c48be59bacd0f56b8/GRCh38_no_alt_analysis_set_GCA_000001405.15_mito_only_bowtie2_index.tar.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff766fgl-bed-gz-7de42b8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF766FGL.bed.gz",
+      "author": "oj",
+      "description": "File 'ENCFF766FGL.bed.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f16cc7892540d7a9bc3207cc44eb8288/ENCFF766FGL.bed.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-encff356lfx-bed-gz-9a2d4e8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ENCFF356LFX.bed.gz",
+      "author": "oj",
+      "description": "File 'ENCFF356LFX.bed.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f183dcba5d34f959d8b55ed438ee2e22/ENCFF356LFX.bed.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-grch38-no-alt-analysis-set-gca-000001405-96a8e73",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "GRCh38_no_alt_analysis_set_GCA_000001405.15_mito_only.fasta.gz",
+      "author": "oj",
+      "description": "File 'GRCh38_no_alt_analysis_set_GCA_000001405.15_mito_only.fasta.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-read-genome-tsv-1c5a41c"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/.caper_tmp/f43b63a83784d3ec8055f1a22168ed89/GRCh38_no_alt_analysis_set_GCA_000001405.15_mito_only.fasta.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-annot-enrich-qc-66b06a6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.annot_enrich.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.annot_enrich.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-annot-enrich-shard-0-7ab38f1"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-annot_enrich/shard-0/glob-5dc2759e1f2ec1b9d52ef565e3202c4e/ameen_2022.PC.annot_enrich.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-544ec1f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-f977493",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-9203131",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-155eada107f68a2195912a39f5dee4bc/ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-frip-q-658c615",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.frip.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.frip.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/ameen_2022.PC.pval0.01.300K.bfilt.frip.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-narrowpeak-g-6936213",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pval0.01.300K.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-77d9e4a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-num-pe-5d54efd",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.num_peak.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.num_peak.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-3b1229fa29433fa118c2c80578c3259b/ameen_2022.PC.pval0.01.300K.bfilt.num_peak.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-086246b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-9826117ee260a5b864d958fe9ca989b0/ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-narrow-c406d63",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-c803fbc8adf0005e2a0b14b4815c0106/ameen_2022.PC.pval0.01.300K.bfilt.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval0-01-300k-bfilt-peak-r-042c910",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.png",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.png' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-shard-0-af33ce7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak/shard-0/glob-e2c73ffa35e91a202da536e2007c07a4/ameen_2022.PC.pval0.01.300K.bfilt.peak_region_size.png"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-6b0d933",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-da442d7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-74a2ee5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-155eada107f68a2195912a39f5dee4bc/ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-fr-389d303",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.frip.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.frip.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/ameen_2022.PC.pr1.pval0.01.300K.bfilt.frip.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-narrowpe-e9731d7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pr1.pval0.01.300K.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-be38747",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-nu-6c24bd8",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.num_peak.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.num_peak.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-3b1229fa29433fa118c2c80578c3259b/ameen_2022.PC.pr1.pval0.01.300K.bfilt.num_peak.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-pe-4a8fa79",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.peak_region_size.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.peak_region_size.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-9826117ee260a5b864d958fe9ca989b0/ameen_2022.PC.pr1.pval0.01.300K.bfilt.peak_region_size.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-na-87b15ee",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-c803fbc8adf0005e2a0b14b4815c0106/ameen_2022.PC.pr1.pval0.01.300K.bfilt.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-pval0-01-300k-bfilt-pe-85667c4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.pval0.01.300K.bfilt.peak_region_size.png",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.pval0.01.300K.bfilt.peak_region_size.png' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr1-shard-0-c24f453"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr1/shard-0/glob-e2c73ffa35e91a202da536e2007c07a4/ameen_2022.PC.pr1.pval0.01.300K.bfilt.peak_region_size.png"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-fc93000",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-cb347c0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-089be38",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-155eada107f68a2195912a39f5dee4bc/ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-fr-eaf2a7d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.frip.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.frip.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/ameen_2022.PC.pr2.pval0.01.300K.bfilt.frip.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-narrowpe-d6531a0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/ameen_2022.PC.pr2.pval0.01.300K.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-a78663c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-nu-93ce0b0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.num_peak.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.num_peak.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-3b1229fa29433fa118c2c80578c3259b/ameen_2022.PC.pr2.pval0.01.300K.bfilt.num_peak.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-pe-e6a3e57",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.peak_region_size.qc",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.peak_region_size.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-9826117ee260a5b864d958fe9ca989b0/ameen_2022.PC.pr2.pval0.01.300K.bfilt.peak_region_size.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-na-a025e8d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-c803fbc8adf0005e2a0b14b4815c0106/ameen_2022.PC.pr2.pval0.01.300K.bfilt.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-pval0-01-300k-bfilt-pe-d2c51e7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.pval0.01.300K.bfilt.peak_region_size.png",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.pval0.01.300K.bfilt.peak_region_size.png' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-call-peak-pr2-shard-0-76fcc4a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-call_peak_pr2/shard-0/glob-e2c73ffa35e91a202da536e2007c07a4/ameen_2022.PC.pr2.pval0.01.300K.bfilt.peak_region_size.png"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-5a7bd90",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-9a573f5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-bbdb09a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-155eada107f68a2195912a39f5dee4bc/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-frip-a80b699",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.frip.qc",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.frip.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.frip.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-narrowpeak-46e9bfd",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/rep1-pr1_vs_rep1-pr2.idr0.05.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-a2d0945",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-log-237d075",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.log",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.log' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "log",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-748df5c4b6fa48c407f98a93d42e64c6/rep1-pr1_vs_rep1-pr2.idr0.05.log"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-31fceff",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.png",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.png' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-8da83e7748d9e54f3e082eb4aa171757/rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.png"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-unthreshold-fcfc9a4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/plain",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-b34256f7f8497ceb77fad19f39663af0/rep1-pr1_vs_rep1-pr2.idr0.05.unthresholded-peaks.txt.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-idr0-05-bfilt-narro-8c297e6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-idr-pr-shard-0-b45ff6b"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-idr_pr/shard-0/glob-c803fbc8adf0005e2a0b14b4815c0106/rep1-pr1_vs_rep1-pr2.idr0.05.bfilt.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pval-signal-bigwig-ce9e5a4",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pval.signal.bigwig",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pval.signal.bigwig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-macs2-signal-track-shard-0-4e4f081"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-macs2_signal_track/shard-0/glob-7ab0340dfeb10ca109917cbdcc568548/ameen_2022.PC.pval.signal.bigwig"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-fc-signal-bigwig-875360a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.fc.signal.bigwig",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.fc.signal.bigwig' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bigwig",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-macs2-signal-track-shard-0-4e4f081"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-macs2_signal_track/shard-0/glob-8876d8ced974dc46a0c7a4fac20a3a95/ameen_2022.PC.fc.signal.bigwig"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-8acf0c1",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-7104324",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-08ed81b9c4c9ccf6c3692d9ea29b11e0/rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-adc20a6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-155eada107f68a2195912a39f5dee4bc/rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-frip-3d69966",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.bfilt.frip.qc",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.bfilt.frip.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-156b027b56a0fc9230201b265d9f4bf4/rep1-pr1_vs_rep1-pr2.overlap.bfilt.frip.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-narrowpeak-f8c7979",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-254907fcd430d7e6c9bf67ac4585adb4/rep1-pr1_vs_rep1-pr2.overlap.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-b2491a7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-2e6c87fc90e45fa5dbda88934d454cd3/rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-rep1-pr1-vs-rep1-pr2-overlap-bfilt-narro-077ae77",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-overlap-pr-shard-0-60c074a"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-overlap_pr/shard-0/glob-c803fbc8adf0005e2a0b14b4815c0106/rep1-pr1_vs_rep1-pr2.overlap.bfilt.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-qc-json-b66b448",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "qc.json",
+      "author": "oj",
+      "description": "File 'qc.json' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/json",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-qc-report-465b9e0"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-qc_report/glob-3440f922973abb7a616aaf203e0db08b/qc.json"
+    },
+    {
+      "@id": "ark:59853/dataset-qc-html-5d0d700",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "qc.html",
+      "author": "oj",
+      "description": "File 'qc.html' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "text/html",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-qc-report-465b9e0"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-qc_report/glob-eae855c82d0f7e2185388856e7b2cc7b/qc.html"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-gz-1f7c02b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-1b1244d5baf1a7d98d4b7b76d79e43bf/idr.optimal_peak.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-bb-96b0554",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-240c97f2273cc92383b551c4d2655be9/idr.optimal_peak.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-hammock-ac95c13",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.conservative_peak.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'idr.conservative_peak.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-29708b5a00e414f63a187d12af34d0d2/idr.conservative_peak.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-hammock-a91b72b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.conservative_peak.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'idr.conservative_peak.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-29708b5a00e414f63a187d12af34d0d2/idr.conservative_peak.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-reproducibility-qc-8ef2132",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.reproducibility.qc",
+      "author": "oj",
+      "description": "File 'idr.reproducibility.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-2e0755477c7b64fb4cd35cd75c0b0f2a/idr.reproducibility.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-num-peak-qc-1f9ac2b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.num_peak.qc",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.num_peak.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-3b1229fa29433fa118c2c80578c3259b/idr.optimal_peak.num_peak.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-starch-e3bd0c0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.conservative_peak.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'idr.conservative_peak.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-48f968fdbba07264a36ef0e5e4ad9da3/idr.conservative_peak.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-starch-86bbaf5",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-5b2709e8fa4f20cca33c67c963268b8c/idr.optimal_peak.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-qc-ca7d302",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.peak_region_size.qc",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.peak_region_size.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-9826117ee260a5b864d958fe9ca989b0/idr.optimal_peak.peak_region_size.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-gz-d0890fa",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.conservative_peak.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'idr.conservative_peak.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-aae3f88ec555ee05b83e37921e9eb318/idr.conservative_peak.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-peak-region-size-png-7f7bd13",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.peak_region_size.png",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.peak_region_size.png' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-e2c73ffa35e91a202da536e2007c07a4/idr.optimal_peak.peak_region_size.png"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-conservative-peak-narrowpeak-bb-f9bb049",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.conservative_peak.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'idr.conservative_peak.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-f628f97804061610489fb3df14b8b3f0/idr.conservative_peak.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-hammock-gz-e41358c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-fe7dae7ccfff8f80b0a121847139e130/idr.optimal_peak.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-idr-optimal-peak-narrowpeak-hammock-gz-t-9fa54ec",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "idr.optimal_peak.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'idr.optimal_peak.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-idr-15110f7"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_idr/glob-fe7dae7ccfff8f80b0a121847139e130/idr.optimal_peak.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-gz-36c7cc2",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-1b1244d5baf1a7d98d4b7b76d79e43bf/overlap.optimal_peak.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-bb-086cb5f",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-240c97f2273cc92383b551c4d2655be9/overlap.optimal_peak.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-ham-1279fc1",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.conservative_peak.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'overlap.conservative_peak.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-29708b5a00e414f63a187d12af34d0d2/overlap.conservative_peak.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-ham-10af99b",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.conservative_peak.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'overlap.conservative_peak.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-29708b5a00e414f63a187d12af34d0d2/overlap.conservative_peak.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-reproducibility-qc-dfb0da7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.reproducibility.qc",
+      "author": "oj",
+      "description": "File 'overlap.reproducibility.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-2e0755477c7b64fb4cd35cd75c0b0f2a/overlap.reproducibility.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-num-peak-qc-2f8fd0a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.num_peak.qc",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.num_peak.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-3b1229fa29433fa118c2c80578c3259b/overlap.optimal_peak.num_peak.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-sta-fcf214c",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.conservative_peak.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'overlap.conservative_peak.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-48f968fdbba07264a36ef0e5e4ad9da3/overlap.conservative_peak.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-starch-56b37f3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.narrowPeak.starch",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.narrowPeak.starch' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "starch",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-5b2709e8fa4f20cca33c67c963268b8c/overlap.optimal_peak.narrowPeak.starch"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-qc-435d4be",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.peak_region_size.qc",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.peak_region_size.qc' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "qc",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-9826117ee260a5b864d958fe9ca989b0/overlap.optimal_peak.peak_region_size.qc"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-gz-6da51ce",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.conservative_peak.narrowPeak.gz",
+      "author": "oj",
+      "description": "File 'overlap.conservative_peak.narrowPeak.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-aae3f88ec555ee05b83e37921e9eb318/overlap.conservative_peak.narrowPeak.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-peak-region-size-pn-e9936bd",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.peak_region_size.png",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.peak_region_size.png' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "image/png",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-e2c73ffa35e91a202da536e2007c07a4/overlap.optimal_peak.peak_region_size.png"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-conservative-peak-narrowpeak-bb-bd4c9d7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.conservative_peak.narrowPeak.bb",
+      "author": "oj",
+      "description": "File 'overlap.conservative_peak.narrowPeak.bb' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "bb",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-f628f97804061610489fb3df14b8b3f0/overlap.conservative_peak.narrowPeak.bb"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-hammock-efed52a",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.narrowPeak.hammock.gz",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.narrowPeak.hammock.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-fe7dae7ccfff8f80b0a121847139e130/overlap.optimal_peak.narrowPeak.hammock.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-overlap-optimal-peak-narrowpeak-hammock-eedbf5d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "overlap.optimal_peak.narrowPeak.hammock.gz.tbi",
+      "author": "oj",
+      "description": "File 'overlap.optimal_peak.narrowPeak.hammock.gz.tbi' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "tbi",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-reproducibility-overlap-b4aeff9"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-reproducibility_overlap/glob-fe7dae7ccfff8f80b0a121847139e130/overlap.optimal_peak.narrowPeak.hammock.gz.tbi"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr1-tagalign-gz-610e1f3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr1.tagAlign.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr1.tagAlign.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-spr-shard-0-8ee4851"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-spr/shard-0/glob-478c0ad30d0d033ce59a75ef84dab32e/ameen_2022.PC.pr1.tagAlign.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-ameen-2022-pc-pr2-tagalign-gz-800a3cb",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "ameen_2022.PC.pr2.tagAlign.gz",
+      "author": "oj",
+      "description": "File 'ameen_2022.PC.pr2.tagAlign.gz' produced by the Cromwell workflow run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "gz",
+      "generatedBy": [
+        {
+          "@id": "ark:59853/computation-spr-shard-0-8ee4851"
+        }
+      ],
+      "contentUrl": "gs://neuro-variants/data/processed/atac_pipeline_outputs/atac/8e71d2e1-c751-459e-aefd-0845a9de40c2/call-spr/shard-0/glob-a7cc663e5a8a49cc3d9bc036f4370f1c/ameen_2022.PC.pr2.tagAlign.gz"
+    },
+    {
+      "@id": "ark:59853/dataset-inputs-json-e3c4040",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "inputs.json",
+      "author": "oj",
+      "description": "File 'inputs.json' submitted to Cromwell for this run",
+      "datePublished": "2026-09-29T12:20:40.373405-04:00",
+      "keywords": [
+        "cromwell",
+        "wdl",
+        "workflow"
+      ],
+      "format": "application/json",
+      "generatedBy": [],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/software-atac-wdl-0d9c345"
+        }
+      ],
+      "contentUrl": "inputs.json",
+      "contentSize": "312"
+    }
+  ]
+}

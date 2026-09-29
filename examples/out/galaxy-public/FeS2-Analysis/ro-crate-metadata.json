@@ -1,0 +1,906 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "evi": "https://w3id.org/EVI#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "usedSoftware": {
+      "@id": "https://w3id.org/EVI#usedSoftware",
+      "@type": "@id"
+    },
+    "usedDataset": {
+      "@id": "https://w3id.org/EVI#usedDataset",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "https://w3id.org/EVI#generatedBy",
+      "@type": "@id"
+    },
+    "generated": {
+      "@id": "https://w3id.org/EVI#generated",
+      "@type": "@id"
+    },
+    "hasDistribution": {
+      "@id": "https://w3id.org/EVI#hasDistribution",
+      "@type": "@id"
+    },
+    "localPath": "https://w3id.org/ro/terms#localPath"
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      },
+      "about": {
+        "@id": "ark:59853/rocrate-fes2-analysis-fd267e8"
+      }
+    },
+    {
+      "@id": "ark:59853/rocrate-fes2-analysis-fd267e8",
+      "@type": [
+        "Dataset",
+        "https://w3id.org/EVI#ROCrate"
+      ],
+      "conformsTo": {
+        "@id": "https://w3id.org/fairscape/profile/0.1"
+      },
+      "name": "FeS2 Analysis",
+      "description": "Same as the basic example from Demeter training",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "version": "1.0",
+      "author": "Zenodo depositor",
+      "license": "https://spdx.org/licenses/CC-BY-4.0",
+      "datePublished": "2024-10-23",
+      "hasPart": [
+        {
+          "@id": "ark:59853/computation-fes2-analysis-d4aa202"
+        },
+        {
+          "@id": "ark:59853/computation-data-fetch-4207ea1"
+        },
+        {
+          "@id": "ark:59853/computation-data-fetch-3655aa4"
+        },
+        {
+          "@id": "ark:59853/computation-larch-athena-ed4d063"
+        },
+        {
+          "@id": "ark:59853/computation-larch-feff-a6f4f36"
+        },
+        {
+          "@id": "ark:59853/computation-larch-select-paths-090aa78"
+        },
+        {
+          "@id": "ark:59853/computation-larch-artemis-c448b49"
+        },
+        {
+          "@id": "ark:59853/software-fes2-analysis-1ee543d"
+        },
+        {
+          "@id": "ark:59853/software-galaxy-1e6dbeb"
+        },
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        },
+        {
+          "@id": "ark:59853/software-larch-artemis-192d1f3"
+        },
+        {
+          "@id": "ark:59853/software-larch-athena-aa43095"
+        },
+        {
+          "@id": "ark:59853/software-larch-feff-f596d70"
+        },
+        {
+          "@id": "ark:59853/software-larch-select-paths-24d202d"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-rt01-mar02-xmu-b152cf6"
+        },
+        {
+          "@id": "ark:59853/dataset-1564889-cif-6e28f62"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-plot-b1c49d7"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-athena-3920cab"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-sp-5d37a00"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-gds-7de55c0"
+        },
+        {
+          "@id": "ark:59853/dataset-fit-report-fes2-75b3470"
+        },
+        {
+          "@id": "ark:59853/dataset-rmr-fes2-7c3cea9"
+        },
+        {
+          "@id": "ark:59853/dataset-chikr-fes2-18e43c3"
+        },
+        {
+          "@id": "ark:59853/dataset-csv-summary-of-1564889-cif-92d90ae"
+        },
+        {
+          "@id": "ark:59853/dataset-feff-paths-of-1564889-cif-41395bb"
+        },
+        {
+          "@id": "ark:59853/dataset-feff-input-of-1564889-cif-ad8ede0"
+        }
+      ]
+    },
+    {
+      "@id": "ark:59853/computation-fes2-analysis-d4aa202",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "Galaxy invocation of 'FeS2 Analysis'",
+      "description": "Invocation of the Galaxy workflow 'FeS2 Analysis' (6 steps, 4 tool jobs), state 'scheduled', on Galaxy 24.1. Reconstructed from Galaxy's invocation export (model store) by fairscape_conversion.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-10-23T14:09:56",
+      "dateModified": "2024-10-23T14:09:57",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-fes2-analysis-1ee543d"
+        },
+        {
+          "@id": "ark:59853/software-galaxy-1e6dbeb"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-fes2-rt01-mar02-xmu-b152cf6"
+        },
+        {
+          "@id": "ark:59853/dataset-1564889-cif-6e28f62"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-fes2-plot-b1c49d7"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-athena-3920cab"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-sp-5d37a00"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-gds-7de55c0"
+        },
+        {
+          "@id": "ark:59853/dataset-fit-report-fes2-75b3470"
+        },
+        {
+          "@id": "ark:59853/dataset-rmr-fes2-7c3cea9"
+        },
+        {
+          "@id": "ark:59853/dataset-chikr-fes2-18e43c3"
+        }
+      ],
+      "status": "scheduled",
+      "identifier": "3138ebf3f9c1aad2"
+    },
+    {
+      "@id": "ark:59853/computation-data-fetch-4207ea1",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "upload (__DATA_FETCH__)",
+      "description": "Galaxy job running tool '__DATA_FETCH__' version 0.1.0, state 'ok'; an upload that produced an input of the invocation.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-05-30T17:37:27",
+      "command": "python '/srv/galaxy/server/data_fetch.py' --galaxy-root '/srv/galaxy/server' --datatypes-registry '/mnt/nfs/data/job_work_dir/004/4433/registry.xml' --request-version '1' --request '/mnt/nfs/data/job_work_dir/004/4433/configs/tmp8man6aoz'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-1564889-cif-6e28f62"
+        }
+      ],
+      "parameter": [
+        "file_count=1",
+        "request_version=1",
+        "request|targets_0|destination|type=hdas",
+        "request|targets_0|elements_0|name=1564889.cif",
+        "request|targets_0|elements_0|ext=auto",
+        "request|targets_0|elements_0|space_to_tab=False",
+        "request|targets_0|elements_0|to_posix_lines=True",
+        "request|targets_0|elements_0|deferred=False",
+        "request|targets_0|elements_0|src=path",
+        "request|targets_0|elements_0|in_place=False",
+        "request|targets_0|elements_0|purge_source=True",
+        "request|targets_0|elements_0|path=/mnt/nfs/data/tus/93d405fce5edcfc4f50147266e02825e",
+        "request|targets_0|elements_0|object_id=14554",
+        "request|auto_decompress=True",
+        "request|check_content=True"
+      ],
+      "status": "ok",
+      "identifier": "2029b88b74bf2376"
+    },
+    {
+      "@id": "ark:59853/computation-data-fetch-3655aa4",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "upload (__DATA_FETCH__)",
+      "description": "Galaxy job running tool '__DATA_FETCH__' version 0.1.0, state 'ok'; an upload that produced an input of the invocation.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-05-30T17:37:28",
+      "command": "python '/srv/galaxy/server/data_fetch.py' --galaxy-root '/srv/galaxy/server' --datatypes-registry '/mnt/nfs/data/job_work_dir/004/4434/registry.xml' --request-version '1' --request '/mnt/nfs/data/job_work_dir/004/4434/configs/tmp26x0tc9m'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-data-fetch-58a5c74"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-fes2-rt01-mar02-xmu-b152cf6"
+        }
+      ],
+      "parameter": [
+        "file_count=1",
+        "request_version=1",
+        "request|targets_0|destination|type=hdas",
+        "request|targets_0|elements_0|name=fes2_rt01_mar02.xmu",
+        "request|targets_0|elements_0|ext=auto",
+        "request|targets_0|elements_0|space_to_tab=False",
+        "request|targets_0|elements_0|to_posix_lines=True",
+        "request|targets_0|elements_0|deferred=False",
+        "request|targets_0|elements_0|src=path",
+        "request|targets_0|elements_0|in_place=False",
+        "request|targets_0|elements_0|purge_source=True",
+        "request|targets_0|elements_0|path=/mnt/nfs/data/tus/33df1db0c5d9a37cbb86b5ad05b5b3a8",
+        "request|targets_0|elements_0|object_id=14555",
+        "request|auto_decompress=True",
+        "request|check_content=True"
+      ],
+      "status": "ok",
+      "identifier": "c60463f2d425dc91"
+    },
+    {
+      "@id": "ark:59853/computation-larch-athena-ed4d063",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "larch_athena (step 2: toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0)",
+      "description": "Galaxy job running tool 'toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0' version 0.9.75+galaxy0, state 'ok', exit code 0; step 2 of the invocation.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-10-23T14:09:56",
+      "command": "mkdir prj plot && python '/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/a0d3b0fe0fa3/larch_athena/larch_athena.py' '/mnt/nfs/data/f/6/4/dataset_f640df2f-ce68-4309-bc83-2e052fb749f1.dat' '/mnt/nfs/data/job_work_dir/025/25310/configs/tmprygfgtsl'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-larch-athena-aa43095"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-fes2-rt01-mar02-xmu-b152cf6"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-fes2-athena-3920cab"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-plot-b1c49d7"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-fes2-analysis-d4aa202"
+        }
+      ],
+      "parameter": [
+        "merge_inputs|format|energy_column|energy_column=auto",
+        "merge_inputs|format|format=plaintext",
+        "merge_inputs|format|is_zipped|is_zipped=",
+        "merge_inputs|format|mu_column|mu_column=auto",
+        "merge_inputs|merge_inputs=true",
+        "plot_graph_0=edge",
+        "plot_graph_1=flat",
+        "plot_graph_2=dmude",
+        "processing|calibrate|calibrate=",
+        "processing|pre_edge|nnorm=3",
+        "processing|pre_edge|norm1=150.0",
+        "processing|pre_edge|norm2=850.0",
+        "processing|pre_edge|pre1=-117.0",
+        "processing|pre_edge|pre2=-30.0",
+        "processing|pre_edge|pre_edge=manual",
+        "processing|rebin=False",
+        "processing|xftf|xftf=",
+        "zip_outputs=false"
+      ],
+      "status": "ok",
+      "exitCode": 0,
+      "identifier": "b1d0f2ca5aeb2ecf"
+    },
+    {
+      "@id": "ark:59853/computation-larch-feff-a6f4f36",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "larch_feff (step 3: toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0)",
+      "description": "Galaxy job running tool 'toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0' version 0.9.75+galaxy0, state 'ok', exit code 0; step 3 of the invocation.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-10-23T14:09:56",
+      "command": "python '/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/a6bd21767730/larch_feff/larch_feff.py' '/mnt/nfs/data/0/c/0/dataset_0c058fb5-124f-4a1e-820a-643ff322c47a.dat' '/mnt/nfs/data/job_work_dir/025/25311/configs/tmpyj4oi0i8' && zip -r out.zip feff",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-larch-feff-f596d70"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-1564889-cif-6e28f62"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-feff-input-of-1564889-cif-ad8ede0"
+        },
+        {
+          "@id": "ark:59853/dataset-csv-summary-of-1564889-cif-92d90ae"
+        },
+        {
+          "@id": "ark:59853/dataset-feff-paths-of-1564889-cif-41395bb"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-fes2-analysis-d4aa202"
+        }
+      ],
+      "parameter": [
+        "format|absorbing_atom=0",
+        "format|format=cif",
+        "format|radius=4.0"
+      ],
+      "status": "ok",
+      "exitCode": 0,
+      "identifier": "35a02d80fc5ea399"
+    },
+    {
+      "@id": "ark:59853/computation-larch-select-paths-090aa78",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "larch_select_paths (step 4: toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0)",
+      "description": "Galaxy job running tool 'toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0' version 0.9.75+galaxy0, state 'ok', exit code 0; step 4 of the invocation.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-10-23T14:09:57",
+      "command": "mkdir sp && python '/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/1d08395c1a9f/larch_select_paths/larch_select_paths.py' '/mnt/nfs/data/job_work_dir/025/25312/configs/tmp9pnahw95'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-larch-select-paths-24d202d"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-csv-summary-of-1564889-cif-92d90ae"
+        },
+        {
+          "@id": "ark:59853/dataset-feff-paths-of-1564889-cif-41395bb"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-fes2-gds-7de55c0"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-sp-5d37a00"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-fes2-analysis-d4aa202"
+        }
+      ],
+      "parameter": [
+        "feff_outputs_0|selection|paths_0|deltar|value=0.0",
+        "feff_outputs_0|selection|paths_0|deltar|vary=True",
+        "feff_outputs_0|selection|paths_0|e0|value=0.0",
+        "feff_outputs_0|selection|paths_0|e0|vary=True",
+        "feff_outputs_0|selection|paths_0|id=1",
+        "feff_outputs_0|selection|paths_0|s02|value=1.0",
+        "feff_outputs_0|selection|paths_0|s02|vary=True",
+        "feff_outputs_0|selection|paths_0|sigma2|value=0.003",
+        "feff_outputs_0|selection|paths_0|sigma2|vary=True",
+        "feff_outputs_0|selection|paths_1|deltar|value=0.0",
+        "feff_outputs_0|selection|paths_1|deltar|vary=True",
+        "feff_outputs_0|selection|paths_1|e0|value=0.0",
+        "feff_outputs_0|selection|paths_1|e0|vary=True",
+        "feff_outputs_0|selection|paths_1|id=2",
+        "feff_outputs_0|selection|paths_1|s02|value=1.0",
+        "feff_outputs_0|selection|paths_1|s02|vary=True",
+        "feff_outputs_0|selection|paths_1|sigma2|value=0.003",
+        "feff_outputs_0|selection|paths_1|sigma2|vary=True",
+        "feff_outputs_0|selection|paths_2|deltar|value=0.0",
+        "feff_outputs_0|selection|paths_2|deltar|vary=True",
+        "feff_outputs_0|selection|paths_2|e0|value=0.0",
+        "feff_outputs_0|selection|paths_2|e0|vary=True",
+        "feff_outputs_0|selection|paths_2|id=3",
+        "feff_outputs_0|selection|paths_2|s02|value=1.0",
+        "feff_outputs_0|selection|paths_2|s02|vary=True",
+        "feff_outputs_0|selection|paths_2|sigma2|value=0.003",
+        "feff_outputs_0|selection|paths_2|sigma2|vary=True",
+        "feff_outputs_0|selection|selection=manual",
+        "variables|deltar|is_common=True",
+        "variables|deltar|value=0.0",
+        "variables|deltar|vary=True",
+        "variables|e0|is_common=True",
+        "variables|e0|value=0.0",
+        "variables|e0|vary=True",
+        "variables|s02|is_common=True",
+        "variables|s02|value=1.0",
+        "variables|s02|vary=True",
+        "variables|sigma2|is_common=False",
+        "variables|sigma2|value=0.003",
+        "variables|sigma2|vary=True"
+      ],
+      "status": "ok",
+      "exitCode": 0,
+      "identifier": "213104123d8e07eb"
+    },
+    {
+      "@id": "ark:59853/computation-larch-artemis-c448b49",
+      "@type": [
+        "prov:Activity",
+        "https://w3id.org/EVI#Computation"
+      ],
+      "name": "larch_artemis (step 5: toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0)",
+      "description": "Galaxy job running tool 'toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0' version 0.9.75+galaxy0, state 'ok', exit code 0; step 5 of the invocation.",
+      "runBy": "Zenodo depositor",
+      "dateCreated": "2024-10-23T14:09:57",
+      "command": "unzip '/mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat' && mkdir report rmr chikr && python '/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/2ceaa943a2ad/larch_artemis/larch_artemis.py' '/mnt/nfs/data/0/b/9/dataset_0b97bec8-4ea8-4a62-bc9d-fb03e229da8c.dat' '/mnt/nfs/data/f/0/0/dataset_f00eb10f-cf39-4a5c-a65f-f78e3ebd0600.dat' '/mnt/nfs/data/d/2/7/dataset_d27f0edf-71e5-4739-b016-770e7bcd02bb.dat' '/mnt/nfs/data/job_work_dir/025/25313/configs/tmpxjb8_dl5'",
+      "usedSoftware": [
+        {
+          "@id": "ark:59853/software-larch-artemis-192d1f3"
+        }
+      ],
+      "usedDataset": [
+        {
+          "@id": "ark:59853/dataset-fes2-athena-3920cab"
+        },
+        {
+          "@id": "ark:59853/dataset-feff-paths-of-1564889-cif-41395bb"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-gds-7de55c0"
+        },
+        {
+          "@id": "ark:59853/dataset-fes2-sp-5d37a00"
+        }
+      ],
+      "generated": [
+        {
+          "@id": "ark:59853/dataset-chikr-fes2-18e43c3"
+        },
+        {
+          "@id": "ark:59853/dataset-fit-report-fes2-75b3470"
+        },
+        {
+          "@id": "ark:59853/dataset-rmr-fes2-7c3cea9"
+        }
+      ],
+      "isPartOf": [
+        {
+          "@id": "ark:59853/computation-fes2-analysis-d4aa202"
+        }
+      ],
+      "parameter": [
+        "execution|execution=parallel",
+        "fit_vars|dk=4.0",
+        "fit_vars|fitspace=r",
+        "fit_vars|kmax=20.0",
+        "fit_vars|kmin=0.0",
+        "fit_vars|kweight=2.0",
+        "fit_vars|rmax=10.0",
+        "fit_vars|rmin=0.0",
+        "fit_vars|window=kaiser",
+        "plot_graph=true",
+        "zip_outputs=false"
+      ],
+      "status": "ok",
+      "exitCode": 0,
+      "identifier": "cf423d990ba14fcd"
+    },
+    {
+      "@id": "ark:59853/software-fes2-analysis-1ee543d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "FeS2 Analysis",
+      "description": "Galaxy workflow 'FeS2 Analysis': Same as the basic example from Demeter training. 6 steps: 2 input(s) and 4 tool step(s) (larch_athena, larch_feff, larch_select_paths, larch_artemis).",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23",
+      "format": "application/json",
+      "localPath": "6f2a09489271f4de.ga",
+      "identifier": "4bb8c79d-7d17-4b9f-a4c9-24c9a9c6b559",
+      "version": "0.1"
+    },
+    {
+      "@id": "ark:59853/software-galaxy-1e6dbeb",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "Galaxy",
+      "description": "The Galaxy platform (galaxyproject.org), which scheduled the workflow invocation and ran each tool job",
+      "version": "24.1",
+      "url": "https://galaxyproject.org",
+      "author": "The Galaxy Community",
+      "datePublished": "2024-10-23",
+      "format": "application/x-web-application"
+    },
+    {
+      "@id": "ark:59853/software-data-fetch-58a5c74",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "__DATA_FETCH__",
+      "description": "Galaxy built-in model operation '__DATA_FETCH__'",
+      "version": "0.1.0",
+      "identifier": "__DATA_FETCH__",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-larch-artemis-192d1f3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "larch_artemis",
+      "description": "Galaxy tool 'larch_artemis' from the ToolShed repository muon-spectroscopy-computational-project/larch_artemis on toolshed.g2.bx.psu.edu",
+      "version": "0.9.75+galaxy0",
+      "url": "https://toolshed.g2.bx.psu.edu/view/muon-spectroscopy-computational-project/larch_artemis/0.9.75+galaxy0",
+      "identifier": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_artemis/larch_artemis/0.9.75+galaxy0",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-larch-athena-aa43095",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "larch_athena",
+      "description": "Galaxy tool 'larch_athena' from the ToolShed repository muon-spectroscopy-computational-project/larch_athena on toolshed.g2.bx.psu.edu",
+      "version": "0.9.75+galaxy0",
+      "url": "https://toolshed.g2.bx.psu.edu/view/muon-spectroscopy-computational-project/larch_athena/0.9.75+galaxy0",
+      "identifier": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_athena/larch_athena/0.9.75+galaxy0",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-larch-feff-f596d70",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "larch_feff",
+      "description": "Galaxy tool 'larch_feff' from the ToolShed repository muon-spectroscopy-computational-project/larch_feff on toolshed.g2.bx.psu.edu",
+      "version": "0.9.75+galaxy0",
+      "url": "https://toolshed.g2.bx.psu.edu/view/muon-spectroscopy-computational-project/larch_feff/0.9.75+galaxy0",
+      "identifier": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_feff/larch_feff/0.9.75+galaxy0",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/software-larch-select-paths-24d202d",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Software"
+      ],
+      "name": "larch_select_paths",
+      "description": "Galaxy tool 'larch_select_paths' from the ToolShed repository muon-spectroscopy-computational-project/larch_select_paths on toolshed.g2.bx.psu.edu",
+      "version": "0.9.75+galaxy0",
+      "url": "https://toolshed.g2.bx.psu.edu/view/muon-spectroscopy-computational-project/larch_select_paths/0.9.75+galaxy0",
+      "identifier": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/larch_select_paths/larch_select_paths/0.9.75+galaxy0",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23",
+      "format": "application/x-galaxy-tool"
+    },
+    {
+      "@id": "ark:59853/dataset-fes2-rt01-mar02-xmu-b152cf6",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "fes2_rt01_mar02.xmu",
+      "description": "Galaxy dataset of type 'txt', 353 lines; uploaded txt file. History item #1.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "text/plain",
+      "localPath": "datasets/fes2_rt01_mar02.xmu_df0bac1ee137448a.txt",
+      "generatedBy": {
+        "@id": "ark:59853/computation-data-fetch-3655aa4"
+      },
+      "identifier": "f640df2f-ce68-4309-bc83-2e052fb749f1",
+      "additionalType": "txt"
+    },
+    {
+      "@id": "ark:59853/dataset-1564889-cif-6e28f62",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "1564889.cif",
+      "description": "Galaxy dataset of type 'cif', CIF file containing 0 structures; \nMetadata is limited as the Atomic Simulation Environment (ASE) is not installed.\nYou can still use this dataset in tools and workflows.\nFor full metadata, ask your admin to install the 'ase' Python package.. History item #2.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "chemical/x-cif",
+      "localPath": "datasets/1564889.cif_df02c7af9dfe5b62.cif",
+      "generatedBy": {
+        "@id": "ark:59853/computation-data-fetch-4207ea1"
+      },
+      "identifier": "0c058fb5-124f-4a1e-820a-643ff322c47a",
+      "additionalType": "cif"
+    },
+    {
+      "@id": "ark:59853/dataset-fes2-plot-b1c49d7",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "FeS2_plot",
+      "description": "Galaxy dataset of type 'png', 136.1 KB; \nAttempting to read from /mnt/nfs/data/f/6/4/dataset_f640df2f-ce68-4309-bc83-2e052fb749f1.dat\nRead columns: ['energy', 'xmu', 'i0']\n'energy' present in column headers\nRenaming columns to: ['energy', 'mu', 'i0']\nCannot load group.athena_params.bkg from gro. History item #4.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "image/png",
+      "localPath": "datasets/FeS2_plot_6c2ea4582a260280.png",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-athena-ed4d063"
+      },
+      "identifier": "77c5b2f3-9a04-44dd-befd-a76467d5277c",
+      "additionalType": "png"
+    },
+    {
+      "@id": "ark:59853/dataset-fes2-athena-3920cab",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "FeS2_athena",
+      "description": "Galaxy dataset of type 'prj', Athena project file of Fe K edge; atsym: Fe\nbkg_e0: 7117.0\nedge: K\nnpts: 352\nxmax: 7963.5\nxmin: 6911.8. History item #3.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "prj",
+      "localPath": "datasets/FeS2_athena_d49ffa4044c67d15.prj",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-athena-ed4d063"
+      },
+      "identifier": "0b97bec8-4ea8-4a62-bc9d-fb03e229da8c",
+      "additionalType": "prj"
+    },
+    {
+      "@id": "ark:59853/dataset-fes2-sp-5d37a00",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "fes2_sp",
+      "description": "Galaxy dataset of type 'sp', 3 lines 7 columns, 1 comments. History item #9.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:57",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "sp",
+      "localPath": "datasets/fes2_sp_75738551921d866c.sp",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-select-paths-090aa78"
+      },
+      "identifier": "d27f0edf-71e5-4739-b016-770e7bcd02bb",
+      "additionalType": "sp"
+    },
+    {
+      "@id": "ark:59853/dataset-fes2-gds-7de55c0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "fes2_gds",
+      "description": "Galaxy dataset of type 'gds', 6 lines 5 columns, 1 comments. History item #8.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:57",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "gds",
+      "localPath": "datasets/fes2_gds_547228271cdb66e2.gds",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-select-paths-090aa78"
+      },
+      "identifier": "f00eb10f-cf39-4a5c-a65f-f78e3ebd0600",
+      "additionalType": "gds"
+    },
+    {
+      "@id": "ark:59853/dataset-fit-report-fes2-75b3470",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "fit_report_FeS2",
+      "description": "Galaxy dataset of type 'feffit', 75 lines; \nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin. History item #10.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:57",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "feffit",
+      "localPath": "datasets/fit_report_FeS2_a9305118c6acc078.feffit",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-artemis-c448b49"
+      },
+      "identifier": "8b809a36-4335-40f1-b5a7-279154baaeaa",
+      "additionalType": "feffit"
+    },
+    {
+      "@id": "ark:59853/dataset-rmr-fes2-7c3cea9",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "rmr_FeS2",
+      "description": "Galaxy dataset of type 'png', 31.4 KB; \nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin. History item #11.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:57",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "image/png",
+      "localPath": "datasets/rmr_FeS2_fb5bc774c9b03fce.png",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-artemis-c448b49"
+      },
+      "identifier": "783887b9-b28d-4a8f-8c88-91eabb9170bb",
+      "additionalType": "png"
+    },
+    {
+      "@id": "ark:59853/dataset-chikr-fes2-18e43c3",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "chikr_FeS2",
+      "description": "Galaxy dataset of type 'png', 43.9 KB; \nArchive:  /mnt/nfs/data/d/4/a/dataset_d4a101e2-a73e-4eac-8f30-75f043982880.dat\n   creating: feff/\n  inflating: feff/feff.inp\n  inflating: feff/feffrun_feff6l.log\n  inflating: feff/feff.run\n  inflating: feff/misc.dat\n  inflating: feff/phase.bin\n  inflatin. History item #12.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:57",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "image/png",
+      "localPath": "datasets/chikr_FeS2_c3e4da2bb600d6e3.png",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-artemis-c448b49"
+      },
+      "identifier": "acc4dcb8-d90b-40d7-aac2-08878864e45e",
+      "additionalType": "png"
+    },
+    {
+      "@id": "ark:59853/dataset-csv-summary-of-1564889-cif-92d90ae",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "CSV summary of 1564889.cif",
+      "description": "Galaxy dataset of type 'feff', 10 lines 8 columns, 1 comments; \nParsing dataset_0c058fb5-124f-4a1e-820a-643ff322c47a.dat and saving to feff/feff.inp\n*** feff input generated by xraylarch cif2feff using pymatgen ***\nTITLE Formula:    FeS2\nTITLE SpaceGroup: Pnnm\nTITLE # sites:    6\n* crystallographics sites: note that . History item #5.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "feff",
+      "localPath": "datasets/CSV_summary_of_1564889.cif_a38f4b5b93cd4e1a.feff",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-feff-a6f4f36"
+      },
+      "identifier": "a526bd99-83d7-4065-b988-64f34074ed87",
+      "additionalType": "feff"
+    },
+    {
+      "@id": "ark:59853/dataset-feff-paths-of-1564889-cif-41395bb",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "FEFF paths of 1564889.cif",
+      "description": "Galaxy dataset of type 'zip', 86.7 KB; \nParsing dataset_0c058fb5-124f-4a1e-820a-643ff322c47a.dat and saving to feff/feff.inp\n*** feff input generated by xraylarch cif2feff using pymatgen ***\nTITLE Formula:    FeS2\nTITLE SpaceGroup: Pnnm\nTITLE # sites:    6\n* crystallographics sites: note that . History item #6.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "application/zip",
+      "localPath": "datasets/FEFF_paths_of_1564889.cif_a011be860e2a8b79.zip",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-feff-a6f4f36"
+      },
+      "identifier": "d4a101e2-a73e-4eac-8f30-75f043982880",
+      "additionalType": "zip"
+    },
+    {
+      "@id": "ark:59853/dataset-feff-input-of-1564889-cif-ad8ede0",
+      "@type": [
+        "prov:Entity",
+        "https://w3id.org/EVI#Dataset"
+      ],
+      "name": "FEFF input of 1564889.cif",
+      "description": "Galaxy dataset of type 'inp', done; Formula: FeS2\nSpaceGroup: Pnnm\n# sites: 6\n. History item #7.",
+      "author": "Zenodo depositor",
+      "datePublished": "2024-10-23T14:09:56",
+      "keywords": [
+        "galaxy",
+        "workflow",
+        "invocation"
+      ],
+      "format": "chemical/x-gamess-input",
+      "localPath": "datasets/FEFF_input_of_1564889.cif_409c0d24534294d8.inp",
+      "generatedBy": {
+        "@id": "ark:59853/computation-larch-feff-a6f4f36"
+      },
+      "identifier": "120a7927-1dfd-4197-a7c3-6c4e141f5617",
+      "additionalType": "inp"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+source_type,source_property,target_type,target_property,import_parser,export_parser,direction,reverse_primary,requirement,cardinality,constant_value,fallback_source,fallback_parser,source_table,param_name,wrap,note
+run,name,Computation,name,run_name,,import,,required,scalar,,,,,,,Python run of '<name>'
+run,name,Computation,description,run_description,,import,,required,scalar,,,,,,,
+run,,Computation,runBy,settings_author,,import,,required,scalar,,,,,,,
+run,starttime,Computation,dateCreated,scalar,,import,,required,scalar,,,,,,,
+run,argv,Computation,command,run_command,,import,,recommended,scalar,,,,,,,python <script> <args>
+run,,Computation,keywords,settings_keywords,,import,,optional,list,,,,,,,
+run,,Computation,usedSoftware,software_refs,,import,,required,list,,,,,,,
+run,,Computation,usedDataset,input_refs,,import,,required,list,,,,,,,files read (and not written) by the run
+run,,Computation,generated,output_refs,,import,,required,list,,,,,,,files written by the run
+run,starttime,Computation,startTime,scalar,,import,,optional,scalar,,,,,,,
+run,endtime,Computation,endTime,scalar,,import,,optional,scalar,,,,,,,
+run,exit_code,Computation,exitCode,exit_code,,import,,optional,scalar,,,,,,,passthrough extra; only when non-zero
+run,python_version,Computation,pythonVersion,scalar,,import,,optional,scalar,,,,,,,passthrough extra
+software,name,Software,name,software_name,,import,,required,scalar,,,,,,,
+software,,Software,author,settings_author,,import,,required,scalar,,,,,,,
+software,name,Software,description,software_description,,import,,required,scalar,,,,,,,
+software,,Software,format,csv_constant,,import,,required,scalar,text/x-python,,,,,,
+software,,Software,keywords,settings_keywords,,import,,optional,list,,,,,,,
+software,endtime,Software,dateModified,scalar,,import,,optional,scalar,,,,,,,
+software,,Software,contentUrl,locator_content_url,,import,,optional,scalar,,,,,,,crate-relative when the code is inside the crate
+software,,Software,localPath,locator_local_path,,import,,optional,scalar,,,,,,,absolute when it is not
+file,path,Dataset,name,basename,,import,,required,scalar,,,,,,,
+file,,Dataset,author,settings_author,,import,,required,scalar,,,,,,,
+file,path,Dataset,description,file_description,,import,,required,scalar,,,,,,,
+file,,Dataset,datePublished,settings_date,,import,,required,scalar,,,,,,,
+file,,Dataset,keywords,settings_keywords,,import,,required,list,,,,,,,
+file,path,Dataset,format,encoding_format,,import,,required,scalar,,,,,,,
+file,role,Dataset,generatedBy,file_generated_by,,import,,required,list,,,,,,,the run for outputs; [] for inputs
+file,,Dataset,contentUrl,locator_content_url,,import,,optional,scalar,,,,,,,crate-relative; only when the file is inside the crate
+file,,Dataset,localPath,locator_local_path,,import,,optional,scalar,,,,,,,absolute; for files outside the crate
+file,size,Dataset,contentSize,size_string,,import,,optional,scalar,,,,,,,pydantic requires a string

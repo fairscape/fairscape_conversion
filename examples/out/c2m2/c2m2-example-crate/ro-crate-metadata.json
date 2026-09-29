@@ -38,7 +38,7 @@
         "provenance"
       ],
       "version": "1.0",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "isPartOf": [
         {
           "@id": "https://cfde.cloud"
@@ -186,7 +186,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "table",
@@ -296,7 +296,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "table",
@@ -388,7 +388,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "table",
@@ -566,7 +566,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "table",
@@ -696,7 +696,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "table",
@@ -830,7 +830,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "table",
@@ -882,7 +882,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "File",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "file",
@@ -924,7 +924,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "File",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "file",
@@ -1038,7 +1038,7 @@
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "File",
-      "datePublished": "2026-09-23",
+      "datePublished": "2026-09-29",
       "keywords": [
         "C2M2",
         "preservation",
@@ -1121,7 +1121,7 @@
       "fairscapeVersion": "1.2.2",
       "additionalType": "Computation",
       "runBy": "CFDE / input-datapackage DCC",
-      "dateCreated": "2026-09-23",
+      "dateCreated": "2026-09-29",
       "command": "python3 convert.py input-datapackage --output-path c2m2-example-crate",
       "usedSoftware": [
         {

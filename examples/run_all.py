@@ -34,6 +34,8 @@ EXAMPLES = [
     ("export_croissant.py", "crate -> MLCommons Croissant"),
     ("import_snakemake_variants.py", "real Snakemake run -> crate"),
     ("import_cromwell_variants.py", "real Cromwell run -> crate"),
+    ("import_cromwell_public.py", "public Cromwell runs, checked vs WDL"),
+    ("import_galaxy_public.py", "public Galaxy runs, checked vs .ga"),
     ("export_croissant_variants.py", "real run's crate -> Croissant"),
     ("import_mlflow_linked.py", "MLflow run over Nextflow outputs -> linked crate"),
     ("import_snakemake_linked.py", "reporter crate linked to an upstream crate"),
