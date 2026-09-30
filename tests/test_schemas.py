@@ -62,6 +62,31 @@ def test_schema_node_swallows_a_bad_file(capsys, tmp_path):
         assert "schema inference failed" in capsys.readouterr().err
 
 
+def test_missing_reader_says_what_to_run(monkeypatch, capsys):
+    """One note per format, worded as an instruction, repeated in NOTES."""
+    import builtins
+    real_import = builtins.__import__
+
+    def no_frictionless(name, *a, **k):
+        if name.startswith("frictionless"):
+            raise ImportError("No module named 'frictionless'")
+        return real_import(name, *a, **k)
+
+    monkeypatch.setattr(builtins, "__import__", no_frictionless)
+    schemas.reset_notes()
+    if not TSV.exists():
+        pytest.skip("wdl example outputs not checked out")
+    for _ in range(2):
+        assert schemas.schema_node(str(TSV), naan="59853", display_path="a.tsv",
+                                   dataset_source="x", tool="test") is None
+    err = capsys.readouterr().err
+    assert err.count("Schema inference skipped") == 1
+    assert 'To infer schemas run: pip install "fairscape-conversion[schemas]"' in err
+    assert schemas.NOTES == [err.strip()]
+    schemas.reset_notes()
+    assert schemas.NOTES == []
+
+
 def test_cromwell_import_emits_schema_nodes_without_the_cli():
     pytest.importorskip("frictionless")
     meta = WDL / "run" / "metadata.json"

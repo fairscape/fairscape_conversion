@@ -28,15 +28,29 @@ from typing import Optional
 
 from .arks import mint_ark
 
-INSTALL_HINT = 'pip install "fairscape-models[schema-infer]"'
+INSTALL = 'pip install "fairscape-conversion[schemas]"'
 
+#: Every note this module printed since the last :func:`reset_notes` — for a
+#: caller that shows its own run log (the studio does) to repeat them there.
+NOTES: list = []
 _warned: set = set()
 
 
-def _warn_once(key: str, message: str) -> None:
-    if key not in _warned:
-        _warned.add(key)
-        print(message, file=sys.stderr)
+def _skipped(key: str, why: str) -> None:
+    """Say once, on stderr and in :data:`NOTES`, that schemas were skipped and
+    what to run to get them."""
+    if key in _warned:
+        return
+    _warned.add(key)
+    message = f"Schema inference skipped: {why}. To infer schemas run: {INSTALL}"
+    NOTES.append(message)
+    print(message, file=sys.stderr)
+
+
+def reset_notes() -> None:
+    """Forget what has been said, so the next run reports again."""
+    NOTES.clear()
+    _warned.clear()
 
 
 def extension(path: str) -> str:
@@ -53,8 +67,7 @@ def supported(path: str) -> bool:
     try:
         from fairscape_models.schema.registry import EXTENSION_MAP
     except ImportError:
-        _warn_once("registry", "NOTE: this fairscape-models has no schema inference "
-                   f"(fairscape_models.schema.registry); skipping schemas. {INSTALL_HINT}")
+        _skipped("registry", "this fairscape-models has no fairscape_models.schema.registry")
         return False
     return extension(path) in EXTENSION_MAP
 
@@ -76,14 +89,15 @@ def schema_node(abs_path: str, *, naan: str, display_path: str,
     is the stable string the Dataset's ARK was minted from, so the Schema's
     ARK follows it. ``tool`` names the importer in the description.
 
-    Returns the node as a plain dict, or None with a warning on stderr when
-    the file cannot be read or its format's reader is not installed.
+    Returns the node as a plain dict, or None when the file cannot be read
+    (a WARNING naming the file) or its format's reader is not installed (one
+    "Schema inference skipped … To infer schemas run: …" note per format,
+    on stderr and in :data:`NOTES`).
     """
     try:
         from fairscape_models.schema.registry import infer_schema
     except ImportError:
-        _warn_once("registry", f"NOTE: fairscape_models.schema.registry not importable; "
-                   f"skipping schemas. {INSTALL_HINT}")
+        _skipped("registry", "this fairscape-models has no fairscape_models.schema.registry")
         return None
 
     name = os.path.basename(str(display_path).rstrip("/")) or str(display_path)
@@ -97,8 +111,7 @@ def schema_node(abs_path: str, *, naan: str, display_path: str,
             guid=schema_ark(naan, name, dataset_source))
     except ImportError as e:
         # a per-format reader (frictionless, h5py, wfdb, pydicom) is missing
-        _warn_once(f"reader:{ext}", f"NOTE: cannot infer .{ext} schemas ({e}); "
-                   f"{INSTALL_HINT}")
+        _skipped(f"reader:{ext}", f"the reader for .{ext} files is not installed ({e})")
         return None
     except Exception as e:  # noqa: BLE001 — one bad file must not sink the run
         print(f"WARNING: schema inference failed for '{display_path}': {e}",
