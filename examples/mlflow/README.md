@@ -15,7 +15,7 @@ anything. [`crate/`](crate) is what that run produced, datasheet and graph inclu
 ## Run it yourself
 
 ```bash
-pip install mlflow scikit-learn pandas fairscape-cli
+pip install mlflow scikit-learn pandas fairscape-artifacts "fairscape-models[schema-tabular]"
 pip install -e ../..                          # fairscape-conversion
 cd examples/mlflow && jupyter lab mlflow_to_rocrate.ipynb
 ```
@@ -29,8 +29,8 @@ restores the committed crates.
 ```
 crate/
   ro-crate-metadata.json              the RO-Crate, 13 nodes
-  ro-crate-datasheet.html             human-readable datasheet (fairscape-cli build datasheet)
-  provenance-graph.html               interactive provenance graph of the model (fairscape-cli build evidence-graph)
+  ro-crate-datasheet.html             human-readable datasheet (fairscape-artifacts datasheet)
+  ro-crate-evidence-graph.html        interactive provenance graph of the model (fairscape-artifacts evidence-graph)
   rf-baseline-<run>/
     confusion_matrix.csv              a logged artifact
     model/                            the sklearn model, copied whole

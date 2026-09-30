@@ -112,46 +112,28 @@ def materialize(text, candidates, fallback_name, crate_dir):
 
 def infer_schemas(files, naan, base_dir):
     """Infer an EVI Schema node per described data file with a supported
-    extension.
+    extension (csv/tsv/parquet/h5/hdf5/hea/dcm).
 
-    Delegates to fairscape_cli.models.schema.infer_schema (which dispatches on
-    extension: csv/tsv/parquet/h5/hdf5/hea/dcm), overriding the CLI's
-    random-uuid guid with a deterministic ARK hashed from the Dataset's ARK so
-    crates stay reproducible across conversion re-runs — the same delegation
-    snakemake-report-plugin-fairscape performs.
+    The inference is ``fairscape_models.schema``; ``core.schemas`` wraps it
+    with the deterministic ARK hashed from the Dataset's ARK so crates stay
+    reproducible across conversion re-runs — the same node the Snakemake
+    reporter and the mlflow importer emit.
     """
-    try:
-        from fairscape_cli.models.schema import infer_schema
-        from fairscape_models.schema.registry import EXTENSION_MAP
-    except ImportError:
-        print("NOTE: fairscape-cli not importable; skipping schema inference")
-        return {}
-
-    from ...core.arks import mint_ark
+    from ...core.schemas import schema_node, supported
 
     schemas = {}
     for path in sorted(files):
-        ext = os.path.splitext(path)[1].lower().lstrip(".")
-        if ext not in EXTENSION_MAP or path.startswith(REMOTE_SCHEMES):
+        if path.startswith(REMOTE_SCHEMES) or not supported(path):
             continue
         abs_p = os.path.normpath(path if os.path.isabs(path)
                                  else os.path.join(base_dir, path))
         if not os.path.isfile(abs_p):
             continue
-        basename = os.path.basename(path.rstrip("/")) or path
-        dataset_ark = mint_ark(naan, "dataset", basename,
-                               files[path]["ark_source"])
-        schema_ark = mint_ark(naan, "schema", basename, dataset_ark)
-        try:
-            model = infer_schema(
-                abs_p,
-                name=f"Schema for {basename}",
-                description=f"Schema inferred from the {ext} file '{path}' "
-                "by cromwell-fairscape",
-                guid=schema_ark)
-            schemas[path] = model.model_dump(by_alias=True, exclude_none=True)
-        except Exception as e:
-            print(f"WARNING: schema inference failed for '{path}': {e}")
+        node = schema_node(abs_p, naan=naan, display_path=path,
+                           dataset_source=files[path]["ark_source"],
+                           tool="cromwell-fairscape")
+        if node:
+            schemas[path] = node
     return schemas
 
 
@@ -166,7 +148,7 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
     submitted WDL/inputs files are materialized. ``date_published`` pins the
     crate timestamp (default: now) — pass it for reproducible output.
     ``schemas=True`` additionally infers an EVI Schema per supported data file
-    (reads the data files; needs fairscape-cli importable).
+    (reads the data files; needs ``fairscape-models[schema-infer]``).
     """
     with open(metadata_path) as f:
         meta = json.load(f)

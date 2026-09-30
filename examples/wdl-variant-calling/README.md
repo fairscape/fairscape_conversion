@@ -21,7 +21,8 @@ BcftoolsCall (all three) ──▶ all.vcf ├──▶ VariantSummary ──▶
 | `variant-calling.wdl`, `inputs.json`, `options.json`, `cromwell.conf` | the workflow and how it was launched |
 | `run/metadata.json` | what Cromwell wrote with `-m` — every call's command, inputs, outputs, timings and status |
 | `ro-crate-metadata.json` | the crate: 47 nodes — 13 Computations, 8 Software, 23 Datasets, 1 Schema |
-| `ro-crate-datasheet.html`, `ro-crate-preview.html`, `ro-crate-prov-graph.html`, `ai_ready_score.json`, `ro-crate-linkml.yaml` | derived from the crate by fairscape-cli |
+| `ro-crate-datasheet.html`, `ro-crate-preview.html`, `ro-crate-prov-graph.html`, `ai_ready_score.json` | derived from the crate by `fairscape-artifacts` (`convert.py` runs it) |
+| `ro-crate-linkml.yaml` | the crate's D4D datasheet, from `python -m fairscape_conversion.core.cli convert d4d export` |
 | `results/all.vcf`, `results/variant_summary.tsv`, `results/quals.svg` | the final outputs Cromwell copied out (`final_workflow_outputs_dir`) |
 
 Cromwell's execution root (`cromwell-executions/`), the reads (`data/`), the

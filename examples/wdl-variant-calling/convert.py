@@ -6,18 +6,23 @@ call graph out of metadata.json, writes the submitted WDL and inputs JSON into
 the crate, and decides for every path whether it is a file inside the crate (a
 relative ``contentUrl``) or somewhere else on this machine (``localPath``).
 ``crate_dir`` is what anchors that decision, so it is the one option you
-always want to pass.
+always want to pass. ``schemas=True`` reads the tabular outputs and adds an
+EVI Schema for each (``pip install "fairscape-conversion[schemas]"``).
 
-Then fairscape-cli, if it is installed, derives the same companion artifacts
-the Snakemake reporter derives automatically: the inverse EVI links, the
-provenance graph, the D4D/LinkML export, the datasheet and the AI-ready
-score. The Croissant export is its own example: ../export_croissant_variants.py.
+Then the companion artifacts the Snakemake reporter derives automatically:
+the D4D/LinkML datasheet is this package's own ``d4d`` export, and the inverse
+EVI links, the inputs/outputs, the provenance graph, the datasheet and the
+AI-ready review come from ``fairscape-artifacts`` when it is installed. The
+Croissant export is its own example: ../export_croissant_variants.py.
 """
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
-from fairscape_conversion.plugins import cromwell
+from fairscape_conversion.core.cli import _write
+from fairscape_conversion.plugins import cromwell, d4d
 
 HERE = Path(__file__).resolve().parent
 CRATE = HERE / "ro-crate-metadata.json"
@@ -36,14 +41,15 @@ crate = cromwell.convert(
 CRATE.write_text(json.dumps(crate, indent=4, default=str) + "\n")
 print(f"{len(crate['@graph'])} nodes written to {CRATE.name}")
 
+_write(HERE / "ro-crate-linkml.yaml", d4d.convert("export", crate))
+print("D4D datasheet written to ro-crate-linkml.yaml")
+
 try:
-    from fairscape_cli.utils.build_utils import process_crate
+    import fairscape_artifacts  # noqa: F401
 except ImportError:
-    print("fairscape-cli not installed; skipping the datasheet and the "
-          "provenance graph")
+    print("fairscape-artifacts not installed; skipping the inverse links, the "
+          "datasheet and the provenance graph (pip install fairscape-artifacts)")
 else:
-    results = process_crate(HERE, link_inverses=True, add_io=True,
-                            evidence_graph=True, linkml=True, datasheet=True,
-                            preview=True, force=True)
-    for error in results.get("errors", []):
-        print(f"WARNING: {error}")
+    for step in (["link-inverses"], ["add-io"], ["all"]):
+        subprocess.run([sys.executable, "-m", "fairscape_artifacts", *step, str(HERE)],
+                       check=True)
