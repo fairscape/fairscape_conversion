@@ -297,40 +297,26 @@ def colspec_schema_node(dataset, naan):
 
 def infer_file_schemas(files, naan, crate_dir):
     """Infer an EVI Schema node per copied artifact with a supported extension.
-    Same fairscape-cli delegation and deterministic-ARK override as the
-    cromwell/snakemake integrations."""
-    try:
-        from fairscape_cli.models.schema import infer_schema
-        from fairscape_models.schema.registry import EXTENSION_MAP
-    except ImportError:
-        print("NOTE: fairscape-cli not importable; skipping schema inference")
-        return {}
+    The inference is ``fairscape_models.schema``; ``core.schemas`` adds the
+    deterministic ARK the cromwell and snakemake importers use too."""
+    from ...core.schemas import schema_node, supported
 
     schemas = {}
     for key in sorted(files):
         info = files[key]
-        if info["locator"] != "contentUrl":
-            continue
-        ext = os.path.splitext(info["path"])[1].lower().lstrip(".")
-        if ext not in EXTENSION_MAP:
+        if info["locator"] != "contentUrl" or not supported(info["path"]):
             continue
         abs_p = os.path.join(crate_dir, info["locator_value"])
         if not os.path.isfile(abs_p):
             continue
-        name = os.path.basename(info["path"])
-        dataset_ark = mint_ark(naan, "dataset", name, info["ark_source"])
-        schema_ark = mint_ark(naan, "schema", name, dataset_ark)
-        try:
-            model = infer_schema(
-                abs_p,
-                name=f"Schema for {name}",
-                description=(f"Schema inferred from the {ext} artifact "
-                             f"'{info['path']}' by mlflow-fairscape"),
-                guid=schema_ark)
-            schemas[f"file:{key}"] = model.model_dump(by_alias=True,
-                                                      exclude_none=True)
-        except Exception as e:
-            print(f"WARNING: schema inference failed for '{info['path']}': {e}")
+        ext = os.path.splitext(info["path"])[1].lower().lstrip(".")
+        node = schema_node(
+            abs_p, naan=naan, display_path=info["path"],
+            dataset_source=info["ark_source"], tool="mlflow-fairscape",
+            description=(f"Schema inferred from the {ext} artifact "
+                         f"'{info['path']}' by mlflow-fairscape"))
+        if node:
+            schemas[f"file:{key}"] = node
     return schemas
 
 
@@ -349,7 +335,7 @@ def extract(tracking_uri, experiment=None, run_id=None, crate_dir=None,
     otherwise Datasets reference the tracking store via localPath.
     ``date_published`` pins the crate timestamp — pass it for reproducible
     output. ``schemas=True`` additionally infers an EVI Schema per copied
-    data artifact (needs fairscape-cli importable); colspec Schemas for
+    data artifact (needs ``fairscape-models[schema-infer]``); colspec Schemas for
     logged dataset inputs are always emitted.
     """
     mlflow, client = _client(tracking_uri)

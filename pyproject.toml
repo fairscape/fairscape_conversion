@@ -24,6 +24,12 @@ dependencies = [
     "pyyaml",
 ]
 
+[project.optional-dependencies]
+# Schema inference for the workflow importers' ``schemas=True`` (cromwell,
+# mlflow; the Snakemake reporter reads the same code). The inference lives in
+# fairscape_models.schema; this pulls in its per-format readers.
+schemas = ["fairscape-models[schema-infer]"]
+
 # The package content lives at the repo root (core/, plugins/, __init__.py),
 # so map the import name onto ".". tests/ and archive/ are deliberately not
 # packaged.

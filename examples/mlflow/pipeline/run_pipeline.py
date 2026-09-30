@@ -42,5 +42,5 @@ print(f"crate: {len(crate['@graph'])} nodes -> {CRATE.relative_to(HERE)}/ro-crat
 
 # 3. datasheet + provenance graph, starting from the predictions
 predictions = next(n["@id"] for n in crate["@graph"] if n.get("name") == "predictions.csv")
-run("fairscape-cli", "build", "datasheet", CRATE, "--skip-subcrate-processing")
-run("fairscape-cli", "build", "evidence-graph", CRATE, predictions)
+run(sys.executable, "-m", "fairscape_artifacts", "evidence-graph", CRATE, "--node", predictions)
+run(sys.executable, "-m", "fairscape_artifacts", "datasheet", CRATE)

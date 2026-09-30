@@ -15,13 +15,13 @@ and links them, so the provenance graph runs unbroken from `predictions.csv`
 back to the raw data.
 
 ```bash
-pip install mlflow scikit-learn pandas matplotlib fairscape-cli
+pip install mlflow scikit-learn pandas matplotlib fairscape-artifacts "fairscape-models[schema-tabular]"
 pip install -e ../../..                      # fairscape-conversion
 python run_pipeline.py
 ```
 
 `run_pipeline.py` runs the steps, converts the experiment, and builds
-`crate/ro-crate-datasheet.html` and `crate/provenance-graph.html` (rooted at
+`crate/ro-crate-datasheet.html` and `crate/ro-crate-evidence-graph.html` (rooted at
 `predictions.csv`). Open either in a browser, or see them rendered at the end of
 [`../mlflow_to_rocrate.ipynb`](../mlflow_to_rocrate.ipynb).
 

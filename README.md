@@ -48,10 +48,14 @@ Every format works the same way:
 | `cpm` | a CPM RO-Crate folder with its PROV bundle files |
 | `python` | a run record from `track` (below) |
 
+`cromwell` and `mlflow` also take `schemas=True` (`--schemas` is not a flag yet; pass it
+from Python or the studio) to read each tabular output and add an EVI Schema for it. The
+readers are `pip install "fairscape-conversion[schemas]"`.
+
 | Export to | |
 |---|---|
 | `croissant` | MLCommons Croissant |
-| `d4d` | Datasheet for Datasets |
+| `d4d` | Datasheet for Datasets — the D4D/LinkML YAML that `fairscape-cli` used to write as `ro-crate-linkml.yaml` |
 | `wrroc` | Workflow Run RO-Crate |
 | `frictionless` | Frictionless `datapackage.json` |
 | `cpm` | PROV-JSON (or PROV-N with `--provn`) |

@@ -27,7 +27,8 @@ data/samples/{A,B,C}.fastq ──bwa_map──▶ results/mapped/{A,B,C}.bam   (
 | `run/records.json` | what `snakemake --reporter fairscape` extracted from the finished run |
 | `ro-crate-metadata.json` | the crate: 46 nodes — 13 Computations, 8 Software, 22 Datasets, 1 Schema |
 | `croissant.json` | the Croissant view of it, written by [`../export_croissant_variants.py`](../export_croissant_variants.py) |
-| `ro-crate-datasheet.html`, `ro-crate-preview.html`, `ro-crate-prov-graph.html`, `ai_ready_score.json`, `ro-crate-linkml.yaml` | what fairscape-cli derives from the crate — open them in a browser |
+| `ro-crate-datasheet.html`, `ro-crate-preview.html`, `ro-crate-prov-graph.html`, `ai_ready_score.json` | what `fairscape-artifacts all` derives from the crate — open them in a browser |
+| `ro-crate-linkml.yaml` | the crate's D4D datasheet: `python -m fairscape_conversion.core.cli convert d4d export ro-crate-metadata.json ro-crate-linkml.yaml` |
 | `results/calls/*`, `results/plots/*` | the actual outputs: the VCF, the summary table, the quality histogram |
 
 The reads (`data/`), the alignments (`results/sorted/`, `results/mapped/`) and
@@ -37,7 +38,7 @@ and rebuilds them.
 ## Running it yourself
 
 ```bash
-pip install snakemake snakemake-report-plugin-fairscape fairscape-cli
+pip install snakemake snakemake-report-plugin-fairscape fairscape-artifacts
 ./run.sh
 ```
 
