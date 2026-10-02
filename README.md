@@ -178,12 +178,11 @@ python -m fairscape_conversion.core.cli track SCRIPT [--crate-dir DIR] [-- SCRIP
 python -m fairscape_conversion.core.cli link <crate-dir-or-metadata.json> --link-crate DIR [-o OUT]
 ```
 
-From Python the shape is the same for every format:
-
-```python
-from fairscape_conversion.plugins import d4d
-crate = d4d.convert("import", document)
-```
+In Python, import the format module and call `convert` with `"import"` or
+`"export"`. The quick start does this for a datasheet: it loads the YAML and
+passes that dictionary to `d4d.convert`. The table below says what each format
+is given. Cromwell and MLflow take the path of the metadata file or the
+tracking store; those calls are in their own sections.
 
 ## Formats
 
