@@ -4,19 +4,19 @@
 [![Python](https://img.shields.io/badge/python-%3E%3D3.10-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/pypi/l/fairscape-conversion)](https://github.com/fairscape/fairscape_conversion)
 
-fairscape-conversion builds a [FAIRSCAPE](https://fairscape.github.io) evidence
-RO-Crate from metadata that already describes a dataset or a computation. A
-Datasheet for Datasets, a Frictionless or C2M2 data package, a REDCap data
-dictionary, or the record written by Cromwell, Snakemake, Galaxy, or MLflow
-becomes `ro-crate-metadata.json`: the datasets, the software, and the
-computations, linked with the identifiers FAIRSCAPE uses for its evidence
-graph.
+fairscape-conversion converts metadata you already have into a
+[FAIRSCAPE](https://fairscape.github.io) RO-Crate
+(`ro-crate-metadata.json`), and exports that crate to another format.
 
-That crate can be written out again as MLCommons Croissant, a Datasheet for
-Datasets, a Workflow Run RO-Crate, a Frictionless Data Package, or a PROV
-document. This package is the **create** step of FAIRSCAPE, next to
+This package is the **create** step of FAIRSCAPE, next to
 [fairscape_models](https://github.com/fairscape/fairscape_models).
 Python 3.10 or newer. Apache-2.0.
+
+## Import and export
+
+![Imports on the left become one FAIRSCAPE RO-Crate. Exports on the right are a datasheet, a Frictionless package, a Workflow Run RO-Crate, PROV, and Croissant.](docs/conversion-overview.png)
+
+Import any file on the left. Export writes that crate as any format on the right, and you choose the format then. The export keeps the part of the crate that format can carry. The command for each format is in [Run a conversion](#run-a-conversion).
 
 ## Install
 
@@ -38,24 +38,27 @@ uv run python -c "import fairscape_conversion; print('fairscape-conversion is in
 ```
 
 `uv` creates `.venv` and installs into it. `uv run` uses that environment.
-In the quick start, put `uv run` in front of the convert line.
+The quick start below shows the uv command and the pip command.
 
 For a single run that keeps no environment on disk, put
 `uv run --with fairscape-conversion` in front of that same line.
 
 ### pip
 
-pip installs the same PyPI release into a virtual environment you activate:
+pip installs the same PyPI release. Create the virtual environment with
+`python3`, the interpreter available before activation. After you activate
+it, `python` is the interpreter inside `.venv`, and the later pip examples
+use that.
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv              # Windows: py -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 python -m pip install -U pip
 python -m pip install fairscape-conversion
 ```
 
-Later pip examples assume this environment is active. `.venv/bin/python`
-(Windows: `.venv\Scripts\python`) is the same interpreter.
+`.venv/bin/python` (Windows: `.venv\Scripts\python`) is that interpreter
+if you call it by path.
 
 A live MLflow tracking store needs the MLflow client as well. On the uv
 environment, `uv pip install mlflow`. On the pip environment,
@@ -68,6 +71,11 @@ extra from this tree. `examples/` ships in the git repository. An editable
 install (`-e`) points the environment at the clone, so the examples and tests
 run this tree.
 
+`examples/run_all.py` includes `import_mlflow_linked.py`. That example writes
+its own MLflow tracking store, then converts it. Install `mlflow` before
+`run_all.py`. The `mlflow` package also installs `pandas`, which that
+example's `analyze.py` imports.
+
 ```bash
 git clone https://github.com/fairscape/fairscape_conversion.git
 cd fairscape_conversion
@@ -79,18 +87,21 @@ uv:
 uv venv
 uv pip install -e ".[schemas]"
 uv pip install pytest
+uv pip install mlflow
 uv run python examples/run_all.py
 uv run python -m pytest
 ```
 
-pip:
+pip. Create this environment with `python3` as well, then activate it
+before the `python` lines:
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv              # Windows: py -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 python -m pip install -U pip
 python -m pip install -e ".[schemas]"
 python -m pip install pytest
+python -m pip install mlflow
 python examples/run_all.py
 python -m pytest
 ```
@@ -98,7 +109,7 @@ python -m pytest
 | Add this on the clone | uv | pip |
 |---|---|---|
 | Schema inference for Cromwell and MLflow outputs | `uv pip install -e ".[schemas]"` | `python -m pip install -e ".[schemas]"` |
-| A live MLflow tracking store | `uv pip install mlflow` | `python -m pip install mlflow` |
+| `import_mlflow_linked.py` and a live MLflow tracking store | `uv pip install mlflow` | `python -m pip install mlflow` |
 | The test suite | `uv pip install pytest` | `python -m pip install pytest` |
 | The MLflow notebook | `uv pip install mlflow scikit-learn pandas jupyter` | `python -m pip install mlflow scikit-learn pandas jupyter` |
 
@@ -107,7 +118,9 @@ Parquet, HDF5, and others). MLflow is its own package.
 
 ## Quick start
 
-After the PyPI install above, this writes a small datasheet and converts it.
+Convert a small datasheet. Do this after the PyPI install above.
+
+Write the file and the output folder:
 
 ```bash
 cat > datasheet.yaml << 'EOF'
@@ -118,11 +131,23 @@ license: CC0-1.0
 EOF
 
 mkdir -p my-crate
+```
+
+Run the conversion.
+
+uv:
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert d4d import datasheet.yaml my-crate/ro-crate-metadata.json
+```
+
+pip, after `source .venv/bin/activate`:
+
+```bash
 python -m fairscape_conversion.core.cli convert d4d import datasheet.yaml my-crate/ro-crate-metadata.json
 ```
 
-That prints `wrote my-crate/ro-crate-metadata.json`. With uv and no activated
-environment, prefix the convert line with `uv run`.
+The command prints `wrote my-crate/ro-crate-metadata.json`.
 
 The same call from Python:
 
@@ -147,161 +172,493 @@ crate = d4d.convert("import", yaml.safe_load(text))
 
 In this repository that file is [`plugins/d4d/input.yaml`](plugins/d4d/input.yaml).
 
-## Command
+## Run a conversion
 
-Every format uses the same command:
+Run these from the repository root, after the
+[clone install](#clone-this-repository). They read samples that are already
+in the tree, or a crate one of these commands just wrote, and they write the
+results under `out/`. A successful command prints `wrote` and the path.
+Delete `out/` when you are finished looking.
+
+Create the folder first. The write needs the folder to exist, and running a
+command again overwrites the file.
 
 ```bash
-python -m fairscape_conversion.core.cli convert <format> <import|export> INPUT [OUTPUT]
+mkdir -p out
 ```
 
-`INPUT` is read as YAML when its name ends in `.yaml` or `.yml`, and as JSON
-otherwise. `OUTPUT` is written the same way. Leave `OUTPUT` off to print the
-result.
+The commands start with `uv run`, matching the uv clone install. With `.venv`
+activated for the pip install, run the same line from `python` onward.
 
-Flags the command accepts:
+```bash
+uv run python -m fairscape_conversion.core.cli convert FORMAT import INPUT OUTPUT
+uv run python -m fairscape_conversion.core.cli convert FORMAT export INPUT OUTPUT
+```
 
-| Flag | What it does |
+| Word | What you type |
 |---|---|
-| `--link-crate DIR` | Reuse identifiers from an upstream crate. Repeat for more than one. |
-| `--crate-dir DIR` | Where this crate's relative paths resolve. |
-| `--records FILE` | REDCap record export, beside the data dictionary. |
-| `--provn` | CPM export writes PROV-N. The default export is PROV-JSON. |
+| `FORMAT` | `d4d`, `snakemake`, `galaxy`, `redcap`, `frictionless`, `wrroc`, `cpm`, `croissant`, or `mlflow` |
+| `import` | Read `INPUT` and write a FAIRSCAPE RO-Crate |
+| `export` | Read a FAIRSCAPE RO-Crate and write the other format |
+| `INPUT` | A sample path in this section, or a file of your own in that same place |
+| `OUTPUT` | A path under `out/`. Leave it off and the JSON is printed |
 
-A word after the input path is the output file. `experiment` is not a flag;
-it is a keyword of `mlflow.convert`, shown below.
+A name ending in `.yaml` or `.yml` is YAML. Any other name is JSON.
 
-Two more commands:
+C2M2 and Cromwell are the Python calls later in this section. C2M2 writes a
+folder, and `output_path` chooses it. Cromwell takes the path of a
+`metadata.json`. A live MLflow store is the Python call in
+[MLflow](#mlflow). The MLflow sample file itself goes through the command
+above.
 
-```bash
-python -m fairscape_conversion.core.cli track SCRIPT [--crate-dir DIR] [-- SCRIPT_ARGS]
-python -m fairscape_conversion.core.cli link <crate-dir-or-metadata.json> --link-crate DIR [-o OUT]
-```
+Add a flag after `OUTPUT` when you need one:
 
-In Python, import the format module and call `convert` with `"import"` or
-`"export"`. The quick start does this for a datasheet: it loads the YAML and
-passes that dictionary to `d4d.convert`. The table below says what each format
-is given. Cromwell and MLflow take the path of the metadata file or the
-tracking store; those calls are in their own sections.
+| Flag | Add it when |
+|---|---|
+| `--records FILE` | Importing REDCap, and you have the record-export CSV as well as the data dictionary |
+| `--provn` | Exporting CPM as PROV-N. The usual CPM export is PROV-JSON |
+| `--link-crate DIR` | An upstream crate already describes inputs of this run. Repeat the flag for another crate. `DIR` contains `ro-crate-metadata.json` |
+| `--crate-dir DIR` | Relative paths in this crate should resolve from `DIR` |
 
-## Formats
+`track` and `link` are separate commands, in the sections below.
 
-| Format | Import | Export | What you pass |
-|---|---|---|---|
-| `d4d` | yes | yes | A Datasheet for Datasets, YAML or JSON. Export writes that datasheet back out. |
-| `snakemake` | yes | | Records JSON from `snakemake --reporter fairscape`. |
-| `wrroc` | yes | yes | A Workflow Run RO-Crate `ro-crate-metadata.json` (CWL, Galaxy, and others). |
-| `galaxy` | yes | | An invocation export (`.tar.gz`, `.zip`, or a folder) or a `.ga` file. |
-| `redcap` | yes | | The data dictionary CSV. Add `--records DATA.csv` to include the record export. |
-| `frictionless` | yes | yes | A `datapackage.json` or the folder that contains it. |
-| `c2m2` | yes | | A CFDE C2M2 datapackage folder. |
-| `cpm` | yes | yes | A CPM RO-Crate folder (metadata plus its PROV bundle files). |
-| `croissant` | | yes | An RO-Crate, written as MLCommons Croissant. |
-| `cromwell` | yes | | A Cromwell `metadata.json`. Call it from Python, below. |
-| `mlflow` | yes | | An `mlruns` directory or a tracking URI. Call it from Python, below. |
-| `python` | yes | | A run record written by `track`. |
+### One Snakemake run, five files
+
+`plugins/snakemake/input.json` is the record of a finished Snakemake run. The
+run writes `letters.txt`, reverses that file, and splits the result in half.
+Import the record, then export the crate. Snakemake has already run. These
+commands read the record.
 
 ```bash
-python -m fairscape_conversion.core.cli convert snakemake import records.json crate.json
-python -m fairscape_conversion.core.cli convert galaxy import invocation.tar.gz crate.json
-python -m fairscape_conversion.core.cli convert redcap import dictionary.csv crate.json --records DATA.csv
-python -m fairscape_conversion.core.cli convert frictionless import ./package crate.json
-python -m fairscape_conversion.core.cli convert croissant export ro-crate-metadata.json croissant.json
-python -m fairscape_conversion.core.cli convert cpm export ro-crate-metadata.json prov.json
-python -m fairscape_conversion.core.cli convert cpm export ro-crate-metadata.json prov.provn --provn
+uv run python -m fairscape_conversion.core.cli convert snakemake import \
+  plugins/snakemake/input.json \
+  out/snakemake-ro-crate.json
+
+uv run python -m fairscape_conversion.core.cli convert d4d export \
+  out/snakemake-ro-crate.json out/snakemake-datasheet.yaml
+
+uv run python -m fairscape_conversion.core.cli convert frictionless export \
+  out/snakemake-ro-crate.json out/snakemake-datapackage.json
+
+uv run python -m fairscape_conversion.core.cli convert wrroc export \
+  out/snakemake-ro-crate.json out/snakemake-workflow-run.json
+
+uv run python -m fairscape_conversion.core.cli convert cpm export \
+  out/snakemake-ro-crate.json out/snakemake-prov.json
+
+uv run python -m fairscape_conversion.core.cli convert croissant export \
+  out/snakemake-ro-crate.json out/snakemake-croissant.json
 ```
 
-C2M2 writes a crate directory next to the datapackage, named `<slug>-crate`,
-with the source tables copied in, and prints the crate. To choose the folder:
+Each line prints `wrote` and the output path.
 
-```python
+List what landed in the crate:
+
+```bash
+uv run python - << 'PY'
+import json
+crate = json.load(open("out/snakemake-ro-crate.json"))
+print("computations")
+for node in crate["@graph"]:
+    kind = node.get("@type", "")
+    if isinstance(kind, list):
+        kind = " ".join(kind)
+    if "Computation" in kind:
+        print(" ", node.get("name"))
+print("files")
+for node in crate["@graph"]:
+    name = node.get("name") or ""
+    if name.endswith(".txt"):
+        print(" ", name)
+PY
+```
+
+That prints:
+
+```
+computations
+  Snakemake workflow run of 'Snakefile'
+  make_list
+  reverse
+  split_halves
+files
+  first_half.txt
+  letters.txt
+  reversed.txt
+  second_half.txt
+```
+
+Each export reads that same crate and keeps the part its format can carry.
+
+| File | What you should find |
+|---|---|
+| `out/snakemake-datasheet.yaml` | A datasheet titled `Snakemake workflow 'Snakefile'`, with the description and the keywords |
+| `out/snakemake-datapackage.json` | A Frictionless data package named `snakemake-workflow-snakefile`. The four text files are the resources |
+| `out/snakemake-workflow-run.json` | A Workflow Run RO-Crate. Each of the four jobs is a `CreateAction` |
+| `out/snakemake-prov.json` | PROV-JSON for the run: 4 activities and 9 entities |
+| `out/snakemake-croissant.json` | Croissant metadata for the workflow. The four text files are distributions |
+
+### Datasheet — `d4d`
+
+Use this for a Datasheet for Datasets, in YAML or JSON. The sample is the
+AI-READI datasheet shipped with the package.
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert d4d import \
+  plugins/d4d/input.yaml \
+  out/aireadi-ro-crate.json
+
+uv run python -m fairscape_conversion.core.cli convert d4d export \
+  out/aireadi-ro-crate.json \
+  out/aireadi-datasheet.yaml
+```
+
+The crate's dataset is Artificial Intelligence Ready and Equitable Atlas for
+Diabetes Insights (AI-READI). The exported datasheet opens with that title and
+the id `https://fairhub.io/datasets/2`.
+
+On a datasheet of your own, use that path in place of `plugins/d4d/input.yaml`.
+
+### Snakemake — `snakemake`
+
+Use this when a Snakemake workflow has already finished and you want that run
+as a FAIRSCAPE RO-Crate. Snakemake runs the pipeline. This package reads the
+JSON that `snakemake --reporter fairscape` writes about that run. Install
+`snakemake-report-plugin-fairscape` beside Snakemake for the reporter. The
+reporter reads the finished run and writes the jobs, the rules, and the files.
+
+The tour above converts the small sample,
+[`plugins/snakemake/input.json`](plugins/snakemake/input.json).
+
+A larger sample is the variant-calling run. The same import:
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert snakemake import \
+  examples/snakemake-variant-calling/run/records.json \
+  out/variant-calling-ro-crate.json
+```
+
+That crate has 13 computations: `bwa_map` on samples A, B, and C,
+`samtools_sort`, `samtools_index`, `bcftools_call`, `plot_quals`, and
+`variant_summary`, plus the workflow run itself. The datasets include the
+FASTQ reads, the BAM files, and `all.vcf`.
+
+On a run of your own, point that import at the JSON the reporter wrote.
+
+### Galaxy — `galaxy`
+
+Use this when you have Galaxy's own export of a run, or a `.ga` workflow
+file. The export is the archive or folder Galaxy writes for an invocation
+(`.tar.gz`, `.zip`, or the unpacked folder).
+
+The sample invocation is the folder
+[`plugins/galaxy/input-store`](plugins/galaxy/input-store).
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert galaxy import \
+  plugins/galaxy/input-store \
+  out/galaxy-ro-crate.json
+```
+
+The crate has seven computations: the invocation, three uploads, a merge,
+`cat_collection`, and `head`. The datasets include `hello`, `world`, and
+`universe`.
+
+The `.ga` file is the workflow definition, the software for that same
+workflow:
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert galaxy import \
+  plugins/galaxy/input-store/workflows/2154bc930d1891d1.ga \
+  out/galaxy-workflow.json
+```
+
+The software nodes are `collection_workflow`, `__MERGE_COLLECTION__`,
+`cat_collection`, and `head`.
+
+Galaxy can also publish the same run as a Workflow Run RO-Crate. That file
+is `ro-crate-metadata.json`. Convert that one with
+[Workflow Run RO-Crate](#workflow-run-ro-crate--wrroc), below.
+
+### REDCap — `redcap`
+
+Import the data dictionary CSV. Add `--records` when you also have the
+project's record export. Both samples are in the tree.
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert redcap import \
+  plugins/redcap/input-dictionary.csv \
+  out/redcap-ro-crate.json \
+  --records plugins/redcap/input-records.csv
+```
+
+The crate has one computation, `REDCap export from project 'input-dictionary'`,
+both CSVs as datasets, and a schema for the record export.
+
+On a project of your own, use your dictionary path and your records path in
+those two places.
+
+### Frictionless — `frictionless`
+
+Import a `datapackage.json`, or the folder that contains it. The sample is
+county respiratory-illness surveillance for the 2025-26 season.
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert frictionless import \
+  plugins/frictionless/input-datapackage \
+  out/frictionless-ro-crate.json
+
+uv run python -m fairscape_conversion.core.cli convert frictionless export \
+  out/frictionless-ro-crate.json \
+  out/frictionless-datapackage.json
+```
+
+The crate carries the package, the resource tables, and a schema for
+`cases_by_county` and for `counties`. The export is the data package again:
+name `county-respiratory-surveillance-2026`, resources `cases_by_county`,
+`counties`, and `methods`.
+
+On a package of your own, use that folder in place of
+`plugins/frictionless/input-datapackage`.
+
+### C2M2 — `c2m2`
+
+Import a CFDE C2M2 datapackage folder. The call writes a crate folder and
+copies the source tables into it. `output_path` chooses the folder, here
+`out/c2m2-crate`.
+
+```bash
+uv run python - << 'PY'
 from fairscape_conversion.plugins import c2m2
-c2m2.convert("import", "./datapackage-dir", output_path="./crate")
+
+c2m2.convert(
+    "import",
+    "plugins/c2m2/input-datapackage",
+    output_path="out/c2m2-crate",
+)
+print("wrote out/c2m2-crate/ro-crate-metadata.json")
+PY
 ```
 
-CPM import wants the crate directory, because the PROV bundle files sit beside
-`ro-crate-metadata.json`:
+The folder holds `ro-crate-metadata.json` and the C2M2 tables (`project.tsv`,
+`file.tsv`, `biosample.tsv`, and the others). The sample is the Mini Project
+package: a schema for each table, and one biosample.
+
+### Workflow Run RO-Crate — `wrroc`
+
+Use this when the run is already a Workflow Run RO-Crate: a
+`ro-crate-metadata.json` published by CWL, by Galaxy's RO-Crate export, or by
+another engine. Import turns that crate into a FAIRSCAPE RO-Crate. Export
+writes a FAIRSCAPE RO-Crate back out in that same profile.
+
+For Galaxy's invocation archive or a `.ga` file, use
+[Galaxy](#galaxy--galaxy).
+
+The sample is a CWL run:
 
 ```bash
-python -m fairscape_conversion.core.cli convert cpm import ./crate-dir evi.json
+uv run python -m fairscape_conversion.core.cli convert wrroc import \
+  plugins/wrroc/input.json \
+  out/wrroc-ro-crate.json
 ```
+
+The computations are the workflow `packed.cwl`, its `rev` step, and its
+`sorted` step. The datasets include `whale.txt`.
+
+Export of a crate you already have is the tour command that writes
+`out/snakemake-workflow-run.json`. The same command on another crate replaces
+`out/snakemake-ro-crate.json` with that crate's `ro-crate-metadata.json`.
+
+### CPM — `cpm`
+
+Import the crate directory. The PROV files sit beside `ro-crate-metadata.json`,
+so the input is that directory. The sample is a model-training provenance
+graph.
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert cpm import \
+  plugins/cpm/input-crate \
+  out/cpm-ro-crate.json
+
+uv run python -m fairscape_conversion.core.cli convert cpm export \
+  out/cpm-ro-crate.json \
+  out/cpm-prov.json
+
+uv run python -m fairscape_conversion.core.cli convert cpm export \
+  out/cpm-ro-crate.json \
+  out/cpm-prov.provn \
+  --provn
+```
+
+The crate has nine computations, from preprocessing and training
+(`trainIter0`, `trainIter1`, `trainIter2`) through testing. The first export
+is PROV-JSON. `--provn` writes PROV-N, and that file opens with `document`.
+
+On a CPM crate of your own, use that directory in place of
+`plugins/cpm/input-crate`.
+
+### Croissant — `croissant`
+
+Export a FAIRSCAPE RO-Crate as MLCommons Croissant. The sample crate is the
+Mini Project C2M2 package.
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert croissant export \
+  plugins/croissant/input.json \
+  out/croissant.json
+```
+
+The Croissant document is named `Mini_Project` and has six record sets, one
+for each C2M2 table schema. The tour file `out/snakemake-croissant.json` is
+this same export on the Snakemake crate, where the four text files are
+distributions.
+
+On a crate of your own, use its `ro-crate-metadata.json` in place of
+`plugins/croissant/input.json`.
 
 ### Cromwell
 
-`cromwell run -m metadata.json` writes a metadata file. Pass that path to
-Python. The importer opens the file itself, reads each call, and can copy the
-submitted workflow into the crate directory.
+Use this when Cromwell has finished a WDL workflow and you want that run as a
+FAIRSCAPE RO-Crate. Cromwell runs the workflow and writes the record. This
+package reads that record.
 
-```python
-from fairscape_conversion.plugins import cromwell
+Save the metadata as Cromwell runs:
 
-cromwell.convert("import", "metadata.json", crate_dir="my-crate", schemas=True)
+```bash
+cromwell run -m metadata.json workflow.wdl inputs.json
 ```
 
-`schemas=True` adds an EVI Schema for each supported data file. Install the
-`schemas` extra first. Leave it off and the computations and files are still
-converted.
+The same JSON is the response from Cromwell's workflow metadata API. The
+sample in this repository is the variant-calling run, the same analysis as
+the Snakemake example above, executed by Cromwell. Pass that path as a string
+and write the crate file:
 
-On the command line, a `.json` input is parsed into a document before the
-plugin sees it. Cromwell metadata is not that document, so the path has to
-reach `cromwell.convert` as a string.
+```bash
+uv run python - << 'PY'
+import json
+from pathlib import Path
+from fairscape_conversion.plugins import cromwell
+
+crate = cromwell.convert(
+    "import",
+    "examples/wdl-variant-calling/run/metadata.json",
+    crate_dir="out/cromwell-crate",
+)
+Path("out/cromwell-crate/ro-crate-metadata.json").write_text(
+    json.dumps(crate, indent=2)
+)
+print("wrote out/cromwell-crate/ro-crate-metadata.json")
+PY
+```
+
+`out/cromwell-crate` then holds `ro-crate-metadata.json`, the submitted
+`VariantCalling.wdl`, and `inputs.json`. The crate has 13 computations: the
+workflow, `BwaMem` on three shards, `SamtoolsSort`, `SamtoolsIndex`,
+`BcftoolsCall`, `PlotQuals`, and `VariantSummary`.
+
+On a run of your own, use the path of that `metadata.json` as the second
+argument. The function opens the file and reads each task.
 
 ### MLflow
 
-Install `mlflow`, then pass the tracking store and the experiment. The store
-is an `mlruns` directory or any MLflow tracking URI. `experiment` is the
-experiment name or id. `run_id` exports one run and its nested children.
+Use this when runs were already tracked in MLflow and you want those runs as
+a FAIRSCAPE RO-Crate. MLflow recorded the experiment. This package reads the
+record.
+
+The sample is the extracted record of an experiment named `iris-classifier`:
+
+```bash
+uv run python -m fairscape_conversion.core.cli convert mlflow import \
+  plugins/mlflow/input.json \
+  out/mlflow-ro-crate.json
+```
+
+The computations are `rf-train` and `rf-depth-2`. The datasets are `iris`,
+`confusion_matrix.csv`, and `notes.txt`, and the iris columns are a schema.
+
+A tracking store you already have is a Python call. Install `mlflow` first
+([Install](#install)). The store is a string: a `sqlite:///` URI built from
+the database path, or the path of a directory of runs. Replace `NAME` with
+the experiment name or its id. The call below writes the crate file.
+`copy_artifacts=False` leaves artifacts in the store. Passing no
+`copy_artifacts` argument copies them into `out/mlflow-crate`.
 
 ```python
+import json
+from pathlib import Path
 from fairscape_conversion.plugins import mlflow
 
-mlflow.convert(
+uri = "sqlite:///" + str(Path("mlflow.db").resolve())
+crate = mlflow.convert(
     "import",
-    "./mlruns",
+    uri,
     experiment="NAME",
-    crate_dir="my-crate",
-    schemas=True,
+    crate_dir="out/mlflow-crate",
+    copy_artifacts=False,
+)
+Path("out/mlflow-crate").mkdir(parents=True, exist_ok=True)
+Path("out/mlflow-crate/ro-crate-metadata.json").write_text(
+    json.dumps(crate, indent=2)
 )
 ```
 
-`schemas=True` infers an EVI Schema for each copied data artifact. Column
-schemas for logged dataset inputs are written either way. Artifacts are copied
-into `crate_dir` so the crate stands on its own; pass `copy_artifacts=False`
-to point at the store instead.
-
-The same path rule as Cromwell applies: the store has to arrive as a string.
-[`examples/mlflow/mlflow_to_rocrate.ipynb`](examples/mlflow/mlflow_to_rocrate.ipynb)
-trains a model, converts the store it just wrote, and renders the crate.
+Pass `run_id="..."` to export one run and its nested children.
 
 ## Track a Python run
 
-`track` runs a script, records the files it reads and writes, and adds the run
-to a crate directory. The crate is created on first use. Each later run is
-appended. An input the crate already describes — usually an earlier run's
-output — reuses that node, so the provenance chain runs through the crate.
+Use `track` when the run is a Python script you are about to execute, and you want the files it reads and writes in a crate. Snakemake, Cromwell, Galaxy, and MLflow are for runs those tools have already recorded. `track` runs the script itself and appends that run to a crate.
 
-`track` is in this repository (0.2.2). Install from a clone, above, to use it.
+`track` is in this repository (0.2.2). Install from a [clone](#clone-this-repository) first.
+
+The command is:
 
 ```bash
-python -m fairscape_conversion.core.cli track clean.py --crate-dir my-crate -- data/raw.csv data/clean.csv
-python -m fairscape_conversion.core.cli track plot.py  --crate-dir my-crate -- data/clean.csv data/plot.png
+python -m fairscape_conversion.core.cli track SCRIPT --crate-dir DIR -- SCRIPT_ARGS
 ```
 
-Everything after `--` is passed to the script. The capture covers `open`,
-`pathlib`, and, when those libraries are installed, pandas, numpy, and
-matplotlib. `--input FILE` records a file the capture misses. `--link-crate DIR`
-reuses entities from an upstream crate. `--name`, `--author`, and repeatable
-`--keyword` set the run's labels. `--start-clean` drops previous runs from
-the crate before this one is added.
+Everything after `--` is passed to the script. With uv, put `uv run` in front
+of `python`. This creates a script, a small input, and records the run:
 
-The script is copied to `software/<name>-<hash>.py` inside the crate directory
-when it does not already live there.
+```bash
+mkdir -p data my-crate
+printf 'raw\n' > data/raw.csv
+cat > clean.py << 'EOF'
+import sys
+src, dst = sys.argv[1], sys.argv[2]
+open(dst, "w").write(open(src).read().upper())
+EOF
 
-In Jupyter, after the clone install above:
+python -m fairscape_conversion.core.cli track clean.py --crate-dir my-crate -- data/raw.csv data/clean.csv
+```
+
+The command prints the computation it recorded, such as one input and one
+output. The crate is `my-crate/ro-crate-metadata.json`. The script is copied
+to `software/clean-<hash>.py` inside that directory. Run `track` again to
+append another computation. An input the crate already describes reuses that
+node.
+
+| Flag | What you add |
+|---|---|
+| `--input FILE` | A file the capture misses. Repeat the flag for another file |
+| `--link-crate DIR` | An upstream crate whose entities this run's inputs reuse |
+| `--name TEXT` | Label for the run. The default is the script's file name |
+| `--author TEXT` | Author. The default is the crate's author, or your username |
+| `--keyword TEXT` | A keyword. Repeat the flag for another |
+| `--start-clean` | Drop previous runs from the crate, then add this one |
+
+The capture records `open` and `pathlib`. It also records pandas, numpy, and
+matplotlib when those packages are installed. A script that reads and writes
+no files prints `no file I/O detected; nothing was recorded`.
+
+In Jupyter, from that same clone environment:
+
+1. Load the extension.
 
 ```python
 %load_ext fairscape_conversion.plugins.python
 ```
+
+2. Run a cell that reads or writes a file. The cell is recorded in `my-crate`.
 
 ```python
 %%fairscape track --crate-dir my-crate --name normalize
@@ -313,25 +670,34 @@ A cell that reads or writes nothing is left out of the crate.
 
 ## Link two crates
 
-When this run's inputs were another run's outputs, name the upstream crate.
-Matching files keep the upstream identifiers, and the evidence graph can
-continue from one crate into the other.
+Use this when files this run reads are outputs another crate already
+describes. `--link-crate` takes the directory that contains
+`ro-crate-metadata.json`.
+
+During a conversion, add the flag after `OUTPUT`:
 
 ```bash
-python -m fairscape_conversion.core.cli convert snakemake import records.json crate.json \
+python -m fairscape_conversion.core.cli convert snakemake import records.json ro-crate-metadata.json \
     --link-crate /path/to/upstream-crate
+```
 
+On a crate already written, run `link`. Add `-o OUT` to write a new file and
+leave the original in place:
+
+```bash
 python -m fairscape_conversion.core.cli link ./crate-dir --link-crate /path/to/upstream-crate
 ```
 
-`--link-crate` can be repeated. `--crate-dir DIR` sets where this crate's
-relative paths resolve. With a convert command and no `--crate-dir`, they
-resolve from the output file's folder.
+Repeat `--link-crate` for another upstream crate. The command prints how many
+inputs matched. With `convert` and no `--crate-dir`, relative paths resolve
+from the output file's folder.
+
+From Python, pass the same directory as `linked_crates`:
 
 ```python
 from fairscape_conversion.plugins import mlflow
 
-crate = mlflow.convert(
+mlflow.convert(
     "import",
     "./mlruns",
     experiment="NAME",
@@ -339,48 +705,86 @@ crate = mlflow.convert(
 )
 ```
 
-Worked pairs, including what is left unlinked on purpose, are in
+From a clone, two worked pairs are already wired up. Run them from the
+repository root. Install `mlflow` before `import_mlflow_linked.py`. That
+example writes a tracking store and converts it.
+
+uv:
+
+```bash
+uv pip install mlflow
+uv run python examples/import_snakemake_linked.py
+uv run python examples/import_mlflow_linked.py
+```
+
+pip, with `.venv` active:
+
+```bash
+python -m pip install mlflow
+python examples/import_snakemake_linked.py
+python examples/import_mlflow_linked.py
+```
+
+In
+`examples/linked-crates/nextflow-run`, `ro-crate-metadata.json` is under
+`results/`. The write-up is
 [`examples/linked-crates/`](examples/linked-crates).
 
 ## Examples
 
-From a clone, after the install in [Clone this repository](#clone-this-repository):
+Run these from the repository root, after the
+[clone install](#clone-this-repository). Install `mlflow` before
+`run_all.py`. The run includes `import_mlflow_linked.py`, which writes an
+MLflow tracking store and converts it.
+
+uv:
 
 ```bash
-python examples/run_all.py             # each example, then a pass/fail table
-python examples/import_d4d.py          # or one script
-python examples/run_all.py --notebook  # also executes the MLflow notebook
+uv pip install mlflow
+uv run python examples/import_d4d.py
+uv run python examples/run_all.py
 ```
 
-With uv and no activated environment, prefix those with `uv run`.
+pip, with `.venv` active:
 
-Each script prints what it converted. The fixture scripts check the result
-against that plugin's reviewed `golden.json`. Output goes to `examples/out/`.
-The linked MLflow example needs `mlflow` and `pandas`. The scripts bind the
-clone, so they run the code you have checked out.
+```bash
+python -m pip install mlflow
+python examples/import_d4d.py
+python examples/run_all.py
+```
 
-The notebook needs `mlflow`, `scikit-learn`, `pandas`, and `jupyter`. It
-rewrites the crate checked in under `examples/mlflow/`. The catalog of every
-script, including public Cromwell and Galaxy runs, is
+`import_d4d.py` converts the datasheet shipped in the package and writes
+`examples/out/d4d/`. `run_all.py` runs every example and prints pass or fail
+for each one. Output goes to `examples/out/`.
+
+The list of every script, including public Cromwell and Galaxy runs, is
 [`examples/README.md`](examples/README.md).
+
+[`examples/mlflow/mlflow_to_rocrate.ipynb`](examples/mlflow/mlflow_to_rocrate.ipynb)
+trains a model and converts the store it wrote. The notebook also runs
+`fairscape-cli`, which is a separate package, and it needs `mlflow`,
+`scikit-learn`, `pandas`, and `jupyter`.
 
 ## Tests
 
-From a clone, with pytest installed as in the clone section:
+From the clone.
+
+uv:
 
 ```bash
-# uv
 uv pip install pytest
 uv run python -m pytest
+```
 
-# pip, environment already active
+pip, with `.venv` active:
+
+```bash
 python -m pip install pytest
 python -m pytest
 ```
 
 Parity tests compare a few converters with the original implementations and
-skip when those trees are not checked out beside this one. The other tests run
-anywhere the dependencies import.
+skip when those trees are not checked out beside this one.
 
 ## Add a format
 

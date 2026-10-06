@@ -3,11 +3,13 @@
 One runnable example per conversion, each on real input that ships with the
 package. Every script prints what went in, what came out, and — where the
 conversion is deterministic — whether it matches the plugin's reviewed
-`golden.json`. Nothing needs installing first: the scripts bind
-`fairscape_conversion` to this checkout.
+`golden.json`. Use the clone install from the repository README. Install
+`mlflow` before `run_all.py`: `import_mlflow_linked.py` writes a tracking
+store and converts it.
 
 ```bash
-python examples/run_all.py            # all twelve, with a pass/fail table
+python -m pip install mlflow          # uv: uv pip install mlflow
+python examples/run_all.py            # every example, with a pass/fail table
 python examples/import_mlflow.py      # or just the one you care about
 ```
 
@@ -90,11 +92,12 @@ three-step prepare → train → evaluate pipeline whose evaluate run `usedMLMod
 the trained model. Both notebook and crates are checked in with their outputs.
 See [`mlflow/README.md`](mlflow/README.md).
 
-Every script on this page finishes instantly — the real-run examples convert
-records that are checked in, not pipelines they re-execute. The two things
-that start from nothing are that notebook (needs `mlflow`, `scikit-learn` and
-`pandas`) and the two `run.sh` scripts in the variant-calling folders (need
-Snakemake, or a JVM, plus the bioinformatics tools).
+The real-run examples convert records that are checked in.
+`import_mlflow_linked.py` also writes a small tracking store first, which is
+why it needs the `mlflow` package. The notebook needs `mlflow`,
+`scikit-learn`, and `pandas`. The two `run.sh` scripts in the
+variant-calling folders need Snakemake, or a JVM, plus the bioinformatics
+tools.
 
 ## Reading them
 
