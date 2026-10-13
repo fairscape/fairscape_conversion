@@ -15,7 +15,7 @@
       "about": {
         "@id": "ark:59853/input-datapackage-c2m2"
       },
-      "fairscapeVersion": "1.1.3"
+      "fairscapeVersion": "1.2.2"
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2",
@@ -38,7 +38,7 @@
         "provenance"
       ],
       "version": "1.0",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "isPartOf": [
         {
           "@id": "https://cfde.cloud"
@@ -85,13 +85,13 @@
           "@id": "ark:59853/input-datapackage-c2m2-table-file_describes_biosample"
         },
         {
-          "@id": "ark:59853/input-datapackage-c2m2-file/sample.tsv"
+          "@id": "ark:59853/input-datapackage-c2m2-file/mini/sample.tsv"
         },
         {
           "@id": "ark:99999/data-bin"
         },
         {
-          "@id": "ark:59853/input-datapackage-c2m2-biosample/bio1"
+          "@id": "ark:59853/input-datapackage-c2m2-biosample/mini/bio1"
         },
         {
           "@id": "http://edamontology.org/format_3475"
@@ -146,7 +146,7 @@
       "separator": "\t",
       "header": true,
       "examples": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "description": "Column schema for the C2M2 'id_namespace' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
       "keywords": [
         "C2M2",
@@ -156,7 +156,10 @@
       "cfde:primaryKey": [
         "id"
       ],
-      "cfde:foreignKeys": []
+      "cfde:foreignKeys": [],
+      "generatedBy": {
+        "@id": "ark:59853/input-datapackage-c2m2-conversion"
+      }
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2-table-id_namespace",
@@ -175,18 +178,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///id_namespace.tsv",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
-      "prov:wasGeneratedBy": [
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-conversion"
-        }
-      ],
+      "fairscapeVersion": "1.2.2",
+      "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "table",
@@ -196,9 +195,7 @@
       "evi:Schema": {
         "@id": "ark:59853/input-datapackage-c2m2-schema-id_namespace"
       },
-      "generatedBy": {
-        "@id": "ark:59853/input-datapackage-c2m2-conversion"
-      },
+      "generatedBy": [],
       "derivedFrom": [],
       "contentSize": "28",
       "rowCount": 1,
@@ -243,7 +240,7 @@
       "separator": "\t",
       "header": true,
       "examples": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "description": "Column schema for the C2M2 'project' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
       "keywords": [
         "C2M2",
@@ -266,7 +263,10 @@
             ]
           }
         }
-      ]
+      ],
+      "generatedBy": {
+        "@id": "ark:59853/input-datapackage-c2m2-conversion"
+      }
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2-table-project",
@@ -285,18 +285,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///project.tsv",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
-      "prov:wasGeneratedBy": [
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-conversion"
-        }
-      ],
+      "fairscapeVersion": "1.2.2",
+      "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "table",
@@ -306,9 +302,7 @@
       "evi:Schema": {
         "@id": "ark:59853/input-datapackage-c2m2-schema-project"
       },
-      "generatedBy": {
-        "@id": "ark:59853/input-datapackage-c2m2-conversion"
-      },
+      "generatedBy": [],
       "derivedFrom": [],
       "contentSize": "51",
       "rowCount": 1,
@@ -348,7 +342,7 @@
       "separator": "\t",
       "header": true,
       "examples": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "description": "Column schema for the C2M2 'file_format' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
       "keywords": [
         "C2M2",
@@ -358,7 +352,10 @@
       "cfde:primaryKey": [
         "id"
       ],
-      "cfde:foreignKeys": []
+      "cfde:foreignKeys": [],
+      "generatedBy": {
+        "@id": "ark:59853/input-datapackage-c2m2-conversion"
+      }
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2-table-file_format",
@@ -377,18 +374,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///file_format.tsv",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
-      "prov:wasGeneratedBy": [
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-conversion"
-        }
-      ],
+      "fairscapeVersion": "1.2.2",
+      "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "table",
@@ -398,9 +391,7 @@
       "evi:Schema": {
         "@id": "ark:59853/input-datapackage-c2m2-schema-file_format"
       },
-      "generatedBy": {
-        "@id": "ark:59853/input-datapackage-c2m2-conversion"
-      },
+      "generatedBy": [],
       "derivedFrom": [],
       "contentSize": "39",
       "rowCount": 1,
@@ -489,7 +480,7 @@
       "separator": "\t",
       "header": true,
       "examples": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "description": "Column schema for the C2M2 'file' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
       "keywords": [
         "C2M2",
@@ -536,7 +527,10 @@
             ]
           }
         }
-      ]
+      ],
+      "generatedBy": {
+        "@id": "ark:59853/input-datapackage-c2m2-conversion"
+      }
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2-table-file",
@@ -555,18 +549,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///file.tsv",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
-      "prov:wasGeneratedBy": [
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-conversion"
-        }
-      ],
+      "fairscapeVersion": "1.2.2",
+      "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "table",
@@ -576,9 +566,7 @@
       "evi:Schema": {
         "@id": "ark:59853/input-datapackage-c2m2-schema-file"
       },
-      "generatedBy": {
-        "@id": "ark:59853/input-datapackage-c2m2-conversion"
-      },
+      "generatedBy": [],
       "derivedFrom": [],
       "contentSize": "391",
       "rowCount": 2,
@@ -630,7 +618,7 @@
       "separator": "\t",
       "header": true,
       "examples": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "description": "Column schema for the C2M2 'biosample' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
       "keywords": [
         "C2M2",
@@ -666,7 +654,10 @@
             ]
           }
         }
-      ]
+      ],
+      "generatedBy": {
+        "@id": "ark:59853/input-datapackage-c2m2-conversion"
+      }
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2-table-biosample",
@@ -685,18 +676,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///biosample.tsv",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
-      "prov:wasGeneratedBy": [
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-conversion"
-        }
-      ],
+      "fairscapeVersion": "1.2.2",
+      "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "table",
@@ -706,9 +693,7 @@
       "evi:Schema": {
         "@id": "ark:59853/input-datapackage-c2m2-schema-biosample"
       },
-      "generatedBy": {
-        "@id": "ark:59853/input-datapackage-c2m2-conversion"
-      },
+      "generatedBy": [],
       "derivedFrom": [],
       "contentSize": "81",
       "rowCount": 1,
@@ -760,7 +745,7 @@
       "separator": "\t",
       "header": true,
       "examples": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "description": "Column schema for the C2M2 'file_describes_biosample' table, derived from C2M2_datapackage.json. Primary key and foreign keys are preserved in the cfde:* extension fields (fairscape's evi:Schema has no native relational key fields).",
       "keywords": [
         "C2M2",
@@ -800,7 +785,10 @@
             ]
           }
         }
-      ]
+      ],
+      "generatedBy": {
+        "@id": "ark:59853/input-datapackage-c2m2-conversion"
+      }
     },
     {
       "@id": "ark:59853/input-datapackage-c2m2-table-file_describes_biosample",
@@ -819,18 +807,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///file_describes_biosample.tsv",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
-      "prov:wasGeneratedBy": [
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-conversion"
-        }
-      ],
+      "fairscapeVersion": "1.2.2",
+      "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "Dataset",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "table",
@@ -840,9 +824,7 @@
       "evi:Schema": {
         "@id": "ark:59853/input-datapackage-c2m2-schema-file_describes_biosample"
       },
-      "generatedBy": {
-        "@id": "ark:59853/input-datapackage-c2m2-conversion"
-      },
+      "generatedBy": [],
       "derivedFrom": [],
       "contentSize": "100",
       "rowCount": 1,
@@ -858,7 +840,7 @@
       ]
     },
     {
-      "@id": "ark:59853/input-datapackage-c2m2-file/sample.tsv",
+      "@id": "ark:59853/input-datapackage-c2m2-file/mini/sample.tsv",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -875,14 +857,14 @@
       "contentUrl": "https://example.org/files/sample.tsv?download",
       "usedByComputation": [],
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "File",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "file",
@@ -917,14 +899,14 @@
       "version": "0.1.0",
       "contentUrl": "ark:99999/data-bin",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "File",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "file",
@@ -942,7 +924,7 @@
       }
     },
     {
-      "@id": "ark:59853/input-datapackage-c2m2-biosample/bio1",
+      "@id": "ark:59853/input-datapackage-c2m2-biosample/mini/bio1",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Sample"
@@ -963,7 +945,7 @@
         "biosample",
         "input-datapackage"
       ],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1002,7 +984,7 @@
       "description": "C2M2 file format controlled-vocabulary term format:3475 (EDAM), referenced by the input-datapackage instance.",
       "usedBy": [
         {
-          "@id": "ark:59853/input-datapackage-c2m2-file/sample.tsv"
+          "@id": "ark:59853/input-datapackage-c2m2-file/mini/sample.tsv"
         }
       ],
       "additionalProperty": [
@@ -1031,14 +1013,14 @@
       "version": "0.1.0",
       "contentUrl": "file:///C2M2_datapackage.json",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [
         "CFDE / input-datapackage DCC"
       ],
       "additionalType": "File",
-      "datePublished": "2026-08-18",
+      "datePublished": "2026-10-13",
       "keywords": [
         "C2M2",
         "preservation",
@@ -1062,49 +1044,25 @@
           "@id": "ark:59853/input-datapackage-c2m2"
         }
       ],
-      "description": "Conversion of the input-datapackage C2M2 Frictionless datapackage into this RO-Crate: one Dataset + evi:Schema per populated table, the file table additionally exploded into file-level source-data entities, and the datapackage.json + SQLite preserved verbatim.",
+      "description": "Conversion of the input-datapackage C2M2 Frictionless datapackage into this RO-Crate. It reads the datapackage.json, the populated table TSVs and the SQLite index (all preserved verbatim) and generates one evi:Schema per populated table. The file table's rows describe the DCC's own data files; they are members of the crate, not outputs of this conversion.",
       "generated": [
         {
           "@id": "ark:59853/input-datapackage-c2m2-schema-id_namespace"
         },
         {
-          "@id": "ark:59853/input-datapackage-c2m2-table-id_namespace"
-        },
-        {
           "@id": "ark:59853/input-datapackage-c2m2-schema-project"
-        },
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-table-project"
         },
         {
           "@id": "ark:59853/input-datapackage-c2m2-schema-file_format"
         },
         {
-          "@id": "ark:59853/input-datapackage-c2m2-table-file_format"
-        },
-        {
           "@id": "ark:59853/input-datapackage-c2m2-schema-file"
-        },
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-table-file"
         },
         {
           "@id": "ark:59853/input-datapackage-c2m2-schema-biosample"
         },
         {
-          "@id": "ark:59853/input-datapackage-c2m2-table-biosample"
-        },
-        {
           "@id": "ark:59853/input-datapackage-c2m2-schema-file_describes_biosample"
-        },
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-table-file_describes_biosample"
-        },
-        {
-          "@id": "ark:59853/input-datapackage-c2m2-file/sample.tsv"
-        },
-        {
-          "@id": "ark:99999/data-bin"
         }
       ],
       "prov:used": [
@@ -1113,15 +1071,33 @@
         },
         {
           "@id": "ark:59853/input-datapackage-c2m2-datapackage-json"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-id_namespace"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-project"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-file_format"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-file"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-biosample"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-file_describes_biosample"
         }
       ],
       "prov:wasAssociatedWith": [
         "CFDE / input-datapackage DCC"
       ],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "additionalType": "Computation",
       "runBy": "CFDE / input-datapackage DCC",
-      "dateCreated": "2026-08-18",
+      "dateCreated": "2026-10-13",
       "command": "python3 convert.py input-datapackage --output-path c2m2-example-crate",
       "usedSoftware": [
         {
@@ -1132,6 +1108,24 @@
       "usedDataset": [
         {
           "@id": "ark:59853/input-datapackage-c2m2-datapackage-json"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-id_namespace"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-project"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-file_format"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-file"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-biosample"
+        },
+        {
+          "@id": "ark:59853/input-datapackage-c2m2-table-file_describes_biosample"
         }
       ],
       "usedContainer": [],
@@ -1153,7 +1147,7 @@
       "description": "Reference converter that reads a C2M2 Frictionless datapackage (datapackage.json + TSVs + SQLite) and emits a FAIRSCAPE RO-Crate following the C2M2-to-ROCrate design spec.",
       "version": "0.1.0",
       "usedByComputation": [],
-      "fairscapeVersion": "1.1.3",
+      "fairscapeVersion": "1.2.2",
       "prov:wasGeneratedBy": [],
       "prov:wasDerivedFrom": [],
       "prov:wasAttributedTo": [

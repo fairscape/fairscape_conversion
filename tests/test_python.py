@@ -105,7 +105,8 @@ def test_build_record_treats_read_and_written_as_output(tmp_path):
     files = record["files"]
     assert set(files) == {str(both), str(outside)}
     assert files[str(both)] == {"role": "output", "size": 1, "locator": "contentUrl",
-                                "locator_value": "data/tmp.csv"}
+                                "locator_value": "data/tmp.csv",
+                                "md5": "0cc175b9c0f1b6a831c399e269772661"}
     assert files[str(outside)]["locator"] == "localPath"
 
 

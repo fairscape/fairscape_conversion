@@ -212,5 +212,7 @@ def convert(direction: str, source, **options):
     """
     if direction == "import" and isinstance(source, (str, os.PathLike)):
         extract_opts = {k: options.pop(k) for k in list(options) if k in EXTRACT_OPTIONS}
+        if "crate_dir" in extract_opts:              # the linking pass needs it too
+            options["crate_dir"] = extract_opts["crate_dir"]
         source = extract_records(source, **extract_opts)
     return PLUGIN.convert(direction, source, **options)

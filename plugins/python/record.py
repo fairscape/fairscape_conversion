@@ -215,8 +215,20 @@ def locate(path: str, crate_dir: str) -> Dict[str, Any]:
     return {"locator": "localPath", "locator_value": path}
 
 
+def file_md5(path: str) -> str:
+    h = hashlib.md5()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def _file_entry(path: str, role: str, crate_dir: str) -> Dict[str, Any]:
-    return {"role": role, "size": os.path.getsize(path), **locate(path, crate_dir)}
+    """One file's record. The md5 is what tells two versions of the same
+    path apart (a later run rewrote it), so ``track`` can link a read to the
+    version that was actually read."""
+    return {"role": role, "size": os.path.getsize(path), "md5": file_md5(path),
+            **locate(path, crate_dir)}
 
 
 def code_hash(code: str) -> str:

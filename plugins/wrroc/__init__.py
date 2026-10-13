@@ -19,9 +19,12 @@ from .parsers import DEFAULT_NAAN
 PLUGIN = WrrocPlugin()
 
 
-def convert(direction: str, source: dict, naan: str = DEFAULT_NAAN, validate: bool = True) -> dict:
+def convert(direction: str, source: dict, naan: str = DEFAULT_NAAN, validate: bool = True,
+            **options) -> dict:
+    """``options`` are the shared import options (``linked_crates``,
+    ``crate_dir``, ``link_report`` …) every importer takes."""
     if direction == "import":
-        return PLUGIN.convert("import", source, naan=naan, validate=validate)
+        return PLUGIN.convert("import", source, naan=naan, validate=validate, **options)
     return PLUGIN.convert(direction, source)
 
 

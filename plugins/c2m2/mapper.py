@@ -222,6 +222,7 @@ class C2M2Mapper:
             "properties": properties,
             "cfde:primaryKey": primary_key,
             "cfde:foreignKeys": foreign_keys,
+            "generatedBy": {"@id": meta["conversion_guid"]},
         }
         return Schema.model_validate(element)
 
@@ -252,7 +253,6 @@ class C2M2Mapper:
             "rowCount": rows,
             "columnCount": cols,
             "contentSize": str(size),
-            "generatedBy": {"@id": meta["conversion_guid"]},
             "isPartOf": [{"@id": meta["crate_guid"]}],
             "cfde:c2m2Table": table,
         }
@@ -317,9 +317,11 @@ class C2M2Mapper:
             "name": f"C2M2 to RO-Crate conversion ({meta['dcc_label']})",
             "description": (
                 f"Conversion of the {meta['dcc_label']} C2M2 Frictionless datapackage "
-                f"into this RO-Crate: one Dataset + evi:Schema per populated table, the "
-                f"file table additionally exploded into file-level source-data entities, "
-                f"and the datapackage.json + SQLite preserved verbatim."
+                f"into this RO-Crate. It reads the datapackage.json, the populated table "
+                f"TSVs and the SQLite index (all preserved verbatim) and generates one "
+                f"evi:Schema per populated table. The file table's rows describe the "
+                f"DCC's own data files; they are members of the crate, not outputs of "
+                f"this conversion."
             ),
             "runBy": meta["author"],
             "dateCreated": meta["date"],

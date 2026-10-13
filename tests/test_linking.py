@@ -41,6 +41,7 @@ def upstream(tmp_path):
         {"@id": "ro-crate-metadata.json", "@type": "CreativeWork", "about": {"@id": UP_ROOT}},
         {"@id": UP_ROOT, "@type": ["Dataset", EVI + "ROCrate"], "name": "Upstream run",
          "description": "the producer", "author": "Up Stream", "keywords": ["up"],
+         "version": "1.0", "license": "https://spdx.org/licenses/CC-BY-4.0",
          "hasPart": [{"@id": UP_RUN}, {"@id": UP_FILE}, {"@id": UP_DIR}, {"@id": UP_SUM}],
          EVI + "outputs": [{"@id": UP_FILE}]},
         {"@id": UP_RUN, "@type": ["prov:Activity", EVI + "Computation"], "name": "RUN",

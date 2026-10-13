@@ -38,11 +38,11 @@
         "@id": "https://w3id.org/ro/crate/1.2"
       },
       "about": {
-        "@id": "ark:59853/rocrate-snakemake-workflow-snakefile-c231952"
+        "@id": "ark:59853/rocrate-snakemake-workflow-snakefile-48c1e7d"
       }
     },
     {
-      "@id": "ark:59853/rocrate-snakemake-workflow-snakefile-c231952",
+      "@id": "ark:59853/rocrate-snakemake-workflow-snakefile-48c1e7d",
       "@type": [
         "Dataset",
         "https://w3id.org/EVI#ROCrate"
@@ -62,16 +62,16 @@
       "datePublished": "2026-08-06T09:23:13.829075-04:00",
       "hasPart": [
         {
-          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-dac1271"
         },
         {
-          "@id": "ark:59853/computation-make-list-9fafdfb"
+          "@id": "ark:59853/computation-make-list-f413909"
         },
         {
-          "@id": "ark:59853/computation-reverse-74f82b4"
+          "@id": "ark:59853/computation-reverse-93b16dc"
         },
         {
-          "@id": "ark:59853/computation-split-halves-165c4dc"
+          "@id": "ark:59853/computation-split-halves-5d10552"
         },
         {
           "@id": "ark:59853/software-snakefile-c231952"
@@ -89,21 +89,21 @@
           "@id": "ark:59853/software-split-halves-8bc6b50"
         },
         {
-          "@id": "ark:59853/dataset-first-half-txt-893cee7"
+          "@id": "ark:59853/dataset-first-half-txt-4fce91f"
         },
         {
-          "@id": "ark:59853/dataset-letters-txt-2ef78ba"
+          "@id": "ark:59853/dataset-letters-txt-a37b5f0"
         },
         {
-          "@id": "ark:59853/dataset-reversed-txt-baab9b2"
+          "@id": "ark:59853/dataset-reversed-txt-e985173"
         },
         {
-          "@id": "ark:59853/dataset-second-half-txt-b68cb24"
+          "@id": "ark:59853/dataset-second-half-txt-09045f6"
         }
       ]
     },
     {
-      "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f",
+      "@id": "ark:59853/computation-snakemake-workflow-snakefile-dac1271",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -124,10 +124,10 @@
       "usedDataset": [],
       "generated": [
         {
-          "@id": "ark:59853/dataset-first-half-txt-893cee7"
+          "@id": "ark:59853/dataset-first-half-txt-4fce91f"
         },
         {
-          "@id": "ark:59853/dataset-second-half-txt-b68cb24"
+          "@id": "ark:59853/dataset-second-half-txt-09045f6"
         }
       ],
       "snakemakeVersion": "9.25.1",
@@ -135,7 +135,7 @@
       "endTime": "2026-08-06T08:38:00.065969-04:00"
     },
     {
-      "@id": "ark:59853/computation-make-list-9fafdfb",
+      "@id": "ark:59853/computation-make-list-f413909",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -152,12 +152,12 @@
       "usedDataset": [],
       "generated": [
         {
-          "@id": "ark:59853/dataset-letters-txt-2ef78ba"
+          "@id": "ark:59853/dataset-letters-txt-a37b5f0"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-dac1271"
         }
       ],
       "command": "printf '%s\\n' a b c d e f g h > results/letters.txt",
@@ -165,7 +165,7 @@
       "endTime": "2026-08-06T08:38:00.040968-04:00"
     },
     {
-      "@id": "ark:59853/computation-reverse-74f82b4",
+      "@id": "ark:59853/computation-reverse-93b16dc",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -181,17 +181,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-letters-txt-2ef78ba"
+          "@id": "ark:59853/dataset-letters-txt-a37b5f0"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-reversed-txt-baab9b2"
+          "@id": "ark:59853/dataset-reversed-txt-e985173"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-dac1271"
         }
       ],
       "command": "tac results/letters.txt > results/reversed.txt",
@@ -199,7 +199,7 @@
       "endTime": "2026-08-06T08:38:00.054969-04:00"
     },
     {
-      "@id": "ark:59853/computation-split-halves-165c4dc",
+      "@id": "ark:59853/computation-split-halves-5d10552",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -215,20 +215,20 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-reversed-txt-baab9b2"
+          "@id": "ark:59853/dataset-reversed-txt-e985173"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-first-half-txt-893cee7"
+          "@id": "ark:59853/dataset-first-half-txt-4fce91f"
         },
         {
-          "@id": "ark:59853/dataset-second-half-txt-b68cb24"
+          "@id": "ark:59853/dataset-second-half-txt-09045f6"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-snakemake-workflow-snakefile-8adea0f"
+          "@id": "ark:59853/computation-snakemake-workflow-snakefile-dac1271"
         }
       ],
       "command": "head -n 4 results/reversed.txt > results/first_half.txt && tail -n 4 results/reversed.txt > results/second_half.txt",
@@ -254,7 +254,7 @@
         "https://w3id.org/EVI#Software"
       ],
       "name": "Snakemake",
-      "author": "Johannes K\u00f6ster",
+      "author": "Johannes Köster",
       "description": "Snakemake workflow management system (https://snakemake.github.io/)",
       "format": "application/x-python",
       "version": "9.25.1",
@@ -312,7 +312,7 @@
       ]
     },
     {
-      "@id": "ark:59853/dataset-first-half-txt-893cee7",
+      "@id": "ark:59853/dataset-first-half-txt-4fce91f",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -328,14 +328,14 @@
       "format": "text/plain",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-split-halves-165c4dc"
+          "@id": "ark:59853/computation-split-halves-5d10552"
         }
       ],
       "contentUrl": "results/first_half.txt",
       "contentSize": "8"
     },
     {
-      "@id": "ark:59853/dataset-letters-txt-2ef78ba",
+      "@id": "ark:59853/dataset-letters-txt-a37b5f0",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -351,14 +351,14 @@
       "format": "text/plain",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-make-list-9fafdfb"
+          "@id": "ark:59853/computation-make-list-f413909"
         }
       ],
       "contentUrl": "results/letters.txt",
       "contentSize": "16"
     },
     {
-      "@id": "ark:59853/dataset-reversed-txt-baab9b2",
+      "@id": "ark:59853/dataset-reversed-txt-e985173",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -374,14 +374,14 @@
       "format": "text/plain",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-reverse-74f82b4"
+          "@id": "ark:59853/computation-reverse-93b16dc"
         }
       ],
       "contentUrl": "results/reversed.txt",
       "contentSize": "16"
     },
     {
-      "@id": "ark:59853/dataset-second-half-txt-b68cb24",
+      "@id": "ark:59853/dataset-second-half-txt-09045f6",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -397,7 +397,7 @@
       "format": "text/plain",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-split-halves-165c4dc"
+          "@id": "ark:59853/computation-split-halves-5d10552"
         }
       ],
       "contentUrl": "results/second_half.txt",

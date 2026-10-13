@@ -30,8 +30,6 @@ import re
 from datetime import datetime, timezone
 
 REMOTE_SCHEMES = ("gs://", "s3://", "drs://", "http://", "https://", "ftp://")
-UUID_RE = re.compile(
-    r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
 
 
 def leaf_strings(value):
@@ -46,9 +44,13 @@ def leaf_strings(value):
             yield from leaf_strings(v)
 
 
-def iter_calls(calls, workflow_name):
-    """Yield (task_name, attempt_dict) for the last attempt of each executed
-    call shard, recursing into inlined subworkflow metadata."""
+def iter_calls(calls, workflow_name, scope=""):
+    """Yield (task_name, attempt_dict, scope) for the last attempt of each
+    executed call shard, recursing into inlined subworkflow metadata.
+
+    ``scope`` names the enclosing subworkflow calls and their shards
+    (``sw[1]/inner[0]``): calls inside a scattered subworkflow all carry
+    shard -1 themselves, so it is what keeps their identities apart."""
     for call_name, attempts in (calls or {}).items():
         task = call_name[len(workflow_name) + 1:] \
             if call_name.startswith(workflow_name + ".") else call_name
@@ -61,10 +63,12 @@ def iter_calls(calls, workflow_name):
             a = by_shard[shard]
             sub = a.get("subWorkflowMetadata")
             if sub:
+                step = task + (f"[{shard}]" if shard >= 0 else "")
                 yield from iter_calls(sub.get("calls"),
-                                      sub.get("workflowName", task))
+                                      sub.get("workflowName", task),
+                                      f"{scope}/{step}" if scope else step)
             elif a.get("start"):
-                yield task, a
+                yield task, a, scope
 
 
 def task_source(wdl_source, task_name):
@@ -172,8 +176,8 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
 
     # sort for a deterministic graph order regardless of the JSON's dict order
     jobs_raw = sorted(iter_calls(meta.get("calls"), workflow_name),
-                      key=lambda ta: (ta[0], ta[1].get("shardIndex", -1)))
-    roots = [workflow_root] + [a["callRoot"] for _, a in jobs_raw if a.get("callRoot")]
+                      key=lambda tas: (tas[0], tas[2], tas[1].get("shardIndex", -1)))
+    roots = [workflow_root] + [a["callRoot"] for _, a, _ in jobs_raw if a.get("callRoot")]
     roots = [os.path.normpath(r) for r in roots if r]
 
     def resolve(path, rel_to=None):
@@ -209,15 +213,12 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
     wdl_key = f"{workflow_name}:{workflow_url or 'inline'}"
 
     def ark_source(path):
+        # the full absolute path, run UUID directories and all: two files are
+        # the same Dataset only when they are the same file on disk (a re-run
+        # writes new files, so it mints new ARKs)
         if path.startswith(REMOTE_SCHEMES):
             return path
-        norm = resolve(path)
-        if workflow_root and (norm.startswith(os.path.normpath(workflow_root) + os.sep)):
-            rel = os.path.relpath(norm, workflow_root)
-            # subworkflow call dirs embed their own run UUID; blank any so
-            # re-runs mint the same dataset ARKs
-            return wdl_key + "#run/" + UUID_RE.sub("-", rel)
-        return norm
+        return resolve(path)
 
     files = {}
 
@@ -246,7 +247,7 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
 
     jobs = []
     tasks = {}
-    for task, a in jobs_raw:
+    for task, a, scope in jobs_raw:
         inputs, parameters = [], []
         for key, value in (a.get("inputs") or {}).items():
             paths = [s for s in leaf_strings(value) if is_file(s)]
@@ -263,6 +264,7 @@ def extract(metadata_path, crate_dir=None, naan="59853", name=None,
         jobs.append({
             "task": task,
             "shard": a.get("shardIndex", -1),
+            "scope": scope,
             "attempt": a.get("attempt", 1),
             "shellcmd": a.get("commandLine"),
             "parameters": parameters,

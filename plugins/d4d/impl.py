@@ -204,6 +204,10 @@ def _map_root(ctx: Context, d4d: dict) -> dict:
 
     root_args = _assemble_root_args(ctx, d4d)
     root_id = d4d.get("id") or d4d.get("doi") or "./"
+    # A license is required, not defaulted: inventing one would claim reuse
+    # terms the datasheet never granted.
+    if root_args.get("dataLicense") in _EMPTY:
+        raise ValueError(f"D4D datasheet {root_id} has no license; add a `license` field")
     root_args.setdefault("name", d4d.get("title") or d4d.get("name") or str(root_id))
     root_args.setdefault("description", d4d.get("description") or root_args["name"])
     root_args.setdefault("keywords", [])

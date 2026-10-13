@@ -29,6 +29,9 @@ class ExamplePlugin(PluginBase):
     name = "example"
     # The names properties.csv references, mapped to shared parsers.
     import_parsers = {"scalar": scalar, "string_list": string_list}
+    # The toy output is a bare graph, not an RO-Crate; a real importer leaves
+    # this at the default (True) so its crates are validated.
+    validates_output = False
 
     def load_source(self, source) -> Iterable[SourceRecord]:
         """The whole format-specific loading step: memos are a dict-of-lists."""

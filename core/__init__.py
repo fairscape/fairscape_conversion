@@ -10,11 +10,11 @@ Public API used by the plugins:
 """
 
 from . import parsers, roundtrip
-from .engine import (Context, Record, apply_export_rules, apply_import_rules,
-                     interpolate, run_export_parser, run_import_parser,
-                     run_pipeline)
+from .engine import (Context, DuplicateIdWarning, Record, apply_export_rules,
+                     apply_import_rules, interpolate, run_export_parser,
+                     run_import_parser, run_pipeline, warn_duplicate)
 from .loader import load_mapping
-from .plugin import PluginBase
+from .plugin import CrateValidationError, PluginBase, validate_crate
 from .records import (SourceRecord, classify_node, records_from_graph,
                       records_from_items, types_of)
 from .registry import Plugin
@@ -30,4 +30,5 @@ __all__ = [
     "apply_import_rules", "apply_export_rules",
     "run_import_parser", "run_export_parser",
     "interpolate", "parsers", "roundtrip",
+    "DuplicateIdWarning", "warn_duplicate", "CrateValidationError", "validate_crate",
 ]

@@ -110,7 +110,7 @@ def resource_description(value, rule, ctx):
 
 def package_author(value, rule, ctx):
     return ", ".join(_contributors(ctx, "author") or _contributors(ctx)) \
-        or _settings(ctx).get("author") or None
+        or _settings(ctx).get("author") or "Unknown"
 
 
 def package_date(value, rule, ctx):
@@ -164,7 +164,10 @@ def resource_hash(value, rule, ctx):
 
 def resource_schema_ref(value, rule, ctx):
     ark = ctx.extras["guid_map"].get("schema:" + ctx.node["name"])
-    return {"@id": ark} if ark else None
+    if ark:
+        return {"@id": ark}
+    ref = ctx.node.get("schema_ref")
+    return {"@id": ref} if ref else None
 
 
 def sources_refs(value, rule, ctx):

@@ -17,11 +17,31 @@ genuinely different.
 from __future__ import annotations
 
 import re
+import warnings
 from dataclasses import dataclass
 
 from .schema import EntityRule, Mapping, PropertyRule
 
 _EMPTY = (None, "", [], {})
+
+
+class DuplicateIdWarning(UserWarning):
+    """Two different nodes were given the same ``@id``; the later one was dropped.
+
+    Almost always an ARK minted from a source string that leaves out the
+    detail telling the two apart (a namespace, a shard, an absolute path).
+    """
+
+
+def warn_duplicate(kept: dict, dropped: dict) -> None:
+    """Warn when first-writer-wins dedup drops a node that differs from the
+    one kept. Identical re-emissions stay silent."""
+    if kept == dropped:
+        return
+    warnings.warn(
+        f"duplicate @id {kept.get('@id')!r}: kept {kept.get('name')!r}, "
+        f"dropped a different node {dropped.get('name')!r}",
+        DuplicateIdWarning, stacklevel=3)
 
 
 @dataclass
@@ -200,7 +220,8 @@ def run_pipeline(plugin, direction: str, source, options: dict | None = None):
     seeded into ``ctx.extras``.
 
     A record whose mapping returns ``None`` is dropped. On a duplicate ``@id``
-    the first-mapped node wins (later records are skipped) — ``pre`` may seed
+    the first-mapped node wins (later records are skipped, with a
+    :class:`DuplicateIdWarning` when they differ) — ``pre`` may seed
     ``ctx.out_nodes``/``ctx.order`` to reserve ids ahead of the loop.
     """
     ctx = Context(plugin, direction, source)
@@ -218,6 +239,7 @@ def run_pipeline(plugin, direction: str, source, options: dict | None = None):
             continue
         node.setdefault("@id", resolve_id(ctx, rec))
         if node["@id"] in ctx.out_nodes:      # first writer wins
+            warn_duplicate(ctx.out_nodes[node["@id"]], node)
             continue
         ctx.out_nodes[node["@id"]] = node
         ctx.order.append(node["@id"])

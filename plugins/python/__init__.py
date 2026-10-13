@@ -18,8 +18,9 @@ record:
 The crate is descriptor -> root -> one Computation -> the Software it ran ->
 one Dataset per file. ARKs are deterministic (core.arks): the Software hashes
 the code (identical code is one Software across runs), an input hashes its
-path, and the Computation and its outputs hash in the start time, since
-re-running writes new versions of the outputs.
+path and md5 (a rewritten file is a new version), and the Computation and its
+outputs hash in the start time, since re-running writes new versions of the
+outputs.
 
     from fairscape_conversion.plugins import python as pyrun
     crate = pyrun.convert("import", record)
@@ -79,6 +80,8 @@ class PythonPlugin(PluginBase):
             source = os.path.normpath(path)
             if info["role"] == "output":
                 source += "#" + run["starttime"]
+            elif info.get("md5"):                # an input is this path's content
+                source += "#" + info["md5"]
             guid_map[f"file:{path}"] = mint_ark(
                 naan, "dataset", os.path.basename(path), source)
         ctx.extras["guid_map"] = guid_map

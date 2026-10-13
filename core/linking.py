@@ -28,13 +28,21 @@ Every reference to the old id in the graph (``usedDataset``, ``hasPart``,
 Matching is by evidence, in this order, because every tool hashes a different
 source string into its ARKs and none of them can re-mint another's:
 
-1. **path** — the same absolute file (``contentUrl`` resolved against each
-   crate's directory, or ``localPath``);
-2. **md5** — both sides declare a checksum and they agree;
-3. **directory** — the file sits inside a directory the upstream crate
+1. **id** — the node already carries an upstream ``@id`` (a run-time helper
+   logged the ARK) and nothing contradicts it: when both sides resolve to
+   files on disk they are the same file, and when both declare an md5 the
+   checksums agree. An ARK alone is never enough against such evidence;
+2. **path** — the same absolute file (``contentUrl`` resolved against each
+   crate's directory, or ``localPath``), unless both sides declare an md5
+   and they differ (the file was rewritten since);
+3. **md5** — both sides declare a checksum and they agree;
+4. **directory** — the file sits inside a directory the upstream crate
    describes as one Dataset (a Nextflow ``publishDir`` without
    ``expandDirectories``). The node keeps its own id and gains ``isPartOf``
    -> a stub of that directory Dataset.
+
+Software is matched by md5 only: every rule of one Snakefile (every task of
+one WDL) points at the same file, so a path names no single Software.
 
 Nothing here is plugin-specific: it reads the finished crate, so any importer
 that puts a resolvable ``contentUrl``/``localPath`` on its nodes takes part.
@@ -43,6 +51,7 @@ that puts a resolvable ``contentUrl``/``localPath`` on its nodes takes part.
 from __future__ import annotations
 
 import os
+import warnings
 from dataclasses import dataclass, field
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -72,6 +81,10 @@ _EDGE_FIELDS = {
 #: Fields whose value names something in the upstream crate that this crate
 #: does not carry; the consumer's own value is kept instead.
 _CONSUMER_ONLY = {"evi:Schema", "schema", "hasSchema"}
+
+#: Inverse edges pointing at the consumer's own computations: the stub keeps
+#: the consumer's values (the upstream's name runs this crate does not carry).
+_CONSUMER_INVERSES = {"datasetUsedBy", "softwareUsedBy", "usedBy", "usedByComputation"}
 
 
 # ---------------------------------------------------------------------------
@@ -228,6 +241,8 @@ class LinkedCrate:
             md5 = node.get("md5")
             if isinstance(md5, str) and md5:
                 self.by_md5.setdefault(md5.lower(), node_id)
+            if _has_type(node, "Software"):      # a shared file names no one Software
+                continue
             for p in _candidates(node, bases):
                 key = _canon(p)
                 if os.path.isdir(p):
@@ -244,6 +259,10 @@ class LinkedCrate:
 
     def match_path(self, path: str) -> Optional[str]:
         return self.by_path.get(_canon(path))
+
+    def md5_of(self, node_id: str) -> Optional[str]:
+        md5 = self.index.get(node_id, {}).get("md5")
+        return md5.lower() if isinstance(md5, str) and md5 else None
 
     def match_md5(self, md5: Optional[str]) -> Optional[str]:
         if not isinstance(md5, str) or not md5:
@@ -329,7 +348,7 @@ def _stub_of(upstream: Dict[str, Any], consumer: Dict[str, Any],
     for key, value in consumer.items():
         if key.startswith("@") or key in stub:
             continue
-        if key in _EDGE_FIELDS and key not in _CONSUMER_ONLY:
+        if key in _EDGE_FIELDS and key not in _CONSUMER_ONLY | _CONSUMER_INVERSES:
             continue
         if value in (None, "", [], {}):
             continue
@@ -407,6 +426,30 @@ def _rewrite_refs(value, mapping: Dict[str, str]):
     return value
 
 
+def _md5(node: Dict[str, Any]) -> Optional[str]:
+    md5 = node.get("md5")
+    return md5.lower() if isinstance(md5, str) and md5 else None
+
+
+def _md5_conflict(node: Dict[str, Any], lc: "LinkedCrate", up_id: str) -> bool:
+    mine, theirs = _md5(node), lc.md5_of(up_id)
+    return bool(mine and theirs and mine != theirs)
+
+
+def _id_contradicted(node: Dict[str, Any], paths: List[str], lc: "LinkedCrate",
+                     up_id: str) -> bool:
+    """A shared ``@id`` is evidence only while the files agree: different
+    checksums, or two different files that both exist, mean two things that
+    were minted the same ARK."""
+    if _md5_conflict(node, lc, up_id):
+        return True
+    theirs = lc.paths.get(up_id)
+    if not theirs or not os.path.exists(theirs):
+        return False
+    mine = [p for p in paths if os.path.exists(p)]
+    return bool(mine) and _canon(theirs) not in {_canon(p) for p in mine}
+
+
 def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None,
                search_dirs: Iterable[str] = (), only_inputs: bool = True) -> LinkReport:
     """Rewrite `crate` in place so its consumed entities reuse upstream ids.
@@ -436,6 +479,14 @@ def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None
     graph: List[Dict[str, Any]] = [n for n in crate.get("@graph", []) if isinstance(n, dict)]
     root = _find_root(graph)
     root_id = root.get("@id")
+    same_root = [c for c in crates if c.root_id and c.root_id == root_id]
+    for c in same_root:
+        warnings.warn(
+            f"linked crate {c.metadata_path} has the same root id {root_id!r} as the "
+            "crate being linked; it cannot be pointed at and is skipped", stacklevel=2)
+    crates = [c for c in crates if c not in same_root]
+    if not crates:
+        return report
     base_dirs = [os.path.abspath(crate_dir)] if crate_dir else []
     for extra in search_dirs:
         extra = os.path.abspath(os.path.expanduser(str(extra)))
@@ -460,21 +511,22 @@ def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None
 
         paths = _candidates(node, base_dirs)
         hit: Optional[Tuple[LinkedCrate, str, str, Optional[str]]] = None
+        is_software = _has_type(node, "Software")
 
-        if not _has_type(node, "Software"):
+        if not is_software:
             # A node that already carries the upstream id (a run-time helper
             # logged the ARK itself). Software is excluded: two crates that
             # both describe the same engine mint the same deterministic ARK
             # without one having taken it from the other.
             for lc in crates:
-                if node_id in lc.index:
+                if node_id in lc.index and not _id_contradicted(node, paths, lc, node_id):
                     hit = (lc, node_id, "id", paths[0] if paths else None)
                     break
-        if hit is None:
+        if hit is None and not is_software:
             for p in paths:
                 for lc in crates:
                     up = lc.match_path(p)
-                    if up:
+                    if up and not _md5_conflict(node, lc, up):
                         hit = (lc, up, "path", p)
                         break
                 if hit:
@@ -485,7 +537,7 @@ def link_crate(crate: Dict[str, Any], linked, *, crate_dir: Optional[str] = None
                 if up:
                     hit = (lc, up, "md5", paths[0] if paths else None)
                     break
-        if hit is None:
+        if hit is None and not is_software:
             for p in paths:
                 for lc in crates:
                     up = lc.match_directory(p)

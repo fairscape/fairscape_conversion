@@ -2,13 +2,17 @@ source_type,source_property,target_type,target_property,import_parser,export_par
 mainActivity,label,Computation,name,pretty_label,,import,TRUE,required,scalar,,,,,,,prov:label else spaced local name
 mainActivity,,Computation,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
 mainActivity,,Computation,runBy,synth_runby,,import,FALSE,required,scalar,,,,,,,bundle senderAgent else crate author else Unknown
-mainActivity,,Computation,dateCreated,synth_date,,import,FALSE,required,scalar,,,,,,,bundles carry no timestamps; crate root datePublished
+mainActivity,,Computation,dateCreated,activity_date,,import,FALSE,required,scalar,,,,,,,activity endTime else startTime else crate root datePublished
+mainActivity,start,Computation,startTime,scalar,,import,FALSE,passthrough,scalar,,,,,,,PROV activity startTime
+mainActivity,end,Computation,endTime,scalar,,import,FALSE,passthrough,scalar,,,,,,,PROV activity endTime
 mainActivity,cpm_type,Computation,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,cpm:mainActivity — round-trip marker for export
 mainActivity,attrs,Computation,parameter,attrs_parameter,,import,FALSE,optional,list,,,,,,,domain attrs (metrics/git hashes) as key=value strings
 activity,label,Computation,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
 activity,,Computation,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
 activity,,Computation,runBy,synth_runby,,import,FALSE,required,scalar,,,,,,,
-activity,,Computation,dateCreated,synth_date,,import,FALSE,required,scalar,,,,,,,
+activity,,Computation,dateCreated,activity_date,,import,FALSE,required,scalar,,,,,,,activity endTime else startTime else crate root datePublished
+activity,start,Computation,startTime,scalar,,import,FALSE,passthrough,scalar,,,,,,,
+activity,end,Computation,endTime,scalar,,import,FALSE,passthrough,scalar,,,,,,,
 activity,attrs,Computation,parameter,attrs_parameter,,import,FALSE,optional,list,,,,,,,
 transferActivity,label,Activity,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
 transferActivity,,Activity,description,synth_desc,,import,FALSE,synthesized,scalar,,,,,,,
@@ -26,6 +30,8 @@ entity,cpm_type,Dataset,additionalType,cpm_type_str,,import,TRUE,optional,scalar
 entity,attrs,Dataset,additionalProperty,attrs_property_values,,import,FALSE,optional,list,,,,,,,every unconsumed bundle attribute as a PropertyValue
 agent,label,Organization,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
 agent,cpm_type,Organization,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,cpm:senderAgent / cpm:receiverAgent
+person,label,Person,name,pretty_label,,import,TRUE,required,scalar,,,,,,,
+person,cpm_type,Person,additionalType,cpm_type_str,,import,TRUE,optional,scalar,,,,,,,
 cpmfile,name,Dataset,name,scalar,,import,TRUE,required,scalar,,,,,,,crate node name else file id
 cpmfile,description,Dataset,description,file_desc,,import,TRUE,required,scalar,,,,,,,
 cpmfile,,Dataset,author,synth_author,,import,FALSE,required,scalar,,,,,,,
