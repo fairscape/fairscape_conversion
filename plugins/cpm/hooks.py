@@ -37,6 +37,7 @@ from __future__ import annotations
 import copy
 import json
 import re
+import warnings
 from pathlib import Path
 
 from ...core import Context, PluginBase, Record, SourceRecord
@@ -57,7 +58,36 @@ _CPM_FILE_TYPES = ("CPMProvenanceFile", "CPMMetaProvenanceFile")
 _ACTIVITY_SOURCE_TYPE = {"mainActivity": "mainActivity",
                          "receiptActivity": "transferActivity"}
 
-_QN_RE = re.compile(r"^[A-Za-z_][\w.-]*:\S")
+_QN_RE = re.compile(r"^([A-Za-z_][\w.-]*):(?!//)\S")
+
+# Which positional arguments of each PROV relation name an element, and of
+# what kind. The rest are times or statement ids (generation / usage) and
+# must never become nodes.
+_RELATION_ARGS = {
+    "used": ("activity", "entity"),
+    "wasGeneratedBy": ("entity", "activity"),
+    "wasInvalidatedBy": ("entity", "activity"),
+    "wasDerivedFrom": ("entity", "entity", "activity"),
+    "wasAttributedTo": ("entity", "agent"),
+    "wasAssociatedWith": ("activity", "agent", "entity"),
+    "actedOnBehalfOf": ("agent", "agent", "activity"),
+    "wasInformedBy": ("activity", "activity"),
+    "wasStartedBy": ("activity", "entity", "activity"),
+    "wasEndedBy": ("activity", "entity", "activity"),
+    "specializationOf": ("entity", "entity"),
+    "alternateOf": ("entity", "entity"),
+    "hadMember": ("entity", "entity"),
+    "wasInfluencedBy": ("entity", "entity"),
+}
+
+# Prefixes an export may write without the source having declared them.
+_KNOWN_PREFIXES = {
+    "dct": "http://purl.org/dc/terms/",
+    "cpm": "https://www.commonprovenancemodel.org/cpm-namespace-v1-0/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+}
+
+_ISO_TIME_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}")
 
 
 def _types_of(node) -> list:
@@ -220,12 +250,14 @@ class CpmPlugin(PluginBase):
                     else:
                         relations.append((stmt.name, stmt.args, bundle.ident))
 
-        # Referenced-but-undeclared ids (e.g. jump targets) become entity stubs.
-        for _, args, bundle_id in relations:
-            for qid in args:
+        # Referenced-but-undeclared ids (e.g. jump targets) become stubs.
+        # Only element positions count: times and statement ids are not nodes.
+        for name, args, bundle_id in relations:
+            kinds = _RELATION_ARGS.get(name, ())
+            for qid, kind in zip(args, kinds):
                 if qid and qid not in elements:
                     self._merge_element(
-                        elements, provn.Statement("entity", [qid]), bundle_id, None)
+                        elements, provn.Statement(kind, [qid]), bundle_id, None)
 
         # dct:hasPart* on a main activity nominates its sub-activities.
         for qid, el in elements.items():
@@ -279,6 +311,10 @@ class CpmPlugin(PluginBase):
             el["bundle_file"], el["bundle_id"] = file_id, bundle_id
         if stmt.name == "activity" and el["kind"] == "entity":
             el["kind"] = "activity"        # stub created from a relation
+        if stmt.name == "activity":
+            start, end = (list(stmt.args[1:3]) + [None, None])[:2]
+            el["start"] = el.get("start") or start
+            el["end"] = el.get("end") or end
         for key, value, _datatype in stmt.attrs:
             if key == "prov:label":
                 el["label"] = el["label"] or str(value)
@@ -295,7 +331,9 @@ class CpmPlugin(PluginBase):
         if el["kind"] == "activity":
             return _ACTIVITY_SOURCE_TYPE.get(el["cpm_type"], "activity")
         if el["kind"] == "agent":
-            return "agent"
+            ptypes = el["attrs"].get("prov:type")
+            ptypes = ptypes if isinstance(ptypes, list) else [ptypes]
+            return "person" if "prov:Person" in map(str, ptypes) else "agent"
         return "entity"
 
     def link(self, ctx: Context):
@@ -305,6 +343,7 @@ class CpmPlugin(PluginBase):
             ark = guid_map.get(qid)
             return (ark, out.get(ark)) if ark else (None, None)
 
+        associated = set()
         for name, args, _bundle in ctx.extras["relations"]:
             a = list(args) + [None, None]
             if name == "used":
@@ -344,6 +383,21 @@ class CpmPlugin(PluginBase):
                 ag_ark, ag = node_of(a[1])
                 if act and ag:
                     _append_ref(act, "prov:wasAssociatedWith", ag_ark)
+                    # The associated agent ran the activity: it replaces the
+                    # bundle-sender default (the first association wins).
+                    if "runBy" in act and act_ark not in associated:
+                        act["runBy"] = {"@id": ag_ark}
+                        associated.add(act_ark)
+            elif name == "wasInformedBy":
+                a2_ark, a2 = node_of(a[0])
+                a1_ark, a1 = node_of(a[1])
+                if a2 and a1:
+                    _append_ref(a2, "prov:wasInformedBy", a1_ark)
+            elif name == "actedOnBehalfOf":
+                d_ark, d = node_of(a[0])
+                r_ark, r = node_of(a[1])
+                if d and r:
+                    _append_ref(d, "prov:actedOnBehalfOf", r_ark)
             elif name == "wasInvalidatedBy":
                 e_ark, e = node_of(a[0])
                 act_ark, act = node_of(a[1])
@@ -354,6 +408,8 @@ class CpmPlugin(PluginBase):
                 m_ark, m = node_of(a[1])
                 if c and m:
                     _append_ref(c, "hasPart", m_ark)
+            else:
+                warnings.warn(f"cpm import: PROV relation {name}{tuple(args)} is not mapped")
 
         for sub_qid, main_qid in ctx.extras["parent_of"].items():
             sub_ark, sub = node_of(sub_qid)
@@ -439,11 +495,40 @@ def _local_name(node) -> str:
     return f"{base}_{tail}" if tail else base
 
 
-def _export_qn(node) -> str:
+def _export_qn(node, prefixes) -> str:
+    """The node's original qualified name when its prefix is declared, else a
+    local name in the default namespace (absolute URLs, ORCIDs, ``doi:`` and
+    ``ark:`` ids are never valid qualified names as they stand)."""
     ident = node.get("identifier")
-    if isinstance(ident, str) and _QN_RE.match(ident) and not ident.startswith("ark:"):
+    m = _QN_RE.match(ident) if isinstance(ident, str) else None
+    if m and m.group(1) in prefixes:
         return ident
     return _local_name(node)
+
+
+def _iso_time(value):
+    return value if isinstance(value, str) and _ISO_TIME_RE.match(value) else None
+
+
+def _declare_used_prefixes(doc) -> None:
+    """Declare every prefix the statements use; an attribute key whose prefix
+    is unknown is rewritten to a plain local name instead."""
+    declared = set(doc.prefixes) | {"prov"}
+    for bundle in doc.bundles:
+        declared |= set(bundle.prefixes)
+    for bundle in doc.bundles:
+        for stmt in bundle.statements:
+            attrs = []
+            for key, value, datatype in stmt.attrs:
+                prefix = key.split(":", 1)[0] if ":" in key else None
+                if prefix and prefix not in declared:
+                    if prefix in _KNOWN_PREFIXES:
+                        doc.prefixes[prefix] = _KNOWN_PREFIXES[prefix]
+                        declared.add(prefix)
+                    else:
+                        key = re.sub(r"[^\w.-]", "_", key)
+                attrs.append((key, value, datatype))
+            stmt.attrs = attrs
 
 
 def _export_attrs(node) -> list:
@@ -486,6 +571,10 @@ def export_convert(crate: dict, plugin, options: dict):
                             for n in graph if n.get("cpmBundleId")}
     default_bundle = options.get("bundle_id") or "provenance"
 
+    prefixes = dict(root.get("cpmPrefixes") or {})
+    if not from_cpm:
+        prefixes.setdefault("cpm", _KNOWN_PREFIXES["cpm"])
+
     # ---- assign each node a qualified name and a bundle --------------------
     qn_of, bundle_of, exportable = {}, {}, {}
     for node in graph:
@@ -501,7 +590,7 @@ def export_convert(crate: dict, plugin, options: dict):
             continue
         exportable[nid] = ("activity" if is_activity
                            else "agent" if is_agent else "entity")
-        qn_of[nid] = _export_qn(node)
+        qn_of[nid] = _export_qn(node, prefixes)
         bundle = default_bundle
         for ref in _ref_ids(node.get("subjectOf")):
             if ref in bundle_ident_of_file and bundle_ident_of_file[ref]:
@@ -509,15 +598,39 @@ def export_convert(crate: dict, plugin, options: dict):
                 break
         bundle_of[nid] = bundle
 
-    # Agents referenced by prov:wasAttributedTo / prov:wasAssociatedWith join in.
+    # Agents referenced by prov:wasAttributedTo / prov:wasAssociatedWith /
+    # runBy / prov:actedOnBehalfOf join in.
+    agent_keys = ("prov:wasAttributedTo", "prov:wasAssociatedWith", "runBy",
+                  "prov:actedOnBehalfOf")
     for node in graph:
-        for key in ("prov:wasAttributedTo", "prov:wasAssociatedWith"):
-            for ref in _ref_ids(node.get(key)):
+        if node.get("@id") not in exportable:
+            continue
+        for key in agent_keys:
+            value = node.get(key)
+            refs = [r["@id"] for r in (value if isinstance(value, list) else [value])
+                    if isinstance(r, dict) and r.get("@id")]
+            for ref in refs:
                 target = by_id.get(ref)
                 if target and ref not in exportable and _kind(target) in _AGENT_KINDS:
                     exportable[ref] = "agent"
-                    qn_of[ref] = _export_qn(target)
+                    qn_of[ref] = _export_qn(target, prefixes)
                     bundle_of[ref] = bundle_of.get(node.get("@id"), default_bundle)
+
+    # A born-EVI Computation run by a plain name gets an agent minted for it
+    # (a CPM-derived crate's string runBy is the synthesized bundle sender).
+    named_agents = {}
+    if not from_cpm:
+        for nid, role in list(exportable.items()):
+            run_by = by_id[nid].get("runBy")
+            if role == "activity" and isinstance(run_by, str) and run_by.strip() \
+                    and run_by.strip() != "Unknown":
+                agent_id = f"_:agent:{run_by.strip()}"
+                if agent_id not in exportable:
+                    by_id[agent_id] = {"@id": agent_id, "@type": "Person", "name": run_by.strip()}
+                    exportable[agent_id] = "agent"
+                    qn_of[agent_id] = _local_name({"name": run_by.strip(), "@id": "agent"})
+                    bundle_of[agent_id] = bundle_of.get(nid, default_bundle)
+                named_agents[nid] = agent_id
 
     computation_ids = {nid for nid, k in exportable.items()
                        if k == "activity" and _kind(by_id[nid]) in ("Computation", "Experiment")}
@@ -526,10 +639,6 @@ def export_convert(crate: dict, plugin, options: dict):
 
     # The cpm prefix URI is the one published CPM bundles bind (e.g. the
     # RationAI/MUNI crates: https://zenodo.org/records/7924183).
-    prefixes = dict(root.get("cpmPrefixes") or {})
-    if not from_cpm:
-        prefixes.setdefault(
-            "cpm", "https://www.commonprovenancemodel.org/cpm-namespace-v1-0/")
     doc = provn.Document(
         prefixes=prefixes,
         default_ns=root.get("cpmDefaultNamespace") or "http://example.org/",
@@ -559,7 +668,11 @@ def export_convert(crate: dict, plugin, options: dict):
             children = [qn_of[c] for c in computation_ids
                         if nid in _ref_ids(by_id[c].get("isPartOf")) and c in qn_of]
             attrs.extend(("dct:hasPart", c, None) for c in sorted(children))
-            stmt(nid, "activity", [qn, None, None], attrs)
+            start = _iso_time(node.get("startTime"))
+            end = _iso_time(node.get("endTime"))
+            if not from_cpm:
+                end = end or _iso_time(node.get("dateCreated"))
+            stmt(nid, "activity", [qn, start, end], attrs)
         elif role == "agent":
             stmt(nid, "agent", [qn], attrs)
         else:
@@ -594,8 +707,19 @@ def export_convert(crate: dict, plugin, options: dict):
             for ref in _ref_ids(node.get("generated")):
                 if ref not in generated_ids:
                     rel(nid, "wasGeneratedBy", qn_of.get(ref), qn_of[nid])
-            for ref in _ref_ids(node.get("prov:wasAssociatedWith")):
+            associated = _ref_ids(node.get("prov:wasAssociatedWith"))
+            run_by = node.get("runBy")
+            if isinstance(run_by, dict) and run_by.get("@id"):
+                associated.append(run_by["@id"])
+            if nid in named_agents:
+                associated.append(named_agents[nid])
+            for ref in associated:
                 rel(nid, "wasAssociatedWith", qn_of[nid], qn_of.get(ref))
+            for ref in _ref_ids(node.get("prov:wasInformedBy")):
+                rel(nid, "wasInformedBy", qn_of[nid], qn_of.get(ref))
+        elif role == "agent":
+            for ref in _ref_ids(node.get("prov:actedOnBehalfOf")):
+                rel(nid, "actedOnBehalfOf", qn_of[nid], qn_of.get(ref))
         else:
             for ref in _ref_ids(node.get("generatedBy")):
                 rel(nid, "wasGeneratedBy", qn_of[nid], qn_of.get(ref))
@@ -609,6 +733,7 @@ def export_convert(crate: dict, plugin, options: dict):
             for ref in _ref_ids(node.get("prov:wasInvalidatedBy")):
                 rel(nid, "wasInvalidatedBy", qn_of[nid], qn_of.get(ref))
 
+    _declare_used_prefixes(doc)
     if options.get("serialization") == "provn":
         return provn.provn_dumps(doc)
     return provn.provjson_dumps(doc)

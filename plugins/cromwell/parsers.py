@@ -35,6 +35,8 @@ def refs(arks):
 
 def job_display_name(job):
     qualifiers = []
+    if job.get("scope"):
+        qualifiers.append(f"in {job['scope']}")
     if job["shard"] >= 0:
         qualifiers.append(f"shard={job['shard']}")
     if job["attempt"] > 1:

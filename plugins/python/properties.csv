@@ -30,3 +30,4 @@ file,role,Dataset,generatedBy,file_generated_by,,import,,required,list,,,,,,,the
 file,,Dataset,contentUrl,locator_content_url,,import,,optional,scalar,,,,,,,crate-relative; only when the file is inside the crate
 file,,Dataset,localPath,locator_local_path,,import,,optional,scalar,,,,,,,absolute; for files outside the crate
 file,size,Dataset,contentSize,size_string,,import,,optional,scalar,,,,,,,pydantic requires a string
+file,md5,Dataset,md5,scalar,,import,,optional,scalar,,,,,,,content checksum; tells versions of one path apart

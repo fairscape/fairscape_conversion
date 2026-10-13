@@ -129,7 +129,7 @@ class FrictionlessPlugin(PluginBase):
             "description": s["description"],
             "keywords": s["keywords"],
             "version": s["version"],
-            "author": s["author"] or ", ".join(a for a in authors if a),
+            "author": s["author"] or ", ".join(a for a in authors if a) or "Unknown",
             "license": s["license"] or (first_license.get("path") or first_license.get("name")
                                         if isinstance(first_license, dict) else first_license),
             "datePublished": s["date_published"],
@@ -213,7 +213,9 @@ def export_convert(crate: dict, plugin, options: dict) -> dict:
         schema_ref = node.get("evi:Schema") or node.get("EVI:Schema") or node.get("schema")
         schema_id = schema_ref.get("@id") if isinstance(schema_ref, dict) else schema_ref
         schema_node = by_id.get(schema_id) if schema_id else None
-        if schema_node and schema_node.get("properties"):
+        if schema_node is None and str(schema_id or "").startswith(("http://", "https://")):
+            resource["schema"] = schema_id     # a remote Table Schema kept as a reference
+        elif schema_node and schema_node.get("properties"):
             table = apply_export_rules(schema_node, mapping.export_rules_by_target("Schema"), ctx)
             resource["schema"] = table
             separator = schema_node.get("separator")
@@ -280,5 +282,7 @@ def convert(direction: str, source, **options):
         is_records = isinstance(source, dict) and "settings" in source and "package" in source
         if not is_records:
             extract_opts = {k: options.pop(k) for k in list(options) if k in EXTRACT_OPTIONS}
+            if "crate_dir" in extract_opts:          # the linking pass needs it too
+                options["crate_dir"] = extract_opts["crate_dir"]
             source = extract_records(source, **extract_opts)
     return PLUGIN.convert(direction, source, **options)

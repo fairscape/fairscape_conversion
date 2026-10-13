@@ -38,11 +38,11 @@
         "@id": "https://w3id.org/ro/crate/1.2"
       },
       "about": {
-        "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-68f3c95"
+        "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-4e994e2"
       }
     },
     {
-      "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-68f3c95",
+      "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-4e994e2",
       "@type": [
         "Dataset",
         "https://w3id.org/EVI#ROCrate"
@@ -65,43 +65,43 @@
       "datePublished": "2026-09-11T13:35:02.543766-04:00",
       "hasPart": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         },
         {
-          "@id": "ark:59853/computation-bcftools-call-c76dde6"
+          "@id": "ark:59853/computation-bcftools-call-6668f2b"
         },
         {
-          "@id": "ark:59853/computation-bwa-map-sample-a-9183688"
+          "@id": "ark:59853/computation-bwa-map-sample-a-1307dde"
         },
         {
-          "@id": "ark:59853/computation-bwa-map-sample-b-5025f30"
+          "@id": "ark:59853/computation-bwa-map-sample-b-040a689"
         },
         {
-          "@id": "ark:59853/computation-bwa-map-sample-c-c80046e"
+          "@id": "ark:59853/computation-bwa-map-sample-c-5d09dab"
         },
         {
-          "@id": "ark:59853/computation-plot-quals-8e2e10d"
+          "@id": "ark:59853/computation-plot-quals-f632c86"
         },
         {
-          "@id": "ark:59853/computation-samtools-index-sample-a-13242d2"
+          "@id": "ark:59853/computation-samtools-index-sample-a-9c62b63"
         },
         {
-          "@id": "ark:59853/computation-samtools-index-sample-b-f89dac4"
+          "@id": "ark:59853/computation-samtools-index-sample-b-86fdc3e"
         },
         {
-          "@id": "ark:59853/computation-samtools-index-sample-c-d37cbd8"
+          "@id": "ark:59853/computation-samtools-index-sample-c-00ababf"
         },
         {
-          "@id": "ark:59853/computation-samtools-sort-sample-a-3bd01fd"
+          "@id": "ark:59853/computation-samtools-sort-sample-a-8a1f9e7"
         },
         {
-          "@id": "ark:59853/computation-samtools-sort-sample-b-74d837f"
+          "@id": "ark:59853/computation-samtools-sort-sample-b-d2ae239"
         },
         {
-          "@id": "ark:59853/computation-samtools-sort-sample-c-1828156"
+          "@id": "ark:59853/computation-samtools-sort-sample-c-1d9086e"
         },
         {
-          "@id": "ark:59853/computation-variant-summary-d29c059"
+          "@id": "ark:59853/computation-variant-summary-0c0ed41"
         },
         {
           "@id": "ark:59853/software-snakefile-68f3c95"
@@ -128,70 +128,70 @@
           "@id": "ark:59853/software-variant-summary-aea5e1b"
         },
         {
-          "@id": "ark:59853/dataset-config-yaml-b5106b5"
+          "@id": "ark:59853/dataset-config-yaml-5bad5c2"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+          "@id": "ark:59853/dataset-genome-fa-57fde3f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+          "@id": "ark:59853/dataset-genome-fa-amb-1252940"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+          "@id": "ark:59853/dataset-genome-fa-ann-484c468"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+          "@id": "ark:59853/dataset-genome-fa-bwt-3a1381f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+          "@id": "ark:59853/dataset-genome-fa-pac-5190f2f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+          "@id": "ark:59853/dataset-genome-fa-sa-d05f4c1"
         },
         {
-          "@id": "ark:59853/dataset-a-fastq-d4611b6"
+          "@id": "ark:59853/dataset-a-fastq-14c9bed"
         },
         {
-          "@id": "ark:59853/dataset-b-fastq-7ed58c5"
+          "@id": "ark:59853/dataset-b-fastq-095f431"
         },
         {
-          "@id": "ark:59853/dataset-c-fastq-bef0063"
+          "@id": "ark:59853/dataset-c-fastq-5f19633"
         },
         {
-          "@id": "ark:59853/dataset-all-vcf-637cf3e"
+          "@id": "ark:59853/dataset-all-vcf-b91cc78"
         },
         {
-          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+          "@id": "ark:59853/dataset-variant-summary-tsv-be1d43c"
         },
         {
-          "@id": "ark:59853/dataset-a-bam-016e31c"
+          "@id": "ark:59853/dataset-a-bam-017cfe2"
         },
         {
-          "@id": "ark:59853/dataset-b-bam-6b7c70e"
+          "@id": "ark:59853/dataset-b-bam-b5fc49e"
         },
         {
-          "@id": "ark:59853/dataset-c-bam-3e0f2ac"
+          "@id": "ark:59853/dataset-c-bam-8f51be6"
         },
         {
-          "@id": "ark:59853/dataset-quals-svg-81b3cdb"
+          "@id": "ark:59853/dataset-quals-svg-2b51702"
         },
         {
-          "@id": "ark:59853/dataset-a-bam-c0907f3"
+          "@id": "ark:59853/dataset-a-bam-6d609ff"
         },
         {
-          "@id": "ark:59853/dataset-a-bam-bai-9ebeb4d"
+          "@id": "ark:59853/dataset-a-bam-bai-832199e"
         },
         {
-          "@id": "ark:59853/dataset-b-bam-cbee9ae"
+          "@id": "ark:59853/dataset-b-bam-7306d13"
         },
         {
-          "@id": "ark:59853/dataset-b-bam-bai-6a20e1e"
+          "@id": "ark:59853/dataset-b-bam-bai-a7f1baa"
         },
         {
-          "@id": "ark:59853/dataset-c-bam-7ccb833"
+          "@id": "ark:59853/dataset-c-bam-f85a75b"
         },
         {
-          "@id": "ark:59853/dataset-c-bam-bai-39648ed"
+          "@id": "ark:59853/dataset-c-bam-bai-62e7b68"
         },
         {
           "@id": "ark:59853/schema-variant-summary-tsv-ec080af"
@@ -199,7 +199,7 @@
       ]
     },
     {
-      "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611",
+      "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -219,39 +219,39 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+          "@id": "ark:59853/dataset-genome-fa-57fde3f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+          "@id": "ark:59853/dataset-genome-fa-amb-1252940"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+          "@id": "ark:59853/dataset-genome-fa-ann-484c468"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+          "@id": "ark:59853/dataset-genome-fa-bwt-3a1381f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+          "@id": "ark:59853/dataset-genome-fa-pac-5190f2f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+          "@id": "ark:59853/dataset-genome-fa-sa-d05f4c1"
         },
         {
-          "@id": "ark:59853/dataset-a-fastq-d4611b6"
+          "@id": "ark:59853/dataset-a-fastq-14c9bed"
         },
         {
-          "@id": "ark:59853/dataset-b-fastq-7ed58c5"
+          "@id": "ark:59853/dataset-b-fastq-095f431"
         },
         {
-          "@id": "ark:59853/dataset-c-fastq-bef0063"
+          "@id": "ark:59853/dataset-c-fastq-5f19633"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+          "@id": "ark:59853/dataset-variant-summary-tsv-be1d43c"
         },
         {
-          "@id": "ark:59853/dataset-quals-svg-81b3cdb"
+          "@id": "ark:59853/dataset-quals-svg-2b51702"
         }
       ],
       "snakemakeVersion": "9.26.1",
@@ -259,7 +259,7 @@
       "endTime": "2026-09-11T13:13:25.031213-04:00"
     },
     {
-      "@id": "ark:59853/computation-bcftools-call-c76dde6",
+      "@id": "ark:59853/computation-bcftools-call-6668f2b",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -275,35 +275,35 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+          "@id": "ark:59853/dataset-genome-fa-57fde3f"
         },
         {
-          "@id": "ark:59853/dataset-a-bam-c0907f3"
+          "@id": "ark:59853/dataset-a-bam-6d609ff"
         },
         {
-          "@id": "ark:59853/dataset-a-bam-bai-9ebeb4d"
+          "@id": "ark:59853/dataset-a-bam-bai-832199e"
         },
         {
-          "@id": "ark:59853/dataset-b-bam-cbee9ae"
+          "@id": "ark:59853/dataset-b-bam-7306d13"
         },
         {
-          "@id": "ark:59853/dataset-b-bam-bai-6a20e1e"
+          "@id": "ark:59853/dataset-b-bam-bai-a7f1baa"
         },
         {
-          "@id": "ark:59853/dataset-c-bam-7ccb833"
+          "@id": "ark:59853/dataset-c-bam-f85a75b"
         },
         {
-          "@id": "ark:59853/dataset-c-bam-bai-39648ed"
+          "@id": "ark:59853/dataset-c-bam-bai-62e7b68"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-all-vcf-637cf3e"
+          "@id": "ark:59853/dataset-all-vcf-b91cc78"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "(bcftools mpileup -d 250 -a AD,DP -f data/genome.fa results/sorted/A.bam results/sorted/B.bam results/sorted/C.bam | bcftools call -mv -Ov -o results/calls/all.vcf) 2> logs/bcftools_call/all.log",
@@ -315,7 +315,7 @@
       "endTime": "2026-09-11T13:13:23.335160-04:00"
     },
     {
-      "@id": "ark:59853/computation-bwa-map-sample-a-9183688",
+      "@id": "ark:59853/computation-bwa-map-sample-a-1307dde",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -331,35 +331,35 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+          "@id": "ark:59853/dataset-genome-fa-57fde3f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+          "@id": "ark:59853/dataset-genome-fa-amb-1252940"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+          "@id": "ark:59853/dataset-genome-fa-ann-484c468"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+          "@id": "ark:59853/dataset-genome-fa-bwt-3a1381f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+          "@id": "ark:59853/dataset-genome-fa-pac-5190f2f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+          "@id": "ark:59853/dataset-genome-fa-sa-d05f4c1"
         },
         {
-          "@id": "ark:59853/dataset-a-fastq-d4611b6"
+          "@id": "ark:59853/dataset-a-fastq-14c9bed"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-bam-016e31c"
+          "@id": "ark:59853/dataset-a-bam-017cfe2"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "bwa mem -t 2 -R '@RG\\tID:A\\tSM:A\\tPL:ILLUMINA' data/genome.fa data/samples/A.fastq 2> logs/bwa_map/A.log | samtools view -Sb - > results/mapped/A.bam",
@@ -370,7 +370,7 @@
       "endTime": "2026-09-11T13:13:19.887053-04:00"
     },
     {
-      "@id": "ark:59853/computation-bwa-map-sample-b-5025f30",
+      "@id": "ark:59853/computation-bwa-map-sample-b-040a689",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -386,35 +386,35 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+          "@id": "ark:59853/dataset-genome-fa-57fde3f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+          "@id": "ark:59853/dataset-genome-fa-amb-1252940"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+          "@id": "ark:59853/dataset-genome-fa-ann-484c468"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+          "@id": "ark:59853/dataset-genome-fa-bwt-3a1381f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+          "@id": "ark:59853/dataset-genome-fa-pac-5190f2f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+          "@id": "ark:59853/dataset-genome-fa-sa-d05f4c1"
         },
         {
-          "@id": "ark:59853/dataset-b-fastq-7ed58c5"
+          "@id": "ark:59853/dataset-b-fastq-095f431"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-b-bam-6b7c70e"
+          "@id": "ark:59853/dataset-b-bam-b5fc49e"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "bwa mem -t 2 -R '@RG\\tID:B\\tSM:B\\tPL:ILLUMINA' data/genome.fa data/samples/B.fastq 2> logs/bwa_map/B.log | samtools view -Sb - > results/mapped/B.bam",
@@ -425,7 +425,7 @@
       "endTime": "2026-09-11T13:13:20.075058-04:00"
     },
     {
-      "@id": "ark:59853/computation-bwa-map-sample-c-c80046e",
+      "@id": "ark:59853/computation-bwa-map-sample-c-5d09dab",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -441,35 +441,35 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-genome-fa-f891ca0"
+          "@id": "ark:59853/dataset-genome-fa-57fde3f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-amb-c2df282"
+          "@id": "ark:59853/dataset-genome-fa-amb-1252940"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-ann-936b248"
+          "@id": "ark:59853/dataset-genome-fa-ann-484c468"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3"
+          "@id": "ark:59853/dataset-genome-fa-bwt-3a1381f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-pac-28b255e"
+          "@id": "ark:59853/dataset-genome-fa-pac-5190f2f"
         },
         {
-          "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1"
+          "@id": "ark:59853/dataset-genome-fa-sa-d05f4c1"
         },
         {
-          "@id": "ark:59853/dataset-c-fastq-bef0063"
+          "@id": "ark:59853/dataset-c-fastq-5f19633"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-c-bam-3e0f2ac"
+          "@id": "ark:59853/dataset-c-bam-8f51be6"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "bwa mem -t 2 -R '@RG\\tID:C\\tSM:C\\tPL:ILLUMINA' data/genome.fa data/samples/C.fastq 2> logs/bwa_map/C.log | samtools view -Sb - > results/mapped/C.bam",
@@ -480,7 +480,7 @@
       "endTime": "2026-09-11T13:13:21.139091-04:00"
     },
     {
-      "@id": "ark:59853/computation-plot-quals-8e2e10d",
+      "@id": "ark:59853/computation-plot-quals-f632c86",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -496,17 +496,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-all-vcf-637cf3e"
+          "@id": "ark:59853/dataset-all-vcf-b91cc78"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-quals-svg-81b3cdb"
+          "@id": "ark:59853/dataset-quals-svg-2b51702"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "script: scripts/plot_quals.py",
@@ -514,7 +514,7 @@
       "endTime": "2026-09-11T13:13:25.031213-04:00"
     },
     {
-      "@id": "ark:59853/computation-samtools-index-sample-a-13242d2",
+      "@id": "ark:59853/computation-samtools-index-sample-a-9c62b63",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -530,17 +530,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-a-bam-c0907f3"
+          "@id": "ark:59853/dataset-a-bam-6d609ff"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-bam-bai-9ebeb4d"
+          "@id": "ark:59853/dataset-a-bam-bai-832199e"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "samtools index results/sorted/A.bam",
@@ -548,7 +548,7 @@
       "endTime": "2026-09-11T13:13:21.583105-04:00"
     },
     {
-      "@id": "ark:59853/computation-samtools-index-sample-b-f89dac4",
+      "@id": "ark:59853/computation-samtools-index-sample-b-86fdc3e",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -564,17 +564,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-b-bam-cbee9ae"
+          "@id": "ark:59853/dataset-b-bam-7306d13"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-b-bam-bai-6a20e1e"
+          "@id": "ark:59853/dataset-b-bam-bai-a7f1baa"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "samtools index results/sorted/B.bam",
@@ -582,7 +582,7 @@
       "endTime": "2026-09-11T13:13:21.635107-04:00"
     },
     {
-      "@id": "ark:59853/computation-samtools-index-sample-c-d37cbd8",
+      "@id": "ark:59853/computation-samtools-index-sample-c-00ababf",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -598,17 +598,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-c-bam-7ccb833"
+          "@id": "ark:59853/dataset-c-bam-f85a75b"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-c-bam-bai-39648ed"
+          "@id": "ark:59853/dataset-c-bam-bai-62e7b68"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "samtools index results/sorted/C.bam",
@@ -616,7 +616,7 @@
       "endTime": "2026-09-11T13:13:22.527135-04:00"
     },
     {
-      "@id": "ark:59853/computation-samtools-sort-sample-a-3bd01fd",
+      "@id": "ark:59853/computation-samtools-sort-sample-a-8a1f9e7",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -632,17 +632,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-a-bam-016e31c"
+          "@id": "ark:59853/dataset-a-bam-017cfe2"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-bam-c0907f3"
+          "@id": "ark:59853/dataset-a-bam-6d609ff"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "samtools sort -T results/sorted/A -O bam results/mapped/A.bam > results/sorted/A.bam 2> logs/samtools_sort/A.log",
@@ -650,7 +650,7 @@
       "endTime": "2026-09-11T13:13:20.875083-04:00"
     },
     {
-      "@id": "ark:59853/computation-samtools-sort-sample-b-74d837f",
+      "@id": "ark:59853/computation-samtools-sort-sample-b-d2ae239",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -666,17 +666,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-b-bam-6b7c70e"
+          "@id": "ark:59853/dataset-b-bam-b5fc49e"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-b-bam-cbee9ae"
+          "@id": "ark:59853/dataset-b-bam-7306d13"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "samtools sort -T results/sorted/B -O bam results/mapped/B.bam > results/sorted/B.bam 2> logs/samtools_sort/B.log",
@@ -684,7 +684,7 @@
       "endTime": "2026-09-11T13:13:20.895084-04:00"
     },
     {
-      "@id": "ark:59853/computation-samtools-sort-sample-c-1828156",
+      "@id": "ark:59853/computation-samtools-sort-sample-c-1d9086e",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -700,17 +700,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-c-bam-3e0f2ac"
+          "@id": "ark:59853/dataset-c-bam-8f51be6"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-c-bam-7ccb833"
+          "@id": "ark:59853/dataset-c-bam-f85a75b"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "samtools sort -T results/sorted/C -O bam results/mapped/C.bam > results/sorted/C.bam 2> logs/samtools_sort/C.log",
@@ -718,7 +718,7 @@
       "endTime": "2026-09-11T13:13:21.887115-04:00"
     },
     {
-      "@id": "ark:59853/computation-variant-summary-d29c059",
+      "@id": "ark:59853/computation-variant-summary-0c0ed41",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -734,17 +734,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-all-vcf-637cf3e"
+          "@id": "ark:59853/dataset-all-vcf-b91cc78"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-variant-summary-tsv-71310c4"
+          "@id": "ark:59853/dataset-variant-summary-tsv-be1d43c"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-f05a611"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-52dbb6c"
         }
       ],
       "command": "(printf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n'; bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' results/calls/all.vcf) > results/calls/variant_summary.tsv",
@@ -885,7 +885,7 @@
       "condaEnvironment": "{'channels': ['conda-forge', 'bioconda'], 'dependencies': ['bcftools =1.24']}"
     },
     {
-      "@id": "ark:59853/dataset-config-yaml-b5106b5",
+      "@id": "ark:59853/dataset-config-yaml-5bad5c2",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -912,7 +912,7 @@
       "contentSize": "375"
     },
     {
-      "@id": "ark:59853/dataset-genome-fa-f891ca0",
+      "@id": "ark:59853/dataset-genome-fa-57fde3f",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -934,7 +934,7 @@
       "contentSize": "234112"
     },
     {
-      "@id": "ark:59853/dataset-genome-fa-amb-c2df282",
+      "@id": "ark:59853/dataset-genome-fa-amb-1252940",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -956,7 +956,7 @@
       "contentSize": "2598"
     },
     {
-      "@id": "ark:59853/dataset-genome-fa-ann-936b248",
+      "@id": "ark:59853/dataset-genome-fa-ann-484c468",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -978,7 +978,7 @@
       "contentSize": "83"
     },
     {
-      "@id": "ark:59853/dataset-genome-fa-bwt-0a9c7e3",
+      "@id": "ark:59853/dataset-genome-fa-bwt-3a1381f",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1000,7 +1000,7 @@
       "contentSize": "230320"
     },
     {
-      "@id": "ark:59853/dataset-genome-fa-pac-28b255e",
+      "@id": "ark:59853/dataset-genome-fa-pac-5190f2f",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1022,7 +1022,7 @@
       "contentSize": "57556"
     },
     {
-      "@id": "ark:59853/dataset-genome-fa-sa-90bdcc1",
+      "@id": "ark:59853/dataset-genome-fa-sa-d05f4c1",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1044,7 +1044,7 @@
       "contentSize": "115160"
     },
     {
-      "@id": "ark:59853/dataset-a-fastq-d4611b6",
+      "@id": "ark:59853/dataset-a-fastq-14c9bed",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1066,7 +1066,7 @@
       "contentSize": "5752788"
     },
     {
-      "@id": "ark:59853/dataset-b-fastq-7ed58c5",
+      "@id": "ark:59853/dataset-b-fastq-095f431",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1088,7 +1088,7 @@
       "contentSize": "5775000"
     },
     {
-      "@id": "ark:59853/dataset-c-fastq-bef0063",
+      "@id": "ark:59853/dataset-c-fastq-5f19633",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1110,7 +1110,7 @@
       "contentSize": "5775000"
     },
     {
-      "@id": "ark:59853/dataset-all-vcf-637cf3e",
+      "@id": "ark:59853/dataset-all-vcf-b91cc78",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1129,14 +1129,14 @@
       "format": "text/x-vcf",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bcftools-call-c76dde6"
+          "@id": "ark:59853/computation-bcftools-call-6668f2b"
         }
       ],
       "contentUrl": "results/calls/all.vcf",
       "contentSize": "111627"
     },
     {
-      "@id": "ark:59853/dataset-variant-summary-tsv-71310c4",
+      "@id": "ark:59853/dataset-variant-summary-tsv-be1d43c",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1155,7 +1155,7 @@
       "format": "text/tab-separated-values",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-variant-summary-d29c059"
+          "@id": "ark:59853/computation-variant-summary-0c0ed41"
         }
       ],
       "evi:Schema": {
@@ -1165,7 +1165,7 @@
       "contentSize": "14609"
     },
     {
-      "@id": "ark:59853/dataset-a-bam-016e31c",
+      "@id": "ark:59853/dataset-a-bam-017cfe2",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1184,13 +1184,13 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bwa-map-sample-a-9183688"
+          "@id": "ark:59853/computation-bwa-map-sample-a-1307dde"
         }
       ],
       "localPath": "results/mapped/A.bam"
     },
     {
-      "@id": "ark:59853/dataset-b-bam-6b7c70e",
+      "@id": "ark:59853/dataset-b-bam-b5fc49e",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1209,13 +1209,13 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bwa-map-sample-b-5025f30"
+          "@id": "ark:59853/computation-bwa-map-sample-b-040a689"
         }
       ],
       "localPath": "results/mapped/B.bam"
     },
     {
-      "@id": "ark:59853/dataset-c-bam-3e0f2ac",
+      "@id": "ark:59853/dataset-c-bam-8f51be6",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1234,13 +1234,13 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bwa-map-sample-c-c80046e"
+          "@id": "ark:59853/computation-bwa-map-sample-c-5d09dab"
         }
       ],
       "localPath": "results/mapped/C.bam"
     },
     {
-      "@id": "ark:59853/dataset-quals-svg-81b3cdb",
+      "@id": "ark:59853/dataset-quals-svg-2b51702",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1259,14 +1259,14 @@
       "format": "image/svg+xml",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-plot-quals-8e2e10d"
+          "@id": "ark:59853/computation-plot-quals-f632c86"
         }
       ],
       "contentUrl": "results/plots/quals.svg",
       "contentSize": "32379"
     },
     {
-      "@id": "ark:59853/dataset-a-bam-c0907f3",
+      "@id": "ark:59853/dataset-a-bam-6d609ff",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1285,14 +1285,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtools-sort-sample-a-3bd01fd"
+          "@id": "ark:59853/computation-samtools-sort-sample-a-8a1f9e7"
         }
       ],
       "contentUrl": "results/sorted/A.bam",
       "contentSize": "2186140"
     },
     {
-      "@id": "ark:59853/dataset-a-bam-bai-9ebeb4d",
+      "@id": "ark:59853/dataset-a-bam-bai-832199e",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1311,14 +1311,14 @@
       "format": "application/octet-stream",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtools-index-sample-a-13242d2"
+          "@id": "ark:59853/computation-samtools-index-sample-a-9c62b63"
         }
       ],
       "contentUrl": "results/sorted/A.bam.bai",
       "contentSize": "344"
     },
     {
-      "@id": "ark:59853/dataset-b-bam-cbee9ae",
+      "@id": "ark:59853/dataset-b-bam-7306d13",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1337,14 +1337,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtools-sort-sample-b-74d837f"
+          "@id": "ark:59853/computation-samtools-sort-sample-b-d2ae239"
         }
       ],
       "contentUrl": "results/sorted/B.bam",
       "contentSize": "2189285"
     },
     {
-      "@id": "ark:59853/dataset-b-bam-bai-6a20e1e",
+      "@id": "ark:59853/dataset-b-bam-bai-a7f1baa",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1363,14 +1363,14 @@
       "format": "application/octet-stream",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtools-index-sample-b-f89dac4"
+          "@id": "ark:59853/computation-samtools-index-sample-b-86fdc3e"
         }
       ],
       "contentUrl": "results/sorted/B.bam.bai",
       "contentSize": "344"
     },
     {
-      "@id": "ark:59853/dataset-c-bam-7ccb833",
+      "@id": "ark:59853/dataset-c-bam-f85a75b",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1389,14 +1389,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtools-sort-sample-c-1828156"
+          "@id": "ark:59853/computation-samtools-sort-sample-c-1d9086e"
         }
       ],
       "contentUrl": "results/sorted/C.bam",
       "contentSize": "2189379"
     },
     {
-      "@id": "ark:59853/dataset-c-bam-bai-39648ed",
+      "@id": "ark:59853/dataset-c-bam-bai-62e7b68",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1415,7 +1415,7 @@
       "format": "application/octet-stream",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtools-index-sample-c-d37cbd8"
+          "@id": "ark:59853/computation-samtools-index-sample-c-00ababf"
         }
       ],
       "contentUrl": "results/sorted/C.bam.bai",

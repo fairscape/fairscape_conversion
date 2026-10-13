@@ -18,5 +18,7 @@ from .impl import D4dPlugin
 PLUGIN = D4dPlugin()
 
 
-def convert(direction: str, source: dict, validate: bool = True) -> dict:
-    return PLUGIN.convert(direction, source, validate=validate)
+def convert(direction: str, source: dict, validate: bool = True, **options) -> dict:
+    """``options`` are the shared import options (``linked_crates``,
+    ``crate_dir``, ``link_report`` …) every importer takes."""
+    return PLUGIN.convert(direction, source, validate=validate, **options)

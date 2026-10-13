@@ -112,6 +112,9 @@ def build_vars(cfg: Dict[str, Any], row: Dict[str, str], meta: Dict[str, Any]) -
     """Flat token dict for one row: columns + meta + (optional) CV tokens + computed clauses."""
     vars: Dict[str, Any] = {k: (v if v is not None else "") for k, v in row.items()}
     vars.update(meta_tokens(meta))
+    # The row's id_namespace, slugged: a local_id is unique only within its
+    # namespace, so minted ids carry both.
+    vars["ns"] = _slug(row.get("id_namespace") or "") or "ns"
 
     cv = cfg.get("cv_source")
     if cv:

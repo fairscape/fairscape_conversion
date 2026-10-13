@@ -34,6 +34,25 @@ from .records import SourceRecord, classify_node
 from .schema import EntityRule, Mapping, PropertyRule
 
 
+class CrateValidationError(ValueError):
+    """An importer produced a crate that ``fairscape_models`` rejects."""
+
+
+def validate_crate(crate: dict, plugin_name: str = "") -> None:
+    """Raise :class:`CrateValidationError` unless ``crate`` passes ``ROCrateV1_2``."""
+    import copy
+
+    from fairscape_models.rocrate import ROCrateV1_2
+    from pydantic import ValidationError
+    try:
+        ROCrateV1_2.model_validate(copy.deepcopy(crate))
+    except ValidationError as exc:
+        who = f"{plugin_name} import" if plugin_name else "import"
+        raise CrateValidationError(
+            f"{who} produced a crate that fails ROCrateV1_2 validation "
+            f"(pass validate=False to keep it anyway):\n{exc}") from exc
+
+
 class PluginBase:
     """One converter: its CSV mapping + the named code the CSVs reference.
 
@@ -57,6 +76,9 @@ class PluginBase:
     export_parsers: dict[str, Callable] = {}
     #: entities.csv ``discriminator`` name -> ``fn(node, ctx) -> bool``.
     discriminators: dict[str, Callable] = {}
+    #: Import output is an RO-Crate checked against ``ROCrateV1_2`` by
+    #: default; a plugin whose import is not a fairscape crate turns it off.
+    validates_output: bool = True
 
     def __init__(self) -> None:
         if self.mapping_dir is None:
@@ -111,15 +133,29 @@ class PluginBase:
         take. The report lands on the result as ``crate["_linking"]`` only
         when ``link_report=True``; otherwise the crate is returned untouched
         beyond the rewrite.
+
+        The finished crate (after linking) is checked against
+        ``fairscape_models``' ``ROCrateV1_2`` unless ``validate=False``; an
+        invalid crate raises :class:`CrateValidationError`. Every importer
+        gets both passes here, so no plugin needs its own.
         """
-        crate = run_pipeline(self, "import", source, options=options)
-        linked = options.get("linked_crates")
+        options = dict(options)
+        validate = options.pop("validate", True)
+        linked = options.pop("linked_crates", None)
+        link_report = options.pop("link_report", False)
+        search_dirs = options.pop("link_search_dirs", None) or ()
+        # plugins that still check ``validate`` themselves skip it: the one
+        # check that counts runs below, on the linked crate
+        crate = run_pipeline(self, "import", source, options={**options, "validate": False})
+        report = None
         if linked and isinstance(crate, dict):
             from .linking import link_crate
             report = link_crate(crate, linked, crate_dir=options.get("crate_dir"),
-                                search_dirs=options.get("link_search_dirs") or ())
-            if options.get("link_report"):
-                crate["_linking"] = [m.as_dict() for m in report.matches]
+                                search_dirs=search_dirs)
+        if validate and self.validates_output and isinstance(crate, dict):
+            validate_crate(crate, self.name)
+        if report is not None and link_report:
+            crate["_linking"] = [m.as_dict() for m in report.matches]
         return crate
 
     def export(self, source, options: dict):

@@ -23,8 +23,13 @@ filesystem I/O; this plugin owns the conversion):
 The emitted crate mirrors nf-fairscape's (docs/FAIRSCAPE.md there): descriptor
 -> root ["Dataset", EVI#ROCrate] -> run Computation -> job Computations ->
 Software (Snakefile + engine + one per rule) -> Datasets -> Schema nodes.
-ARKs are deterministic (core.arks): they hash run-independent strings, so
-re-running the report — or the whole workflow — reproduces the identifiers.
+ARKs are deterministic (core.arks): re-running the report over the same run
+reproduces the identifiers. They hash what tells things apart across
+projects and runs: files hash their absolute path (the workflow directory
+joined with the recorded path), and the root, run, jobs and the files a job
+wrote also hash the run's start time — re-running the workflow writes new
+versions, so it gets new identifiers. Rules and the Snakefile hash the
+Snakefile's absolute path only (the same code is one Software).
 """
 
 from __future__ import annotations
@@ -73,9 +78,13 @@ class SnakemakePlugin(PluginBase):
         ctx.extras["schemas"] = src.get("schemas", {})
 
         key = run["snakefile_key"]
+        run_key = key + "@" + str(run.get("starttime") or "")
+        # the directory relative file paths count from: the reporter's
+        # ``workdir`` when it records one, else the Snakefile's folder
+        workdir = run.get("workdir") or os.path.dirname(key)
         guid_map = {
-            "root": mint_ark(naan, "rocrate", run["name"], key),
-            "run": mint_ark(naan, "computation", run["name"], key + "#run"),
+            "root": mint_ark(naan, "rocrate", run["name"], run_key),
+            "run": mint_ark(naan, "computation", run["name"], run_key + "#run"),
             "workflow": mint_ark(naan, "software",
                                  os.path.basename(run["snakefile"]), key),
             "engine": mint_ark(naan, "software", "snakemake",
@@ -83,14 +92,11 @@ class SnakemakePlugin(PluginBase):
         }
         for i, job in enumerate(jobs):
             guid_map[f"job:{i}"] = mint_ark(
-                naan, "computation", job_display_name(job), job_ark_source(job))
+                naan, "computation", job_display_name(job),
+                run_key + "\0" + job_ark_source(job))
         for rule_name in rules:
             guid_map[f"rule:{rule_name}"] = mint_ark(
                 naan, "software", rule_name, key + "#" + rule_name)
-        for path in files:
-            guid_map[f"file:{path}"] = mint_ark(
-                naan, "dataset", os.path.basename(path), os.path.normpath(path))
-        ctx.extras["guid_map"] = guid_map
 
         produced_by = {}
         consumed = set()
@@ -100,6 +106,14 @@ class SnakemakePlugin(PluginBase):
             for inp in job["inputs"]:
                 consumed.add(os.path.normpath(inp))
         ctx.extras["produced_by"] = produced_by
+
+        for path in files:
+            source = os.path.normpath(os.path.join(workdir, path))
+            if os.path.normpath(path) in produced_by:
+                source += "@" + str(run.get("starttime") or "")
+            guid_map[f"file:{path}"] = mint_ark(
+                naan, "dataset", os.path.basename(path), source)
+        ctx.extras["guid_map"] = guid_map
 
         all_paths = sorted(files)
         ctx.extras["root_inputs"] = [

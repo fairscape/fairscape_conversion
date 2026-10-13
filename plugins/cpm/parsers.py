@@ -67,6 +67,12 @@ def synth_keywords(value, rule, ctx):
     return _root_meta(ctx).get("keywords") or ["cpm", "provenance"]
 
 
+def activity_date(value, rule, ctx):
+    """The activity's own end time, else its start time, else the crate
+    root's datePublished."""
+    return ctx.node.get("end") or ctx.node.get("start") or synth_date(value, rule, ctx)
+
+
 def synth_runby(value, rule, ctx):
     """The bundle's sender agent (the org that ran and publishes this part),
     else the crate author, else Unknown."""
@@ -159,6 +165,7 @@ IMPORT_PARSERS = {
     "synth_date": synth_date,
     "synth_keywords": synth_keywords,
     "synth_runby": synth_runby,
+    "activity_date": activity_date,
     "synth_format": synth_format,
     "synth_content_url": synth_content_url,
     "cpm_type_str": cpm_type_str,

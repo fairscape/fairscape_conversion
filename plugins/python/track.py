@@ -8,8 +8,12 @@ creating it on first use. Each run appends one Computation, the Software it
 ran and its Datasets, so repeated runs (or notebook cells) build up one crate:
 
 * an input the crate already describes — typically an earlier run's output —
-  reuses that node (matched by file path; the latest one wins), so the
-  provenance chain runs through the crate;
+  reuses that node (matched by file path, the latest version, as long as its
+  md5 is the content that was read), so the provenance chain runs through the
+  crate; a file rewritten outside any tracked run becomes a new version;
+* the Software is never matched by path: it is identified by its code, so an
+  edited script is a new Software and a script an earlier run generated
+  still gets one;
 * a node whose ``@id`` is already there is not added again (identical code is
   one Software; a linked upstream crate appears once).
 
@@ -72,6 +76,27 @@ def start_clean(crate: Dict[str, Any]) -> Dict[str, Any]:
     return crate
 
 
+def _is_software(node: Dict[str, Any]) -> bool:
+    types = node.get("@type") or []
+    types = types if isinstance(types, list) else [types]
+    return any(str(t).endswith("Software") for t in types)
+
+
+def _latest_version(node: Dict[str, Any], by_path: Dict[str, Dict[str, Any]],
+                    crate_dir: str) -> Optional[str]:
+    """The id of the newest crate node at ``node``'s path whose content is the
+    content ``node`` read (an md5 on both sides must agree)."""
+    for p in _candidates(node, [crate_dir]):
+        have = by_path.get(_canon(p))
+        if have is None:
+            continue
+        mine, theirs = node.get("md5"), have.get("md5")
+        if mine and theirs and str(mine).lower() != str(theirs).lower():
+            return None                       # rewritten since: a new version
+        return have["@id"]
+    return None
+
+
 def merge(existing: Optional[Dict[str, Any]], fragment: Dict[str, Any],
           crate_dir) -> Dict[str, Any]:
     """Append a converted run to the crate already in ``crate_dir``."""
@@ -82,23 +107,29 @@ def merge(existing: Optional[Dict[str, Any]], fragment: Dict[str, Any],
     root = _find_root(graph)
     known = {n.get("@id") for n in graph}
 
-    by_path: Dict[str, str] = {}
+    by_path: Dict[str, Dict[str, Any]] = {}
     for node in graph:                       # later nodes win: the latest version
+        if _is_software(node) or node.get("@id") in (METADATA, root.get("@id")):
+            continue
         for path in _candidates(node, [crate_dir]):
-            by_path[_canon(path)] = node["@id"]
+            by_path[_canon(path)] = node
 
     frag_root = _find_root(fragment["@graph"])
     new_nodes, id_map = [], {}
     for node in fragment["@graph"]:
         nid = node.get("@id")
-        if nid in (METADATA, frag_root.get("@id")) or nid in known:
+        if nid in (METADATA, frag_root.get("@id")):
             continue
-        if not _generated_by(node):          # consumed: reuse what the crate has
-            match = next((by_path[_canon(p)] for p in _candidates(node, [crate_dir])
-                          if _canon(p) in by_path), None)
+        if not _generated_by(node) and not _is_software(node):
+            # consumed: reuse the latest version the crate has of this path,
+            # as long as it is the content that was read
+            match = _latest_version(node, by_path, crate_dir)
             if match:
-                id_map[nid] = match
+                if match != nid:
+                    id_map[nid] = match
                 continue
+        if nid in known:
+            continue
         new_nodes.append(node)
         known.add(nid)
 

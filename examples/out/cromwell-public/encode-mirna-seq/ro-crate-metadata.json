@@ -38,11 +38,11 @@
         "@id": "https://w3id.org/ro/crate/1.2"
       },
       "about": {
-        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-mirna-seq-p-8597795"
+        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-mirna-seq-p-353da45"
       }
     },
     {
-      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-mirna-seq-p-8597795",
+      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-mirna-seq-p-353da45",
       "@type": [
         "Dataset",
         "https://w3id.org/EVI#ROCrate"
@@ -60,10 +60,10 @@
       "version": "1.0",
       "author": "oj",
       "license": "https://spdx.org/licenses/CC-BY-4.0",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "hasPart": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         },
         {
           "@id": "ark:59853/computation-cutadapt-shard-0-5591aea"
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f",
+      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -422,7 +422,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "cutadapt \\\n    -a file:/cromwell_root/encode-processing/caper_tmp/meenakshi/ca31b14d4535436a9d7959bdcf77e706/ENCFF463QEL.txt \\\n    -e 0.25 \\\n    --match-read-wildcards \\\n    --untrimmed-output=rep1ENCSR715NEZ_NO3AD.fastq \\\n    /cromwell_root/encode-processing/caper_tmp/meenakshi/encode-public/2017/06/29/5e59f7f5-02aa-482a-bb3e-7e49ab8828e8/ENCFF961HXV.fastq.gz \\\n    | cutadapt \\\n    -e 0.34 \\\n    --match-read-wildcards \\\n    --no-indels \\\n    -m 15 \\\n    -O 6 \\\n    -n 1 \\\n    -g file:/cromwell_root/encode-processing/caper_tmp/meenakshi/df8acfb115cb667ef5a787093c4115bd/ENCFF642YMX.txt \\\n    --untrimmed-output=rep1ENCSR715NEZ_NO5AD.fastq \\\n    --too-short-output=rep1ENCSR715NEZ_SHORT_FAIL.fastq \\\n    - > rep1ENCSR715NEZ_trim.fastq",
@@ -478,7 +478,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "cutadapt \\\n    -a file:/cromwell_root/encode-processing/caper_tmp/meenakshi/ca31b14d4535436a9d7959bdcf77e706/ENCFF463QEL.txt \\\n    -e 0.25 \\\n    --match-read-wildcards \\\n    --untrimmed-output=rep2ENCSR715NEZ_NO3AD.fastq \\\n    /cromwell_root/encode-processing/caper_tmp/meenakshi/encode-public/2017/06/29/9bf53883-a8c2-404b-b9f5-59b3665ea023/ENCFF414HIZ.fastq.gz \\\n    | cutadapt \\\n    -e 0.34 \\\n    --match-read-wildcards \\\n    --no-indels \\\n    -m 15 \\\n    -O 6 \\\n    -n 1 \\\n    -g file:/cromwell_root/encode-processing/caper_tmp/meenakshi/df8acfb115cb667ef5a787093c4115bd/ENCFF642YMX.txt \\\n    --untrimmed-output=rep2ENCSR715NEZ_NO5AD.fastq \\\n    --too-short-output=rep2ENCSR715NEZ_SHORT_FAIL.fastq \\\n    - > rep2ENCSR715NEZ_trim.fastq",
@@ -522,7 +522,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "python3 $(which calculate_correlation.py) --quants /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-ee3cac44669b7460fea102fa893f1b06/rep1ENCSR715NEZ.tsv /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-ee3cac44669b7460fea102fa893f1b06/rep2ENCSR715NEZ.tsv --output_filename ENCSR715NEZ_spearman.json",
@@ -587,7 +587,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "tar -xzvf /cromwell_root/encode-processing/caper_tmp/meenakshi/8d73a50a7aab6aa71cbd489cf81e26a3/ENCFF795AAA.tar.gz\ngzip -cd /cromwell_root/encode-processing/caper_tmp/meenakshi/59b8f3ac1bad56f32e98f8b6223ddc81/ENCFF094ICJ.gtf.gz > anno.gtf\nSTAR \\\n    --genomeDir out \\\n    --readFilesIn /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-0/glob-13510a96631ebcd33b0389553a698adf/rep1ENCSR715NEZ_trim.fastq \\\n    --sjdbGTFfile anno.gtf \\\n    --runThreadN 16 \\\n    --alignEndsType EndToEnd \\\n    --outFilterMismatchNmax 1 \\\n    --outFilterMultimapScoreRange 0 \\\n    --quantMode TranscriptomeSAM GeneCounts \\\n    --outReadsUnmapped Fastx \\\n    --outSAMtype BAM SortedByCoordinate \\\n    --outFilterMultimapNmax 10 \\\n    --outSAMunmapped Within \\\n    --outFilterScoreMinOverLread 0 \\\n    --outFilterMatchNminOverLread 0 \\\n    --outFilterMatchNmin 16 \\\n    --alignSJDBoverhangMin 1000 \\\n    --alignIntronMax 1 \\\n    --outWigType wiggle \\\n    --outWigStrand Stranded \\\n    --outWigNorm RPM\nmv Aligned.sortedByCoord.out.bam rep1ENCSR715NEZ.bam\nmv ReadsPerGene.out.tab rep1ENCSR715NEZ.tsv\nmv Log.final.out rep1ENCSR715NEZ.Log.final.out\npython3  $(which make_star_qc.py) --quants rep1ENCSR715NEZ.tsv \\\n                                  --star_log rep1ENCSR715NEZ.Log.final.out \\\n                                  --output_filename rep1ENCSR715NEZ_star_qc.json",
@@ -655,7 +655,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "tar -xzvf /cromwell_root/encode-processing/caper_tmp/meenakshi/8d73a50a7aab6aa71cbd489cf81e26a3/ENCFF795AAA.tar.gz\ngzip -cd /cromwell_root/encode-processing/caper_tmp/meenakshi/59b8f3ac1bad56f32e98f8b6223ddc81/ENCFF094ICJ.gtf.gz > anno.gtf\nSTAR \\\n    --genomeDir out \\\n    --readFilesIn /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-cutadapt/shard-1/glob-13510a96631ebcd33b0389553a698adf/rep2ENCSR715NEZ_trim.fastq \\\n    --sjdbGTFfile anno.gtf \\\n    --runThreadN 16 \\\n    --alignEndsType EndToEnd \\\n    --outFilterMismatchNmax 1 \\\n    --outFilterMultimapScoreRange 0 \\\n    --quantMode TranscriptomeSAM GeneCounts \\\n    --outReadsUnmapped Fastx \\\n    --outSAMtype BAM SortedByCoordinate \\\n    --outFilterMultimapNmax 10 \\\n    --outSAMunmapped Within \\\n    --outFilterScoreMinOverLread 0 \\\n    --outFilterMatchNminOverLread 0 \\\n    --outFilterMatchNmin 16 \\\n    --alignSJDBoverhangMin 1000 \\\n    --alignIntronMax 1 \\\n    --outWigType wiggle \\\n    --outWigStrand Stranded \\\n    --outWigNorm RPM\nmv Aligned.sortedByCoord.out.bam rep2ENCSR715NEZ.bam\nmv ReadsPerGene.out.tab rep2ENCSR715NEZ.tsv\nmv Log.final.out rep2ENCSR715NEZ.Log.final.out\npython3  $(which make_star_qc.py) --quants rep2ENCSR715NEZ.tsv \\\n                                  --star_log rep2ENCSR715NEZ.Log.final.out \\\n                                  --output_filename rep2ENCSR715NEZ_star_qc.json",
@@ -717,7 +717,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "wigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-41773c7ab111b23d6eb594bba78fa1d9/Signal.UniqueMultiple.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.all.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-95ad94f4655a5da1faa51c905e436322/Signal.UniqueMultiple.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.all.minus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-34e0341cc922c3159cacc690d41b117b/Signal.Unique.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.unique.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-0/glob-581651af3e8d85ac9aecfba9cf6eaea5/Signal.Unique.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep1ENCSR715NEZ.signal.unique.minus.bigWig",
@@ -779,7 +779,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-06b7e9f"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-mirna-seq-p-d5ecec5"
         }
       ],
       "command": "wigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-41773c7ab111b23d6eb594bba78fa1d9/Signal.UniqueMultiple.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.all.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-95ad94f4655a5da1faa51c905e436322/Signal.UniqueMultiple.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.all.minus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-34e0341cc922c3159cacc690d41b117b/Signal.Unique.str1.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.unique.plus.bigWig\nwigToBigWig /cromwell_root/encode-processing/caper_out/mirna_seq_pipeline/ff2a61b1-8708-407f-a075-6a262d7d1ca0/call-star/shard-1/glob-581651af3e8d85ac9aecfba9cf6eaea5/Signal.Unique.str2.out.wig /cromwell_root/encode-processing/caper_tmp/meenakshi/a4733a4e097a19c869b1cb1aae1b33c9/mm10_no_alt.chrom.sizes.tsv rep2ENCSR715NEZ.signal.unique.minus.bigWig",
@@ -899,7 +899,7 @@
       "name": "rep1ENCSR715NEZ_trim.fastq",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ_trim.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -922,7 +922,7 @@
       "name": "rep1ENCSR715NEZ_NO5AD.fastq",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ_NO5AD.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -945,7 +945,7 @@
       "name": "rep1ENCSR715NEZ_SHORT_FAIL.fastq",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ_SHORT_FAIL.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -968,7 +968,7 @@
       "name": "rep1ENCSR715NEZ_NO3AD.fastq",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ_NO3AD.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -991,7 +991,7 @@
       "name": "rep2ENCSR715NEZ_trim.fastq",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ_trim.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1014,7 +1014,7 @@
       "name": "rep2ENCSR715NEZ_NO5AD.fastq",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ_NO5AD.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1037,7 +1037,7 @@
       "name": "rep2ENCSR715NEZ_SHORT_FAIL.fastq",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ_SHORT_FAIL.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1060,7 +1060,7 @@
       "name": "rep2ENCSR715NEZ_NO3AD.fastq",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ_NO3AD.fastq' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1083,7 +1083,7 @@
       "name": "ENCSR715NEZ_spearman.json",
       "author": "oj",
       "description": "File 'ENCSR715NEZ_spearman.json' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1106,7 +1106,7 @@
       "name": "rep1ENCSR715NEZ.bam",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1129,7 +1129,7 @@
       "name": "Signal.Unique.str1.out.wig",
       "author": "oj",
       "description": "File 'Signal.Unique.str1.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1152,7 +1152,7 @@
       "name": "Signal.UniqueMultiple.str1.out.wig",
       "author": "oj",
       "description": "File 'Signal.UniqueMultiple.str1.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1175,7 +1175,7 @@
       "name": "rep1ENCSR715NEZ_star_qc.json",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ_star_qc.json' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1198,7 +1198,7 @@
       "name": "Signal.Unique.str2.out.wig",
       "author": "oj",
       "description": "File 'Signal.Unique.str2.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1221,7 +1221,7 @@
       "name": "Signal.UniqueMultiple.str2.out.wig",
       "author": "oj",
       "description": "File 'Signal.UniqueMultiple.str2.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1244,7 +1244,7 @@
       "name": "rep1ENCSR715NEZ.tsv",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ.tsv' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1267,7 +1267,7 @@
       "name": "star_qc.log",
       "author": "oj",
       "description": "File 'star_qc.log' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1290,7 +1290,7 @@
       "name": "Signal.Unique.str1.out.wig",
       "author": "oj",
       "description": "File 'Signal.Unique.str1.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1313,7 +1313,7 @@
       "name": "Signal.UniqueMultiple.str1.out.wig",
       "author": "oj",
       "description": "File 'Signal.UniqueMultiple.str1.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1336,7 +1336,7 @@
       "name": "rep2ENCSR715NEZ_star_qc.json",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ_star_qc.json' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1359,7 +1359,7 @@
       "name": "Signal.Unique.str2.out.wig",
       "author": "oj",
       "description": "File 'Signal.Unique.str2.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1382,7 +1382,7 @@
       "name": "rep2ENCSR715NEZ.bam",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1405,7 +1405,7 @@
       "name": "Signal.UniqueMultiple.str2.out.wig",
       "author": "oj",
       "description": "File 'Signal.UniqueMultiple.str2.out.wig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1428,7 +1428,7 @@
       "name": "rep2ENCSR715NEZ.tsv",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ.tsv' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1451,7 +1451,7 @@
       "name": "star_qc.log",
       "author": "oj",
       "description": "File 'star_qc.log' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1474,7 +1474,7 @@
       "name": "rep1ENCSR715NEZ.signal.unique.plus.bigWig",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ.signal.unique.plus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1497,7 +1497,7 @@
       "name": "rep1ENCSR715NEZ.signal.unique.minus.bigWig",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ.signal.unique.minus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1520,7 +1520,7 @@
       "name": "rep1ENCSR715NEZ.signal.all.plus.bigWig",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ.signal.all.plus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1543,7 +1543,7 @@
       "name": "rep1ENCSR715NEZ.signal.all.minus.bigWig",
       "author": "oj",
       "description": "File 'rep1ENCSR715NEZ.signal.all.minus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1566,7 +1566,7 @@
       "name": "rep2ENCSR715NEZ.signal.unique.plus.bigWig",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ.signal.unique.plus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1589,7 +1589,7 @@
       "name": "rep2ENCSR715NEZ.signal.unique.minus.bigWig",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ.signal.unique.minus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1612,7 +1612,7 @@
       "name": "rep2ENCSR715NEZ.signal.all.plus.bigWig",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ.signal.all.plus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1635,7 +1635,7 @@
       "name": "rep2ENCSR715NEZ.signal.all.minus.bigWig",
       "author": "oj",
       "description": "File 'rep2ENCSR715NEZ.signal.all.minus.bigWig' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1658,7 +1658,7 @@
       "name": "ENCFF094ICJ.gtf.gz",
       "author": "oj",
       "description": "Input file 'ENCFF094ICJ.gtf.gz' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1677,7 +1677,7 @@
       "name": "ENCFF795AAA.tar.gz",
       "author": "oj",
       "description": "Input file 'ENCFF795AAA.tar.gz' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1696,7 +1696,7 @@
       "name": "mm10_no_alt.chrom.sizes.tsv",
       "author": "oj",
       "description": "Input file 'mm10_no_alt.chrom.sizes.tsv' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1715,7 +1715,7 @@
       "name": "ENCFF463QEL.txt",
       "author": "oj",
       "description": "Input file 'ENCFF463QEL.txt' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1734,7 +1734,7 @@
       "name": "ENCFF642YMX.txt",
       "author": "oj",
       "description": "Input file 'ENCFF642YMX.txt' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1753,7 +1753,7 @@
       "name": "ENCFF961HXV.fastq.gz",
       "author": "oj",
       "description": "Input file 'ENCFF961HXV.fastq.gz' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1772,7 +1772,7 @@
       "name": "ENCFF414HIZ.fastq.gz",
       "author": "oj",
       "description": "Input file 'ENCFF414HIZ.fastq.gz' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1791,7 +1791,7 @@
       "name": "inputs.json",
       "author": "oj",
       "description": "File 'inputs.json' submitted to Cromwell for this run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1816,7 +1816,7 @@
       "name": "mirna_seq_pipeline.wdl",
       "author": "oj",
       "description": "File 'mirna_seq_pipeline.wdl' submitted to Cromwell for this run",
-      "datePublished": "2026-09-29T12:20:40.396048-04:00",
+      "datePublished": "2026-10-13T11:24:03.649268-04:00",
       "keywords": [
         "cromwell",
         "wdl",

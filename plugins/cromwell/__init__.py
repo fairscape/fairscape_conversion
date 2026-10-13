@@ -29,10 +29,9 @@ for sizes/locators) into plain records, and this plugin owns the conversion:
 The emitted crate mirrors nf-fairscape's and plugins/snakemake's: descriptor
 -> root ["Dataset", EVI#ROCrate] -> run Computation -> call Computations ->
 Software (WDL + engine + one per task) -> Datasets -> Schema nodes. ARKs are deterministic
-(core.arks): every hashed string is run-independent (``extract`` strips the
-run-UUID directory from paths under workflowRoot), so re-running the same
-workflow — a fresh Cromwell run, new UUID and all — reproduces the
-identifiers. The standalone ``nf/cromwell-fairscape`` converter is the parity
+(core.arks): converting the same run twice reproduces the identifiers. Dataset
+ARKs hash the file's absolute path, so a fresh Cromwell run (new run-UUID
+directory, new files) mints new ones. The standalone ``nf/cromwell-fairscape`` converter is the parity
 reference (tests/test_cromwell.py).
 """
 
@@ -63,7 +62,8 @@ DEFAULT_CONTEXT = {
 
 
 def job_ark_source(job, files, wdl_key):
-    return (wdl_key + "#" + job["task"]
+    scope = job.get("scope")
+    return (wdl_key + "#" + (scope + "/" if scope else "") + job["task"]
             + "\0" + str(job["shard"])
             + "\0" + "\0".join(sorted(files[p]["ark_source"]
                                       for p in job["outputs"])))
@@ -90,9 +90,12 @@ class CromwellPlugin(PluginBase):
         ctx.extras["schemas"] = src.get("schemas", {})
 
         key = run["wdl_key"]
+        # Cromwell's workflow id is unique per run, so a re-run of the same WDL
+        # gets a new root and run ARK instead of colliding with the first.
+        run_key = key + "#" + str(run.get("workflow_id") or run.get("starttime") or "")
         guid_map = {
-            "root": mint_ark(naan, "rocrate", run["name"], key),
-            "run": mint_ark(naan, "computation", run["name"], key + "#run"),
+            "root": mint_ark(naan, "rocrate", run["name"], run_key),
+            "run": mint_ark(naan, "computation", run["name"], run_key + "#run"),
             "workflow": mint_ark(naan, "software",
                                  os.path.basename(run["wdl_ref"]), key),
             "engine": mint_ark(naan, "software", "cromwell",

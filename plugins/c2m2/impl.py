@@ -433,16 +433,18 @@ class C2m2Plugin(PluginBase):
         # Per-table reflection layer (Dataset + evi:Schema from the Frictionless
         # descriptor). Pre-loaded into out_nodes/order so their guids seed the
         # first-wins dedup — exactly the old engine's `seen` set semantics.
-        generated_guids = []
+        # The conversion generates the Schemas; the table TSVs are what it read.
+        generated_guids, table_guids = [], []
         for resource in mapper.resources:
             table = resource["name"]
             if table not in meta["populated"]:
                 continue
-            for obj in (mapper._schema_element(resource, meta), mapper._table_dataset(resource, meta)):
+            for obj, bucket in ((mapper._schema_element(resource, meta), generated_guids),
+                                (mapper._table_dataset(resource, meta), table_guids)):
                 node = _dump(obj)
                 ctx.out_nodes[node["@id"]] = node
                 ctx.order.append(node["@id"])
-                generated_guids.append(node["@id"])
+                bucket.append(node["@id"])
 
         guid_maps = _build_guid_maps(mapper, meta, entity_cfgs)
         assoc_index = _build_assoc_index(mapper, meta, guid_maps, entity_cfgs)
@@ -455,6 +457,7 @@ class C2m2Plugin(PluginBase):
             guid_maps=guid_maps,
             assoc_index=assoc_index,
             generated_guids=generated_guids,
+            table_guids=table_guids,
             cfg_by_table={c["source_table"]: c for c in entity_cfgs},
             output_path=output_path,
         )
@@ -508,6 +511,7 @@ class C2m2Plugin(PluginBase):
         )
         tail.append(_dump(datapackage_element))
         used_dataset_guids.append(datapackage_element.guid)
+        used_dataset_guids.extend(ctx.extras["table_guids"])
 
         preserve_sqlite = ctx.extras.get("include_sqlite", True) and mapper.sqlite_path.exists()
         if preserve_sqlite:

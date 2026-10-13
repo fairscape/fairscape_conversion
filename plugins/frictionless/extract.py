@@ -82,10 +82,38 @@ def _relative(path, crate_dir) -> str:
     return os.path.basename(str(path))
 
 
+def _load_reference(ref, base_dir):
+    """A resource ``schema`` / ``dialect`` given as a path or URL instead of
+    an inline object. A local path (relative to the descriptor) is read; a
+    URL is never fetched and comes back as None, so the caller keeps it as a
+    reference."""
+    if str(ref).startswith(REMOTE) or base_dir is None:
+        return None
+    full = os.path.normpath(os.path.join(base_dir, str(ref)))
+    if not os.path.isfile(full):
+        return None
+    with open(full, encoding="utf-8-sig") as f:
+        if full.endswith((".yaml", ".yml")):
+            import yaml
+            loaded = yaml.safe_load(f)
+        else:
+            loaded = json.load(f)
+    return loaded if isinstance(loaded, dict) else None
+
+
 def resource_record(resource: dict, base_dir, crate_dir) -> dict:
     """One resource as the mapping sees it: the descriptor entry plus what
     the disk says about the file (if it is a local one)."""
     rec = dict(resource)
+    for key in ("schema", "dialect"):
+        ref = rec.get(key)
+        if isinstance(ref, str):
+            loaded = _load_reference(ref, base_dir)
+            if loaded is None:
+                del rec[key]
+                rec[key + "_ref"] = ref    # a URL (or unreadable path): kept as a reference
+            else:
+                rec[key] = loaded
     raw_path = _first_path(resource.get("path"))
     rec["path"] = raw_path
     rec["remote"] = bool(raw_path and str(raw_path).startswith(REMOTE))

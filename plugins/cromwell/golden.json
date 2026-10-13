@@ -38,11 +38,11 @@
         "@id": "https://w3id.org/ro/crate/1.2"
       },
       "about": {
-        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-letters-b0212b3"
+        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-letters-61ae259"
       }
     },
     {
-      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-letters-b0212b3",
+      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-letters-61ae259",
       "@type": [
         "Dataset",
         "https://w3id.org/EVI#ROCrate"
@@ -63,7 +63,7 @@
       "datePublished": "2026-08-06T00:00:00-04:00",
       "hasPart": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-b7c1014"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-3ea8b73"
         },
         {
           "@id": "ark:59853/computation-annotate-shard-0-409b41c"
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-b7c1014",
+      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-3ea8b73",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -182,7 +182,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-b7c1014"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-3ea8b73"
         }
       ],
       "command": "sed \"s/^/alpha: /\" /cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-0/inputs/-1940065067/upper.txt > alpha.txt",
@@ -220,7 +220,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-b7c1014"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-3ea8b73"
         }
       ],
       "command": "sed \"s/^/beta: /\" /cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-annotate/shard-1/inputs/-1940065067/upper.txt > beta.txt",
@@ -261,7 +261,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-b7c1014"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-3ea8b73"
         }
       ],
       "command": "cat /data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/inputs/2041601165/alpha.txt /data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-combine/inputs/244649806/beta.txt > summary.txt",
@@ -295,7 +295,7 @@
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-b7c1014"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-letters-3ea8b73"
         }
       ],
       "command": "tr 'a-z' 'A-Z' < /data/letters-scatter/cromwell-executions/letters/d2dd6a65-d3e7-4350-a495-6a7fa72bdd0b/call-uppercase/inputs/-1588382431/seed.txt > upper.txt",

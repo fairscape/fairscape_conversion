@@ -4,4 +4,5 @@ activity,,Computation,prov:Activity|https://w3id.org/EVI#Computation,step,mint,,
 transferActivity,,Activity,prov:Activity,transfer,mint,,,TRUE,cpm-transfer,cpm:receiptActivity — cross-org data transfer kept as a plain prov:Activity (deliberate: not dropped and not a Computation)
 entity,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,data,mint,,,TRUE,cpm-dataset,every PROV entity: connectors and externalInputs included; shared connector ids stitch bundles (same qid -> same ARK)
 agent,,Organization,Organization,agent,mint,,,TRUE,cpm-agent,cpm:senderAgent / cpm:receiverAgent — organization-level actors
+person,,Person,Person,agent,mint,,,TRUE,cpm-agent,an agent typed prov:Person stays a Person
 cpmfile,,Dataset,prov:Entity|https://w3id.org/EVI#Dataset,bundlefile,mint,,,TRUE,cpm-bundle,the CPMProvenanceFile / CPMMetaProvenanceFile itself registered as a Dataset; bundle members point at it via subjectOf

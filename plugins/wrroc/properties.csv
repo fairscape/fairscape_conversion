@@ -14,11 +14,11 @@ CreateAction,environment,Computation,environment,passthrough,passthrough,both,FA
 CreateAction,containerImage,Computation,containerImage,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,EVI Container model exists but is not wired to Computation
 CreateAction,resourceUsage,Computation,resourceUsage,passthrough,passthrough,both,FALSE,passthrough,scalar,,,,,,,Provenance profile only
 CreateAction,,Computation,isPartOf,parent_link,drop_export,import,FALSE,synthesized,scalar,,,,,,,tool Computations point at the workflow-level Computation
-ComputationalWorkflow,name,Software,name,scalar,scalar,both,TRUE,required,scalar,,,,,,,
+ComputationalWorkflow,name,Software,name,name_or_basename,scalar,both,TRUE,required,scalar,,,,,,,name else the @id's last path segment
 ComputationalWorkflow,description,Software,description,desc_min10,scalar,both,TRUE,synthesized,scalar,,,,,,,
 ComputationalWorkflow,version,Software,version,scalar,scalar,both,FALSE,optional,scalar,,,,,,,
 ComputationalWorkflow,programmingLanguage,Software,format,synth_format_lang,drop_export,import,TRUE,synthesized,scalar,,,,,,,resolved via the ComputerLanguage node else extension else text/plain
-SoftwareApplication,name,Software,name,scalar,scalar,both,TRUE,required,scalar,,,,,,,
+SoftwareApplication,name,Software,name,name_or_basename,scalar,both,TRUE,required,scalar,,,,,,,name else the @id's last path segment
 SoftwareApplication,description,Software,description,desc_min10,scalar,both,TRUE,synthesized,scalar,,,,,,,
 SoftwareApplication,version,Software,version,scalar,scalar,both,FALSE,optional,scalar,,,,,,,
 SoftwareApplication,,Software,format,synth_format,drop_export,import,FALSE,synthesized,scalar,,,,,,,from file extension else text/plain

@@ -23,6 +23,10 @@ crate's relative ``contentUrl`` values resolve. The same pass runs standalone
 over a crate already on disk with
 ``fairscape_conversion link <crate> --link-crate DIR [-o OUT]``.
 
+Every import checks the crate it produces against ``fairscape_models``
+(``ROCrateV1_2``) and fails on an invalid one; ``--no-validate`` writes it
+anyway.
+
 ``track SCRIPT [options] [-- args]`` runs a Python script and adds the run to
 a crate directory (``plugins/python/track.py``; ``track --help`` for options).
 """
@@ -63,7 +67,8 @@ def main(argv=None):
         from ..plugins.python.track import main as track_main
         return track_main(argv[1:])
     provn = "--provn" in argv
-    argv = [a for a in argv if a != "--provn"]
+    no_validate = "--no-validate" in argv
+    argv = [a for a in argv if a not in ("--provn", "--no-validate")]
     options = {}
     linked = []
     while "--link-crate" in argv:                # linked crates, repeatable
@@ -94,6 +99,8 @@ def main(argv=None):
         return 1
     plugin = importlib.import_module(f"fairscape_conversion.plugins.{plugin_name}")
 
+    if direction == "import" and no_validate:
+        options["validate"] = False
     if direction == "export" and plugin_name == "cpm" and provn:
         options["serialization"] = "provn"
 

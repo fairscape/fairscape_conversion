@@ -38,11 +38,11 @@
         "@id": "https://w3id.org/ro/crate/1.2"
       },
       "about": {
-        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-main-workfl-3d11061"
+        "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-main-workfl-fdad9a0"
       }
     },
     {
-      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-main-workfl-3d11061",
+      "@id": "ark:59853/rocrate-cromwell-run-of-wdl-workflow-main-workfl-fdad9a0",
       "@type": [
         "Dataset",
         "https://w3id.org/EVI#ROCrate"
@@ -60,13 +60,13 @@
       "version": "1.0",
       "author": "oj",
       "license": "https://spdx.org/licenses/CC-BY-4.0",
-      "datePublished": "2026-09-29T12:20:40.361451-04:00",
+      "datePublished": "2026-10-13T11:24:03.338726-04:00",
       "hasPart": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-20d43b3"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-016e5ae"
         },
         {
-          "@id": "ark:59853/computation-hello-a1ece25"
+          "@id": "ark:59853/computation-hello-in-wf-hello-633603a"
         },
         {
           "@id": "ark:59853/software-main-workflow-wdl-3d11061"
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-20d43b3",
+      "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-016e5ae",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -109,12 +109,12 @@
       "endTime": "2020-04-16T20:51:22.877Z"
     },
     {
-      "@id": "ark:59853/computation-hello-a1ece25",
+      "@id": "ark:59853/computation-hello-in-wf-hello-633603a",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
       ],
-      "name": "hello",
+      "name": "hello (in wf_hello)",
       "description": "Cromwell call of WDL task 'hello'",
       "runBy": "oj",
       "dateCreated": "2020-04-16T20:48:56.074Z",
@@ -127,7 +127,7 @@
       "generated": [],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-20d43b3"
+          "@id": "ark:59853/computation-cromwell-run-of-wdl-workflow-main-workfl-016e5ae"
         }
       ],
       "command": "echo \"Hello sub world!\"",
@@ -190,7 +190,7 @@
       "name": "main_workflow.wdl",
       "author": "oj",
       "description": "File 'main_workflow.wdl' submitted to Cromwell for this run",
-      "datePublished": "2026-09-29T12:20:40.361451-04:00",
+      "datePublished": "2026-10-13T11:24:03.338726-04:00",
       "keywords": [
         "cromwell",
         "wdl",

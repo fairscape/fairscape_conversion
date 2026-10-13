@@ -38,11 +38,11 @@
         "@id": "https://w3id.org/ro/crate/1.2"
       },
       "about": {
-        "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-eaa82aa"
+        "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-bdac64c"
       }
     },
     {
-      "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-eaa82aa",
+      "@id": "ark:59853/rocrate-variant-calling-on-three-sequenced-sampl-bdac64c",
       "@type": [
         "Dataset",
         "https://w3id.org/EVI#ROCrate"
@@ -63,46 +63,46 @@
       "version": "1.0",
       "author": "Example Researcher",
       "license": "https://spdx.org/licenses/CC-BY-4.0",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "hasPart": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         },
         {
-          "@id": "ark:59853/computation-bcftoolscall-8ea519b"
+          "@id": "ark:59853/computation-bcftoolscall-5d0f78b"
         },
         {
-          "@id": "ark:59853/computation-bwamem-shard-0-804de6e"
+          "@id": "ark:59853/computation-bwamem-shard-0-a3ad133"
         },
         {
-          "@id": "ark:59853/computation-bwamem-shard-1-6e07ad5"
+          "@id": "ark:59853/computation-bwamem-shard-1-b3291b4"
         },
         {
-          "@id": "ark:59853/computation-bwamem-shard-2-a914867"
+          "@id": "ark:59853/computation-bwamem-shard-2-6f4f189"
         },
         {
-          "@id": "ark:59853/computation-plotquals-35cec30"
+          "@id": "ark:59853/computation-plotquals-bbfd1fc"
         },
         {
-          "@id": "ark:59853/computation-samtoolsindex-shard-0-3376a7c"
+          "@id": "ark:59853/computation-samtoolsindex-shard-0-8b5cdee"
         },
         {
-          "@id": "ark:59853/computation-samtoolsindex-shard-1-8842a0f"
+          "@id": "ark:59853/computation-samtoolsindex-shard-1-5dec7e6"
         },
         {
-          "@id": "ark:59853/computation-samtoolsindex-shard-2-5ea9730"
+          "@id": "ark:59853/computation-samtoolsindex-shard-2-eb5a9de"
         },
         {
-          "@id": "ark:59853/computation-samtoolssort-shard-0-9640891"
+          "@id": "ark:59853/computation-samtoolssort-shard-0-72dab46"
         },
         {
-          "@id": "ark:59853/computation-samtoolssort-shard-1-6c00821"
+          "@id": "ark:59853/computation-samtoolssort-shard-1-39f0526"
         },
         {
-          "@id": "ark:59853/computation-samtoolssort-shard-2-c978d5d"
+          "@id": "ark:59853/computation-samtoolssort-shard-2-c7ca3da"
         },
         {
-          "@id": "ark:59853/computation-variantsummary-0b2b77a"
+          "@id": "ark:59853/computation-variantsummary-09c98c4"
         },
         {
           "@id": "ark:59853/software-variant-calling-wdl-eaa82aa"
@@ -129,40 +129,40 @@
           "@id": "ark:59853/software-variantsummary-8e9b1a6"
         },
         {
-          "@id": "ark:59853/dataset-all-vcf-07f232c"
+          "@id": "ark:59853/dataset-all-vcf-1dada3d"
         },
         {
-          "@id": "ark:59853/dataset-a-bam-c796871"
+          "@id": "ark:59853/dataset-a-bam-5c7e245"
         },
         {
-          "@id": "ark:59853/dataset-b-bam-c5ee69f"
+          "@id": "ark:59853/dataset-b-bam-aeaa3c3"
         },
         {
-          "@id": "ark:59853/dataset-c-bam-22ad6db"
+          "@id": "ark:59853/dataset-c-bam-381fe69"
         },
         {
-          "@id": "ark:59853/dataset-quals-svg-130641f"
+          "@id": "ark:59853/dataset-quals-svg-05b3ce6"
         },
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-bai-8967d81"
+          "@id": "ark:59853/dataset-a-sorted-bam-bai-a57b76a"
         },
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-bai-50ef104"
+          "@id": "ark:59853/dataset-b-sorted-bam-bai-d5f0c11"
         },
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-bai-2e89357"
+          "@id": "ark:59853/dataset-c-sorted-bam-bai-9123f6e"
         },
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+          "@id": "ark:59853/dataset-a-sorted-bam-f46d369"
         },
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+          "@id": "ark:59853/dataset-b-sorted-bam-a82da81"
         },
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+          "@id": "ark:59853/dataset-c-sorted-bam-2d56cc1"
         },
         {
-          "@id": "ark:59853/dataset-variant-summary-tsv-f81f0cc"
+          "@id": "ark:59853/dataset-variant-summary-tsv-149f190"
         },
         {
           "@id": "ark:59853/dataset-genome-fa-ad35c32"
@@ -200,7 +200,7 @@
       ]
     },
     {
-      "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815",
+      "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -249,22 +249,22 @@
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+          "@id": "ark:59853/dataset-a-sorted-bam-f46d369"
         },
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+          "@id": "ark:59853/dataset-b-sorted-bam-a82da81"
         },
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+          "@id": "ark:59853/dataset-c-sorted-bam-2d56cc1"
         },
         {
-          "@id": "ark:59853/dataset-all-vcf-07f232c"
+          "@id": "ark:59853/dataset-all-vcf-1dada3d"
         },
         {
-          "@id": "ark:59853/dataset-variant-summary-tsv-f81f0cc"
+          "@id": "ark:59853/dataset-variant-summary-tsv-149f190"
         },
         {
-          "@id": "ark:59853/dataset-quals-svg-130641f"
+          "@id": "ark:59853/dataset-quals-svg-05b3ce6"
         }
       ],
       "cromwellVersion": "92",
@@ -273,7 +273,7 @@
       "endTime": "2026-09-11T17:15:14.630Z"
     },
     {
-      "@id": "ark:59853/computation-bcftoolscall-8ea519b",
+      "@id": "ark:59853/computation-bcftoolscall-5d0f78b",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -292,32 +292,32 @@
           "@id": "ark:59853/dataset-genome-fa-ad35c32"
         },
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-bai-8967d81"
+          "@id": "ark:59853/dataset-a-sorted-bam-bai-a57b76a"
         },
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-bai-50ef104"
+          "@id": "ark:59853/dataset-b-sorted-bam-bai-d5f0c11"
         },
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-bai-2e89357"
+          "@id": "ark:59853/dataset-c-sorted-bam-bai-9123f6e"
         },
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+          "@id": "ark:59853/dataset-a-sorted-bam-f46d369"
         },
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+          "@id": "ark:59853/dataset-b-sorted-bam-a82da81"
         },
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+          "@id": "ark:59853/dataset-c-sorted-bam-2d56cc1"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-all-vcf-07f232c"
+          "@id": "ark:59853/dataset-all-vcf-1dada3d"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# pile the alignments and their indexes back into one directory\nmkdir -p alignments\nfor bam in /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/230049286/A.sorted.bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-1566902073/B.sorted.bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/931113864/C.sorted.bam; do ln -s \"$bam\" alignments/; done\nfor bai in /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-1581987200/A.sorted.bam.bai /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/916028737/B.sorted.bam.bai /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/-880922622/C.sorted.bam.bai; do ln -s \"$bai\" alignments/; done\n\nbcftools mpileup -d 250 -a AD,DP -f /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/inputs/1495863733/genome.fa alignments/*.bam \\\n    | bcftools call -mv -Ov -o all.vcf",
@@ -329,7 +329,7 @@
       "endTime": "2026-09-11T17:15:03.805Z"
     },
     {
-      "@id": "ark:59853/computation-bwamem-shard-0-804de6e",
+      "@id": "ark:59853/computation-bwamem-shard-0-a3ad133",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -368,12 +368,12 @@
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-bam-c796871"
+          "@id": "ark:59853/dataset-a-bam-5c7e245"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# bwa wants the index files beside the fasta under their original\n# names; Cromwell localizes each input into its own directory, so\n# rebuild that layout with symlinks.\nmkdir -p reference\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa     reference/genome.fa\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.amb reference/genome.fa.amb\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.ann reference/genome.fa.ann\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.pac reference/genome.fa.pac\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa\n\nbwa mem -t 2 \\\n    -R \"@RG\\tID:A\\tSM:A\\tPL:ILLUMINA\" \\\n    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/inputs/23660975/A.fastq \\\n    | samtools view -Sb - > A.bam",
@@ -385,7 +385,7 @@
       "endTime": "2026-09-11T17:14:33.835Z"
     },
     {
-      "@id": "ark:59853/computation-bwamem-shard-1-6e07ad5",
+      "@id": "ark:59853/computation-bwamem-shard-1-b3291b4",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -424,12 +424,12 @@
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-b-bam-c5ee69f"
+          "@id": "ark:59853/dataset-b-bam-aeaa3c3"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# bwa wants the index files beside the fasta under their original\n# names; Cromwell localizes each input into its own directory, so\n# rebuild that layout with symlinks.\nmkdir -p reference\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa     reference/genome.fa\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.amb reference/genome.fa.amb\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.ann reference/genome.fa.ann\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.pac reference/genome.fa.pac\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa\n\nbwa mem -t 2 \\\n    -R \"@RG\\tID:B\\tSM:B\\tPL:ILLUMINA\" \\\n    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/inputs/23660975/B.fastq \\\n    | samtools view -Sb - > B.bam",
@@ -441,7 +441,7 @@
       "endTime": "2026-09-11T17:14:33.834Z"
     },
     {
-      "@id": "ark:59853/computation-bwamem-shard-2-a914867",
+      "@id": "ark:59853/computation-bwamem-shard-2-6f4f189",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -480,12 +480,12 @@
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-c-bam-22ad6db"
+          "@id": "ark:59853/dataset-c-bam-381fe69"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# bwa wants the index files beside the fasta under their original\n# names; Cromwell localizes each input into its own directory, so\n# rebuild that layout with symlinks.\nmkdir -p reference\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa     reference/genome.fa\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.amb reference/genome.fa.amb\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.ann reference/genome.fa.ann\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.bwt reference/genome.fa.bwt\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.pac reference/genome.fa.pac\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/1495863733/genome.fa.sa  reference/genome.fa.sa\n\nbwa mem -t 2 \\\n    -R \"@RG\\tID:C\\tSM:C\\tPL:ILLUMINA\" \\\n    reference/genome.fa /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/inputs/23660975/C.fastq \\\n    | samtools view -Sb - > C.bam",
@@ -497,7 +497,7 @@
       "endTime": "2026-09-11T17:14:33.836Z"
     },
     {
-      "@id": "ark:59853/computation-plotquals-35cec30",
+      "@id": "ark:59853/computation-plotquals-bbfd1fc",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -513,17 +513,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-all-vcf-07f232c"
+          "@id": "ark:59853/dataset-all-vcf-1dada3d"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-quals-svg-130641f"
+          "@id": "ark:59853/dataset-quals-svg-05b3ce6"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\npython3 <<'PYTHON'\nimport matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nfrom pysam import VariantFile\n\nquals = [record.qual for record in VariantFile(\"/home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/inputs/1301869358/all.vcf\")]\n\nfigure, axes = plt.subplots(figsize=(6, 4))\naxes.hist(quals, bins=30, color=\"#3b6ea5\", edgecolor=\"white\")\naxes.set_xlabel(\"variant quality (Phred)\")\naxes.set_ylabel(\"variants\")\naxes.set_title(f\"{len(quals)} variants called across all samples\")\nfigure.tight_layout()\nfigure.savefig(\"quals.svg\")\nPYTHON",
@@ -531,7 +531,7 @@
       "endTime": "2026-09-11T17:15:12.806Z"
     },
     {
-      "@id": "ark:59853/computation-samtoolsindex-shard-0-3376a7c",
+      "@id": "ark:59853/computation-samtoolsindex-shard-0-8b5cdee",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -547,17 +547,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+          "@id": "ark:59853/dataset-a-sorted-bam-f46d369"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-bai-8967d81"
+          "@id": "ark:59853/dataset-a-sorted-bam-bai-a57b76a"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# the index has to sit beside the bam it indexes\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/inputs/230049286/A.sorted.bam A.sorted.bam\nsamtools index A.sorted.bam",
@@ -568,7 +568,7 @@
       "endTime": "2026-09-11T17:14:51.807Z"
     },
     {
-      "@id": "ark:59853/computation-samtoolsindex-shard-1-8842a0f",
+      "@id": "ark:59853/computation-samtoolsindex-shard-1-5dec7e6",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -584,17 +584,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+          "@id": "ark:59853/dataset-b-sorted-bam-a82da81"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-bai-50ef104"
+          "@id": "ark:59853/dataset-b-sorted-bam-bai-d5f0c11"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# the index has to sit beside the bam it indexes\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/inputs/-1566902073/B.sorted.bam B.sorted.bam\nsamtools index B.sorted.bam",
@@ -605,7 +605,7 @@
       "endTime": "2026-09-11T17:14:51.808Z"
     },
     {
-      "@id": "ark:59853/computation-samtoolsindex-shard-2-5ea9730",
+      "@id": "ark:59853/computation-samtoolsindex-shard-2-eb5a9de",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -621,17 +621,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+          "@id": "ark:59853/dataset-c-sorted-bam-2d56cc1"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-bai-2e89357"
+          "@id": "ark:59853/dataset-c-sorted-bam-bai-9123f6e"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\n# the index has to sit beside the bam it indexes\nln -s /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/inputs/931113864/C.sorted.bam C.sorted.bam\nsamtools index C.sorted.bam",
@@ -642,7 +642,7 @@
       "endTime": "2026-09-11T17:14:51.808Z"
     },
     {
-      "@id": "ark:59853/computation-samtoolssort-shard-0-9640891",
+      "@id": "ark:59853/computation-samtoolssort-shard-0-72dab46",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -658,17 +658,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-a-bam-c796871"
+          "@id": "ark:59853/dataset-a-bam-5c7e245"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-a-sorted-bam-feab38c"
+          "@id": "ark:59853/dataset-a-sorted-bam-f46d369"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\nsamtools sort -T A -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/inputs/217367413/A.bam > A.sorted.bam",
@@ -679,7 +679,7 @@
       "endTime": "2026-09-11T17:14:42.808Z"
     },
     {
-      "@id": "ark:59853/computation-samtoolssort-shard-1-6c00821",
+      "@id": "ark:59853/computation-samtoolssort-shard-1-39f0526",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -695,17 +695,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-b-bam-c5ee69f"
+          "@id": "ark:59853/dataset-b-bam-aeaa3c3"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-b-sorted-bam-a762e31"
+          "@id": "ark:59853/dataset-b-sorted-bam-a82da81"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\nsamtools sort -T B -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/inputs/-1579583946/B.bam > B.sorted.bam",
@@ -716,7 +716,7 @@
       "endTime": "2026-09-11T17:14:42.808Z"
     },
     {
-      "@id": "ark:59853/computation-samtoolssort-shard-2-c978d5d",
+      "@id": "ark:59853/computation-samtoolssort-shard-2-c7ca3da",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -732,17 +732,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-c-bam-22ad6db"
+          "@id": "ark:59853/dataset-c-bam-381fe69"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d"
+          "@id": "ark:59853/dataset-c-sorted-bam-2d56cc1"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\nsamtools sort -T C -O bam /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/inputs/918431991/C.bam > C.sorted.bam",
@@ -753,7 +753,7 @@
       "endTime": "2026-09-11T17:14:42.809Z"
     },
     {
-      "@id": "ark:59853/computation-variantsummary-0b2b77a",
+      "@id": "ark:59853/computation-variantsummary-09c98c4",
       "@type": [
         "prov:Activity",
         "https://w3id.org/EVI#Computation"
@@ -769,17 +769,17 @@
       ],
       "usedDataset": [
         {
-          "@id": "ark:59853/dataset-all-vcf-07f232c"
+          "@id": "ark:59853/dataset-all-vcf-1dada3d"
         }
       ],
       "generated": [
         {
-          "@id": "ark:59853/dataset-variant-summary-tsv-f81f0cc"
+          "@id": "ark:59853/dataset-variant-summary-tsv-149f190"
         }
       ],
       "isPartOf": [
         {
-          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-cf1c815"
+          "@id": "ark:59853/computation-variant-calling-on-three-sequenced-sampl-1856f53"
         }
       ],
       "command": "set -euo pipefail\nprintf 'chrom\\tpos\\tref\\talt\\tquality\\tdepth\\n' > variant_summary.tsv\nbcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t%QUAL\\t%INFO/DP\\n' /home/oj/fairscape/fairscape_conversion/examples/wdl-variant-calling/cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/inputs/1301869358/all.vcf \\\n    >> variant_summary.tsv",
@@ -914,7 +914,7 @@
       ]
     },
     {
-      "@id": "ark:59853/dataset-all-vcf-07f232c",
+      "@id": "ark:59853/dataset-all-vcf-1dada3d",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -922,7 +922,7 @@
       "name": "all.vcf",
       "author": "Example Researcher",
       "description": "File 'all.vcf' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -934,14 +934,14 @@
       "format": "text/x-vcf",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bcftoolscall-8ea519b"
+          "@id": "ark:59853/computation-bcftoolscall-5d0f78b"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BcftoolsCall/execution/all.vcf",
       "contentSize": "111966"
     },
     {
-      "@id": "ark:59853/dataset-a-bam-c796871",
+      "@id": "ark:59853/dataset-a-bam-5c7e245",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -949,7 +949,7 @@
       "name": "A.bam",
       "author": "Example Researcher",
       "description": "File 'A.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -961,14 +961,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bwamem-shard-0-804de6e"
+          "@id": "ark:59853/computation-bwamem-shard-0-a3ad133"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-0/execution/A.bam",
       "contentSize": "2201870"
     },
     {
-      "@id": "ark:59853/dataset-b-bam-c5ee69f",
+      "@id": "ark:59853/dataset-b-bam-aeaa3c3",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -976,7 +976,7 @@
       "name": "B.bam",
       "author": "Example Researcher",
       "description": "File 'B.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -988,14 +988,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bwamem-shard-1-6e07ad5"
+          "@id": "ark:59853/computation-bwamem-shard-1-b3291b4"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-1/execution/B.bam",
       "contentSize": "2206471"
     },
     {
-      "@id": "ark:59853/dataset-c-bam-22ad6db",
+      "@id": "ark:59853/dataset-c-bam-381fe69",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1003,7 +1003,7 @@
       "name": "C.bam",
       "author": "Example Researcher",
       "description": "File 'C.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1015,14 +1015,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-bwamem-shard-2-a914867"
+          "@id": "ark:59853/computation-bwamem-shard-2-6f4f189"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-BwaMem/shard-2/execution/C.bam",
       "contentSize": "2206515"
     },
     {
-      "@id": "ark:59853/dataset-quals-svg-130641f",
+      "@id": "ark:59853/dataset-quals-svg-05b3ce6",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1030,7 +1030,7 @@
       "name": "quals.svg",
       "author": "Example Researcher",
       "description": "File 'quals.svg' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1042,14 +1042,14 @@
       "format": "image/svg+xml",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-plotquals-35cec30"
+          "@id": "ark:59853/computation-plotquals-bbfd1fc"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-PlotQuals/execution/quals.svg",
       "contentSize": "32829"
     },
     {
-      "@id": "ark:59853/dataset-a-sorted-bam-bai-8967d81",
+      "@id": "ark:59853/dataset-a-sorted-bam-bai-a57b76a",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1057,7 +1057,7 @@
       "name": "A.sorted.bam.bai",
       "author": "Example Researcher",
       "description": "File 'A.sorted.bam.bai' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1069,14 +1069,14 @@
       "format": "application/octet-stream",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtoolsindex-shard-0-3376a7c"
+          "@id": "ark:59853/computation-samtoolsindex-shard-0-8b5cdee"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-0/execution/A.sorted.bam.bai",
       "contentSize": "344"
     },
     {
-      "@id": "ark:59853/dataset-b-sorted-bam-bai-50ef104",
+      "@id": "ark:59853/dataset-b-sorted-bam-bai-d5f0c11",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1084,7 +1084,7 @@
       "name": "B.sorted.bam.bai",
       "author": "Example Researcher",
       "description": "File 'B.sorted.bam.bai' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1096,14 +1096,14 @@
       "format": "application/octet-stream",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtoolsindex-shard-1-8842a0f"
+          "@id": "ark:59853/computation-samtoolsindex-shard-1-5dec7e6"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-1/execution/B.sorted.bam.bai",
       "contentSize": "344"
     },
     {
-      "@id": "ark:59853/dataset-c-sorted-bam-bai-2e89357",
+      "@id": "ark:59853/dataset-c-sorted-bam-bai-9123f6e",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1111,7 +1111,7 @@
       "name": "C.sorted.bam.bai",
       "author": "Example Researcher",
       "description": "File 'C.sorted.bam.bai' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1123,14 +1123,14 @@
       "format": "application/octet-stream",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtoolsindex-shard-2-5ea9730"
+          "@id": "ark:59853/computation-samtoolsindex-shard-2-eb5a9de"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsIndex/shard-2/execution/C.sorted.bam.bai",
       "contentSize": "344"
     },
     {
-      "@id": "ark:59853/dataset-a-sorted-bam-feab38c",
+      "@id": "ark:59853/dataset-a-sorted-bam-f46d369",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1138,7 +1138,7 @@
       "name": "A.sorted.bam",
       "author": "Example Researcher",
       "description": "File 'A.sorted.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1150,14 +1150,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtoolssort-shard-0-9640891"
+          "@id": "ark:59853/computation-samtoolssort-shard-0-72dab46"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-0/execution/A.sorted.bam",
       "contentSize": "2186270"
     },
     {
-      "@id": "ark:59853/dataset-b-sorted-bam-a762e31",
+      "@id": "ark:59853/dataset-b-sorted-bam-a82da81",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1165,7 +1165,7 @@
       "name": "B.sorted.bam",
       "author": "Example Researcher",
       "description": "File 'B.sorted.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1177,14 +1177,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtoolssort-shard-1-6c00821"
+          "@id": "ark:59853/computation-samtoolssort-shard-1-39f0526"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-1/execution/B.sorted.bam",
       "contentSize": "2189418"
     },
     {
-      "@id": "ark:59853/dataset-c-sorted-bam-4b72a7d",
+      "@id": "ark:59853/dataset-c-sorted-bam-2d56cc1",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1192,7 +1192,7 @@
       "name": "C.sorted.bam",
       "author": "Example Researcher",
       "description": "File 'C.sorted.bam' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1204,14 +1204,14 @@
       "format": "application/x-bam",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-samtoolssort-shard-2-c978d5d"
+          "@id": "ark:59853/computation-samtoolssort-shard-2-c7ca3da"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-SamtoolsSort/shard-2/execution/C.sorted.bam",
       "contentSize": "2189510"
     },
     {
-      "@id": "ark:59853/dataset-variant-summary-tsv-f81f0cc",
+      "@id": "ark:59853/dataset-variant-summary-tsv-149f190",
       "@type": [
         "prov:Entity",
         "https://w3id.org/EVI#Dataset"
@@ -1219,7 +1219,7 @@
       "name": "variant_summary.tsv",
       "author": "Example Researcher",
       "description": "File 'variant_summary.tsv' produced by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1231,7 +1231,7 @@
       "format": "text/tab-separated-values",
       "generatedBy": [
         {
-          "@id": "ark:59853/computation-variantsummary-0b2b77a"
+          "@id": "ark:59853/computation-variantsummary-09c98c4"
         }
       ],
       "contentUrl": "cromwell-executions/VariantCalling/c7066cd6-5dd5-434d-b0f5-fca0662f2533/call-VariantSummary/execution/variant_summary.tsv",
@@ -1246,7 +1246,7 @@
       "name": "genome.fa",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1269,7 +1269,7 @@
       "name": "genome.fa.amb",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.amb' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1292,7 +1292,7 @@
       "name": "genome.fa.ann",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.ann' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1315,7 +1315,7 @@
       "name": "genome.fa.bwt",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.bwt' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1338,7 +1338,7 @@
       "name": "genome.fa.pac",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.pac' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1361,7 +1361,7 @@
       "name": "genome.fa.sa",
       "author": "Example Researcher",
       "description": "Input file 'genome.fa.sa' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1384,7 +1384,7 @@
       "name": "A.fastq",
       "author": "Example Researcher",
       "description": "Input file 'A.fastq' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1407,7 +1407,7 @@
       "name": "B.fastq",
       "author": "Example Researcher",
       "description": "Input file 'B.fastq' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1430,7 +1430,7 @@
       "name": "C.fastq",
       "author": "Example Researcher",
       "description": "Input file 'C.fastq' used by the Cromwell workflow run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1453,7 +1453,7 @@
       "name": "inputs.json",
       "author": "Example Researcher",
       "description": "File 'inputs.json' submitted to Cromwell for this run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",
@@ -1481,7 +1481,7 @@
       "name": "variant-calling.wdl",
       "author": "Example Researcher",
       "description": "File 'variant-calling.wdl' submitted to Cromwell for this run",
-      "datePublished": "2026-09-29T12:20:40.321310-04:00",
+      "datePublished": "2026-10-13T11:24:10.205540-04:00",
       "keywords": [
         "cromwell",
         "wdl",

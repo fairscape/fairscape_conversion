@@ -84,7 +84,9 @@ def identity(value, rule, ctx):
 
 
 def crate_author(value, rule, ctx):
-    return _settings(ctx).get("author") or None
+    # Galaxy exports carry no user; runBy/author are required, so fall back
+    # the way the root does
+    return _settings(ctx).get("author") or "Unknown"
 
 
 def crate_date(value, rule, ctx):
@@ -249,7 +251,7 @@ def workflow_description(value, rule, ctx):
 
 
 def workflow_author(value, rule, ctx):
-    return ", ".join(ctx.node.get("creators") or []) or _settings(ctx).get("author") or None
+    return ", ".join(ctx.node.get("creators") or []) or _settings(ctx).get("author") or "Unknown"
 
 
 def workflow_tags(value, rule, ctx):

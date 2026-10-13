@@ -242,6 +242,14 @@
       ],
       "format": "text/tab-separated-values",
       "contentSize": "14609",
+      "datasetUsedBy": [
+        {
+          "@id": "ark:59853/computation-variants-per-chromosome-6c80a5b"
+        },
+        {
+          "@id": "ark:59853/computation-variants-per-chrom-9537d23"
+        }
+      ],
       "localPath": "/home/oj/fairscape/fairscape_conversion/examples/snakemake-variant-calling/results/calls/variant_summary.tsv",
       "isPartOf": [
         {

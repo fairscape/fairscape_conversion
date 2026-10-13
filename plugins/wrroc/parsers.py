@@ -157,6 +157,16 @@ def _synth_name(value, rule, ctx):
     return ctx.node["@id"].rstrip("/").split("/")[-1]
 
 
+def _name_or_basename(value, rule, ctx):
+    """``name`` is only a SHOULD in RO-Crate: fall back to the @id's last
+    path segment (without a leading ``#``)."""
+    name = _scalar(value, rule, ctx)
+    if name:
+        return name
+    tail = ctx.node["@id"].rstrip("/").split("/")[-1].lstrip("#")
+    return tail or ctx.node["@id"]
+
+
 def _format_from_extension(name):
     ext = str(name).rsplit(".", 1)[-1].lower() if "." in str(name) else ""
     known = {"json": "application/json", "csv": "text/csv",
@@ -179,14 +189,26 @@ def _synth_format_lang(value, rule, ctx):
     return _synth_format(value, rule, ctx)
 
 
+def _first_format(value):
+    """encodingFormat may be a list mixing a MIME string with a PRONOM
+    ``{"@id": ...}`` (RO-Crate's recommended form): prefer the plain string."""
+    items = listify(value)
+    for item in items:
+        if isinstance(item, str) and item.strip():
+            return iana_tail(item.strip())
+    ids = ref_ids(items)
+    return iana_tail(ids[0]) if ids else None
+
+
 def _synth_format_file(value, rule, ctx):
-    if value not in _EMPTY:
-        return iana_tail(value)
+    fmt = _first_format(value)
+    if fmt:
+        return fmt
     node = ctx.node
     for pid in ref_ids(node.get("exampleOfWork")):
-        fmt = ctx.by_id.get(pid, {}).get("encodingFormat")
+        fmt = _first_format(ctx.by_id.get(pid, {}).get("encodingFormat"))
         if fmt:
-            return iana_tail(fmt)
+            return fmt
     return _format_from_extension(node.get("alternateName") or "") or "text/plain"
 
 
@@ -215,6 +237,7 @@ IMPORT_PARSERS = {
     "agent_ref": _agent_ref,
     "desc_min10": _desc_min10,
     "synth_name": _synth_name,
+    "name_or_basename": _name_or_basename,
     "synth_format": _synth_format,
     "synth_format_lang": _synth_format_lang,
     "synth_format_file": _synth_format_file,

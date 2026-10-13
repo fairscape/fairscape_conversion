@@ -18,7 +18,7 @@ import copy
 from ...core import (Context, PluginBase, Record, SourceRecord,
                      apply_export_rules, roundtrip)
 from .parsers import (DEFAULT_NAAN, EXPORT_PARSERS, IMPORT_PARSERS, agent_name,
-                      listify, mint_ark, ref_ids, slugify, types_of)
+                      listify, mint_ark, ref_ids, short_hash, slugify, types_of)
 
 # Profile config is workflow-specific (not property data), so it stays Python.
 PROFILES = {
@@ -102,6 +102,21 @@ def _fallback_agent(organize_actions, root):
     if isinstance(author, str) and author.strip():
         return author.strip()
     return "Unknown"
+
+
+def _license_text(value):
+    """WRROC license (a string, an ``{"@id": url}`` reference, or a list of
+    either) -> the single string EVI's ``license`` holds."""
+    ids = ref_ids(value)
+    return ", ".join(ids) if ids else None
+
+
+def _license_export(value):
+    """EVI license string -> a contextual-entity reference when it is a URL,
+    which is how RO-Crate (and the WRROC examples) write it."""
+    if isinstance(value, str) and value.startswith(("http://", "https://")) and ", " not in value:
+        return {"@id": value}
+    return value
 
 
 def _kind(node):
@@ -237,7 +252,7 @@ class WrrocPlugin(PluginBase):
                 or f"EVI RO-Crate converted from the Workflow Run RO-Crate '{root_name}'.",
             "keywords": [str(k) for k in listify(root.get("keywords"))] or ["wrroc", "workflow-run"],
             "version": str(root.get("version") or "0.1.0"),
-            "license": root.get("license"),
+            "license": _license_text(root.get("license")),
             "author": agent_name(fallback_agent, by_id),
             "datePublished": root.get("datePublished"),
             "conformsTo": ([{"@id": u} for u in ref_ids(root.get("conformsTo"))]
@@ -305,7 +320,7 @@ def export_convert(crate: dict, plugin) -> dict:
             action = {"@id": out_id, "@type": "CreateAction",
                       **apply_export_rules(node, mapping.export_rules_by_target("Computation"), ctx)}
             for pname, pvalue in (node.get("parameters") or {}).items():
-                pv = {"@id": f"#pv-{slugify(pname)}-{slugify(node['@id'])[-7:]}",
+                pv = {"@id": f"#pv-{slugify(pname)}-{short_hash(node['@id'])}",
                       "@type": "PropertyValue", "name": pname, "value": pvalue}
                 carried.append(pv)
                 action.setdefault("object", []).append({"@id": pv["@id"]})
@@ -331,7 +346,7 @@ def export_convert(crate: dict, plugin) -> dict:
         "name": root.get("name"),
         "description": root.get("description"),
         "datePublished": root.get("datePublished"),
-        "license": root.get("license"),
+        "license": _license_export(root.get("license")),
         "hasPart": [{"@id": e["@id"]} for e in data_entities + software_entities
                     if "#" not in e["@id"]],
         "mentions": [{"@id": a["@id"]} for a in actions],

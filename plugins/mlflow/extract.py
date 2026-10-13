@@ -35,6 +35,7 @@ byte-identical ARKs, so run-scoped ARK sources include the run_id.
 from __future__ import annotations
 
 import getpass
+import hashlib
 import json
 import os
 from datetime import datetime, timezone
@@ -62,6 +63,12 @@ def _iso(epoch_ms):
         return None
     return datetime.fromtimestamp(epoch_ms / 1000,
                                   timezone.utc).astimezone().isoformat()
+
+
+def _parse_time(text):
+    """An _iso() string back to an aware datetime (naive ones read as UTC)."""
+    t = datetime.fromisoformat(str(text).replace("Z", "+00:00"))
+    return t if t.tzinfo else t.replace(tzinfo=timezone.utc)
 
 
 def _client(tracking_uri):
@@ -219,17 +226,47 @@ def _dir_size(path):
     return total or None
 
 
-def _alias_dataset_inputs(runs, datasets, files):
+def _md5(path):
+    digest = hashlib.md5()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _artifact_path(info, crate_dir):
+    """Where an artifact's bytes are on this machine, if anywhere."""
+    value = info.get("locator_value")
+    if not value:
+        return None
+    if info.get("locator") == "contentUrl":
+        if not crate_dir:
+            return None
+        value = os.path.join(crate_dir, value)
+    return value if os.path.isfile(value) else None
+
+
+def _alias_dataset_inputs(runs, datasets, files, crate_dir=None):
     """Best-effort cross-run linking. A logged dataset input whose local
-    source file is an artifact that *another* run logged (same basename,
-    and the same size when the local file is still around) is that
-    artifact: point the consuming run's usedDataset at the artifact's
-    Dataset node instead of minting a second, producer-less node. This is
-    what turns a chain of runs (prepare -> train -> evaluate) into one
-    connected provenance graph. Ambiguous basenames are left alone."""
+    source file is an artifact that *another* run logged is that artifact:
+    point the consuming run's usedDataset at the artifact's Dataset node
+    instead of minting a second, producer-less node. This is what turns a
+    chain of runs (prepare -> train -> evaluate) into one connected
+    provenance graph.
+
+    A candidate artifact must have the same basename, must come from a run
+    that had finished before the consumer started (a later run cannot have
+    produced what the consumer read), and must hold the same bytes: md5 when
+    both copies are on disk, else size. Ambiguous matches are left alone."""
     by_basename = {}
     for key, info in files.items():
         by_basename.setdefault(os.path.basename(info["path"]), []).append(key)
+    run_by_id = {r["run_id"]: r for r in runs}
+
+    def finished_before(producer_id, consumer):
+        producer = run_by_id.get(producer_id) or {}
+        end, start = producer.get("end_time"), consumer.get("start_time")
+        return bool(end and start) and _parse_time(end) <= _parse_time(start)
 
     aliased = {}
     for key, ds in datasets.items():
@@ -242,14 +279,26 @@ def _alias_dataset_inputs(runs, datasets, files):
             size = os.path.getsize(path)
             candidates = [k for k in candidates
                           if files[k]["size"] in (None, size)]
-        if len(candidates) == 1:
-            aliased[key] = candidates[0]
+            source_md5 = None
+            kept = []
+            for k in candidates:
+                art = _artifact_path(files[k], crate_dir)
+                if art is None:
+                    kept.append(k)
+                    continue
+                source_md5 = source_md5 or _md5(path)
+                if _md5(art) == source_md5:
+                    kept.append(k)
+            candidates = kept
+        aliased[key] = candidates
 
     for run in runs:
         for di in run["dataset_inputs"]:
-            file_key = aliased.get(di["key"])
-            if file_key and files[file_key]["run_id"] != run["run_id"]:
-                di["file_key"] = file_key
+            usable = [k for k in aliased.get(di["key"], [])
+                      if files[k]["run_id"] != run["run_id"]
+                      and finished_before(files[k]["run_id"], run)]
+            if len(usable) == 1:
+                di["file_key"] = usable[0]
 
     still_direct = {di["key"] for run in runs for di in run["dataset_inputs"]
                     if not di.get("file_key")}
@@ -562,7 +611,8 @@ def extract(tracking_uri, experiment=None, run_id=None, crate_dir=None,
         })
 
     engine_version = engine_version or mlflow.__version__
-    _alias_dataset_inputs(runs, datasets, files)
+    _alias_dataset_inputs(runs, datasets, files,
+                          crate_dir if copy_artifacts else None)
 
     author = author or getpass.getuser()
     keyword_list = [k.strip() for k in (keywords or "").split(",") if k.strip()]
